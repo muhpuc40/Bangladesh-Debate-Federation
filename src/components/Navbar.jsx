@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FaBars, FaTimes, FaUserCircle } from 'react-icons/fa';
+import { FaBars, FaTimes, FaSignInAlt } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,7 +32,6 @@ const Navbar = () => {
               <h1 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-emerald-800 leading-tight whitespace-normal overflow-visible">
                 Bangladesh Debate Federation
               </h1>
-           
             </div>
           </Link>
 
@@ -55,26 +54,26 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Desktop Member Portal Button */}
+          {/* Desktop Sign In Button */}
           <div className="hidden lg:flex items-center flex-shrink-0">
             <Link
-              to="/portal"
+              to="/signin"
               className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 xl:px-6 rounded-lg transition-all duration-300 flex items-center text-sm xl:text-base whitespace-nowrap hover:scale-105 hover:shadow-md ml-2 xl:ml-4"
             >
-              <FaUserCircle className="mr-2 text-base xl:text-lg" /> 
-              Member Portal
+              <FaSignInAlt className="mr-2 text-base xl:text-lg" /> 
+              Sign In
             </Link>
           </div>
 
-          {/* Mobile Menu Button and Member Portal */}
+          {/* Mobile Menu Button and Sign In Button */}
           <div className="flex items-center space-x-2 sm:space-x-3 lg:hidden flex-shrink-0">
-            {/* Mobile Member Portal Button */}
+            {/* Mobile Sign In Button */}
             <Link
-              to="/portal"
+              to="/signin"
               className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-1.5 px-3 sm:py-2 sm:px-4 rounded-lg transition-all duration-300 flex items-center text-xs sm:text-sm whitespace-nowrap hover:scale-105 flex-shrink-0"
             >
-              <FaUserCircle className="mr-1 sm:mr-2 text-sm sm:text-base" /> 
-              <span className="hidden xs:inline">Portal</span>
+              <FaSignInAlt className="mr-1 sm:mr-2 text-sm sm:text-base" /> 
+              <span className="hidden xs:inline">Sign In</span>
             </Link>
             
             {/* Mobile Menu Button */}
@@ -114,11 +113,11 @@ const Navbar = () => {
               ))}
               <div className="pt-3 border-t border-emerald-100 mt-2">
                 <Link
-                  to="/portal"
+                  to="/signin"
                   onClick={() => setIsMenuOpen(false)}
                   className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg text-center transition-all duration-300 flex items-center justify-center text-sm sm:text-base md:text-lg hover:scale-[1.02]"
                 >
-                  <FaUserCircle className="mr-2" /> Member Portal
+                  <FaSignInAlt className="mr-2" /> Sign In
                 </Link>
               </div>
             </div>
