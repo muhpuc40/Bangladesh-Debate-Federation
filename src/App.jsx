@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Root from './Root';
 import Home from './pages/Home';
 import About from './pages/About';
+import ExecutiveCommittee from './pages/ExecutiveCommittee'; // নতুন import
 import Events from './pages/Events';
 import Resources from './pages/Resources';
 import Gallery from './pages/Gallery';
@@ -16,6 +17,7 @@ function App() {
       <Route path="/" element={<Root />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="executive-committee" element={<ExecutiveCommittee />} /> {/* নতুন রাউট */}
         <Route path="events" element={<Events />} />
         <Route path="resources" element={<Resources />} />
         <Route path="gallery" element={<Gallery />} />

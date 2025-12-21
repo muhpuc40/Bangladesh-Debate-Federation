@@ -5,6 +5,7 @@ import {
   FaYoutube, 
   FaTwitter, 
   FaInstagram, 
+  FaLinkedin,
   FaPhone, 
   FaEnvelope, 
   FaMapMarkerAlt,
@@ -38,6 +39,7 @@ const Footer = () => {
     { platform: 'YouTube', icon: <FaYoutube />, link: 'https://youtube.com' },
     { platform: 'Twitter', icon: <FaTwitter />, link: 'https://twitter.com' },
     { platform: 'Instagram', icon: <FaInstagram />, link: 'https://instagram.com' },
+    { platform: 'LinkedIn', icon: <FaLinkedin />, link: 'https://linkedin.com' },
   ];
 
   return (
@@ -114,7 +116,7 @@ const Footer = () => {
                 ))}
               </div>
 
-              {/* Contact Information - Resources এর পাশে */}
+              {/* Contact Information */}
               <div className="space-y-4 md:space-y-5">
                 <div>
                   <div className="flex items-center mb-2">
@@ -145,33 +147,8 @@ const Footer = () => {
                     Email: info@debatefederation.org
                   </p>
                 </div>
-
-                <div>
-                  <div className="flex items-center mb-2">
-                    <div className="bg-emerald-100 p-1.5 rounded-full mr-2 group hover:bg-emerald-200 transition-all duration-300">
-                      <FaClock className="text-emerald-600 text-xs group-hover:scale-110 transition-transform duration-300" />
-                    </div>
-                    <h4 className="font-bold text-emerald-800 text-sm md:text-base">
-                      Office Hours
-                    </h4>
-                  </div>
-                  <p className="text-gray-600 text-xs md:text-sm pl-8">
-                    Sun-Thu: 9:00 AM - 5:00 PM<br />
-                    Fri-Sat: Closed
-                  </p>
-                </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Accreditation - রিমুভ করিনি */}
-        <div className="mb-4 md:mb-6 text-center">
-          <div className="inline-flex items-center bg-emerald-50 px-3 md:px-4 py-2 rounded-full border border-emerald-100 hover:border-emerald-200 transition-all duration-300">
-            <FaGraduationCap className="text-emerald-600 mr-2 text-sm" />
-            <p className="text-emerald-700 text-xs md:text-sm">
-              Recognized by Ministry of Education | Member of Asian Debate Council
-            </p>
           </div>
         </div>
 
