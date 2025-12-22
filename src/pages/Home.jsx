@@ -546,7 +546,7 @@ const Home = () => {
                 to="/events" 
                 className="group inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
               >
-                <span className="mr-2">View All Events</span>
+                <span className="mr-2">Browser All Event</span>
                 <div className="relative">
                   <FaArrowRight className="text-sm sm:text-base transform group-hover:translate-x-2 transition-transform duration-300" />
                   <FaArrowRight className="absolute top-0 left-0 text-sm sm:text-base opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
@@ -570,7 +570,7 @@ const Home = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
-                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200">
+                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200 text-black">
                     {event.category}
                   </div>
                   {/* Gradient overlay */}
@@ -672,18 +672,28 @@ const Home = () => {
         </style>
       </section>
 
-      {/* Latest News */}
+      {/* Latest News - Updated with Animation */}
       <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 md:mb-10 lg:mb-12">
+            {/* Left Side - Text with Animation */}
             <div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4">
-                Latest News & Announcements
+                Latest News & 
+                <span className="relative inline-block ml-2">
+                  <span className="text-emerald-600 relative">
+                    Announcements
+                    {/* Animated underline - Same as Events section */}
+                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
+                  </span>
+                </span>
               </h2>
               <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl">
                 Stay updated with the latest announcements, competition results and upcoming events
               </p>
             </div>
+            
+            {/* Right Side - View All News Link */}
             <Link 
               to="/news" 
               className="text-emerald-600 hover:text-emerald-800 font-bold inline-flex items-center mt-4 lg:mt-0 hover:underline text-base sm:text-lg md:text-xl group"
@@ -692,6 +702,7 @@ const Home = () => {
             </Link>
           </div>
           
+          {/* News Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
             {[
               {
