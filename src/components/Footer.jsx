@@ -17,23 +17,6 @@ import {
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const footerLinks = {
-    'Quick Links': [
-      { path: '/', label: 'Home' },
-      { path: '/about', label: 'About Us' },
-      { path: '/events', label: 'Events Calendar' },
-      { path: '/registration', label: 'Register Now' },
-      { path: '/results', label: 'Latest Results' },
-    ],
-    'Resources': [
-      { path: '/rules', label: 'Debate Formats' },
-      { path: '/resources', label: 'Training Materials' },
-      { path: '/resources#tutorials', label: 'Video Tutorials' },
-      { path: '/resources#sample-motions', label: 'Sample Motions' },
-      { path: '/resources#glossary', label: 'Debate Glossary' },
-    ],
-  };
-
   const socialMedia = [
     { platform: 'Facebook', icon: <FaFacebook />, link: 'https://facebook.com' },
     { platform: 'YouTube', icon: <FaYoutube />, link: 'https://youtube.com' },
@@ -62,14 +45,10 @@ const Footer = () => {
                 <h2 className="text-lg md:text-xl font-bold text-emerald-800 leading-tight">
                   Bangladesh Debate Federation
                 </h2>
-                <p className="text-emerald-600 text-xs md:text-sm mt-1">
-                  National Platform for Debate Excellence
-                </p>
+             
               </div>
             </Link>
-            <p className="text-gray-600 mb-4 text-xs md:text-sm text-center sm:text-left leading-relaxed">
-              Established to promote debate culture across Bangladesh.
-            </p>
+           
             <div className="flex justify-center sm:justify-start space-x-3">
               {socialMedia.map((social) => (
                 <a
@@ -87,36 +66,10 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Links & Contact Section */}
+          {/* Contact Information - Now takes full width */}
           <div className="lg:col-span-2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              {/* Links Columns */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {Object.entries(footerLinks).map(([category, links]) => (
-                  <div key={category} className="w-full">
-                    <h3 className="text-sm md:text-base font-bold mb-3 text-emerald-800 border-b border-emerald-200 pb-2">
-                      {category}
-                    </h3>
-                    <ul className="space-y-2">
-                      {links.map((link) => (
-                        <li key={link.path}>
-                          <Link
-                            to={link.path}
-                            className="text-gray-600 hover:text-emerald-700 hover:pl-2 transition-all duration-300 flex items-center text-xs md:text-sm group"
-                          >
-                            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mr-2 hidden sm:block group-hover:scale-125 transition-transform duration-300"></span>
-                            <span className="group-hover:font-medium transition-all duration-300">
-                              {link.label}
-                            </span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-
-              {/* Contact Information */}
+              {/* Contact Information Column 1 */}
               <div className="space-y-4 md:space-y-5">
                 <div>
                   <div className="flex items-center mb-2">
@@ -145,6 +98,39 @@ const Footer = () => {
                   <p className="text-gray-600 text-xs md:text-sm pl-8">
                     Phone: +880 2 1234 5678<br />
                     Email: info@debatefederation.org
+                  </p>
+                </div>
+              </div>
+
+              {/* Contact Information Column 2 - Additional contact info */}
+              <div className="space-y-4 md:space-y-5">
+                <div>
+                  <div className="flex items-center mb-2">
+                    <div className="bg-emerald-100 p-1.5 rounded-full mr-2 group hover:bg-emerald-200 transition-all duration-300">
+                      <FaClock className="text-emerald-600 text-xs group-hover:scale-110 transition-transform duration-300" />
+                    </div>
+                    <h4 className="font-bold text-emerald-800 text-sm md:text-base">
+                      Office Hours
+                    </h4>
+                  </div>
+                  <p className="text-gray-600 text-xs md:text-sm pl-8">
+                    Sunday - Thursday: 9:00 AM - 5:00 PM<br />
+                    Friday & Saturday: Closed
+                  </p>
+                </div>
+
+                <div>
+                  <div className="flex items-center mb-2">
+                    <div className="bg-emerald-100 p-1.5 rounded-full mr-2 group hover:bg-emerald-200 transition-all duration-300">
+                      <FaGraduationCap className="text-emerald-600 text-xs group-hover:scale-110 transition-transform duration-300" />
+                    </div>
+                    <h4 className="font-bold text-emerald-800 text-sm md:text-base">
+                      Training Department
+                    </h4>
+                  </div>
+                  <p className="text-gray-600 text-xs md:text-sm pl-8">
+                    Email: training@debatefederation.org<br />
+                    Phone: +880 2 1234 5679
                   </p>
                 </div>
               </div>

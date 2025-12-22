@@ -61,9 +61,9 @@ const Navbar = () => {
               />
             </div>
             <div className="min-w-0">
-              <h1 className="text-sm md:text-base lg:text-lg font-bold text-emerald-800 leading-tight whitespace-normal">
+              {/* <h1 className="text-sm md:text-base lg:text-lg font-bold text-emerald-800 leading-tight whitespace-normal">
                 Bangladesh Debate Federation
-              </h1>
+              </h1> */}
             </div>
           </Link>
 
