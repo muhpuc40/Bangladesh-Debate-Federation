@@ -294,152 +294,154 @@ const Home = () => {
           </div>
         </div>
       </section>
-{/* About Us Section (Replaces Quick Links) */}
-<section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white" id="about-section">
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center">
-      {/* Left Side - 3 Small Images Grid with Slide Up Animation on Scroll */}
-      <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
-        {aboutImages.map((image, index) => (
-          <div 
-            key={image.id} 
-            ref={el => {
-              // Intersection Observer for slide-up animation
-              if (el && typeof window !== 'undefined') {
-                // Create a unique observer for each element
-                const observer = new IntersectionObserver(
-                  (entries) => {
-                    entries.forEach((entry) => {
-                      if (entry.isIntersecting) {
-                        // Add animation class when element is in view
-                        entry.target.classList.add('animate-slide-up');
-                        // Remove initial hidden styles
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                      }
-                    });
-                  },
-                  {
-                    threshold: 0.2, // Trigger when 20% of element is visible
-                    rootMargin: '0px 0px -30px 0px' // Trigger slightly before entering viewport
-                  }
-                );
-                
-                observer.observe(el);
-                
-                // Cleanup observer on component unmount
-                return () => observer.disconnect();
+
+      {/* About Us Section (Replaces Quick Links) */}
+      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white" id="about-section">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center">
+            {/* Left Side - 3 Small Images Grid with Slide Up Animation on Scroll */}
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+              {aboutImages.map((image, index) => (
+                <div 
+                  key={image.id} 
+                  ref={el => {
+                    // Intersection Observer for slide-up animation
+                    if (el && typeof window !== 'undefined') {
+                      // Create a unique observer for each element
+                      const observer = new IntersectionObserver(
+                        (entries) => {
+                          entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                              // Add animation class when element is in view
+                              entry.target.classList.add('animate-slide-up');
+                              // Remove initial hidden styles
+                              entry.target.style.opacity = '1';
+                              entry.target.style.transform = 'translateY(0)';
+                            }
+                          });
+                        },
+                        {
+                          threshold: 0.2, // Trigger when 20% of element is visible
+                          rootMargin: '0px 0px -30px 0px' // Trigger slightly before entering viewport
+                        }
+                      );
+                      
+                      observer.observe(el);
+                      
+                      // Cleanup observer on component unmount
+                      return () => observer.disconnect();
+                    }
+                  }}
+                  className={`relative overflow-hidden rounded-lg md:rounded-xl border border-emerald-100 hover:border-emerald-300 transition-all duration-700 hover:shadow-xl hover:-translate-y-2 ${
+                    index === 1 ? 'row-span-2' : 'row-span-1'
+                  }`}
+                  style={{ 
+                    opacity: 0,
+                    transform: 'translateY(30px)',
+                    transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'
+                  }}
+                >
+                  <div className={`aspect-square overflow-hidden ${index === 1 ? 'h-full' : ''}`}>
+                    <img 
+                      src={image.url} 
+                      alt={image.alt}
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                      loading="lazy"
+                    />
+                  </div>
+                  {/* Overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Right Side - About Us Content */}
+            <div>
+              <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200">
+                ABOUT BDF
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-4 sm:mb-6 leading-tight">
+                Leading Debate Excellence in <span className="text-emerald-600">Bangladesh</span>
+              </h2>
+              <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-4 sm:mb-6 md:mb-8 leading-relaxed">
+                Established in 2010, Bangladesh Debate Federation (BDF) is the premier national body 
+                dedicated to promoting competitive debating, critical thinking, and public speaking 
+                across Bangladesh. We are committed to nurturing the next generation of leaders.
+              </p>
+              
+              <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 md:mb-10">
+                <div className="flex items-start">
+                  <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1">
+                    <FaCheckCircle className="text-sm sm:text-base" />
+                  </div>
+                  <span className="text-gray-800 text-sm sm:text-base md:text-lg">
+                    <span className="font-bold text-emerald-700">15,000+</span> Trained Debaters Nationwide
+                  </span>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1">
+                    <FaCheckCircle className="text-sm sm:text-base" />
+                  </div>
+                  <span className="text-gray-800 text-sm sm:text-base md:text-lg">
+                    <span className="font-bold text-emerald-700">250+</span> Events Organized Annually
+                  </span>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1">
+                    <FaCheckCircle className="text-sm sm:text-base" />
+                  </div>
+                  <span className="text-gray-800 text-sm sm:text-base md:text-lg">
+                    <span className="font-bold text-emerald-700">64</span> Districts Covered Across Bangladesh
+                  </span>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1">
+                    <FaCheckCircle className="text-sm sm:text-base" />
+                  </div>
+                  <span className="text-gray-800 text-sm sm:text-base md:text-lg">
+                    <span className="font-bold text-emerald-700">12</span> International Awards & Recognitions
+                  </span>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <Link 
+                  to="/about" 
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
+                >
+                  Know More <FaArrowRight className="ml-2 text-sm sm:text-base md:text-base" />
+                </Link>
+                <Link 
+                  to="/events" 
+                  className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
+                >
+                  Upcoming Events
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* CSS for slide up animation */}
+        <style>
+          {`
+            @keyframes slideUp {
+              0% {
+                opacity: 0;
+                transform: translateY(30px);
               }
-            }}
-            className={`relative overflow-hidden rounded-lg md:rounded-xl border border-emerald-100 hover:border-emerald-300 transition-all duration-700 hover:shadow-xl hover:-translate-y-2 ${
-              index === 1 ? 'row-span-2' : 'row-span-1'
-            }`}
-            style={{ 
-              opacity: 0,
-              transform: 'translateY(30px)',
-              transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'
-            }}
-          >
-            <div className={`aspect-square overflow-hidden ${index === 1 ? 'h-full' : ''}`}>
-              <img 
-                src={image.url} 
-                alt={image.alt}
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                loading="lazy"
-              />
-            </div>
-            {/* Overlay on hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-          </div>
-        ))}
-      </div>
-      
-      {/* Right Side - About Us Content */}
-      <div>
-        <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200">
-          ABOUT BDF
-        </div>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-4 sm:mb-6 leading-tight">
-          Leading Debate Excellence in <span className="text-emerald-600">Bangladesh</span>
-        </h2>
-        <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-4 sm:mb-6 md:mb-8 leading-relaxed">
-          Established in 2010, Bangladesh Debate Federation (BDF) is the premier national body 
-          dedicated to promoting competitive debating, critical thinking, and public speaking 
-          across Bangladesh. We are committed to nurturing the next generation of leaders.
-        </p>
-        
-        <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 md:mb-10">
-          <div className="flex items-start">
-            <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1">
-              <FaCheckCircle className="text-sm sm:text-base" />
-            </div>
-            <span className="text-gray-800 text-sm sm:text-base md:text-lg">
-              <span className="font-bold text-emerald-700">15,000+</span> Trained Debaters Nationwide
-            </span>
-          </div>
-          <div className="flex items-start">
-            <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1">
-              <FaCheckCircle className="text-sm sm:text-base" />
-            </div>
-            <span className="text-gray-800 text-sm sm:text-base md:text-lg">
-              <span className="font-bold text-emerald-700">250+</span> Events Organized Annually
-            </span>
-          </div>
-          <div className="flex items-start">
-            <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1">
-              <FaCheckCircle className="text-sm sm:text-base" />
-            </div>
-            <span className="text-gray-800 text-sm sm:text-base md:text-lg">
-              <span className="font-bold text-emerald-700">64</span> Districts Covered Across Bangladesh
-            </span>
-          </div>
-          <div className="flex items-start">
-            <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1">
-              <FaCheckCircle className="text-sm sm:text-base" />
-            </div>
-            <span className="text-gray-800 text-sm sm:text-base md:text-lg">
-              <span className="font-bold text-emerald-700">12</span> International Awards & Recognitions
-            </span>
-          </div>
-        </div>
-        
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-          <Link 
-            to="/about" 
-            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-          >
-            Know More <FaArrowRight className="ml-2 text-sm sm:text-base md:text-base" />
-          </Link>
-          <Link 
-            to="/events" 
-            className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-          >
-            Upcoming Events
-          </Link>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  {/* CSS for slide up animation */}
-  <style>
-    {`
-      @keyframes slideUp {
-        0% {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .animate-slide-up {
-        animation: slideUp 0.8s ease-out forwards;
-      }
-    `}
-  </style>
-</section>
+              100% {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+            .animate-slide-up {
+              animation: slideUp 0.8s ease-out forwards;
+            }
+          `}
+        </style>
+      </section>
+
       {/* Advertisement Marquee Section - Added below About BDF */}
       <section className="py-8 md:py-10 bg-emerald-50 border-y border-emerald-100 overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -519,14 +521,38 @@ const Home = () => {
       {/* NEW: Events Section with Perfectly Aligned Cards */}
       <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-emerald-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 md:mb-12 lg:mb-16">
-            <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200">
-              UPCOMING EVENTS
+          {/* Section Header with Arrow and Button */}
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10 md:mb-12 lg:mb-16">
+            {/* Left Side - Text Only */}
+            <div className="mb-6 lg:mb-0">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 leading-tight">
+                Join Our Next 
+                <span className="relative inline-block ml-2">
+                  <span className="text-emerald-600 relative">
+                    Debate Events
+                    {/* Animated underline */}
+                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
+                  </span>
+                </span>
+              </h2>
+              <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl mt-3 md:mt-4">
+                Participate in exciting debate competitions and workshops across Bangladesh
+              </p>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4 lg:mb-6">
-              Join Our Next <span className="text-emerald-600">Debate Events</span>
-            </h2>
-           
+            
+            {/* Right Side - View All Events Button */}
+            <div className="lg:text-right">
+              <Link 
+                to="/events" 
+                className="group inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
+              >
+                <span className="mr-2">View All Events</span>
+                <div className="relative">
+                  <FaArrowRight className="text-sm sm:text-base transform group-hover:translate-x-2 transition-transform duration-300" />
+                  <FaArrowRight className="absolute top-0 left-0 text-sm sm:text-base opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+                </div>
+              </Link>
+            </div>
           </div>
           
           {/* Grid container with equal height cards */}
@@ -608,7 +634,8 @@ const Home = () => {
             ))}
           </div>
           
-          <div className="text-center mt-10 md:mt-12 lg:mt-16">
+          {/* Mobile View - Bottom Button for Mobile Only */}
+          <div className="text-center mt-10 md:mt-12 lg:mt-16 lg:hidden">
             <Link 
               to="/events" 
               className="inline-flex items-center bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 border border-emerald-300 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
@@ -617,9 +644,33 @@ const Home = () => {
             </Link>
           </div>
         </div>
+        
+        {/* CSS for underline animation */}
+        <style>
+          {`
+            @keyframes underline {
+              0% {
+                transform: scaleX(0);
+                transform-origin: left;
+              }
+              50% {
+                transform: scaleX(1);
+                transform-origin: left;
+              }
+              51% {
+                transform-origin: right;
+              }
+              100% {
+                transform: scaleX(0);
+                transform-origin: right;
+              }
+            }
+            .animate-underline {
+              animation: underline 2s ease-in-out infinite;
+            }
+          `}
+        </style>
       </section>
-
- 
 
       {/* Latest News */}
       <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
