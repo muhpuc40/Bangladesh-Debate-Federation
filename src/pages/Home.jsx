@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -154,6 +153,18 @@ const Home = () => {
       logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png",
       alt: "Netflix"
     }
+  ];
+
+  // Partners data for marquee
+  const partners = [
+    { name: "Ministry of Education", logo: "🏛️", bg: "bg-emerald-50" },
+    { name: "Youth Development", logo: "🌟", bg: "bg-emerald-50" },
+    { name: "Bangladesh Bank", logo: "🏦", bg: "bg-emerald-50" },
+    { name: "University Grants", logo: "🎓", bg: "bg-emerald-50" },
+    { name: "Prothom Alo", logo: "📰", bg: "bg-emerald-50" },
+    { name: "BTV", logo: "📺", bg: "bg-emerald-50" },
+    { name: "Dhaka University", logo: "🎯", bg: "bg-emerald-50" },
+    { name: "Bangladesh Army", logo: "⚔️", bg: "bg-emerald-50" }
   ];
 
   return (
@@ -696,75 +707,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Debaters */}
-      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-emerald-50 border-y border-emerald-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 md:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4 lg:mb-6">
-              Our Star Debaters
-            </h2>
-            <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl mx-auto">
-              Meet the exceptional talents who have represented Bangladesh on national and international stages
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
-            {[
-              {
-                name: "Tasnim Rahman",
-                title: "National Champion 2023",
-                achievement: "Best Speaker, Asian Debate Championship",
-                image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-                category: "University"
-              },
-              {
-                name: "Rahim Khan",
-                title: "Top Adjudicator",
-                achievement: "Perfect Score in National Finals",
-                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-                category: "Open Category"
-              },
-              {
-                name: "Sarah Ahmed",
-                title: "Youth Ambassador",
-                achievement: "Winner, International Peace Debate",
-                image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-                category: "College"
-              }
-            ].map((debaters, index) => (
-              <div key={index} className="bg-white rounded-xl border border-emerald-100 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden">
-                  <img 
-                    src={debaters.image} 
-                    alt={debaters.name}
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200">
-                    {debaters.category}
-                  </div>
-                </div>
-                <div className="p-4 sm:p-5 md:p-6">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-emerald-900 mb-1 sm:mb-2 hover:text-emerald-700 transition-colors duration-300">
-                    {debaters.name}
-                  </h3>
-                  <p className="text-emerald-600 font-bold text-sm sm:text-base md:text-lg mb-1 sm:mb-2">
-                    {debaters.title}
-                  </p>
-                  <p className="text-gray-600 text-xs sm:text-sm md:text-base mb-3 sm:mb-4">
-                    {debaters.achievement}
-                  </p>
-                  <div className="flex items-center text-emerald-600 font-semibold text-sm sm:text-base md:text-lg hover:text-emerald-800 transition-colors duration-300 group">
-                    View Profile <FaArrowRight className="ml-2 text-sm sm:text-base group-hover:translate-x-2 transition-transform duration-300" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Partners */}
+      {/* Partners with Marquee Cards */}
       <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-12 lg:mb-16">
@@ -776,25 +719,65 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-5 lg:gap-6 items-center justify-items-center mb-8 md:mb-10 lg:mb-12">
-            {[
-              { name: "Ministry of Education", logo: "🏛️", bg: "bg-emerald-50" },
-              { name: "Youth Development", logo: "🌟", bg: "bg-emerald-50" },
-              { name: "Bangladesh Bank", logo: "🏦", bg: "bg-emerald-50" },
-              { name: "University Grants", logo: "🎓", bg: "bg-emerald-50" },
-              { name: "Prothom Alo", logo: "📰", bg: "bg-emerald-50" },
-              { name: "BTV", logo: "📺", bg: "bg-emerald-50" }
-            ].map((partner, index) => (
-              <div 
-                key={index} 
-                className={`${partner.bg} p-3 sm:p-4 md:p-5 lg:p-6 rounded-xl w-full h-20 sm:h-24 md:h-28 lg:h-32 flex flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 hover:shadow-lg hover:scale-105 transition-all duration-300`}
-              >
-                <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-1 sm:mb-2">{partner.logo}</div>
-                <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm md:text-base">
-                  {partner.name}
+          {/* Marquee Container for All Devices */}
+          <div className="relative w-full overflow-hidden mb-8 md:mb-10 lg:mb-12">
+            <div className="flex whitespace-nowrap" style={{ animation: 'partnerMarquee 25s linear infinite' }}>
+              {partners.flatMap((partner, idx) => [
+                <div 
+                  key={`${idx}-1`} 
+                  className={`inline-flex ${partner.bg} p-3 sm:p-4 md:p-5 rounded-xl mx-2 sm:mx-3 md:mx-4 h-24 sm:h-28 md:h-32 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 hover:shadow-lg hover:scale-105 transition-all duration-300 group`}
+                  style={{ width: '160px' }}
+                >
+                  <div className="text-xl sm:text-2xl md:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                    {partner.logo}
+                  </div>
+                  <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm md:text-base">
+                    {partner.name}
+                  </div>
+                </div>,
+                <div 
+                  key={`${idx}-2`} 
+                  className={`inline-flex ${partner.bg} p-3 sm:p-4 md:p-5 rounded-xl mx-2 sm:mx-3 md:mx-4 h-24 sm:h-28 md:h-32 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 hover:shadow-lg hover:scale-105 transition-all duration-300 group`}
+                  style={{ width: '160px' }}
+                >
+                  <div className="text-xl sm:text-2xl md:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                    {partner.logo}
+                  </div>
+                  <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm md:text-base">
+                    {partner.name}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ])}
+            </div>
+            
+            {/* Gradient overlays for smooth edges */}
+            <div className="absolute top-0 left-0 w-16 sm:w-20 h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-16 sm:w-20 h-full bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+            
+            {/* Inline CSS for marquee animation */}
+            <style>
+              {`
+                @keyframes partnerMarquee {
+                  0% {
+                    transform: translateX(0%);
+                  }
+                  100% {
+                    transform: translateX(-50%);
+                  }
+                }
+                
+                @media (max-width: 640px) {
+                  @keyframes partnerMarquee {
+                    0% {
+                      transform: translateX(0%);
+                    }
+                    100% {
+                      transform: translateX(-50%);
+                    }
+                  }
+                }
+              `}
+            </style>
           </div>
           
           <div className="text-center">
@@ -804,38 +787,6 @@ const Home = () => {
             >
               Become a Partner <FaArrowRight className="ml-2 text-base md:text-lg group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-emerald-50 border-t border-emerald-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-white p-6 sm:p-8 md:p-10 lg:p-12 rounded-xl border border-emerald-100 max-w-3xl lg:max-w-4xl mx-auto shadow-sm hover:shadow-xl transition-all duration-300">
-            <div className="bg-emerald-100 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 border border-emerald-200 group-hover:scale-110 transition-transform duration-500">
-              <FaMicrophone className="text-2xl sm:text-3xl md:text-4xl text-emerald-600" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-4 sm:mb-6 md:mb-8">
-              Ready to Start Your Debate Journey?
-            </h2>
-            <p className="text-gray-600 text-base sm:text-lg md:text-xl mb-6 sm:mb-8 md:mb-10 max-w-2xl lg:max-w-3xl mx-auto leading-relaxed">
-              Join thousands of debaters across Bangladesh. Register now for upcoming events, 
-              access free resources, and become part of our growing community.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 md:gap-5">
-              <Link 
-                to="/registration" 
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 lg:py-5 lg:px-10 rounded-lg transition-all duration-300 border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-              >
-                Register for Competition
-              </Link>
-              <Link 
-                to="/membership" 
-                className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 md:py-4 md:px-8 lg:py-5 lg:px-10 rounded-lg transition-all duration-300 border border-emerald-300 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-              >
-                Join as Member
-              </Link>
-            </div>
           </div>
         </div>
       </section>
