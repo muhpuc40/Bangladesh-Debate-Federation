@@ -571,71 +571,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About BDF - Original Section (Keeping as is) */}
-      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-emerald-50 border-y border-emerald-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center">
-            <div>
-              <div className="inline-block bg-emerald-100 text-emerald-800 px-4 py-1 sm:py-1.5 rounded-full text-sm sm:text-base md:text-lg font-bold mb-4 md:mb-6 border border-emerald-200">
-                🇧🇩 Bangladesh Debate Federation
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-4 md:mb-6 lg:mb-8">
-                Leading the <span className="text-emerald-600">Debate Culture</span> in Bangladesh
-              </h2>
-              <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-6 md:mb-8 lg:mb-10 leading-relaxed">
-                Established in 2010, Bangladesh Debate Federation is the official governing body 
-                for competitive debating in Bangladesh. We organize national tournaments, provide 
-                training programs, and represent Bangladesh in international debate forums.
-              </p>
-              
-              <div className="space-y-3 sm:space-y-4 md:space-y-5 mb-8 md:mb-10 lg:mb-12">
-                {[
-                  "National Debate Fest - Largest debate competition in South Asia",
-                  "Youth Parliament Initiative - Training future leaders",
-                  "Regional Training Camps across all 8 divisions",
-                  "International Representation - World Universities Debating Championship"
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start">
-                    <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 md:p-2.5 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1 border border-emerald-200 group-hover:scale-110 transition-transform duration-300">
-                      <FaCheckCircle className="text-sm sm:text-base md:text-lg" />
-                    </div>
-                    <span className="text-gray-800 text-sm sm:text-base md:text-lg">{item}</span>
-                  </div>
-                ))}
-              </div>
-              
-              <Link 
-                to="/about" 
-                className="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 lg:py-5 lg:px-10 rounded-lg transition-all duration-300 border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-              >
-                Our Story <FaArrowRight className="ml-2 text-base md:text-lg" />
-              </Link>
-            </div>
-            
-            {/* Achievement Stats */}
-            <div className="bg-white rounded-xl border border-emerald-100 p-4 sm:p-6 md:p-8 shadow-sm hover:shadow-xl transition-all duration-300">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 mb-6 md:mb-8 text-center">
-                Our Achievements
-              </h3>
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5">
-                {[
-                  { number: "15K+", label: "Trained Debaters", color: "text-emerald-700" },
-                  { number: "250+", label: "Events Organized", color: "text-emerald-700" },
-                  { number: "100+", label: "Institutional Partners", color: "text-emerald-700" },
-                  { number: "12", label: "International Awards", color: "text-emerald-700" }
-                ].map((stat, index) => (
-                  <div key={index} className="text-center p-3 sm:p-4 md:p-5 bg-emerald-50 rounded-lg border border-emerald-100 hover:bg-emerald-100 hover:scale-105 transition-all duration-300">
-                    <div className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold ${stat.color} mb-1 sm:mb-2`}>
-                      {stat.number}
-                    </div>
-                    <div className="text-gray-700 text-xs sm:text-sm md:text-base">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+ 
 
       {/* Latest News */}
       <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
