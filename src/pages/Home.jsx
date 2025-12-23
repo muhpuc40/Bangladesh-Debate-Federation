@@ -482,69 +482,57 @@ const Home = () => {
         </style>
       </section>
 
-      {/* Advertisement Marquee Section - Added below About BDF */}
-      <section className="py-8 md:py-10 bg-emerald-50 border-y border-emerald-100 overflow-hidden">
+      {/* Partners with Marquee Cards */}
+      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6">
-            <h3 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-2">
+          <div className="text-center mb-10 md:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4 lg:mb-6">
               Our Esteemed Partners
-            </h3>
-            <p className="text-gray-600 text-sm sm:text-base">
-              Collaborating with industry leaders to promote debate excellence
+            </h2>
+            <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl mx-auto">
+              Collaborating with leading organizations to promote debate culture in Bangladesh
             </p>
           </div>
           
-          {/* Marquee Container */}
-          <div className="relative w-full overflow-hidden">
-            {/* Marquee Track */}
-            <div className="flex whitespace-nowrap" style={{ animation: 'marquee 25s linear infinite' }}>
-              {/* First set of logos */}
-              {adLogos.map((logo) => (
+          {/* Marquee Container for All Devices */}
+          <div className="relative w-full overflow-hidden mb-8 md:mb-10 lg:mb-12">
+            <div className="flex whitespace-nowrap" style={{ animation: 'partnerMarquee 25s linear infinite' }}>
+              {partners.flatMap((partner, idx) => [
                 <div 
-                  key={`${logo.id}-1`} 
-                  className="inline-flex items-center justify-center mx-4 sm:mx-6 md:mx-8 px-3 sm:px-4 py-2 sm:py-3 bg-white rounded-xl border border-emerald-100 hover:border-emerald-300 hover:shadow-lg transition-all duration-300 flex-shrink-0"
+                  key={`${idx}-1`} 
+                  className={`inline-flex ${partner.bg} p-3 sm:p-4 md:p-5 rounded-xl mx-2 sm:mx-3 md:mx-4 h-24 sm:h-28 md:h-32 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 hover:shadow-lg hover:scale-105 transition-all duration-300 group`}
+                  style={{ width: '160px' }}
                 >
-                  <div className="flex flex-col items-center">
-                    <div className="h-10 sm:h-12 md:h-14 w-auto mb-1 sm:mb-2 flex items-center justify-center">
-                      <img 
-                        src={logo.logo} 
-                        alt={logo.alt}
-                        className="h-full w-auto object-contain max-w-[120px] sm:max-w-[150px] md:max-w-[180px]"
-                      />
-                    </div>
-                    <span className="text-xs sm:text-sm text-gray-600 font-medium">
-                      {logo.name}
-                    </span>
+                  <div className="text-xl sm:text-2xl md:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                    {partner.logo}
+                  </div>
+                  <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm md:text-base">
+                    {partner.name}
+                  </div>
+                </div>,
+                <div 
+                  key={`${idx}-2`} 
+                  className={`inline-flex ${partner.bg} p-3 sm:p-4 md:p-5 rounded-xl mx-2 sm:mx-3 md:mx-4 h-24 sm:h-28 md:h-32 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 hover:shadow-lg hover:scale-105 transition-all duration-300 group`}
+                  style={{ width: '160px' }}
+                >
+                  <div className="text-xl sm:text-2xl md:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                    {partner.logo}
+                  </div>
+                  <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm md:text-base">
+                    {partner.name}
                   </div>
                 </div>
-              ))}
-              
-              {/* Duplicate set for seamless looping */}
-              {adLogos.map((logo) => (
-                <div 
-                  key={`${logo.id}-2`} 
-                  className="inline-flex items-center justify-center mx-4 sm:mx-6 md:mx-8 px-3 sm:px-4 py-2 sm:py-3 bg-white rounded-xl border border-emerald-100 hover:border-emerald-300 hover:shadow-lg transition-all duration-300 flex-shrink-0"
-                >
-                  <div className="flex flex-col items-center">
-                    <div className="h-10 sm:h-12 md:h-14 w-auto mb-1 sm:mb-2 flex items-center justify-center">
-                      <img 
-                        src={logo.logo} 
-                        alt={logo.alt}
-                        className="h-full w-auto object-contain max-w-[120px] sm:max-w-[150px] md:max-w-[180px]"
-                      />
-                    </div>
-                    <span className="text-xs sm:text-sm text-gray-600 font-medium">
-                      {logo.name}
-                    </span>
-                  </div>
-                </div>
-              ))}
+              ])}
             </div>
+            
+            {/* Gradient overlays for smooth edges */}
+            <div className="absolute top-0 left-0 w-16 sm:w-20 h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-16 sm:w-20 h-full bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
             
             {/* Inline CSS for marquee animation */}
             <style>
               {`
-                @keyframes marquee {
+                @keyframes partnerMarquee {
                   0% {
                     transform: translateX(0%);
                   }
@@ -552,9 +540,22 @@ const Home = () => {
                     transform: translateX(-50%);
                   }
                 }
+                
+                @media (max-width: 640px) {
+                  @keyframes partnerMarquee {
+                    0% {
+                      transform: translateX(0%);
+                    }
+                    100% {
+                      transform: translateX(-50%);
+                    }
+                  }
+                }
               `}
             </style>
           </div>
+          
+       
         </div>
       </section>
 
@@ -942,83 +943,6 @@ const Home = () => {
     */}
   </div>
 </section>
-
-      {/* Partners with Marquee Cards */}
-      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 md:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4 lg:mb-6">
-              Our Esteemed Partners
-            </h2>
-            <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl mx-auto">
-              Collaborating with leading organizations to promote debate culture in Bangladesh
-            </p>
-          </div>
-          
-          {/* Marquee Container for All Devices */}
-          <div className="relative w-full overflow-hidden mb-8 md:mb-10 lg:mb-12">
-            <div className="flex whitespace-nowrap" style={{ animation: 'partnerMarquee 25s linear infinite' }}>
-              {partners.flatMap((partner, idx) => [
-                <div 
-                  key={`${idx}-1`} 
-                  className={`inline-flex ${partner.bg} p-3 sm:p-4 md:p-5 rounded-xl mx-2 sm:mx-3 md:mx-4 h-24 sm:h-28 md:h-32 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 hover:shadow-lg hover:scale-105 transition-all duration-300 group`}
-                  style={{ width: '160px' }}
-                >
-                  <div className="text-xl sm:text-2xl md:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                    {partner.logo}
-                  </div>
-                  <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm md:text-base">
-                    {partner.name}
-                  </div>
-                </div>,
-                <div 
-                  key={`${idx}-2`} 
-                  className={`inline-flex ${partner.bg} p-3 sm:p-4 md:p-5 rounded-xl mx-2 sm:mx-3 md:mx-4 h-24 sm:h-28 md:h-32 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 hover:shadow-lg hover:scale-105 transition-all duration-300 group`}
-                  style={{ width: '160px' }}
-                >
-                  <div className="text-xl sm:text-2xl md:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                    {partner.logo}
-                  </div>
-                  <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm md:text-base">
-                    {partner.name}
-                  </div>
-                </div>
-              ])}
-            </div>
-            
-            {/* Gradient overlays for smooth edges */}
-            <div className="absolute top-0 left-0 w-16 sm:w-20 h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute top-0 right-0 w-16 sm:w-20 h-full bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
-            
-            {/* Inline CSS for marquee animation */}
-            <style>
-              {`
-                @keyframes partnerMarquee {
-                  0% {
-                    transform: translateX(0%);
-                  }
-                  100% {
-                    transform: translateX(-50%);
-                  }
-                }
-                
-                @media (max-width: 640px) {
-                  @keyframes partnerMarquee {
-                    0% {
-                      transform: translateX(0%);
-                    }
-                    100% {
-                      transform: translateX(-50%);
-                    }
-                  }
-                }
-              `}
-            </style>
-          </div>
-          
-       
-        </div>
-      </section>
     </div>
   );
 };
