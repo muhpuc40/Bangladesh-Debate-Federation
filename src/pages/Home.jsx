@@ -167,6 +167,46 @@ const Home = () => {
     { name: "Bangladesh Army", logo: "⚔️", bg: "bg-emerald-50" }
   ];
 
+  // News data with images
+  const newsItems = [
+    {
+      category: "Announcement",
+      date: "March 18, 2024",
+      title: "National Fest Registration Deadline Extended",
+      excerpt: "Registration extended until March 30, 2024 due to high demand from participants across all 64 districts.",
+      color: "bg-emerald-100",
+      textColor: "text-emerald-800",
+      image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      alt: "Registration Announcement",
+      readTime: "2 min read",
+      viewers: "245+"
+    },
+    {
+      category: "Results",
+      date: "March 15, 2024",
+      title: "Inter-University Debate Championship 2024 Results",
+      excerpt: "Dhaka University Debate Club wins championship title for third consecutive year in a thrilling finale.",
+      color: "bg-emerald-100",
+      textColor: "text-emerald-800",
+      image: "https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      alt: "Championship Results",
+      readTime: "3 min read",
+      viewers: "318+"
+    },
+    {
+      category: "Training",
+      date: "March 12, 2024",
+      title: "Free Online Adjudicator Workshop Series",
+      excerpt: "4-week comprehensive training program for aspiring adjudicators starting from April 1st, 2024.",
+      color: "bg-emerald-100",
+      textColor: "text-emerald-800",
+      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      alt: "Workshop Training",
+      readTime: "4 min read",
+      viewers: "192+"
+    }
+  ];
+
   return (
     <div className="home-page bg-white">
       {/* Hero Banner with Background Swiper Slider */}
@@ -518,240 +558,390 @@ const Home = () => {
         </div>
       </section>
 
-      {/* NEW: Events Section with Perfectly Aligned Cards */}
-      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-emerald-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header with Arrow and Button */}
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10 md:mb-12 lg:mb-16">
-            {/* Left Side - Text Only */}
-            <div className="mb-6 lg:mb-0">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 leading-tight">
-                Join Our Next 
-                <span className="relative inline-block ml-2">
-                  <span className="text-emerald-600 relative">
-                    Debate Events
-                    {/* Animated underline */}
-                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
-                  </span>
-                </span>
-              </h2>
-              <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl mt-3 md:mt-4">
-                Participate in exciting debate competitions and workshops across Bangladesh
-              </p>
+  {/* NEW: Events Section with Perfectly Aligned Cards */}
+<section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-emerald-50">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Section Header with Arrow and Button */}
+    <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10 md:mb-12 lg:mb-16">
+      {/* Left Side - Text Only */}
+      <div className="mb-6 lg:mb-0">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 leading-tight">
+          Join Our Next 
+          <span className="relative inline-block ml-2">
+            <span className="text-emerald-600 relative">
+              Debate Events
+              {/* Animated underline */}
+              <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
+            </span>
+          </span>
+        </h2>
+        <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl mt-3 md:mt-4">
+          Participate in exciting debate competitions and workshops across Bangladesh
+        </p>
+      </div>
+      
+      {/* Right Side - Dynamic Browse All Events Button */}
+      <div className="hidden lg:block">
+        <Link 
+          to="/events" 
+          className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600 shadow-lg"
+        >
+          {/* Animated Background Pattern */}
+          <span className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-700">
+            <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+          </span>
+          
+          {/* Shine Effect */}
+          <span className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white/40 via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[200%] transition-all duration-1000"></span>
+          
+          {/* Button Content */}
+          <span className="relative z-10 flex items-center">
+            <span className="mr-3 text-lg font-semibold tracking-wide">Browse All Events</span>
+            <div className="relative">
+              <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
+              <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+            </div>
+          </span>
+          
+          {/* Corner Accents with Animation */}
+          <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+          <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+          <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+          <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+          
+          {/* Pulsing Ring Effect */}
+          <span className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-white/20 group-hover:animate-pulse transition-all duration-500"></span>
+        </Link>
+      </div>
+    </div>
+    
+    {/* Grid container with equal height cards */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
+      {events.map((event, index) => (
+        <div 
+          key={event.id} 
+          className={`group bg-white rounded-xl border ${event.borderColor} overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${index === 1 ? 'lg:-translate-y-0' : ''} flex flex-col h-full`}
+        >
+          {/* Event Image - Fixed Height */}
+          <div className="relative h-48 sm:h-56 md:h-60 lg:h-64 overflow-hidden flex-shrink-0">
+            <img 
+              src={event.image} 
+              alt={event.alt}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+            />
+            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200 text-black">
+              {event.category}
+            </div>
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+          </div>
+          
+          {/* Event Content - Flexible height with button at bottom */}
+          <div className="p-5 sm:p-6 md:p-7 flex flex-col flex-grow">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 mb-3 sm:mb-4 line-clamp-2">
+              {event.title}
+            </h3>
+            
+            <p className="text-gray-700 text-sm sm:text-base md:text-lg mb-4 sm:mb-5 md:mb-6 leading-relaxed line-clamp-3 flex-grow">
+              {event.description}
+            </p>
+            
+            {/* Event Details - Fixed content */}
+            <div className="space-y-2 sm:space-y-3 mb-5 sm:mb-6 md:mb-7">
+              <div className="flex items-center">
+                <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
+                  <FaCalendar className="text-emerald-600 text-xs sm:text-sm" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-gray-500 truncate">Date</p>
+                  <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.date}</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center">
+                <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
+                  <FaMapMarkerAlt className="text-emerald-600 text-xs sm:text-sm" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-gray-500 truncate">Location</p>
+                  <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.location}</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center">
+                <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
+                  <FaClock className="text-emerald-600 text-xs sm:text-sm" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-gray-500 truncate">Time</p>
+                  <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.time}</p>
+                </div>
+              </div>
             </div>
             
-            {/* Right Side - View All Events Button */}
-            <div className="lg:text-right">
+            {/* Button - Fixed at bottom */}
+            <div className="mt-auto pt-2">
               <Link 
-                to="/events" 
-                className="group inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
+                to={`/events/${event.id}`} 
+                className="group/btn inline-flex items-center justify-center w-full text-center bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-3 px-4 sm:py-3.5 sm:px-6 rounded-lg transition-all duration-300 border border-emerald-600 hover:shadow-lg hover:scale-[1.02] text-sm sm:text-base"
               >
-                <span className="mr-2">Browser All Event</span>
+                <span className="mr-2">Know More</span>
                 <div className="relative">
-                  <FaArrowRight className="text-sm sm:text-base transform group-hover:translate-x-2 transition-transform duration-300" />
-                  <FaArrowRight className="absolute top-0 left-0 text-sm sm:text-base opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+                  <FaArrowRight className="text-xs sm:text-sm transform group-hover/btn:translate-x-1 transition-transform duration-300" />
+                  <FaArrowRight className="absolute top-0 left-0 text-xs sm:text-sm opacity-0 group-hover/btn:opacity-30 group-hover/btn:translate-x-2 transition-all duration-300" />
                 </div>
               </Link>
             </div>
           </div>
-          
-          {/* Grid container with equal height cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
-            {events.map((event, index) => (
-              <div 
-                key={event.id} 
-                className={`group bg-white rounded-xl border ${event.borderColor} overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${index === 1 ? 'lg:-translate-y-0' : ''} flex flex-col h-full`}
-              >
-                {/* Event Image - Fixed Height */}
-                <div className="relative h-48 sm:h-56 md:h-60 lg:h-64 overflow-hidden flex-shrink-0">
-                  <img 
-                    src={event.image} 
-                    alt={event.alt}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200 text-black">
-                    {event.category}
-                  </div>
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
-                </div>
-                
-                {/* Event Content - Flexible height with button at bottom */}
-                <div className="p-5 sm:p-6 md:p-7 flex flex-col flex-grow">
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 mb-3 sm:mb-4 line-clamp-2">
-                    {event.title}
-                  </h3>
-                  
-                  <p className="text-gray-700 text-sm sm:text-base md:text-lg mb-4 sm:mb-5 md:mb-6 leading-relaxed line-clamp-3 flex-grow">
-                    {event.description}
-                  </p>
-                  
-                  {/* Event Details - Fixed content */}
-                  <div className="space-y-2 sm:space-y-3 mb-5 sm:mb-6 md:mb-7">
-                    <div className="flex items-center">
-                      <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
-                        <FaCalendar className="text-emerald-600 text-xs sm:text-sm" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-xs sm:text-sm text-gray-500 truncate">Date</p>
-                        <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.date}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center">
-                      <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
-                        <FaMapMarkerAlt className="text-emerald-600 text-xs sm:text-sm" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-xs sm:text-sm text-gray-500 truncate">Location</p>
-                        <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.location}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center">
-                      <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
-                        <FaClock className="text-emerald-600 text-xs sm:text-sm" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-xs sm:text-sm text-gray-500 truncate">Time</p>
-                        <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.time}</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Button - Fixed at bottom */}
-                  <div className="mt-auto pt-2">
-                    <Link 
-                      to={`/events/${event.id}`} 
-                      className="inline-flex items-center justify-center w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 sm:py-3.5 sm:px-6 rounded-lg transition-all duration-300 border border-emerald-700 hover:shadow-lg hover:scale-[1.02] text-sm sm:text-base"
-                    >
-                      Know More <FaArrowRight className="ml-2 text-xs sm:text-sm" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          {/* Mobile View - Bottom Button for Mobile Only */}
-          <div className="text-center mt-10 md:mt-12 lg:mt-16 lg:hidden">
-            <Link 
-              to="/events" 
-              className="inline-flex items-center bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 border border-emerald-300 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-            >
-              View All Events <FaArrowRight className="ml-2 text-sm sm:text-base" />
-            </Link>
-          </div>
         </div>
+      ))}
+    </div>
+    
+    {/* Mobile & Tablet View - Dynamic Button (Center Aligned) */}
+    <div className="text-center mt-10 md:mt-12 lg:hidden">
+      <Link 
+        to="/events" 
+        className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600 shadow-lg mx-auto"
+      >
+        {/* Shine Effect */}
+        <span className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white/40 via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[200%] transition-all duration-1000"></span>
         
-        {/* CSS for underline animation */}
-        <style>
-          {`
-            @keyframes underline {
-              0% {
-                transform: scaleX(0);
-                transform-origin: left;
-              }
-              50% {
-                transform: scaleX(1);
-                transform-origin: left;
-              }
-              51% {
-                transform-origin: right;
-              }
-              100% {
-                transform: scaleX(0);
-                transform-origin: right;
-              }
-            }
-            .animate-underline {
-              animation: underline 2s ease-in-out infinite;
-            }
-          `}
-        </style>
-      </section>
+        {/* Button Content */}
+        <span className="relative z-10 flex items-center">
+          <span className="mr-3 text-lg font-semibold tracking-wide">Browse All Events</span>
+          <div className="relative">
+            <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
+            <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+          </div>
+        </span>
+        
+        {/* Corner Accents */}
+        <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+        <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+        <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+        <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+      </Link>
+    </div>
+  </div>
+  
+  {/* CSS for underline animation */}
+  <style>
+    {`
+      @keyframes underline {
+        0% {
+          transform: scaleX(0);
+          transform-origin: left;
+        }
+        50% {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+        51% {
+          transform-origin: right;
+        }
+        100% {
+          transform: scaleX(0);
+          transform-origin: right;
+        }
+      }
+      .animate-underline {
+        animation: underline 2s ease-in-out infinite;
+      }
+      
+      /* Custom animation for pulse ring */
+      @keyframes pulse-ring {
+        0% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 0.3;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+      }
+      .animate-pulse {
+        animation: pulse-ring 2s ease-in-out infinite;
+      }
+    `}
+  </style>
+</section>
 
-      {/* Latest News - Updated with Animation */}
-      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 md:mb-10 lg:mb-12">
-            {/* Left Side - Text with Animation */}
-            <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4">
-                Latest News & 
-                <span className="relative inline-block ml-2">
-                  <span className="text-emerald-600 relative">
-                    Announcements
-                    {/* Animated underline - Same as Events section */}
-                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
-                  </span>
-                </span>
-              </h2>
-              <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl">
-                Stay updated with the latest announcements, competition results and upcoming events
-              </p>
+   {/* Latest News - Updated with Images */}
+<section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 md:mb-10 lg:mb-12">
+      {/* Left Side - Text with Animation */}
+      <div>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4">
+          Latest News & 
+          <span className="relative inline-block ml-2">
+            <span className="text-emerald-600 relative">
+              Announcements
+              {/* Animated underline - Same as Events section */}
+              <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
+            </span>
+          </span>
+        </h2>
+        <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl">
+          Stay updated with the latest announcements, competition results and upcoming events
+        </p>
+      </div>
+      
+      {/* Right Side - Dynamic View All News Button (Desktop Only) */}
+      <div className="hidden lg:block">
+        <Link 
+          to="/news" 
+          className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600"
+        >
+          {/* Shine Effect */}
+          <span className="absolute top-0 left-0 w-6 h-full bg-white/30 -skew-x-12 -translate-x-16 group-hover:translate-x-[calc(100%+16px)] transition-all duration-700"></span>
+          
+          {/* Button Content */}
+          <span className="relative z-10 flex items-center">
+            <span className="mr-3 text-lg">View All News</span>
+            <div className="relative">
+              <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
+              <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+            </div>
+          </span>
+          
+          {/* Corner Accents */}
+          <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/30"></span>
+          <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/30"></span>
+        </Link>
+      </div>
+    </div>
+    
+    {/* News Cards Grid with Images */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
+      {newsItems.map((news, index) => (
+        <div 
+          key={index} 
+          className="group bg-white rounded-xl border border-emerald-100 hover:border-emerald-300 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
+        >
+          {/* News Image */}
+          <div className="relative h-48 sm:h-56 md:h-60 lg:h-64 overflow-hidden">
+            <img 
+              src={news.image} 
+              alt={news.alt}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+            />
+            {/* Category Badge on Image */}
+            <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200 text-emerald-800">
+              {news.category}
+            </div>
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          
+          {/* News Content */}
+          <div className="p-5 sm:p-6 md:p-7">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-gray-500 text-xs sm:text-sm md:text-base flex items-center">
+                <FaCalendar className="mr-1.5 text-emerald-600" /> {news.date}
+              </span>
+              <span className="text-gray-400 text-xs sm:text-sm">{news.readTime}</span>
             </div>
             
-            {/* Right Side - View All News Link */}
-            <Link 
-              to="/news" 
-              className="text-emerald-600 hover:text-emerald-800 font-bold inline-flex items-center mt-4 lg:mt-0 hover:underline text-base sm:text-lg md:text-xl group"
-            >
-              View All News <FaArrowRight className="ml-2 text-base md:text-lg group-hover:translate-x-2 transition-transform duration-300" />
-            </Link>
-          </div>
-          
-          {/* News Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
-            {[
-              {
-                category: "Announcement",
-                date: "March 18, 2024",
-                title: "National Fest Registration Deadline Extended",
-                excerpt: "Registration extended until March 30, 2024 due to high demand.",
-                color: "bg-emerald-100",
-                textColor: "text-emerald-800"
-              },
-              {
-                category: "Results",
-                date: "March 15, 2024",
-                title: "Inter-University Debate Championship 2024 Results",
-                excerpt: "Dhaka University wins championship title for third consecutive year.",
-                color: "bg-emerald-100",
-                textColor: "text-emerald-800"
-              },
-              {
-                category: "Training",
-                date: "March 12, 2024",
-                title: "Free Online Adjudicator Workshop Series",
-                excerpt: "4-week comprehensive training program for aspiring adjudicators.",
-                color: "bg-emerald-100",
-                textColor: "text-emerald-800"
-              }
-            ].map((news, index) => (
-              <div 
-                key={index} 
-                className="bg-white rounded-xl border border-emerald-100 hover:border-emerald-300 p-4 sm:p-5 md:p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+            <h3 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-3 sm:mb-4 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
+              {news.title}
+            </h3>
+            
+            <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-5 sm:mb-6 line-clamp-3">
+              {news.excerpt}
+            </p>
+            
+            <div className="flex items-center justify-between pt-4 border-t border-emerald-50">
+              <Link 
+                to={`/news/${index + 1}`}
+                className="inline-flex items-center text-emerald-600 font-semibold text-sm sm:text-base hover:text-emerald-800 transition-colors duration-300 group/readmore"
               >
-                <div className="flex items-center justify-between mb-3 sm:mb-4">
-                  <span className={`${news.color} ${news.textColor} px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200`}>
-                    {news.category}
-                  </span>
-                  <span className="text-gray-500 text-xs sm:text-sm md:text-base">{news.date}</span>
-                </div>
-                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-emerald-900 mb-2 sm:mb-3 hover:text-emerald-700 transition-colors duration-300">
-                  {news.title}
-                </h3>
-                <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-4 sm:mb-6">{news.excerpt}</p>
-                <div className="flex items-center text-emerald-600 font-semibold text-sm sm:text-base md:text-lg hover:text-emerald-800 transition-colors duration-300 group">
-                  Read Full Story <FaArrowRight className="ml-2 text-sm sm:text-base group-hover:translate-x-2 transition-transform duration-300" />
-                </div>
+                Read Full Story 
+                <FaArrowRight className="ml-2 text-sm sm:text-base group-hover/readmore:translate-x-2 transition-transform duration-300" />
+              </Link>
+              
+              <div className="flex items-center space-x-1">
+                <FaUsers className="text-gray-400 text-xs" />
+                <span className="text-gray-400 text-xs sm:text-sm">{news.viewers}</span>
               </div>
-            ))}
+            </div>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+    
+    {/* Mobile & Tablet View - Dynamic Button (Center Aligned) */}
+    <div className="text-center mt-10 md:mt-12 lg:hidden">
+      <Link 
+        to="/news" 
+        className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600 mx-auto"
+      >
+        {/* Shine Effect */}
+        <span className="absolute top-0 left-0 w-6 h-full bg-white/30 -skew-x-12 -translate-x-16 group-hover:translate-x-[calc(100%+16px)] transition-all duration-700"></span>
+        
+        {/* Button Content */}
+        <span className="relative z-10 flex items-center">
+          <span className="mr-3 text-lg">View All News</span>
+          <div className="relative">
+            <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
+            <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+          </div>
+        </span>
+        
+        {/* Corner Accents */}
+        <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/30"></span>
+        <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/30"></span>
+      </Link>
+    </div>
+    
+    {/* Alternative Modern Button Design (Optional - Commented Out) */}
+    {/* 
+    <div className="hidden lg:block">
+      <Link 
+        to="/news" 
+        className="group relative inline-flex items-center bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border-2 border-emerald-300 overflow-hidden"
+      >
+        {/* Background Pattern *\/}
+        <span className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500">
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1" fill="currentColor"></circle>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#pattern)"></rect>
+          </svg>
+        </span>
+        
+        {/* Button Content *\/}
+        <span className="relative z-10 flex items-center">
+          <span className="mr-3 text-lg">Explore All News</span>
+          <div className="relative">
+            <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
+            <span className="absolute -right-1 -top-1 w-2 h-2 bg-emerald-500 rounded-full group-hover:scale-150 transition-transform duration-300"></span>
+          </div>
+        </span>
+        
+        {/* Pulsing Dot *\/}
+        <span className="absolute -right-2 -top-2 w-4 h-4 bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping"></span>
+      </Link>
+    </div>
+    */}
+  </div>
+</section>
 
       {/* Partners with Marquee Cards */}
       <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
@@ -826,14 +1016,7 @@ const Home = () => {
             </style>
           </div>
           
-          <div className="text-center">
-            <Link 
-              to="/partners" 
-              className="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 lg:py-5 lg:px-10 rounded-lg transition-all duration-300 border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-            >
-              Become a Partner <FaArrowRight className="ml-2 text-base md:text-lg group-hover:translate-x-2 transition-transform duration-300" />
-            </Link>
-          </div>
+       
         </div>
       </section>
     </div>
