@@ -11,24 +11,28 @@ import {
   FaGlobeAsia,
   FaUniversity,
   FaBullhorn,
-  FaHeart
+  FaHeart,
+  FaBrain,
+  FaEye,
+  FaHandsHelping,
+  FaSeedling
 } from 'react-icons/fa';
 
 const About = () => {
   const milestones = [
-    { year: "2010", title: "Foundation", description: "Bangladesh Debate Federation established with 10 founding members" },
+    { year: "2010", title: "Foundation", description: "Bangladesh Debate Federation established as a non-profit voluntary organization" },
     { year: "2012", title: "First National", description: "Organized first national debate competition with 50 teams" },
     { year: "2015", title: "International Debut", description: "First participation in World Universities Debating Championship" },
-    { year: "2018", title: "Expansion", description: "Launched divisional chapters across all 8 divisions" },
-    { year: "2020", title: "Digital Shift", description: "Pioneered online debating during pandemic" },
-    { year: "2023", title: "Record Growth", description: "15,000+ trained debaters, 250+ events organized" }
+    { year: "2018", title: "Grassroots Expansion", description: "Launched programs reaching educational institutions at all levels" },
+    { year: "2020", title: "Digital Shift", description: "Pioneered online debating and remote training during pandemic" },
+    { year: "2023", title: "National Reach", description: "15,000+ trained debaters, programs in all 64 districts" }
   ];
 
   const teamMembers = [
     { name: "Dr. Ayesha Rahman", role: "Chairperson", image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
     { name: "Mr. Kabir Ahmed", role: "Executive Director", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
     { name: "Ms. Sabrina Khan", role: "Training Director", image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
-    { name: "Mr. Rahim Chowdhury", role: "Events Coordinator", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" }
+    { name: "Mr. Rahim Chowdhury", role: "Partnership Coordinator", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" }
   ];
 
   return (
@@ -45,9 +49,10 @@ const About = () => {
                 About Bangladesh Debate Federation
               </h1>
               <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-                Founded in 2010, Bangladesh Debate Federation (BDF) is the premier national body 
-                dedicated to promoting competitive debating, critical thinking, and public speaking 
-                across Bangladesh. We are committed to nurturing the next generation of leaders.
+                Bangladesh Debate Federation (BDF) is a non-profit voluntary organization dedicated to spreading 
+                the art of debate and the power of public speaking to every corner of our nation. Founded in 2010, 
+                we work to bring logical reasoning and critical thinking to all age groups—from students to 
+                professionals—ensuring that clear discourse becomes a core part of our national identity.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link 
@@ -60,7 +65,7 @@ const About = () => {
                   to="/contact" 
                   className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1"
                 >
-                  Contact Us
+                  Partner With Us
                 </Link>
               </div>
             </div>
@@ -72,16 +77,16 @@ const About = () => {
                     <div className="text-gray-600">Trained Debaters</div>
                   </div>
                   <div className="bg-white p-4 rounded-lg border border-emerald-100 text-center">
-                    <div className="text-3xl font-bold text-emerald-700 mb-2">250+</div>
-                    <div className="text-gray-600">Events Organized</div>
-                  </div>
-                  <div className="bg-white p-4 rounded-lg border border-emerald-100 text-center">
                     <div className="text-3xl font-bold text-emerald-700 mb-2">64</div>
                     <div className="text-gray-600">Districts Covered</div>
                   </div>
                   <div className="bg-white p-4 rounded-lg border border-emerald-100 text-center">
-                    <div className="text-3xl font-bold text-emerald-700 mb-2">12</div>
-                    <div className="text-gray-600">International Awards</div>
+                    <div className="text-3xl font-bold text-emerald-700 mb-2">250+</div>
+                    <div className="text-gray-600">Events Organized</div>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg border border-emerald-100 text-center">
+                    <div className="text-3xl font-bold text-emerald-700 mb-2">500+</div>
+                    <div className="text-gray-600">Institutions Reached</div>
                   </div>
                 </div>
               </div>
@@ -102,9 +107,11 @@ const About = () => {
                 <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">Our Mission</h2>
               </div>
               <p className="text-gray-700 text-lg leading-relaxed">
-                To democratize access to debate education, foster critical thinking skills, and 
-                empower youth to become articulate, informed, and engaged citizens who can 
-                contribute meaningfully to society and participate effectively in democratic processes.
+                Bangladesh Debate Federation (BDF) works to develop skills in debate, public speaking, 
+                logical reasoning, and critical thinking across all segments of society. Through partnerships 
+                with educational institutions, private sector actors, civil society organizations, and 
+                development partners, we promote social awareness, ethical communication, and constructive 
+                exchange of ideas throughout Bangladesh and beyond.
               </p>
             </div>
             
@@ -116,9 +123,10 @@ const About = () => {
                 <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">Our Vision</h2>
               </div>
               <p className="text-gray-700 text-lg leading-relaxed">
-                To establish Bangladesh as a global hub for competitive debating by creating 
-                a sustainable ecosystem where every young person has the opportunity to develop 
-                their voice, confidence, and leadership abilities through structured debate programs.
+                To cultivate a society where ideas are examined through logic, dialogue is guided by reason, 
+                and public narratives are shaped with integrity. We envision a just and informed Bangladesh 
+                where every individual develops the skills to solve problems, understand one another, and 
+                contribute meaningfully to conversations that extend beyond our boundaries.
               </p>
             </div>
           </div>
@@ -133,16 +141,16 @@ const About = () => {
               Our Core Values
             </h2>
             <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
-              The principles that guide everything we do at Bangladesh Debate Federation
+              The pillars that guide our work and define our identity
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: <FaCheckCircle />, title: "Excellence", description: "Striving for the highest standards in all our programs and competitions" },
-              { icon: <FaUsers />, title: "Inclusion", description: "Ensuring equal opportunities for participants from all backgrounds" },
-              { icon: <FaHandshake />, title: "Integrity", description: "Maintaining transparency and ethical standards in all operations" },
-              { icon: <FaUniversity />, title: "Innovation", description: "Continuously evolving our programs to meet changing needs" }
+              { icon: <FaBrain />, title: "Logical & Critical Thinking", description: "Promoting reasoned analysis and evidence-based discourse in all conversations" },
+              { icon: <FaUsers />, title: "Inclusiveness", description: "Ensuring equal access and participation for people from all backgrounds and regions" },
+              { icon: <FaEye />, title: "Social Awareness", description: "Fostering understanding of societal issues and encouraging ethical communication" },
+              { icon: <FaHandsHelping />, title: "Leadership & Responsibility", description: "Developing individuals who lead with integrity and contribute positively to society" }
             ].map((value, index) => (
               <div key={index} className="bg-white rounded-xl p-6 border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:shadow-lg">
                 <div className="bg-emerald-100 text-emerald-600 w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
@@ -164,7 +172,7 @@ const About = () => {
               Our Journey
             </h2>
             <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
-              Key milestones in our journey of promoting debate culture in Bangladesh
+              Milestones in our mission to make logical discourse a national identity
             </p>
           </div>
           
@@ -186,7 +194,7 @@ const About = () => {
                 
                 <div className="flex justify-center md:justify-center md:w-8 relative z-10">
                   <div className="w-8 h-8 rounded-full bg-emerald-600 border-4 border-white shadow-lg flex items-center justify-center">
-                    <FaCheckCircle className="text-white text-sm" />
+                    <FaSeedling className="text-white text-sm" />
                   </div>
                 </div>
                 
@@ -224,7 +232,7 @@ const About = () => {
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-emerald-900 mb-1">{member.name}</h3>
                   <p className="text-emerald-600 font-bold mb-4">{member.role}</p>
-                  <div className="flex justify-center space-x-3">
+                  <div className="flex justify-center">
                     <button className="text-emerald-600 hover:text-emerald-800 transition-colors duration-300">
                       View Profile
                     </button>
@@ -244,9 +252,9 @@ const About = () => {
               Join Our Movement
             </h2>
             <p className="text-gray-600 text-lg md:text-xl mb-8 leading-relaxed">
-              Whether you're a student looking to develop your skills, an educator wanting to 
-              start a debate club, or an organization interested in partnership, we have 
-              opportunities for everyone to get involved.
+              Whether you're a student looking to develop reasoning skills, an educator wanting to 
+              start a debate club, or an organization interested in partnership, we have opportunities 
+              for everyone to engage in meaningful dialogue and help build a more reasoned Bangladesh.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link 
@@ -262,10 +270,10 @@ const About = () => {
                 Partner With Us
               </Link>
               <Link 
-                to="/events" 
+                to="/training" 
                 className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 border border-emerald-300 hover:shadow-xl hover:-translate-y-1"
               >
-                Volunteer Opportunities
+                Join a Training
               </Link>
             </div>
           </div>
