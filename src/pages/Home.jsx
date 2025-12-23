@@ -210,7 +210,7 @@ const Home = () => {
   return (
     <div className="home-page bg-white">
       {/* Hero Banner with Background Swiper Slider */}
-      <section className="relative overflow-hidden min-h-[500px] md:min-h-[600px] lg:min-h-[700px] xl:min-h-[800px]">
+      <section className="relative overflow-hidden min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
         {/* Background Swiper Slider */}
         <div className="absolute inset-0 z-0">
           <Swiper
@@ -252,19 +252,19 @@ const Home = () => {
         </div>
 
         {/* Content Overlay */}
-        <div className="relative z-10 py-12 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 py-12 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
           <div className="container mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
               {/* Left Content - Text */}
               <div className="text-white">
                 <div className="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-4 py-2 md:px-5 md:py-2.5 rounded-full mb-6 border border-white/30 hover:bg-white/30 transition-all duration-300">
                   <FaCalendarAlt className="mr-2 text-sm md:text-base" />
                   <span className="font-bold text-sm md:text-base lg:text-lg">March 15-20, 2024</span>
                 </div>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 lg:mb-8 leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 lg:mb-8 leading-tight">
                   National Debate <span className="text-emerald-300">Festival</span> 2024
                 </h1>
-                <p className="text-white/90 mb-6 md:mb-8 lg:mb-10 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed">
+                <p className="text-white/90 mb-6 md:mb-8 lg:mb-10 text-base sm:text-lg md:text-xl leading-relaxed">
                   Participate in Bangladesh's largest debate competition. 
                   Participants from all 64 districts, world-class judging panel, and attractive prizes.
                 </p>
@@ -286,59 +286,28 @@ const Home = () => {
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-12 lg:mt-16">
                   <div className="text-center bg-white/10 backdrop-blur-sm p-3 sm:p-4 md:p-5 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
-                    <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white">5,000+</div>
+                    <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">5,000+</div>
                     <div className="text-xs sm:text-sm md:text-base text-white/80">Participants</div>
                   </div>
                   <div className="text-center bg-white/10 backdrop-blur-sm p-3 sm:p-4 md:p-5 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
-                    <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white">64</div>
+                    <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">64</div>
                     <div className="text-xs sm:text-sm md:text-base text-white/80">Districts</div>
                   </div>
                   <div className="text-center bg-white/10 backdrop-blur-sm p-3 sm:p-4 md:p-5 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
-                    <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white">50 Lakh+</div>
+                    <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">50 Lakh+</div>
                     <div className="text-xs sm:text-sm md:text-base text-white/80">Prize Pool</div>
                   </div>
                 </div>
               </div>
-              
-              {/* Right Side - Champion Card */}
-              {/* <div className="relative">
-                <div className="bg-white/10 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                  <div className="flex items-center mb-4 md:mb-6">
-                    <div className="bg-emerald-500/20 p-2 sm:p-3 rounded-full mr-3 sm:mr-4">
-                      <FaTrophy className="text-emerald-300 text-lg sm:text-xl md:text-2xl" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-white text-lg sm:text-xl md:text-2xl">2023 National Champions</h4>
-                      <p className="text-white/80 text-sm sm:text-base md:text-lg">Dhaka University Debate Club</p>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5">
-                    <div className="text-center p-3 sm:p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300">
-                      <div className="text-base sm:text-lg md:text-xl font-bold text-white">Tasnim Rahman</div>
-                      <div className="text-xs sm:text-sm md:text-base text-emerald-300">Best Speaker</div>
-                    </div>
-                    <div className="text-center p-3 sm:p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300">
-                      <div className="text-base sm:text-lg md:text-xl font-bold text-white">Rahim Khan</div>
-                      <div className="text-xs sm:text-sm md:text-base text-emerald-300">Top Adjudicator</div>
-                    </div>
-                  </div>
-                  <Link 
-                    to="/champions" 
-                    className="mt-4 md:mt-6 inline-flex items-center justify-center w-full text-center text-emerald-300 hover:text-emerald-200 font-semibold text-sm sm:text-base py-2 sm:py-3 border border-emerald-300/30 rounded-lg hover:bg-emerald-300/10 transition-all duration-300 hover:scale-[1.02]"
-                  >
-                    Meet All Champions <FaArrowRight className="ml-2 text-sm sm:text-base" />
-                  </Link>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
       </section>
 
       {/* About Us Section (Replaces Quick Links) */}
-      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white" id="about-section">
+      <section className="py-12 md:py-16 lg:py-20 bg-white" id="about-section">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
             {/* Left Side - 3 Small Images Grid with Slide Up Animation on Scroll */}
             <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
               {aboutImages.map((image, index) => (
@@ -400,7 +369,7 @@ const Home = () => {
               <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200">
                 ABOUT BDF
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-4 sm:mb-6 leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-4 sm:mb-6 leading-tight">
                 Leading Debate Excellence in <span className="text-emerald-600">Bangladesh</span>
               </h2>
               <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-4 sm:mb-6 md:mb-8 leading-relaxed">
@@ -482,132 +451,95 @@ const Home = () => {
         </style>
       </section>
 
- {/* Partners with Marquee Cards - INFINITE LOOP - FIXED */}
-<section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-10 md:mb-12 lg:mb-16">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4 lg:mb-6">
+  {/* Partners with Marquee Cards - FIXED MOBILE VERSION - SINGLE LINE */}
+<section className="py-8 md:py-12 lg:py-16 bg-white overflow-hidden">
+  <div className="container mx-auto px-4">
+    <div className="text-center mb-8 md:mb-10">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-2">
         Our Esteemed Partners
       </h2>
-      <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl mx-auto">
+      <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
         Collaborating with leading organizations to promote debate culture in Bangladesh
       </p>
     </div>
     
-    {/* Marquee Container - INFINITE LOOP with proper overflow */}
-    <div className="relative w-full overflow-visible mb-8 md:mb-10 lg:mb-12">
-      {/* Extra padding for hover space */}
-      <div className="py-8">
-        {/* Single marquee with duplicate content for seamless loop */}
-        <div className="flex whitespace-nowrap animate-infiniteMarquee">
-          {/* First set of partners */}
-          {partners.map((partner, idx) => (
-            <div 
-              key={`${idx}-1`} 
-              className="relative inline-flex bg-emerald-50 p-4 sm:p-5 md:p-6 rounded-xl mx-3 sm:mx-4 md:mx-5 h-28 sm:h-32 md:h-36 w-[180px] sm:w-[200px] flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 ease-out group hover:z-50"
-              style={{ 
-                transform: 'translateY(0)',
-                transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out'
-              }}
-            >
-              <div className="text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
-                {partner.logo}
-              </div>
-              <div className="font-semibold text-center text-emerald-800 text-sm sm:text-base md:text-lg px-2">
-                {partner.name}
-              </div>
-              
-              {/* Hover effect overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-white rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+    {/* Marquee Container - SINGLE LINE */}
+    <div className="relative w-full overflow-hidden py-4">
+      {/* Single marquee row with duplicate content for seamless loop */}
+      <div className="flex animate-marqueeSingle whitespace-nowrap">
+        {/* First set of partners */}
+        {partners.map((partner, idx) => (
+          <div 
+            key={`${idx}-1`} 
+            className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-20 sm:h-24 w-28 sm:w-32 md:w-36 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
+          >
+            <div className="text-xl sm:text-2xl md:text-3xl mb-2">
+              {partner.logo}
             </div>
-          ))}
-          
-          {/* Duplicate set of partners for seamless loop */}
-          {partners.map((partner, idx) => (
-            <div 
-              key={`${idx}-2`} 
-              className="relative inline-flex bg-emerald-50 p-4 sm:p-5 md:p-6 rounded-xl mx-3 sm:mx-4 md:mx-5 h-28 sm:h-32 md:h-36 w-[180px] sm:w-[200px] flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 ease-out group hover:z-50"
-              style={{ 
-                transform: 'translateY(0)',
-                transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out'
-              }}
-            >
-              <div className="text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
-                {partner.logo}
-              </div>
-              <div className="font-semibold text-center text-emerald-800 text-sm sm:text-base md:text-lg px-2">
-                {partner.name}
-              </div>
-              
-              {/* Hover effect overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-white rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+            <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm px-1">
+              {partner.name}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+        
+        {/* Duplicate set for seamless loop */}
+        {partners.map((partner, idx) => (
+          <div 
+            key={`${idx}-2`} 
+            className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-20 sm:h-24 w-28 sm:w-32 md:w-36 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
+            aria-hidden="true"
+          >
+            <div className="text-xl sm:text-2xl md:text-3xl mb-2">
+              {partner.logo}
+            </div>
+            <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm px-1">
+              {partner.name}
+            </div>
+          </div>
+        ))}
       </div>
-      
-      {/* REMOVED: Gradient overlays that were causing white screen */}
     </div>
   </div>
   
-  {/* Inline CSS for INFINITE marquee animation */}
+  {/* Inline CSS for single line marquee animation */}
   <style>
     {`
-      @keyframes infiniteMarquee {
+      @keyframes marqueeSingle {
         0% {
-          transform: translateX(0%);
+          transform: translateX(0);
         }
         100% {
           transform: translateX(-50%);
         }
       }
       
-      .animate-infiniteMarquee {
-        animation: infiniteMarquee 40s linear infinite;
+      .animate-marqueeSingle {
+        animation: marqueeSingle 40s linear infinite;
         display: flex;
         width: max-content;
       }
       
       @media (max-width: 640px) {
-        .animate-infiniteMarquee {
-          animation: infiniteMarquee 50s linear infinite;
+        .animate-marqueeSingle {
+          animation: marqueeSingle 35s linear infinite;
         }
       }
       
-      .animate-infiniteMarquee:hover {
+      .animate-marqueeSingle:hover {
         animation-play-state: paused;
-      }
-      
-      /* Hover effect for cards */
-      .animate-infiniteMarquee > div:hover {
-        transform: translateY(-20px) scale(1.05) !important;
-        box-shadow: 
-          0 25px 50px -12px rgba(5, 150, 105, 0.25),
-          0 10px 25px -5px rgba(5, 150, 105, 0.1),
-          0 0 0 1px rgba(5, 150, 105, 0.1) !important;
-        border-color: rgba(5, 150, 105, 0.3) !important;
-      }
-      
-      /* Make sure hovered card is on top */
-      .animate-infiniteMarquee > div {
-        z-index: 10;
-      }
-      
-      .animate-infiniteMarquee > div:hover {
-        z-index: 100 !important;
       }
     `}
   </style>
 </section>
 
-      {/* NEW: Events Section with Perfectly Aligned Cards */}
-      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-emerald-50">
+      {/* NEW: Events Section with Perfectly Aligned Cards - COMPACT VERSION */}
+      <section className="py-8 md:py-10 lg:py-12 bg-emerald-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header with Arrow and Button */}
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10 md:mb-12 lg:mb-16">
+          {/* Section Header with Arrow and Button - Compact */}
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 md:mb-8">
             {/* Left Side - Text Only */}
-            <div className="mb-6 lg:mb-0">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 leading-tight">
+            <div className="mb-4 lg:mb-0">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 leading-tight">
                 Join Our Next 
                 <span className="relative inline-block ml-2">
                   <span className="text-emerald-600 relative">
@@ -617,7 +549,7 @@ const Home = () => {
                   </span>
                 </span>
               </h2>
-              <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl mt-3 md:mt-4">
+              <p className="text-gray-600 text-sm sm:text-base max-w-xl mt-2">
                 Participate in exciting debate competitions and workshops across Bangladesh
               </p>
             </div>
@@ -626,60 +558,39 @@ const Home = () => {
             <div className="hidden lg:block">
               <Link 
                 to="/events" 
-                className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600 shadow-lg"
+                className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-emerald-600 shadow-md"
               >
-                {/* Animated Background Pattern */}
-                <span className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-700">
-                  <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
-                      </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#grid)" />
-                  </svg>
-                </span>
-                
                 {/* Shine Effect */}
-                <span className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white/40 via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[200%] transition-all duration-1000"></span>
+                <span className="absolute top-0 left-0 w-6 h-full bg-gradient-to-r from-white/40 via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[200%] transition-all duration-1000"></span>
                 
                 {/* Button Content */}
                 <span className="relative z-10 flex items-center">
-                  <span className="mr-3 text-lg font-semibold tracking-wide">Browse All Events</span>
+                  <span className="mr-2 text-sm font-semibold tracking-wide">Browse All Events</span>
                   <div className="relative">
-                    <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
-                    <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+                    <FaArrowRight className="text-sm transform group-hover:translate-x-1 transition-transform duration-300" />
+                    <FaArrowRight className="absolute top-0 left-0 text-sm opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-300" />
                   </div>
                 </span>
-                
-                {/* Corner Accents with Animation */}
-                <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-                <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-                <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-                <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-                
-                {/* Pulsing Ring Effect */}
-                <span className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-white/20 group-hover:animate-pulse transition-all duration-500"></span>
               </Link>
             </div>
           </div>
           
-          {/* Grid container with equal height cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
+          {/* Grid container with equal height cards - Compact */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 items-stretch">
             {events.map((event, index) => (
               <div 
                 key={event.id} 
-                className={`group bg-white rounded-xl border ${event.borderColor} overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${index === 1 ? 'lg:-translate-y-0' : ''} flex flex-col h-full`}
+                className={`group bg-white rounded-lg border ${event.borderColor} overflow-hidden hover:shadow-lg transition-all duration-500 hover:-translate-y-1 ${index === 1 ? 'lg:-translate-y-0' : ''} flex flex-col h-full`}
               >
-                {/* Event Image - Fixed Height */}
-                <div className="relative h-48 sm:h-56 md:h-60 lg:h-64 overflow-hidden flex-shrink-0">
+                {/* Event Image - Fixed Height (Compact) */}
+                <div className="relative h-40 sm:h-44 md:h-48 lg:h-52 overflow-hidden flex-shrink-0">
                   <img 
                     src={event.image} 
                     alt={event.alt}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
-                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200 text-black">
+                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold border border-emerald-200 text-black">
                     {event.category}
                   </div>
                   {/* Gradient overlay */}
@@ -687,58 +598,58 @@ const Home = () => {
                 </div>
                 
                 {/* Event Content - Flexible height with button at bottom */}
-                <div className="p-5 sm:p-6 md:p-7 flex flex-col flex-grow">
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 mb-3 sm:mb-4 line-clamp-2">
+                <div className="p-4 sm:p-5 md:p-6 flex flex-col flex-grow">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-emerald-900 mb-2 sm:mb-3 line-clamp-2">
                     {event.title}
                   </h3>
                   
-                  <p className="text-gray-700 text-sm sm:text-base md:text-lg mb-4 sm:mb-5 md:mb-6 leading-relaxed line-clamp-3 flex-grow">
+                  <p className="text-gray-700 text-xs sm:text-sm md:text-base mb-3 sm:mb-4 leading-relaxed line-clamp-3 flex-grow">
                     {event.description}
                   </p>
                   
                   {/* Event Details - Fixed content */}
-                  <div className="space-y-2 sm:space-y-3 mb-5 sm:mb-6 md:mb-7">
+                  <div className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-5 md:mb-6">
                     <div className="flex items-center">
-                      <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
-                        <FaCalendar className="text-emerald-600 text-xs sm:text-sm" />
+                      <div className={`${event.bgColor} p-1.5 rounded-full mr-2 border ${event.borderColor} flex-shrink-0`}>
+                        <FaCalendar className="text-emerald-600 text-xs" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs sm:text-sm text-gray-500 truncate">Date</p>
-                        <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.date}</p>
+                        <p className="text-xs text-gray-500 truncate">Date</p>
+                        <p className="font-semibold text-emerald-800 text-sm truncate">{event.date}</p>
                       </div>
                     </div>
                     
                     <div className="flex items-center">
-                      <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
-                        <FaMapMarkerAlt className="text-emerald-600 text-xs sm:text-sm" />
+                      <div className={`${event.bgColor} p-1.5 rounded-full mr-2 border ${event.borderColor} flex-shrink-0`}>
+                        <FaMapMarkerAlt className="text-emerald-600 text-xs" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs sm:text-sm text-gray-500 truncate">Location</p>
-                        <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.location}</p>
+                        <p className="text-xs text-gray-500 truncate">Location</p>
+                        <p className="font-semibold text-emerald-800 text-sm truncate">{event.location}</p>
                       </div>
                     </div>
                     
                     <div className="flex items-center">
-                      <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
-                        <FaClock className="text-emerald-600 text-xs sm:text-sm" />
+                      <div className={`${event.bgColor} p-1.5 rounded-full mr-2 border ${event.borderColor} flex-shrink-0`}>
+                        <FaClock className="text-emerald-600 text-xs" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs sm:text-sm text-gray-500 truncate">Time</p>
-                        <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.time}</p>
+                        <p className="text-xs text-gray-500 truncate">Time</p>
+                        <p className="font-semibold text-emerald-800 text-sm truncate">{event.time}</p>
                       </div>
                     </div>
                   </div>
                   
                   {/* Button - Fixed at bottom */}
-                  <div className="mt-auto pt-2">
+                  <div className="mt-auto pt-1">
                     <Link 
                       to={`/events/${event.id}`} 
-                      className="group/btn inline-flex items-center justify-center w-full text-center bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-3 px-4 sm:py-3.5 sm:px-6 rounded-lg transition-all duration-300 border border-emerald-600 hover:shadow-lg hover:scale-[1.02] text-sm sm:text-base"
+                      className="group/btn inline-flex items-center justify-center w-full text-center bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 border border-emerald-600 hover:shadow-md hover:scale-[1.02] text-xs sm:text-sm"
                     >
-                      <span className="mr-2">Know More</span>
+                      <span className="mr-1">Know More</span>
                       <div className="relative">
-                        <FaArrowRight className="text-xs sm:text-sm transform group-hover/btn:translate-x-1 transition-transform duration-300" />
-                        <FaArrowRight className="absolute top-0 left-0 text-xs sm:text-sm opacity-0 group-hover/btn:opacity-30 group-hover/btn:translate-x-2 transition-all duration-300" />
+                        <FaArrowRight className="text-xs transform group-hover/btn:translate-x-0.5 transition-transform duration-300" />
+                        <FaArrowRight className="absolute top-0 left-0 text-xs opacity-0 group-hover/btn:opacity-30 group-hover/btn:translate-x-1 transition-all duration-300" />
                       </div>
                     </Link>
                   </div>
@@ -748,28 +659,22 @@ const Home = () => {
           </div>
           
           {/* Mobile & Tablet View - Dynamic Button (Center Aligned) */}
-          <div className="text-center mt-10 md:mt-12 lg:hidden">
+          <div className="text-center mt-8 md:mt-10 lg:hidden">
             <Link 
               to="/events" 
-              className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600 shadow-lg mx-auto"
+              className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-emerald-600 shadow-md mx-auto"
             >
               {/* Shine Effect */}
-              <span className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white/40 via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[200%] transition-all duration-1000"></span>
+              <span className="absolute top-0 left-0 w-6 h-full bg-gradient-to-r from-white/40 via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[200%] transition-all duration-1000"></span>
               
               {/* Button Content */}
               <span className="relative z-10 flex items-center">
-                <span className="mr-3 text-lg font-semibold tracking-wide">Browse All Events</span>
+                <span className="mr-2 text-sm font-semibold tracking-wide">Browse All Events</span>
                 <div className="relative">
-                  <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
-                  <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+                  <FaArrowRight className="text-sm transform group-hover:translate-x-1 transition-transform duration-300" />
+                  <FaArrowRight className="absolute top-0 left-0 text-sm opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-300" />
                 </div>
               </span>
-              
-              {/* Corner Accents */}
-              <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-              <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-              <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-              <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
             </Link>
           </div>
         </div>
@@ -797,36 +702,17 @@ const Home = () => {
             .animate-underline {
               animation: underline 2s ease-in-out infinite;
             }
-            
-            /* Custom animation for pulse ring */
-            @keyframes pulse-ring {
-              0% {
-                transform: scale(1);
-                opacity: 0.5;
-              }
-              50% {
-                transform: scale(1.05);
-                opacity: 0.3;
-              }
-              100% {
-                transform: scale(1);
-                opacity: 0.5;
-              }
-            }
-            .animate-pulse {
-              animation: pulse-ring 2s ease-in-out infinite;
-            }
           `}
         </style>
       </section>
 
       {/* Latest News - Updated with Images */}
-      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
+      <section className="py-12 md:py-16 lg:py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 md:mb-10 lg:mb-12">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 md:mb-10">
             {/* Left Side - Text with Animation */}
             <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-2">
                 Latest News & 
                 <span className="relative inline-block ml-2">
                   <span className="text-emerald-600 relative">
@@ -836,7 +722,7 @@ const Home = () => {
                   </span>
                 </span>
               </h2>
-              <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl">
+              <p className="text-gray-600 text-base sm:text-lg max-w-xl">
                 Stay updated with the latest announcements, competition results and upcoming events
               </p>
             </div>
