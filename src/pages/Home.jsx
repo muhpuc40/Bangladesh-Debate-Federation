@@ -304,71 +304,79 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About Us Section (Replaces Quick Links) */}
+      {/* About Us Section (Replaces Quick Links) - UPDATED MOBILE ORDER */}
       <section className="py-12 md:py-16 lg:py-20 bg-white" id="about-section">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
-            {/* Left Side - 3 Small Images Grid with Slide Up Animation on Scroll */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
-              {aboutImages.map((image, index) => (
-                <div 
-                  key={image.id} 
-                  ref={el => {
-                    // Intersection Observer for slide-up animation
-                    if (el && typeof window !== 'undefined') {
-                      // Create a unique observer for each element
-                      const observer = new IntersectionObserver(
-                        (entries) => {
-                          entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                              // Add animation class when element is in view
-                              entry.target.classList.add('animate-slide-up');
-                              // Remove initial hidden styles
-                              entry.target.style.opacity = '1';
-                              entry.target.style.transform = 'translateY(0)';
-                            }
-                          });
-                        },
-                        {
-                          threshold: 0.2, // Trigger when 20% of element is visible
-                          rootMargin: '0px 0px -30px 0px' // Trigger slightly before entering viewport
-                        }
-                      );
-                      
-                      observer.observe(el);
-                      
-                      // Cleanup observer on component unmount
-                      return () => observer.disconnect();
-                    }
-                  }}
-                  className={`relative overflow-hidden rounded-lg md:rounded-xl border border-emerald-100 hover:border-emerald-300 transition-all duration-700 hover:shadow-xl hover:-translate-y-2 ${
-                    index === 1 ? 'row-span-2' : 'row-span-1'
-                  }`}
-                  style={{ 
-                    opacity: 0,
-                    transform: 'translateY(30px)',
-                    transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'
-                  }}
-                >
-                  <div className={`aspect-square overflow-hidden ${index === 1 ? 'h-full' : ''}`}>
-                    <img 
-                      src={image.url} 
-                      alt={image.alt}
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                      loading="lazy"
-                    />
-                  </div>
-                  {/* Overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-              ))}
-            </div>
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
             
-            {/* Right Side - About Us Content */}
-            <div>
+            {/* Mobile Order: First show "ABOUT BDF" label */}
+            <div className="lg:hidden w-full">
               <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200">
                 ABOUT BDF
               </div>
+            </div>
+            
+            {/* Left Side - 3 Small Images Grid (Mobile: Show after label, Desktop: Show as left column) */}
+            <div className="w-full order-2 lg:order-1">
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+                {aboutImages.map((image, index) => (
+                  <div 
+                    key={image.id} 
+                    ref={el => {
+                      // Intersection Observer for slide-up animation
+                      if (el && typeof window !== 'undefined') {
+                        const observer = new IntersectionObserver(
+                          (entries) => {
+                            entries.forEach((entry) => {
+                              if (entry.isIntersecting) {
+                                entry.target.classList.add('animate-slide-up');
+                                entry.target.style.opacity = '1';
+                                entry.target.style.transform = 'translateY(0)';
+                              }
+                            });
+                          },
+                          {
+                            threshold: 0.2,
+                            rootMargin: '0px 0px -30px 0px'
+                          }
+                        );
+                        
+                        observer.observe(el);
+                        return () => observer.disconnect();
+                      }
+                    }}
+                    className={`relative overflow-hidden rounded-lg md:rounded-xl border border-emerald-100 hover:border-emerald-300 transition-all duration-700 hover:shadow-xl hover:-translate-y-2 ${
+                      index === 1 ? 'row-span-2' : 'row-span-1'
+                    }`}
+                    style={{ 
+                      opacity: 0,
+                      transform: 'translateY(30px)',
+                      transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'
+                    }}
+                  >
+                    <div className={`aspect-square overflow-hidden ${index === 1 ? 'h-full' : ''}`}>
+                      <img 
+                        src={image.url} 
+                        alt={image.alt}
+                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Right Side - About Us Content (Mobile: Show after images, Desktop: Show as right column) */}
+            <div className="w-full order-3 lg:order-2">
+              {/* Desktop: Show "ABOUT BDF" label */}
+              <div className="hidden lg:block">
+                <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200">
+                  ABOUT BDF
+                </div>
+              </div>
+              
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-4 sm:mb-6 leading-tight">
                 Leading Debate Excellence in <span className="text-emerald-600">Bangladesh</span>
               </h2>
@@ -451,86 +459,86 @@ const Home = () => {
         </style>
       </section>
 
-  {/* Partners with Marquee Cards - FIXED MOBILE VERSION - SINGLE LINE */}
-<section className="py-8 md:py-12 lg:py-16 bg-white overflow-hidden">
-  <div className="container mx-auto px-4">
-    <div className="text-center mb-8 md:mb-10">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-2">
-        Our Esteemed Partners
-      </h2>
-      <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
-        Collaborating with leading organizations to promote debate culture in Bangladesh
-      </p>
-    </div>
-    
-    {/* Marquee Container - SINGLE LINE */}
-    <div className="relative w-full overflow-hidden py-4">
-      {/* Single marquee row with duplicate content for seamless loop */}
-      <div className="flex animate-marqueeSingle whitespace-nowrap">
-        {/* First set of partners */}
-        {partners.map((partner, idx) => (
-          <div 
-            key={`${idx}-1`} 
-            className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-20 sm:h-24 w-28 sm:w-32 md:w-36 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
-          >
-            <div className="text-xl sm:text-2xl md:text-3xl mb-2">
-              {partner.logo}
-            </div>
-            <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm px-1">
-              {partner.name}
+      {/* Partners with Marquee Cards - FIXED MOBILE VERSION - SINGLE LINE */}
+      <section className="py-8 md:py-12 lg:py-16 bg-white overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8 md:mb-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-2">
+              Our Esteemed Partners
+            </h2>
+            <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
+              Collaborating with leading organizations to promote debate culture in Bangladesh
+            </p>
+          </div>
+          
+          {/* Marquee Container - SINGLE LINE */}
+          <div className="relative w-full overflow-hidden py-4">
+            {/* Single marquee row with duplicate content for seamless loop */}
+            <div className="flex animate-marqueeSingle whitespace-nowrap">
+              {/* First set of partners */}
+              {partners.map((partner, idx) => (
+                <div 
+                  key={`${idx}-1`} 
+                  className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-20 sm:h-24 w-28 sm:w-32 md:w-36 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
+                >
+                  <div className="text-xl sm:text-2xl md:text-3xl mb-2">
+                    {partner.logo}
+                  </div>
+                  <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm px-1">
+                    {partner.name}
+                  </div>
+                </div>
+              ))}
+              
+              {/* Duplicate set for seamless loop */}
+              {partners.map((partner, idx) => (
+                <div 
+                  key={`${idx}-2`} 
+                  className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-20 sm:h-24 w-28 sm:w-32 md:w-36 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
+                  aria-hidden="true"
+                >
+                  <div className="text-xl sm:text-2xl md:text-3xl mb-2">
+                    {partner.logo}
+                  </div>
+                  <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm px-1">
+                    {partner.name}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+        </div>
         
-        {/* Duplicate set for seamless loop */}
-        {partners.map((partner, idx) => (
-          <div 
-            key={`${idx}-2`} 
-            className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-20 sm:h-24 w-28 sm:w-32 md:w-36 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
-            aria-hidden="true"
-          >
-            <div className="text-xl sm:text-2xl md:text-3xl mb-2">
-              {partner.logo}
-            </div>
-            <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm px-1">
-              {partner.name}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-  
-  {/* Inline CSS for single line marquee animation */}
-  <style>
-    {`
-      @keyframes marqueeSingle {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
-      }
-      
-      .animate-marqueeSingle {
-        animation: marqueeSingle 40s linear infinite;
-        display: flex;
-        width: max-content;
-      }
-      
-      @media (max-width: 640px) {
-        .animate-marqueeSingle {
-          animation: marqueeSingle 35s linear infinite;
-        }
-      }
-      
-      .animate-marqueeSingle:hover {
-        animation-play-state: paused;
-      }
-    `}
-  </style>
-</section>
+        {/* Inline CSS for single line marquee animation */}
+        <style>
+          {`
+            @keyframes marqueeSingle {
+              0% {
+                transform: translateX(0);
+              }
+              100% {
+                transform: translateX(-50%);
+              }
+            }
+            
+            .animate-marqueeSingle {
+              animation: marqueeSingle 40s linear infinite;
+              display: flex;
+              width: max-content;
+            }
+            
+            @media (max-width: 640px) {
+              .animate-marqueeSingle {
+                animation: marqueeSingle 35s linear infinite;
+              }
+            }
+            
+            .animate-marqueeSingle:hover {
+              animation-play-state: paused;
+            }
+          `}
+        </style>
+      </section>
 
       {/* NEW: Events Section with Perfectly Aligned Cards - COMPACT VERSION */}
       <section className="py-8 md:py-10 lg:py-12 bg-emerald-50">
@@ -706,13 +714,14 @@ const Home = () => {
         </style>
       </section>
 
-      {/* Latest News - Updated with Images */}
-      <section className="py-12 md:py-16 lg:py-20 bg-white">
+      {/* Latest News - Compact Version */}
+      <section className="py-8 md:py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 md:mb-10">
-            {/* Left Side - Text with Animation */}
+          {/* Compact Header Section */}
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 md:mb-8">
+            {/* Left Side - Text with Animation (Compact) */}
             <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-2">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 mb-2">
                 Latest News & 
                 <span className="relative inline-block ml-2">
                   <span className="text-emerald-600 relative">
@@ -722,88 +731,84 @@ const Home = () => {
                   </span>
                 </span>
               </h2>
-              <p className="text-gray-600 text-base sm:text-lg max-w-xl">
+              <p className="text-gray-600 text-sm sm:text-base max-w-xl">
                 Stay updated with the latest announcements, competition results and upcoming events
               </p>
             </div>
             
-            {/* Right Side - Dynamic View All News Button (Desktop Only) */}
+            {/* Right Side - Dynamic View All News Button (Desktop Only) - Compact */}
             <div className="hidden lg:block">
               <Link 
                 to="/news" 
-                className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600"
+                className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-emerald-600"
               >
                 {/* Shine Effect */}
                 <span className="absolute top-0 left-0 w-6 h-full bg-white/30 -skew-x-12 -translate-x-16 group-hover:translate-x-[calc(100%+16px)] transition-all duration-700"></span>
                 
-                {/* Button Content */}
+                {/* Button Content - Compact */}
                 <span className="relative z-10 flex items-center">
-                  <span className="mr-3 text-lg">View All News</span>
+                  <span className="mr-2 text-sm">View All News</span>
                   <div className="relative">
-                    <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
-                    <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+                    <FaArrowRight className="text-sm transform group-hover:translate-x-1 transition-transform duration-300" />
+                    <FaArrowRight className="absolute top-0 left-0 text-sm opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-300" />
                   </div>
                 </span>
-                
-                {/* Corner Accents */}
-                <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/30"></span>
-                <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/30"></span>
               </Link>
             </div>
           </div>
           
-          {/* News Cards Grid with Images */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
+          {/* News Cards Grid with Images - Compact */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {newsItems.map((news, index) => (
               <div 
                 key={index} 
-                className="group bg-white rounded-xl border border-emerald-100 hover:border-emerald-300 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
+                className="group bg-white rounded-lg border border-emerald-100 hover:border-emerald-300 overflow-hidden transition-all duration-500 hover:shadow-lg hover:-translate-y-1"
               >
-                {/* News Image */}
-                <div className="relative h-48 sm:h-56 md:h-60 lg:h-64 overflow-hidden">
+                {/* News Image - Compact */}
+                <div className="relative h-40 sm:h-44 md:h-48 overflow-hidden">
                   <img 
                     src={news.image} 
                     alt={news.alt}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
-                  {/* Category Badge on Image */}
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200 text-emerald-800">
+                  {/* Category Badge on Image - Compact */}
+                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold border border-emerald-200 text-emerald-800">
                     {news.category}
                   </div>
                   {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 
-                {/* News Content */}
-                <div className="p-5 sm:p-6 md:p-7">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-gray-500 text-xs sm:text-sm md:text-base flex items-center">
-                      <FaCalendar className="mr-1.5 text-emerald-600" /> {news.date}
+                {/* News Content - Compact */}
+                <div className="p-4 sm:p-5">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-gray-500 text-xs flex items-center">
+                      <FaCalendar className="mr-1.5 text-emerald-600 text-xs" /> {news.date}
                     </span>
-                    <span className="text-gray-400 text-xs sm:text-sm">{news.readTime}</span>
+                    <span className="text-gray-400 text-xs">{news.readTime}</span>
                   </div>
                   
-                  <h3 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-3 sm:mb-4 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-emerald-900 mb-2 sm:mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
                     {news.title}
                   </h3>
                   
-                  <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-5 sm:mb-6 line-clamp-3">
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                     {news.excerpt}
                   </p>
                   
-                  <div className="flex items-center justify-between pt-4 border-t border-emerald-50">
+                  <div className="flex items-center justify-between pt-3 border-t border-emerald-50">
                     <Link 
                       to={`/news/${index + 1}`}
-                      className="inline-flex items-center text-emerald-600 font-semibold text-sm sm:text-base hover:text-emerald-800 transition-colors duration-300 group/readmore"
+                      className="inline-flex items-center text-emerald-600 font-semibold text-sm hover:text-emerald-800 transition-colors duration-300 group/readmore"
                     >
                       Read Full Story 
-                      <FaArrowRight className="ml-2 text-sm sm:text-base group-hover/readmore:translate-x-2 transition-transform duration-300" />
+                      <FaArrowRight className="ml-1.5 text-xs group-hover/readmore:translate-x-1 transition-transform duration-300" />
                     </Link>
                     
                     <div className="flex items-center space-x-1">
                       <FaUsers className="text-gray-400 text-xs" />
-                      <span className="text-gray-400 text-xs sm:text-sm">{news.viewers}</span>
+                      <span className="text-gray-400 text-xs">{news.viewers}</span>
                     </div>
                   </div>
                 </div>
@@ -811,27 +816,23 @@ const Home = () => {
             ))}
           </div>
           
-          {/* Mobile & Tablet View - Dynamic Button (Center Aligned) */}
-          <div className="text-center mt-10 md:mt-12 lg:hidden">
+          {/* Mobile & Tablet View - Dynamic Button (Center Aligned) - Compact */}
+          <div className="text-center mt-8 md:mt-10 lg:hidden">
             <Link 
               to="/news" 
-              className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600 mx-auto"
+              className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-emerald-600 mx-auto"
             >
               {/* Shine Effect */}
               <span className="absolute top-0 left-0 w-6 h-full bg-white/30 -skew-x-12 -translate-x-16 group-hover:translate-x-[calc(100%+16px)] transition-all duration-700"></span>
               
               {/* Button Content */}
               <span className="relative z-10 flex items-center">
-                <span className="mr-3 text-lg">View All News</span>
+                <span className="mr-2 text-sm">View All News</span>
                 <div className="relative">
-                  <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
-                  <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+                  <FaArrowRight className="text-sm transform group-hover:translate-x-1 transition-transform duration-300" />
+                  <FaArrowRight className="absolute top-0 left-0 text-sm opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-300" />
                 </div>
               </span>
-              
-              {/* Corner Accents */}
-              <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/30"></span>
-              <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/30"></span>
             </Link>
           </div>
         </div>

@@ -9,8 +9,6 @@ import {
   FaPhone, 
   FaEnvelope, 
   FaMapMarkerAlt,
-  FaClock,
-  FaGraduationCap,
   FaArrowUp
 } from 'react-icons/fa';
 
@@ -30,7 +28,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8">
-          {/* Brand Column */}
+          {/* Brand Column - Left Side */}
           <div>
             <Link to="/" className="flex flex-col items-center sm:items-start space-y-2 mb-4">
               <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
@@ -45,7 +43,6 @@ const Footer = () => {
                 <h2 className="text-lg md:text-xl font-bold text-emerald-800 leading-tight">
                   Bangladesh Debate Federation
                 </h2>
-             
               </div>
             </Link>
            
@@ -66,73 +63,40 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Contact Information - Now takes full width */}
-          <div className="lg:col-span-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              {/* Contact Information Column 1 */}
-              <div className="space-y-4 md:space-y-5">
-                <div>
-                  <div className="flex items-center mb-2">
-                    <div className="bg-emerald-100 p-1.5 rounded-full mr-2 group hover:bg-emerald-200 transition-all duration-300">
-                      <FaMapMarkerAlt className="text-emerald-600 text-xs group-hover:scale-110 transition-transform duration-300" />
-                    </div>
-                    <h4 className="font-bold text-emerald-800 text-sm md:text-base">
-                      Head Office
-                    </h4>
-                  </div>
-                  <p className="text-gray-600 text-xs md:text-sm pl-8">
-                    BDF Tower, 123 Debate Road<br />
-                    Dhaka 1212, Bangladesh
-                  </p>
-                </div>
+          {/* Empty Middle Column for spacing */}
+          <div className="hidden lg:block"></div>
 
-                <div>
-                  <div className="flex items-center mb-2">
-                    <div className="bg-emerald-100 p-1.5 rounded-full mr-2 group hover:bg-emerald-200 transition-all duration-300">
-                      <FaPhone className="text-emerald-600 text-xs group-hover:scale-110 transition-transform duration-300" />
-                    </div>
-                    <h4 className="font-bold text-emerald-800 text-sm md:text-base">
-                      Contact
-                    </h4>
+          {/* Contact Information - Right Side */}
+          <div>
+            <div className="space-y-4 md:space-y-5">
+              <div>
+                <div className="flex items-center mb-2">
+                  <div className="bg-emerald-100 p-1.5 rounded-full mr-2 group hover:bg-emerald-200 transition-all duration-300">
+                    <FaMapMarkerAlt className="text-emerald-600 text-xs group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <p className="text-gray-600 text-xs md:text-sm pl-8">
-                    Phone: +880 2 1234 5678<br />
-                    Email: info@debatefederation.org
-                  </p>
+                  <h4 className="font-bold text-emerald-800 text-sm md:text-base">
+                    Head Office
+                  </h4>
                 </div>
+                <p className="text-gray-600 text-xs md:text-sm pl-8">
+                  BDF Tower, 123 Debate Road<br />
+                  Dhaka 1212, Bangladesh
+                </p>
               </div>
 
-              {/* Contact Information Column 2 - Additional contact info */}
-              <div className="space-y-4 md:space-y-5">
-                <div>
-                  <div className="flex items-center mb-2">
-                    <div className="bg-emerald-100 p-1.5 rounded-full mr-2 group hover:bg-emerald-200 transition-all duration-300">
-                      <FaClock className="text-emerald-600 text-xs group-hover:scale-110 transition-transform duration-300" />
-                    </div>
-                    <h4 className="font-bold text-emerald-800 text-sm md:text-base">
-                      Office Hours
-                    </h4>
+              <div>
+                <div className="flex items-center mb-2">
+                  <div className="bg-emerald-100 p-1.5 rounded-full mr-2 group hover:bg-emerald-200 transition-all duration-300">
+                    <FaPhone className="text-emerald-600 text-xs group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <p className="text-gray-600 text-xs md:text-sm pl-8">
-                    Sunday - Thursday: 9:00 AM - 5:00 PM<br />
-                    Friday & Saturday: Closed
-                  </p>
+                  <h4 className="font-bold text-emerald-800 text-sm md:text-base">
+                    Contact
+                  </h4>
                 </div>
-
-                <div>
-                  <div className="flex items-center mb-2">
-                    <div className="bg-emerald-100 p-1.5 rounded-full mr-2 group hover:bg-emerald-200 transition-all duration-300">
-                      <FaGraduationCap className="text-emerald-600 text-xs group-hover:scale-110 transition-transform duration-300" />
-                    </div>
-                    <h4 className="font-bold text-emerald-800 text-sm md:text-base">
-                      Training Department
-                    </h4>
-                  </div>
-                  <p className="text-gray-600 text-xs md:text-sm pl-8">
-                    Email: training@debatefederation.org<br />
-                    Phone: +880 2 1234 5679
-                  </p>
-                </div>
+                <p className="text-gray-600 text-xs md:text-sm pl-8">
+                  Phone: +880 2 1234 5678<br />
+                  Email: info@debatefederation.org
+                </p>
               </div>
             </div>
           </div>
