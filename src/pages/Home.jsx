@@ -482,467 +482,474 @@ const Home = () => {
         </style>
       </section>
 
-      {/* Partners with Marquee Cards */}
-      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 md:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4 lg:mb-6">
-              Our Esteemed Partners
-            </h2>
-            <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl mx-auto">
-              Collaborating with leading organizations to promote debate culture in Bangladesh
-            </p>
-          </div>
-          
-          {/* Marquee Container for All Devices */}
-          <div className="relative w-full overflow-hidden mb-8 md:mb-10 lg:mb-12">
-            <div className="flex whitespace-nowrap" style={{ animation: 'partnerMarquee 25s linear infinite' }}>
-              {partners.flatMap((partner, idx) => [
-                <div 
-                  key={`${idx}-1`} 
-                  className={`inline-flex ${partner.bg} p-3 sm:p-4 md:p-5 rounded-xl mx-2 sm:mx-3 md:mx-4 h-24 sm:h-28 md:h-32 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 hover:shadow-lg hover:scale-105 transition-all duration-300 group`}
-                  style={{ width: '160px' }}
-                >
-                  <div className="text-xl sm:text-2xl md:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                    {partner.logo}
-                  </div>
-                  <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm md:text-base">
-                    {partner.name}
-                  </div>
-                </div>,
-                <div 
-                  key={`${idx}-2`} 
-                  className={`inline-flex ${partner.bg} p-3 sm:p-4 md:p-5 rounded-xl mx-2 sm:mx-3 md:mx-4 h-24 sm:h-28 md:h-32 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 hover:shadow-lg hover:scale-105 transition-all duration-300 group`}
-                  style={{ width: '160px' }}
-                >
-                  <div className="text-xl sm:text-2xl md:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                    {partner.logo}
-                  </div>
-                  <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm md:text-base">
-                    {partner.name}
-                  </div>
-                </div>
-              ])}
-            </div>
-            
-            {/* Gradient overlays for smooth edges */}
-            <div className="absolute top-0 left-0 w-16 sm:w-20 h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute top-0 right-0 w-16 sm:w-20 h-full bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
-            
-            {/* Inline CSS for marquee animation */}
-            <style>
-              {`
-                @keyframes partnerMarquee {
-                  0% {
-                    transform: translateX(0%);
-                  }
-                  100% {
-                    transform: translateX(-50%);
-                  }
-                }
-                
-                @media (max-width: 640px) {
-                  @keyframes partnerMarquee {
-                    0% {
-                      transform: translateX(0%);
-                    }
-                    100% {
-                      transform: translateX(-50%);
-                    }
-                  }
-                }
-              `}
-            </style>
-          </div>
-          
-       
-        </div>
-      </section>
-
-  {/* NEW: Events Section with Perfectly Aligned Cards */}
-<section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-emerald-50">
+ {/* Partners with Marquee Cards - INFINITE LOOP - FIXED */}
+<section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
   <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-    {/* Section Header with Arrow and Button */}
-    <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10 md:mb-12 lg:mb-16">
-      {/* Left Side - Text Only */}
-      <div className="mb-6 lg:mb-0">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 leading-tight">
-          Join Our Next 
-          <span className="relative inline-block ml-2">
-            <span className="text-emerald-600 relative">
-              Debate Events
-              {/* Animated underline */}
-              <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
-            </span>
-          </span>
-        </h2>
-        <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl mt-3 md:mt-4">
-          Participate in exciting debate competitions and workshops across Bangladesh
-        </p>
+    <div className="text-center mb-10 md:mb-12 lg:mb-16">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4 lg:mb-6">
+        Our Esteemed Partners
+      </h2>
+      <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl mx-auto">
+        Collaborating with leading organizations to promote debate culture in Bangladesh
+      </p>
+    </div>
+    
+    {/* Marquee Container - INFINITE LOOP with proper overflow */}
+    <div className="relative w-full overflow-visible mb-8 md:mb-10 lg:mb-12">
+      {/* Extra padding for hover space */}
+      <div className="py-8">
+        {/* Single marquee with duplicate content for seamless loop */}
+        <div className="flex whitespace-nowrap animate-infiniteMarquee">
+          {/* First set of partners */}
+          {partners.map((partner, idx) => (
+            <div 
+              key={`${idx}-1`} 
+              className="relative inline-flex bg-emerald-50 p-4 sm:p-5 md:p-6 rounded-xl mx-3 sm:mx-4 md:mx-5 h-28 sm:h-32 md:h-36 w-[180px] sm:w-[200px] flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 ease-out group hover:z-50"
+              style={{ 
+                transform: 'translateY(0)',
+                transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out'
+              }}
+            >
+              <div className="text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                {partner.logo}
+              </div>
+              <div className="font-semibold text-center text-emerald-800 text-sm sm:text-base md:text-lg px-2">
+                {partner.name}
+              </div>
+              
+              {/* Hover effect overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-white rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+            </div>
+          ))}
+          
+          {/* Duplicate set of partners for seamless loop */}
+          {partners.map((partner, idx) => (
+            <div 
+              key={`${idx}-2`} 
+              className="relative inline-flex bg-emerald-50 p-4 sm:p-5 md:p-6 rounded-xl mx-3 sm:mx-4 md:mx-5 h-28 sm:h-32 md:h-36 w-[180px] sm:w-[200px] flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 ease-out group hover:z-50"
+              style={{ 
+                transform: 'translateY(0)',
+                transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out'
+              }}
+            >
+              <div className="text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                {partner.logo}
+              </div>
+              <div className="font-semibold text-center text-emerald-800 text-sm sm:text-base md:text-lg px-2">
+                {partner.name}
+              </div>
+              
+              {/* Hover effect overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-white rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+            </div>
+          ))}
+        </div>
       </div>
       
-      {/* Right Side - Dynamic Browse All Events Button */}
-      <div className="hidden lg:block">
-        <Link 
-          to="/events" 
-          className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600 shadow-lg"
-        >
-          {/* Animated Background Pattern */}
-          <span className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-700">
-            <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
-          </span>
-          
-          {/* Shine Effect */}
-          <span className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white/40 via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[200%] transition-all duration-1000"></span>
-          
-          {/* Button Content */}
-          <span className="relative z-10 flex items-center">
-            <span className="mr-3 text-lg font-semibold tracking-wide">Browse All Events</span>
-            <div className="relative">
-              <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
-              <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
-            </div>
-          </span>
-          
-          {/* Corner Accents with Animation */}
-          <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-          <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-          <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-          <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-          
-          {/* Pulsing Ring Effect */}
-          <span className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-white/20 group-hover:animate-pulse transition-all duration-500"></span>
-        </Link>
-      </div>
-    </div>
-    
-    {/* Grid container with equal height cards */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
-      {events.map((event, index) => (
-        <div 
-          key={event.id} 
-          className={`group bg-white rounded-xl border ${event.borderColor} overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${index === 1 ? 'lg:-translate-y-0' : ''} flex flex-col h-full`}
-        >
-          {/* Event Image - Fixed Height */}
-          <div className="relative h-48 sm:h-56 md:h-60 lg:h-64 overflow-hidden flex-shrink-0">
-            <img 
-              src={event.image} 
-              alt={event.alt}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-            />
-            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200 text-black">
-              {event.category}
-            </div>
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
-          </div>
-          
-          {/* Event Content - Flexible height with button at bottom */}
-          <div className="p-5 sm:p-6 md:p-7 flex flex-col flex-grow">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 mb-3 sm:mb-4 line-clamp-2">
-              {event.title}
-            </h3>
-            
-            <p className="text-gray-700 text-sm sm:text-base md:text-lg mb-4 sm:mb-5 md:mb-6 leading-relaxed line-clamp-3 flex-grow">
-              {event.description}
-            </p>
-            
-            {/* Event Details - Fixed content */}
-            <div className="space-y-2 sm:space-y-3 mb-5 sm:mb-6 md:mb-7">
-              <div className="flex items-center">
-                <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
-                  <FaCalendar className="text-emerald-600 text-xs sm:text-sm" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-xs sm:text-sm text-gray-500 truncate">Date</p>
-                  <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.date}</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center">
-                <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
-                  <FaMapMarkerAlt className="text-emerald-600 text-xs sm:text-sm" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-xs sm:text-sm text-gray-500 truncate">Location</p>
-                  <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.location}</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center">
-                <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
-                  <FaClock className="text-emerald-600 text-xs sm:text-sm" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-xs sm:text-sm text-gray-500 truncate">Time</p>
-                  <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.time}</p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Button - Fixed at bottom */}
-            <div className="mt-auto pt-2">
-              <Link 
-                to={`/events/${event.id}`} 
-                className="group/btn inline-flex items-center justify-center w-full text-center bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-3 px-4 sm:py-3.5 sm:px-6 rounded-lg transition-all duration-300 border border-emerald-600 hover:shadow-lg hover:scale-[1.02] text-sm sm:text-base"
-              >
-                <span className="mr-2">Know More</span>
-                <div className="relative">
-                  <FaArrowRight className="text-xs sm:text-sm transform group-hover/btn:translate-x-1 transition-transform duration-300" />
-                  <FaArrowRight className="absolute top-0 left-0 text-xs sm:text-sm opacity-0 group-hover/btn:opacity-30 group-hover/btn:translate-x-2 transition-all duration-300" />
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-    
-    {/* Mobile & Tablet View - Dynamic Button (Center Aligned) */}
-    <div className="text-center mt-10 md:mt-12 lg:hidden">
-      <Link 
-        to="/events" 
-        className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600 shadow-lg mx-auto"
-      >
-        {/* Shine Effect */}
-        <span className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white/40 via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[200%] transition-all duration-1000"></span>
-        
-        {/* Button Content */}
-        <span className="relative z-10 flex items-center">
-          <span className="mr-3 text-lg font-semibold tracking-wide">Browse All Events</span>
-          <div className="relative">
-            <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
-            <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
-          </div>
-        </span>
-        
-        {/* Corner Accents */}
-        <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-        <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-        <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-        <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
-      </Link>
+      {/* REMOVED: Gradient overlays that were causing white screen */}
     </div>
   </div>
   
-  {/* CSS for underline animation */}
+  {/* Inline CSS for INFINITE marquee animation */}
   <style>
     {`
-      @keyframes underline {
+      @keyframes infiniteMarquee {
         0% {
-          transform: scaleX(0);
-          transform-origin: left;
-        }
-        50% {
-          transform: scaleX(1);
-          transform-origin: left;
-        }
-        51% {
-          transform-origin: right;
+          transform: translateX(0%);
         }
         100% {
-          transform: scaleX(0);
-          transform-origin: right;
+          transform: translateX(-50%);
         }
-      }
-      .animate-underline {
-        animation: underline 2s ease-in-out infinite;
       }
       
-      /* Custom animation for pulse ring */
-      @keyframes pulse-ring {
-        0% {
-          transform: scale(1);
-          opacity: 0.5;
-        }
-        50% {
-          transform: scale(1.05);
-          opacity: 0.3;
-        }
-        100% {
-          transform: scale(1);
-          opacity: 0.5;
+      .animate-infiniteMarquee {
+        animation: infiniteMarquee 40s linear infinite;
+        display: flex;
+        width: max-content;
+      }
+      
+      @media (max-width: 640px) {
+        .animate-infiniteMarquee {
+          animation: infiniteMarquee 50s linear infinite;
         }
       }
-      .animate-pulse {
-        animation: pulse-ring 2s ease-in-out infinite;
+      
+      .animate-infiniteMarquee:hover {
+        animation-play-state: paused;
+      }
+      
+      /* Hover effect for cards */
+      .animate-infiniteMarquee > div:hover {
+        transform: translateY(-20px) scale(1.05) !important;
+        box-shadow: 
+          0 25px 50px -12px rgba(5, 150, 105, 0.25),
+          0 10px 25px -5px rgba(5, 150, 105, 0.1),
+          0 0 0 1px rgba(5, 150, 105, 0.1) !important;
+        border-color: rgba(5, 150, 105, 0.3) !important;
+      }
+      
+      /* Make sure hovered card is on top */
+      .animate-infiniteMarquee > div {
+        z-index: 10;
+      }
+      
+      .animate-infiniteMarquee > div:hover {
+        z-index: 100 !important;
       }
     `}
   </style>
 </section>
 
-   {/* Latest News - Updated with Images */}
-<section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 md:mb-10 lg:mb-12">
-      {/* Left Side - Text with Animation */}
-      <div>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4">
-          Latest News & 
-          <span className="relative inline-block ml-2">
-            <span className="text-emerald-600 relative">
-              Announcements
-              {/* Animated underline - Same as Events section */}
-              <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
-            </span>
-          </span>
-        </h2>
-        <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl">
-          Stay updated with the latest announcements, competition results and upcoming events
-        </p>
-      </div>
-      
-      {/* Right Side - Dynamic View All News Button (Desktop Only) */}
-      <div className="hidden lg:block">
-        <Link 
-          to="/news" 
-          className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600"
-        >
-          {/* Shine Effect */}
-          <span className="absolute top-0 left-0 w-6 h-full bg-white/30 -skew-x-12 -translate-x-16 group-hover:translate-x-[calc(100%+16px)] transition-all duration-700"></span>
-          
-          {/* Button Content */}
-          <span className="relative z-10 flex items-center">
-            <span className="mr-3 text-lg">View All News</span>
-            <div className="relative">
-              <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
-              <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+      {/* NEW: Events Section with Perfectly Aligned Cards */}
+      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-emerald-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header with Arrow and Button */}
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10 md:mb-12 lg:mb-16">
+            {/* Left Side - Text Only */}
+            <div className="mb-6 lg:mb-0">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 leading-tight">
+                Join Our Next 
+                <span className="relative inline-block ml-2">
+                  <span className="text-emerald-600 relative">
+                    Debate Events
+                    {/* Animated underline */}
+                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
+                  </span>
+                </span>
+              </h2>
+              <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl mt-3 md:mt-4">
+                Participate in exciting debate competitions and workshops across Bangladesh
+              </p>
             </div>
-          </span>
-          
-          {/* Corner Accents */}
-          <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/30"></span>
-          <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/30"></span>
-        </Link>
-      </div>
-    </div>
-    
-    {/* News Cards Grid with Images */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
-      {newsItems.map((news, index) => (
-        <div 
-          key={index} 
-          className="group bg-white rounded-xl border border-emerald-100 hover:border-emerald-300 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
-        >
-          {/* News Image */}
-          <div className="relative h-48 sm:h-56 md:h-60 lg:h-64 overflow-hidden">
-            <img 
-              src={news.image} 
-              alt={news.alt}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-            />
-            {/* Category Badge on Image */}
-            <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200 text-emerald-800">
-              {news.category}
+            
+            {/* Right Side - Dynamic Browse All Events Button */}
+            <div className="hidden lg:block">
+              <Link 
+                to="/events" 
+                className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600 shadow-lg"
+              >
+                {/* Animated Background Pattern */}
+                <span className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-700">
+                  <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                  </svg>
+                </span>
+                
+                {/* Shine Effect */}
+                <span className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white/40 via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[200%] transition-all duration-1000"></span>
+                
+                {/* Button Content */}
+                <span className="relative z-10 flex items-center">
+                  <span className="mr-3 text-lg font-semibold tracking-wide">Browse All Events</span>
+                  <div className="relative">
+                    <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
+                    <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+                  </div>
+                </span>
+                
+                {/* Corner Accents with Animation */}
+                <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+                <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+                <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+                
+                {/* Pulsing Ring Effect */}
+                <span className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-white/20 group-hover:animate-pulse transition-all duration-500"></span>
+              </Link>
             </div>
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
           
-          {/* News Content */}
-          <div className="p-5 sm:p-6 md:p-7">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-gray-500 text-xs sm:text-sm md:text-base flex items-center">
-                <FaCalendar className="mr-1.5 text-emerald-600" /> {news.date}
-              </span>
-              <span className="text-gray-400 text-xs sm:text-sm">{news.readTime}</span>
-            </div>
-            
-            <h3 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-3 sm:mb-4 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
-              {news.title}
-            </h3>
-            
-            <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-5 sm:mb-6 line-clamp-3">
-              {news.excerpt}
-            </p>
-            
-            <div className="flex items-center justify-between pt-4 border-t border-emerald-50">
-              <Link 
-                to={`/news/${index + 1}`}
-                className="inline-flex items-center text-emerald-600 font-semibold text-sm sm:text-base hover:text-emerald-800 transition-colors duration-300 group/readmore"
+          {/* Grid container with equal height cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
+            {events.map((event, index) => (
+              <div 
+                key={event.id} 
+                className={`group bg-white rounded-xl border ${event.borderColor} overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${index === 1 ? 'lg:-translate-y-0' : ''} flex flex-col h-full`}
               >
-                Read Full Story 
-                <FaArrowRight className="ml-2 text-sm sm:text-base group-hover/readmore:translate-x-2 transition-transform duration-300" />
-              </Link>
-              
-              <div className="flex items-center space-x-1">
-                <FaUsers className="text-gray-400 text-xs" />
-                <span className="text-gray-400 text-xs sm:text-sm">{news.viewers}</span>
+                {/* Event Image - Fixed Height */}
+                <div className="relative h-48 sm:h-56 md:h-60 lg:h-64 overflow-hidden flex-shrink-0">
+                  <img 
+                    src={event.image} 
+                    alt={event.alt}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200 text-black">
+                    {event.category}
+                  </div>
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                </div>
+                
+                {/* Event Content - Flexible height with button at bottom */}
+                <div className="p-5 sm:p-6 md:p-7 flex flex-col flex-grow">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 mb-3 sm:mb-4 line-clamp-2">
+                    {event.title}
+                  </h3>
+                  
+                  <p className="text-gray-700 text-sm sm:text-base md:text-lg mb-4 sm:mb-5 md:mb-6 leading-relaxed line-clamp-3 flex-grow">
+                    {event.description}
+                  </p>
+                  
+                  {/* Event Details - Fixed content */}
+                  <div className="space-y-2 sm:space-y-3 mb-5 sm:mb-6 md:mb-7">
+                    <div className="flex items-center">
+                      <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
+                        <FaCalendar className="text-emerald-600 text-xs sm:text-sm" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs sm:text-sm text-gray-500 truncate">Date</p>
+                        <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.date}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center">
+                      <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
+                        <FaMapMarkerAlt className="text-emerald-600 text-xs sm:text-sm" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs sm:text-sm text-gray-500 truncate">Location</p>
+                        <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.location}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center">
+                      <div className={`${event.bgColor} p-1.5 sm:p-2 rounded-full mr-3 border ${event.borderColor} flex-shrink-0`}>
+                        <FaClock className="text-emerald-600 text-xs sm:text-sm" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs sm:text-sm text-gray-500 truncate">Time</p>
+                        <p className="font-semibold text-emerald-800 text-sm sm:text-base truncate">{event.time}</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Button - Fixed at bottom */}
+                  <div className="mt-auto pt-2">
+                    <Link 
+                      to={`/events/${event.id}`} 
+                      className="group/btn inline-flex items-center justify-center w-full text-center bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-3 px-4 sm:py-3.5 sm:px-6 rounded-lg transition-all duration-300 border border-emerald-600 hover:shadow-lg hover:scale-[1.02] text-sm sm:text-base"
+                    >
+                      <span className="mr-2">Know More</span>
+                      <div className="relative">
+                        <FaArrowRight className="text-xs sm:text-sm transform group-hover/btn:translate-x-1 transition-transform duration-300" />
+                        <FaArrowRight className="absolute top-0 left-0 text-xs sm:text-sm opacity-0 group-hover/btn:opacity-30 group-hover/btn:translate-x-2 transition-all duration-300" />
+                      </div>
+                    </Link>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
+          </div>
+          
+          {/* Mobile & Tablet View - Dynamic Button (Center Aligned) */}
+          <div className="text-center mt-10 md:mt-12 lg:hidden">
+            <Link 
+              to="/events" 
+              className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600 shadow-lg mx-auto"
+            >
+              {/* Shine Effect */}
+              <span className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white/40 via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[200%] transition-all duration-1000"></span>
+              
+              {/* Button Content */}
+              <span className="relative z-10 flex items-center">
+                <span className="mr-3 text-lg font-semibold tracking-wide">Browse All Events</span>
+                <div className="relative">
+                  <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
+                  <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+                </div>
+              </span>
+              
+              {/* Corner Accents */}
+              <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+              <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+              <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/40 group-hover:border-white/80 transition-all duration-300"></span>
+            </Link>
           </div>
         </div>
-      ))}
-    </div>
-    
-    {/* Mobile & Tablet View - Dynamic Button (Center Aligned) */}
-    <div className="text-center mt-10 md:mt-12 lg:hidden">
-      <Link 
-        to="/news" 
-        className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600 mx-auto"
-      >
-        {/* Shine Effect */}
-        <span className="absolute top-0 left-0 w-6 h-full bg-white/30 -skew-x-12 -translate-x-16 group-hover:translate-x-[calc(100%+16px)] transition-all duration-700"></span>
         
-        {/* Button Content */}
-        <span className="relative z-10 flex items-center">
-          <span className="mr-3 text-lg">View All News</span>
-          <div className="relative">
-            <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
-            <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+        {/* CSS for underline animation */}
+        <style>
+          {`
+            @keyframes underline {
+              0% {
+                transform: scaleX(0);
+                transform-origin: left;
+              }
+              50% {
+                transform: scaleX(1);
+                transform-origin: left;
+              }
+              51% {
+                transform-origin: right;
+              }
+              100% {
+                transform: scaleX(0);
+                transform-origin: right;
+              }
+            }
+            .animate-underline {
+              animation: underline 2s ease-in-out infinite;
+            }
+            
+            /* Custom animation for pulse ring */
+            @keyframes pulse-ring {
+              0% {
+                transform: scale(1);
+                opacity: 0.5;
+              }
+              50% {
+                transform: scale(1.05);
+                opacity: 0.3;
+              }
+              100% {
+                transform: scale(1);
+                opacity: 0.5;
+              }
+            }
+            .animate-pulse {
+              animation: pulse-ring 2s ease-in-out infinite;
+            }
+          `}
+        </style>
+      </section>
+
+      {/* Latest News - Updated with Images */}
+      <section className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 md:mb-10 lg:mb-12">
+            {/* Left Side - Text with Animation */}
+            <div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-3 md:mb-4">
+                Latest News & 
+                <span className="relative inline-block ml-2">
+                  <span className="text-emerald-600 relative">
+                    Announcements
+                    {/* Animated underline - Same as Events section */}
+                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
+                  </span>
+                </span>
+              </h2>
+              <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-3xl">
+                Stay updated with the latest announcements, competition results and upcoming events
+              </p>
+            </div>
+            
+            {/* Right Side - Dynamic View All News Button (Desktop Only) */}
+            <div className="hidden lg:block">
+              <Link 
+                to="/news" 
+                className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600"
+              >
+                {/* Shine Effect */}
+                <span className="absolute top-0 left-0 w-6 h-full bg-white/30 -skew-x-12 -translate-x-16 group-hover:translate-x-[calc(100%+16px)] transition-all duration-700"></span>
+                
+                {/* Button Content */}
+                <span className="relative z-10 flex items-center">
+                  <span className="mr-3 text-lg">View All News</span>
+                  <div className="relative">
+                    <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
+                    <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+                  </div>
+                </span>
+                
+                {/* Corner Accents */}
+                <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/30"></span>
+                <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/30"></span>
+              </Link>
+            </div>
           </div>
-        </span>
-        
-        {/* Corner Accents */}
-        <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/30"></span>
-        <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/30"></span>
-      </Link>
-    </div>
-    
-    {/* Alternative Modern Button Design (Optional - Commented Out) */}
-    {/* 
-    <div className="hidden lg:block">
-      <Link 
-        to="/news" 
-        className="group relative inline-flex items-center bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border-2 border-emerald-300 overflow-hidden"
-      >
-        {/* Background Pattern *\/}
-        <span className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500">
-          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="1" fill="currentColor"></circle>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#pattern)"></rect>
-          </svg>
-        </span>
-        
-        {/* Button Content *\/}
-        <span className="relative z-10 flex items-center">
-          <span className="mr-3 text-lg">Explore All News</span>
-          <div className="relative">
-            <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
-            <span className="absolute -right-1 -top-1 w-2 h-2 bg-emerald-500 rounded-full group-hover:scale-150 transition-transform duration-300"></span>
+          
+          {/* News Cards Grid with Images */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
+            {newsItems.map((news, index) => (
+              <div 
+                key={index} 
+                className="group bg-white rounded-xl border border-emerald-100 hover:border-emerald-300 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
+              >
+                {/* News Image */}
+                <div className="relative h-48 sm:h-56 md:h-60 lg:h-64 overflow-hidden">
+                  <img 
+                    src={news.image} 
+                    alt={news.alt}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  {/* Category Badge on Image */}
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-emerald-200 text-emerald-800">
+                    {news.category}
+                  </div>
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                
+                {/* News Content */}
+                <div className="p-5 sm:p-6 md:p-7">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-gray-500 text-xs sm:text-sm md:text-base flex items-center">
+                      <FaCalendar className="mr-1.5 text-emerald-600" /> {news.date}
+                    </span>
+                    <span className="text-gray-400 text-xs sm:text-sm">{news.readTime}</span>
+                  </div>
+                  
+                  <h3 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-3 sm:mb-4 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
+                    {news.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-5 sm:mb-6 line-clamp-3">
+                    {news.excerpt}
+                  </p>
+                  
+                  <div className="flex items-center justify-between pt-4 border-t border-emerald-50">
+                    <Link 
+                      to={`/news/${index + 1}`}
+                      className="inline-flex items-center text-emerald-600 font-semibold text-sm sm:text-base hover:text-emerald-800 transition-colors duration-300 group/readmore"
+                    >
+                      Read Full Story 
+                      <FaArrowRight className="ml-2 text-sm sm:text-base group-hover/readmore:translate-x-2 transition-transform duration-300" />
+                    </Link>
+                    
+                    <div className="flex items-center space-x-1">
+                      <FaUsers className="text-gray-400 text-xs" />
+                      <span className="text-gray-400 text-xs sm:text-sm">{news.viewers}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </span>
-        
-        {/* Pulsing Dot *\/}
-        <span className="absolute -right-2 -top-2 w-4 h-4 bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping"></span>
-      </Link>
-    </div>
-    */}
-  </div>
-</section>
+          
+          {/* Mobile & Tablet View - Dynamic Button (Center Aligned) */}
+          <div className="text-center mt-10 md:mt-12 lg:hidden">
+            <Link 
+              to="/news" 
+              className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-emerald-600 mx-auto"
+            >
+              {/* Shine Effect */}
+              <span className="absolute top-0 left-0 w-6 h-full bg-white/30 -skew-x-12 -translate-x-16 group-hover:translate-x-[calc(100%+16px)] transition-all duration-700"></span>
+              
+              {/* Button Content */}
+              <span className="relative z-10 flex items-center">
+                <span className="mr-3 text-lg">View All News</span>
+                <div className="relative">
+                  <FaArrowRight className="text-lg transform group-hover:translate-x-2 transition-transform duration-300" />
+                  <FaArrowRight className="absolute top-0 left-0 text-lg opacity-0 group-hover:opacity-30 group-hover:translate-x-4 transition-all duration-300" />
+                </div>
+              </span>
+              
+              {/* Corner Accents */}
+              <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/30"></span>
+              <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/30"></span>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
