@@ -14,115 +14,159 @@ import {
   FaUniversity
 } from 'react-icons/fa';
 
+// Events data in JSON format
+const eventsData = {
+  "events": [
+    {
+      "id": 1,
+      "title": "National Debate Festival 2024",
+      "description": "Bangladesh's largest debate competition with participants from all 64 districts",
+      "date": "March 15-20, 2024",
+      "time": "9:00 AM - 6:00 PM",
+      "location": "Dhaka University Campus",
+      "type": "upcoming",
+      "category": "national",
+      "participants": "5000+",
+      "registrationDeadline": "March 10, 2024",
+      "status": "Open for Registration",
+      "image": "https://i.ibb.co.com/HfwY09Kt/Gemini-Generated-Image-sozxjesozxjesozx.png"
+    },
+    {
+      "id": 2,
+      "title": "Asian Parliamentary Debate Workshop",
+      "description": "Intensive training on Asian Parliamentary format for college students",
+      "date": "March 25-27, 2024",
+      "time": "10:00 AM - 4:00 PM",
+      "location": "Online (Zoom)",
+      "type": "upcoming",
+      "category": "training",
+      "participants": "200",
+      "registrationDeadline": "March 20, 2024",
+      "status": "Open for Registration",
+      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 3,
+      "title": "Inter-University Debate Championship",
+      "description": "Annual competition among universities across Bangladesh",
+      "date": "February 10-15, 2024",
+      "time": "9:00 AM - 8:00 PM",
+      "location": "Rajshahi University",
+      "type": "completed",
+      "category": "national",
+      "participants": "2000+",
+      "winner": "Dhaka University",
+      "status": "Completed",
+      "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 4,
+      "title": "Youth Parliament Session",
+      "description": "Simulated parliamentary debate for school students",
+      "date": "April 5-7, 2024",
+      "time": "10:00 AM - 5:00 PM",
+      "location": "Bangabandhu International Conference Center",
+      "type": "upcoming",
+      "category": "national",
+      "participants": "1000",
+      "registrationDeadline": "March 30, 2024",
+      "status": "Open for Registration",
+      "image": "https://images.unsplash.com/photo-1551135049-8a33b2fb2d5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 5,
+      "title": "International Debate Exchange Program",
+      "description": "Cultural exchange and debate competition with international teams",
+      "date": "May 20-25, 2024",
+      "time": "All Day",
+      "location": "Multiple Venues",
+      "type": "upcoming",
+      "category": "international",
+      "participants": "300",
+      "registrationDeadline": "April 30, 2024",
+      "status": "Coming Soon",
+      "image": "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 6,
+      "title": "Adjudicator Certification Program",
+      "description": "Professional training for aspiring debate judges",
+      "date": "January 15-20, 2024",
+      "time": "9:00 AM - 5:00 PM",
+      "location": "BDF Training Center, Dhaka",
+      "type": "completed",
+      "category": "training",
+      "participants": "150",
+      "certified": "120",
+      "status": "Completed",
+      "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "metadata": {
+    "total": 6,
+    "upcoming": 4,
+    "completed": 2,
+    "lastUpdated": "2024-03-01"
+  }
+};
+
+// Filters data in JSON format
+const filtersData = {
+  "filters": [
+    { "id": "all", "label": "All Events" },
+    { "id": "upcoming", "label": "Upcoming" },
+    { "id": "ongoing", "label": "Ongoing" },
+    { "id": "completed", "label": "Completed" },
+    { "id": "national", "label": "National" },
+    { "id": "international", "label": "International" },
+    { "id": "training", "label": "Training" }
+  ]
+};
+
 const Events = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
-
-  const filters = [
-    { id: 'all', label: 'All Events' },
-    { id: 'upcoming', label: 'Upcoming' },
-    { id: 'ongoing', label: 'Ongoing' },
-    { id: 'completed', label: 'Completed' },
-    { id: 'national', label: 'National' },
-    { id: 'international', label: 'International' },
-    { id: 'training', label: 'Training' }
-  ];
-
-  const events = [
-    {
-      id: 1,
-      title: "National Debate Festival 2024",
-      description: "Bangladesh's largest debate competition with participants from all 64 districts",
-      date: "March 15-20, 2024",
-      time: "9:00 AM - 6:00 PM",
-      location: "Dhaka University Campus",
-      type: "upcoming",
-      category: "national",
-      participants: "5000+",
-      registrationDeadline: "March 10, 2024",
-      status: "Open for Registration",
-      image: "https://i.ibb.co.com/HfwY09Kt/Gemini-Generated-Image-sozxjesozxjesozx.png"
-    },
-    {
-      id: 2,
-      title: "Asian Parliamentary Debate Workshop",
-      description: "Intensive training on Asian Parliamentary format for college students",
-      date: "March 25-27, 2024",
-      time: "10:00 AM - 4:00 PM",
-      location: "Online (Zoom)",
-      type: "upcoming",
-      category: "training",
-      participants: "200",
-      registrationDeadline: "March 20, 2024",
-      status: "Open for Registration",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      id: 3,
-      title: "Inter-University Debate Championship",
-      description: "Annual competition among universities across Bangladesh",
-      date: "February 10-15, 2024",
-      time: "9:00 AM - 8:00 PM",
-      location: "Rajshahi University",
-      type: "completed",
-      category: "national",
-      participants: "2000+",
-      winner: "Dhaka University",
-      status: "Completed",
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      id: 4,
-      title: "Youth Parliament Session",
-      description: "Simulated parliamentary debate for school students",
-      date: "April 5-7, 2024",
-      time: "10:00 AM - 5:00 PM",
-      location: "Bangabandhu International Conference Center",
-      type: "upcoming",
-      category: "national",
-      participants: "1000",
-      registrationDeadline: "March 30, 2024",
-      status: "Open for Registration",
-      image: "https://images.unsplash.com/photo-1551135049-8a33b2fb2d5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      id: 5,
-      title: "International Debate Exchange Program",
-      description: "Cultural exchange and debate competition with international teams",
-      date: "May 20-25, 2024",
-      time: "All Day",
-      location: "Multiple Venues",
-      type: "upcoming",
-      category: "international",
-      participants: "300",
-      registrationDeadline: "April 30, 2024",
-      status: "Coming Soon",
-      image: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      id: 6,
-      title: "Adjudicator Certification Program",
-      description: "Professional training for aspiring debate judges",
-      date: "January 15-20, 2024",
-      time: "9:00 AM - 5:00 PM",
-      location: "BDF Training Center, Dhaka",
-      type: "completed",
-      category: "training",
-      participants: "150",
-      certified: "120",
-      status: "Completed",
-      image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    }
-  ];
+  
+  // Extract events array from eventsData object
+  const events = eventsData.events;
+  const filters = filtersData.filters;
+  const metadata = eventsData.metadata;
 
   const filteredEvents = events.filter(event => {
     const matchesFilter = activeFilter === 'all' || 
                          event.type === activeFilter || 
                          event.category === activeFilter;
     const matchesSearch = event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         event.description.toLowerCase().includes(searchTerm.toLowerCase());
+                         event.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         event.location.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesFilter && matchesSearch;
   });
+
+  // Function to get filter label
+  const getFilterLabel = (filterId) => {
+    const filter = filters.find(f => f.id === filterId);
+    return filter ? filter.label : 'All Events';
+  };
+
+  // Function to get event status color
+  const getStatusColor = (eventType) => {
+    const colors = {
+      'upcoming': 'bg-green-100 text-green-800',
+      'ongoing': 'bg-blue-100 text-blue-800',
+      'completed': 'bg-gray-100 text-gray-800'
+    };
+    return colors[eventType] || 'bg-gray-100 text-gray-800';
+  };
+
+  // Function to get category label
+  const getCategoryLabel = (category) => {
+    const labels = {
+      'national': '🇧🇩 National',
+      'international': '🌍 International',
+      'training': '🎓 Training'
+    };
+    return labels[category] || category;
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -171,7 +215,7 @@ const Events = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search events by title, description, or location..."
-                  className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300"
+                  className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500"
                 />
               </div>
             </div>
@@ -207,10 +251,15 @@ const Events = () => {
       <section className="py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">
-              {activeFilter === 'all' ? 'All Events' : filters.find(f => f.id === activeFilter)?.label}
-              <span className="text-gray-500 text-lg ml-2">({filteredEvents.length})</span>
-            </h2>
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">
+                {getFilterLabel(activeFilter)}
+                <span className="text-gray-500 text-lg ml-2">({filteredEvents.length})</span>
+              </h2>
+              <p className="text-sm text-gray-600 mt-1">
+                Total Events: {metadata.total} | Upcoming: {metadata.upcoming} | Completed: {metadata.completed}
+              </p>
+            </div>
             <div className="flex items-center space-x-4">
               <span className="text-gray-600 text-sm">
                 <FaRegCalendarCheck className="inline mr-1" />
@@ -243,18 +292,13 @@ const Events = () => {
                       className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                     />
                     <div className="absolute top-4 left-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                        event.type === 'upcoming' ? 'bg-green-100 text-green-800' :
-                        event.type === 'ongoing' ? 'bg-blue-100 text-blue-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
+                      <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(event.type)}`}>
                         {event.status}
                       </span>
                     </div>
                     <div className="absolute top-4 right-4">
                       <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
-                        {event.category === 'national' ? '🇧🇩 National' : 
-                         event.category === 'international' ? '🌍 International' : '🎓 Training'}
+                        {getCategoryLabel(event.category)}
                       </span>
                     </div>
                   </div>
@@ -333,40 +377,7 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Calendar View */}
-      <section className="py-12 md:py-16 lg:py-20 bg-emerald-50 border-y border-emerald-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4">
-              Event Calendar
-            </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              View our events in calendar format for easy planning
-            </p>
-          </div>
-          
-          <div className="bg-white rounded-xl border border-emerald-100 p-6">
-            <div className="grid grid-cols-7 gap-2 mb-6">
-              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                <div key={day} className="text-center font-bold text-emerald-800 py-2">
-                  {day}
-                </div>
-              ))}
-              
-              {/* Calendar days would go here */}
-              <div className="text-center py-4 text-gray-400">
-                Calendar implementation would go here
-              </div>
-            </div>
-            
-            <div className="text-center">
-              <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center mx-auto">
-                <FaCalendarAlt className="mr-2" /> Download Calendar (.ics)
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+  
 
       {/* CTA Section */}
       <section className="py-12 md:py-16 lg:py-20">
