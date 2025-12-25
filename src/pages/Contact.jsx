@@ -10,7 +10,11 @@ import {
   FaInstagram,
   FaYoutube,
   FaCheckCircle,
-  FaExclamationCircle
+  FaExclamationCircle,
+  FaUniversity,
+  FaUserTie,
+  FaUserGraduate,
+  FaIdCard
 } from 'react-icons/fa';
 
 const Contact = () => {
@@ -36,47 +40,99 @@ const Contact = () => {
     {
       icon: <FaPhone />,
       title: "Phone Numbers",
-      details: "General: +880 2 1234 5678\nSupport: +880 2 9876 5432",
+      details: "01719 142953\n 01717 666166\n 01777 408630",
       color: "bg-green-100 text-green-600"
     },
-    {
-      icon: <FaEnvelope />,
-      title: "Email Addresses",
-      details: "General: info@debatefederation.org\nEvents: events@debatefederation.org\nSupport: support@debatefederation.org",
-      color: "bg-red-100 text-red-600"
-    },
-    {
-      icon: <FaClock />,
-      title: "Office Hours",
-      details: "Sunday - Thursday: 9:00 AM - 5:00 PM\nFriday - Saturday: Closed",
-      color: "bg-purple-100 text-purple-600"
-    }
+    // {
+    //   icon: <FaEnvelope />,
+    //   title: "Email Addresses",
+    //   details: "General: info@debatefederation.org\nEvents: events@debatefederation.org\nSupport: support@debatefederation.org",
+    //   color: "bg-red-100 text-red-600"
+    // },
+    // {
+    //   icon: <FaClock />,
+    //   title: "Office Hours",
+    //   details: "Sunday - Thursday: 9:00 AM - 5:00 PM\nFriday - Saturday: Closed",
+    //   color: "bg-purple-100 text-purple-600"
+    // }
   ];
 
   const departments = [
     {
       name: "Events & Competitions",
       email: "events@debatefederation.org",
-      phone: "+880 2 1234 5678 Ext. 101",
+      phone: "01719 142953 Ext. 101",
       description: "For event registration, scheduling, and competition inquiries"
     },
     {
       name: "Training & Development",
       email: "training@debatefederation.org",
-      phone: "+880 2 1234 5678 Ext. 102",
+      phone: "01719 142953 Ext. 102",
       description: "For workshop requests, training programs, and skill development"
     },
     {
       name: "Partnership & Sponsorship",
       email: "partnership@debatefederation.org",
-      phone: "+880 2 1234 5678 Ext. 103",
+      phone: "01719 142953 Ext. 103",
       description: "For corporate partnerships, sponsorships, and collaborations"
     },
     {
       name: "Media & Press",
       email: "media@debatefederation.org",
-      phone: "+880 2 1234 5678 Ext. 104",
+      phone: "01719 142953 Ext. 104",
       description: "For press inquiries, interviews, and media coverage"
+    }
+  ];
+
+  // Debate Club Directory Data
+  const debateClubs = [
+    {
+      clubName: "Dhaka University Debate Society",
+      university: "University of Dhaka",
+      president: "Ahmed Rahman",
+      gs: "Fatima Khan",
+      contact: "01719 142953",
+      email: "duds@du.ac.bd"
+    },
+    {
+      clubName: "BUET Oratory Club",
+      university: "Bangladesh University of Engineering & Technology",
+      president: "Rahim Islam",
+      gs: "Tasnim Ahmed",
+      contact: "01717 666166",
+      email: "oratory@buet.ac.bd"
+    },
+    {
+      clubName: "Jahangirnagar Debating Club",
+      university: "Jahangirnagar University",
+      president: "Sadia Afrin",
+      gs: "Kamal Hossain",
+      contact: "01777 408630",
+      email: "jdc@juniv.edu"
+    },
+    {
+      clubName: "Chittagong University Debate Forum",
+      university: "University of Chittagong",
+      president: "Nabil Hasan",
+      gs: "Sumaiya Akter",
+      contact: "01812 345678",
+      email: "cudf@cu.ac.bd"
+    },
+    {
+      clubName: "North South University Debate Club",
+      university: "North South University",
+      president: "Zarin Tasnim",
+      gs: "Rayhan Chowdhury",
+      contact: "01987 654321",
+      email: "debateclub@northsouth.edu"
+    },
+    {
+      clubName: "BRAC University Debate Society",
+      university: "BRAC University",
+      president: "Tahsin Alam",
+      gs: "Nusrat Jahan",
+      contact: "01678 912345",
+      email: "brac.debate@bracu.ac.bd"
     }
   ];
 
@@ -165,7 +221,7 @@ const Contact = () => {
                 <FaEnvelope className="mr-2" /> Email Us
               </a>
               <a 
-                href="tel:+880212345678"
+                href="tel:01719142953"
                 className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1"
               >
                 <FaPhone className="mr-2" /> Call Us
@@ -388,8 +444,89 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Debate Club Directory */}
+      {/* <section className="py-12 md:py-16 lg:py-20 bg-emerald-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4">
+              Debate Club Directory
+            </h2>
+            <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+              Connect with debate clubs from universities across Bangladesh
+            </p>
+          </div>
+          
+          <div className="overflow-x-auto rounded-xl border border-emerald-100 bg-white">
+            <table className="min-w-full divide-y divide-emerald-100">
+              <thead className="bg-emerald-50">
+                <tr>
+                  <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
+                    <div className="flex items-center">
+                      <FaIdCard className="mr-2" /> Club Name
+                    </div>
+                  </th>
+                  <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
+                    <div className="flex items-center">
+                      <FaUniversity className="mr-2" /> University
+                    </div>
+                  </th>
+                  <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
+                    <div className="flex items-center">
+                      <FaUserTie className="mr-2" /> President
+                    </div>
+                  </th>
+                  <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
+                    <div className="flex items-center">
+                      <FaUserGraduate className="mr-2" /> General Secretary
+                    </div>
+                  </th>
+                  <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
+                    <div className="flex items-center">
+                      <FaPhone className="mr-2" /> Contact
+                    </div>
+                  </th>
+                  <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
+                    <div className="flex items-center">
+                      <FaEnvelope className="mr-2" /> Email
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-emerald-100">
+                {debateClubs.map((club, index) => (
+                  <tr key={index} className="hover:bg-emerald-50 transition-colors">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="font-medium text-emerald-900">{club.clubName}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-gray-700">{club.university}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-gray-700">{club.president}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-gray-700">{club.gs}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <a href={`tel:${club.contact}`} className="text-emerald-600 hover:text-emerald-800 hover:underline">
+                        {club.contact}
+                      </a>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <a href={`mailto:${club.email}`} className="text-emerald-600 hover:text-emerald-800 hover:underline truncate block max-w-xs">
+                        {club.email}
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section> */}
+
       {/* Department Contacts */}
-      <section className="py-12 md:py-16 lg:py-20">
+      {/* <section className="py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4">
@@ -423,7 +560,7 @@ const Contact = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* FAQ Section */}
       <section className="py-12 md:py-16 lg:py-20 bg-emerald-50 border-t border-emerald-100">
@@ -467,11 +604,11 @@ const Contact = () => {
             ))}
           </div>
           
-          <div className="text-center mt-8">
+          {/* <div className="text-center mt-8">
             <button className="text-emerald-600 hover:text-emerald-800 font-bold">
               View All FAQs →
             </button>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>
