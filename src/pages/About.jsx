@@ -61,12 +61,7 @@ const About = () => {
                 >
                   Upcoming Events <FaArrowRight className="ml-2" />
                 </Link>
-                <Link 
-                  to="/contact" 
-                  className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1"
-                >
-                  Partner With Us
-                </Link>
+              
               </div>
             </div>
             <div className="relative">
@@ -165,120 +160,11 @@ const About = () => {
       </section>
 
       {/* Timeline */}
-      <section className="py-12 md:py-16 lg:py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-4">
-              Our Journey
-            </h2>
-            <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
-              Milestones in our mission to make logical discourse a national identity
-            </p>
-          </div>
-          
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-emerald-200"></div>
-            
-            {milestones.map((milestone, index) => (
-              <div key={index} className={`flex flex-col md:flex-row items-center mb-12 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                <div className="md:w-1/2 md:px-8 mb-4 md:mb-0">
-                  <div className={`bg-white p-6 rounded-xl border border-emerald-100 shadow-sm hover:shadow-lg transition-all duration-300 ${index % 2 === 0 ? 'md:text-right' : ''}`}>
-                    <div className="inline-flex items-center bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm font-bold mb-3">
-                      <FaCalendarAlt className="mr-2" /> {milestone.year}
-                    </div>
-                    <h3 className="text-xl font-bold text-emerald-900 mb-2">{milestone.title}</h3>
-                    <p className="text-gray-600">{milestone.description}</p>
-                  </div>
-                </div>
-                
-                <div className="flex justify-center md:justify-center md:w-8 relative z-10">
-                  <div className="w-8 h-8 rounded-full bg-emerald-600 border-4 border-white shadow-lg flex items-center justify-center">
-                    <FaSeedling className="text-white text-sm" />
-                  </div>
-                </div>
-                
-                <div className="md:w-1/2 md:px-8 text-center md:text-left">
-                  <div className="text-3xl font-bold text-emerald-700 mb-2">{milestone.year}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+  
 
-      {/* Leadership Team */}
-      <section className="py-12 md:py-16 lg:py-20 bg-emerald-50 border-y border-emerald-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-4">
-              Leadership Team
-            </h2>
-            <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
-              Meet the dedicated individuals steering the Bangladesh Debate Federation
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {teamMembers.map((member, index) => (
-              <div key={index} className="bg-white rounded-xl overflow-hidden border border-emerald-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <div className="h-48 overflow-hidden">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-emerald-900 mb-1">{member.name}</h3>
-                  <p className="text-emerald-600 font-bold mb-4">{member.role}</p>
-                  <div className="flex justify-center">
-                    <button className="text-emerald-600 hover:text-emerald-800 transition-colors duration-300">
-                      View Profile
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Call to Action */}
-      <section className="py-12 md:py-16 lg:py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-6">
-              Join Our Movement
-            </h2>
-            <p className="text-gray-600 text-lg md:text-xl mb-8 leading-relaxed">
-              Whether you're a student looking to develop reasoning skills, an educator wanting to 
-              start a debate club, or an organization interested in partnership, we have opportunities 
-              for everyone to engage in meaningful dialogue and help build a more reasoned Bangladesh.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link 
-                to="/membership" 
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 border border-emerald-700 hover:shadow-xl hover:-translate-y-1"
-              >
-                Become a Member
-              </Link>
-              <Link 
-                to="/contact" 
-                className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 border border-emerald-300 hover:shadow-xl hover:-translate-y-1"
-              >
-                Partner With Us
-              </Link>
-              <Link 
-                to="/training" 
-                className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 border border-emerald-300 hover:shadow-xl hover:-translate-y-1"
-              >
-                Join a Training
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+    
+    
     </div>
   );
 };
