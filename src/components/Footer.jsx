@@ -6,6 +6,7 @@ import {
   FaTwitter, 
   FaInstagram, 
   FaLinkedin,
+  FaUsers, // Facebook Group icon
   FaPhone, 
   FaEnvelope, 
   FaMapMarkerAlt,
@@ -17,9 +18,9 @@ const Footer = () => {
 
   const socialMedia = [
     { platform: 'Facebook', icon: <FaFacebook />, link: 'https://facebook.com' },
-    { platform: 'YouTube', icon: <FaYoutube />, link: 'https://youtube.com' },
+    { platform: 'Facebook Group', icon: <FaUsers />, link: 'https://www.facebook.com/groups/8307242668/' },
+    { platform: 'YouTube', icon: <FaYoutube />, link: 'https://www.youtube.com/@bangladeshdebatefederation' },
     { platform: 'Twitter', icon: <FaTwitter />, link: 'https://twitter.com' },
-    { platform: 'Instagram', icon: <FaInstagram />, link: 'https://instagram.com' },
     { platform: 'LinkedIn', icon: <FaLinkedin />, link: 'https://linkedin.com' },
   ];
 
@@ -79,8 +80,8 @@ const Footer = () => {
                   </h4>
                 </div>
                 <p className="text-gray-600 text-xs md:text-sm pl-8">
-                  BDF Tower, 123 Debate Road<br />
-                  Dhaka 1212, Bangladesh
+                  House: 128, Road: 04, Mohammadia Housing Society<br />
+                  Mohammadpur, Dhaka-1207, Bangladesh
                 </p>
               </div>
 
@@ -94,8 +95,10 @@ const Footer = () => {
                   </h4>
                 </div>
                 <p className="text-gray-600 text-xs md:text-sm pl-8">
-                  Phone: +880 2 1234 5678<br />
-                  Email: info@debatefederation.org
+                  Phone: +880 1719 142953<br />
+                  Phone: +880 1717 666166<br />
+                  Phone: +880 1777 408630<br />
+        
                 </p>
               </div>
             </div>
