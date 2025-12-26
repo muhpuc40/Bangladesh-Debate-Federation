@@ -17,7 +17,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialMedia = [
-    { platform: 'Facebook', icon: <FaFacebook />, link: 'https://www.facebook.com/BangladeshDebateFedaration/' },
+    { platform: 'Facebook', icon: <FaFacebook />, link: 'https://www.facebook.com/BangladeshDebateFedaration/n' },
     { platform: 'Facebook Group', icon: <FaUsers />, link: 'https://www.facebook.com/groups/8307242668/' },
     { platform: 'YouTube', icon: <FaYoutube />, link: 'https://www.youtube.com/@bangladeshdebatefederation' },
     { platform: 'Twitter', icon: <FaTwitter />, link: 'https://twitter.com' },
