@@ -377,8 +377,7 @@ const Home = () => {
           `}
         </style>
       </section>
-
-    {/* Partners with Marquee Cards - FIXED WITH BETTER STYLING */}
+{/* Partners with Marquee Cards - FIXED FOR LONG TEXT */}
 <section className="py-8 md:py-12 lg:py-16 bg-white overflow-hidden">
   <div className="container mx-auto px-4">
     <div className="text-center mb-8 md:mb-10">
@@ -390,7 +389,7 @@ const Home = () => {
       </p>
     </div>
     
-    {/* Marquee Container - FIXED VERSION */}
+    {/* Marquee Container - IMPROVED FOR LONG TEXT */}
     <div className="relative w-full overflow-hidden py-4">
       {/* Single marquee row with duplicate content for seamless loop */}
       <div className="flex animate-marqueeSingle whitespace-nowrap">
@@ -439,22 +438,24 @@ const Home = () => {
         ].map((partner, idx) => (
           <div 
             key={`${idx}-1`} 
-            className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-24 sm:h-28 w-36 sm:w-40 md:w-44 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
+            className="inline-flex bg-emerald-50 p-4 sm:p-5 rounded-lg mx-2 sm:mx-3 md:mx-4 h-36 sm:h-40 md:h-44 w-52 sm:w-56 md:w-64 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
           >
-            {/* Logo Container with fixed height */}
-            <div className="h-12 sm:h-14 md:h-16 w-full flex items-center justify-center mb-3 px-2">
+            {/* Logo Container with fixed height - Increased */}
+            <div className="h-16 sm:h-20 md:h-24 w-full flex items-center justify-center mb-4 px-3">
               <img 
                 src={partner.logo} 
                 alt={partner.alt}
-                className="max-h-full max-w-full object-contain"
+                className="max-h-full max-w-full object-contain p-1"
                 loading="lazy"
               />
             </div>
             
-            {/* Text Container with controlled styling */}
-            <div className="w-full px-2">
-              <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm leading-tight line-clamp-2 break-words">
-                {partner.name}
+            {/* Text Container with full text display */}
+            <div className="w-full px-3">
+              <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm md:text-base">
+                <div className="leading-tight break-words whitespace-normal h-auto">
+                  {partner.name}
+                </div>
               </div>
             </div>
           </div>
@@ -505,23 +506,25 @@ const Home = () => {
         ].map((partner, idx) => (
           <div 
             key={`${idx}-2`} 
-            className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-24 sm:h-28 w-36 sm:w-40 md:w-44 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
+            className="inline-flex bg-emerald-50 p-4 sm:p-5 rounded-lg mx-2 sm:mx-3 md:mx-4 h-36 sm:h-40 md:h-44 w-52 sm:w-56 md:w-64 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
             aria-hidden="true"
           >
-            {/* Logo Container with fixed height */}
-            <div className="h-12 sm:h-14 md:h-16 w-full flex items-center justify-center mb-3 px-2">
+            {/* Logo Container with fixed height - Increased */}
+            <div className="h-16 sm:h-20 md:h-24 w-full flex items-center justify-center mb-4 px-3">
               <img 
                 src={partner.logo} 
                 alt={partner.alt}
-                className="max-h-full max-w-full object-contain"
+                className="max-h-full max-w-full object-contain p-1"
                 loading="lazy"
               />
             </div>
             
-            {/* Text Container with controlled styling */}
-            <div className="w-full px-2">
-              <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm leading-tight line-clamp-2 break-words">
-                {partner.name}
+            {/* Text Container with full text display */}
+            <div className="w-full px-3">
+              <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm md:text-base">
+                <div className="leading-tight break-words whitespace-normal h-auto">
+                  {partner.name}
+                </div>
               </div>
             </div>
           </div>
@@ -543,14 +546,14 @@ const Home = () => {
       }
       
       .animate-marqueeSingle {
-        animation: marqueeSingle 40s linear infinite;
+        animation: marqueeSingle 60s linear infinite;
         display: flex;
         width: max-content;
       }
       
       @media (max-width: 640px) {
         .animate-marqueeSingle {
-          animation: marqueeSingle 35s linear infinite;
+          animation: marqueeSingle 50s linear infinite;
         }
       }
       
@@ -558,17 +561,21 @@ const Home = () => {
         animation-play-state: paused;
       }
       
-      /* Ensure text doesn't overflow */
-      .line-clamp-2 {
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+      /* Adjust spacing between cards for better visibility */
+      .animate-marqueeSingle > div {
+        margin: 0 12px;
       }
       
-      .break-words {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
+      @media (min-width: 640px) {
+        .animate-marqueeSingle > div {
+          margin: 0 16px;
+        }
+      }
+      
+      @media (min-width: 768px) {
+        .animate-marqueeSingle > div {
+          margin: 0 20px;
+        }
       }
     `}
   </style>
