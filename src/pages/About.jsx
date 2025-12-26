@@ -64,7 +64,7 @@ const About = () => {
               
               </div>
             </div>
-            <div className="relative">
+            {/* <div className="relative">
               <div className="bg-emerald-100 rounded-xl p-6 border border-emerald-200 shadow-lg">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white p-4 rounded-lg border border-emerald-100 text-center">
@@ -85,7 +85,7 @@ const About = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

@@ -231,23 +231,6 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Information Grid */}
-      <section className="py-12 md:py-16 lg:py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {contactInfo.map((info, index) => (
-              <div key={index} className="bg-white rounded-xl border border-emerald-100 p-6 hover:border-emerald-300 hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
-                <div className={`${info.color} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
-                  {info.icon}
-                </div>
-                <h3 className="text-lg font-bold text-emerald-900 mb-3">{info.title}</h3>
-                <p className="text-gray-600 whitespace-pre-line">{info.details}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Contact Form and Map */}
       <section className="py-12 md:py-16 lg:py-20 bg-emerald-50 border-y border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -399,26 +382,50 @@ const Contact = () => {
             
             {/* Map and Social Media */}
             <div>
-              {/* Map Placeholder */}
+              {/* Google Maps Embed */}
               <div className="bg-white rounded-xl border border-emerald-100 overflow-hidden mb-8">
-                <div className="h-64 bg-emerald-100 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-4xl mb-2">🗺️</div>
-                    <p className="text-gray-600">Interactive Map Here</p>
-                    <p className="text-gray-500 text-sm">Google Maps integration</p>
-                  </div>
+                <div className="h-64 md:h-96">
+                  <iframe
+                    title="BDF Tower Location"
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    style={{ border: 0 }}
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.8371030554966!2d90.39427967599152!3d23.797815986369262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c70c15ea1de1%3A0x978b5c38c7aec582!2sDhaka%201212%2C%20Bangladesh!5e0!3m2!1sen!2s!4v1697823426788!5m2!1sen!2s"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-bold text-emerald-900 mb-2">Find Our Office</h3>
-                  <p className="text-gray-600">
-                    Our head office is located in the heart of Dhaka. 
-                    Use the map to find directions or contact us for assistance.
+                  <h3 className="text-lg font-bold text-emerald-900 mb-2">
+                    <FaMapMarkerAlt className="inline mr-2" />
+                    Find Our Office
+                  </h3>
+                  <p className="text-gray-600 mb-3">
+                    BDF Tower, 123 Debate Road, Dhaka 1212, Bangladesh
                   </p>
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href="https://www.google.com/maps/dir//BDF+Tower,+123+Debate+Road,+Dhaka+1212,+Bangladesh"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center text-sm border border-emerald-700 hover:shadow-md"
+                    >
+                      <FaMapMarkerAlt className="mr-2" /> Get Directions
+                    </a>
+                    <a
+                      href="tel:01719142953"
+                      className="bg-white hover:bg-emerald-50 text-emerald-700 font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center text-sm border border-emerald-300 hover:shadow-md"
+                    >
+                      <FaPhone className="mr-2" /> Call for Directions
+                    </a>
+                  </div>
                 </div>
               </div>
               
-              {/* Social Media */}
-              <div className="bg-white rounded-xl border border-emerald-100 p-6">
+              {/* Social Media - Commented out as per original */}
+              {/* <div className="bg-white rounded-xl border border-emerald-100 p-6">
                 <h3 className="text-lg font-bold text-emerald-900 mb-4">Connect With Us</h3>
                 <p className="text-gray-600 mb-6">
                   Follow us on social media for the latest updates, event announcements, 
@@ -438,13 +445,30 @@ const Contact = () => {
                     </a>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Debate Club Directory */}
+      {/* Contact Information Grid */}
+      <section className="py-12 md:py-16 lg:py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {contactInfo.map((info, index) => (
+              <div key={index} className="bg-white rounded-xl border border-emerald-100 p-6 hover:border-emerald-300 hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
+                <div className={`${info.color} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
+                  {info.icon}
+                </div>
+                <h3 className="text-lg font-bold text-emerald-900 mb-3">{info.title}</h3>
+                <p className="text-gray-600 whitespace-pre-line">{info.details}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Debate Club Directory - Commented out as per original */}
       {/* <section className="py-12 md:py-16 lg:py-20 bg-emerald-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -485,7 +509,7 @@ const Contact = () => {
                       <FaPhone className="mr-2" /> Contact
                     </div>
                   </th>
-                  <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
+                  <th scope="col" className="px-6-8 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
                     <div className="flex items-center">
                       <FaEnvelope className="mr-2" /> Email
                     </div>
@@ -525,7 +549,7 @@ const Contact = () => {
         </div>
       </section> */}
 
-      {/* Department Contacts */}
+      {/* Department Contacts - Commented out as per original */}
       {/* <section className="py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -561,56 +585,6 @@ const Contact = () => {
           </div>
         </div>
       </section> */}
-
-      {/* FAQ Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-emerald-50 border-t border-emerald-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Quick answers to common questions about Bangladesh Debate Federation
-            </p>
-          </div>
-          
-          <div className="max-w-3xl mx-auto space-y-4">
-            {[
-              {
-                question: "How do I register for debate competitions?",
-                answer: "You can register through our events page online. Most competitions require team registration through educational institutions."
-              },
-              {
-                question: "Are there age restrictions for participation?",
-                answer: "We have different categories: School (under 18), College (18-22), University (undergraduate), and Open (all ages)."
-              },
-              {
-                question: "Do you provide debate training for beginners?",
-                answer: "Yes! We offer regular workshops, online tutorials, and training materials specifically designed for beginners."
-              },
-              {
-                question: "How can my organization partner with BDF?",
-                answer: "Contact our partnership department. We collaborate with educational institutions, corporations, and NGOs."
-              },
-              {
-                question: "What debate formats do you follow?",
-                answer: "We primarily follow British Parliamentary, Asian Parliamentary, and World Schools formats. Training is provided for all formats."
-              }
-            ].map((faq, index) => (
-              <div key={index} className="bg-white rounded-xl border border-emerald-100 p-6">
-                <h3 className="text-lg font-bold text-emerald-900 mb-2">{faq.question}</h3>
-                <p className="text-gray-600">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
-          
-          {/* <div className="text-center mt-8">
-            <button className="text-emerald-600 hover:text-emerald-800 font-bold">
-              View All FAQs →
-            </button>
-          </div> */}
-        </div>
-      </section>
     </div>
   );
 };
