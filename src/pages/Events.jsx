@@ -174,15 +174,15 @@ const Events = () => {
       <section className="relative py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight text-justify">
               Events & Competitions
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed text-justify">
               Discover upcoming debate competitions, training workshops, and special events 
               organized by Bangladesh Debate Federation. Register now to participate in 
               transformative experiences.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 justify-start">
               <Link 
                 to="/registration" 
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1"
@@ -215,7 +215,7 @@ const Events = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search events by title, description, or location..."
-                  className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500"
+                  className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-justify"
                 />
               </div>
             </div>
@@ -251,7 +251,7 @@ const Events = () => {
       <section className="py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-8">
-            <div>
+            <div className="text-justify">
               <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">
                 {getFilterLabel(activeFilter)}
                 <span className="text-gray-500 text-lg ml-2">({filteredEvents.length})</span>
@@ -261,7 +261,7 @@ const Events = () => {
               </p>
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-gray-600 text-sm">
+              <span className="text-gray-600 text-sm text-justify">
                 <FaRegCalendarCheck className="inline mr-1" />
                 {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
               </span>
@@ -271,8 +271,8 @@ const Events = () => {
           {filteredEvents.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">📅</div>
-              <h3 className="text-2xl font-bold text-gray-700 mb-2">No events found</h3>
-              <p className="text-gray-600 mb-6">Try changing your search or filter criteria</p>
+              <h3 className="text-2xl font-bold text-gray-700 mb-2 text-justify">No events found</h3>
+              <p className="text-gray-600 mb-6 text-justify">Try changing your search or filter criteria</p>
               <button 
                 onClick={() => { setSearchTerm(''); setActiveFilter('all'); }}
                 className="text-emerald-600 hover:text-emerald-800 font-bold"
@@ -305,48 +305,48 @@ const Events = () => {
 
                   {/* Event Content */}
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-emerald-900 mb-3 hover:text-emerald-700 transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-emerald-900 mb-3 hover:text-emerald-700 transition-colors duration-300 text-justify">
                       {event.title}
                     </h3>
-                    <p className="text-gray-600 mb-4">{event.description}</p>
+                    <p className="text-gray-600 mb-4 text-justify">{event.description}</p>
                     
                     {/* Event Details */}
                     <div className="space-y-3 mb-6">
-                      <div className="flex items-center text-gray-600">
+                      <div className="flex items-center text-gray-600 justify-start">
                         <FaCalendarAlt className="mr-3 text-emerald-600" />
-                        <span className="font-medium">{event.date}</span>
+                        <span className="font-medium text-justify">{event.date}</span>
                       </div>
-                      <div className="flex items-center text-gray-600">
+                      <div className="flex items-center text-gray-600 justify-start">
                         <FaClock className="mr-3 text-emerald-600" />
-                        <span>{event.time}</span>
+                        <span className="text-justify">{event.time}</span>
                       </div>
-                      <div className="flex items-center text-gray-600">
+                      <div className="flex items-center text-gray-600 justify-start">
                         <FaMapMarkerAlt className="mr-3 text-emerald-600" />
-                        <span>{event.location}</span>
+                        <span className="text-justify">{event.location}</span>
                       </div>
-                      <div className="flex items-center text-gray-600">
+                      <div className="flex items-center text-gray-600 justify-start">
                         <FaUsers className="mr-3 text-emerald-600" />
-                        <span>{event.participants} Participants</span>
+                        <span className="text-justify">{event.participants} Participants</span>
                       </div>
                     </div>
 
                     {/* Event Specific Info */}
                     {event.type === 'upcoming' && event.registrationDeadline && (
                       <div className="bg-yellow-50 border border-yellow-100 rounded-lg p-3 mb-4">
-                        <div className="flex items-center text-yellow-800">
+                        <div className="flex items-center text-yellow-800 justify-start">
                           <FaClock className="mr-2" />
-                          <span className="font-bold">Registration Deadline:</span>
-                          <span className="ml-2">{event.registrationDeadline}</span>
+                          <span className="font-bold text-justify">Registration Deadline:</span>
+                          <span className="ml-2 text-justify">{event.registrationDeadline}</span>
                         </div>
                       </div>
                     )}
 
                     {event.type === 'completed' && event.winner && (
                       <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-3 mb-4">
-                        <div className="flex items-center text-emerald-800">
+                        <div className="flex items-center text-emerald-800 justify-start">
                           <FaTrophy className="mr-2" />
-                          <span className="font-bold">Winner:</span>
-                          <span className="ml-2">{event.winner}</span>
+                          <span className="font-bold text-justify">Winner:</span>
+                          <span className="ml-2 text-justify">{event.winner}</span>
                         </div>
                       </div>
                     )}
@@ -355,7 +355,7 @@ const Events = () => {
                     <div className="flex justify-between items-center">
                       <Link 
                         to={`/event/${event.id}`}
-                        className="text-emerald-600 hover:text-emerald-800 font-bold flex items-center hover:underline"
+                        className="text-emerald-600 hover:text-emerald-800 font-bold flex items-center hover:underline justify-start"
                       >
                         View Details <FaArrowRight className="ml-2" />
                       </Link>
@@ -377,8 +377,6 @@ const Events = () => {
         </div>
       </section>
 
-  
-
       {/* CTA Section */}
       <section className="py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -386,10 +384,10 @@ const Events = () => {
             <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
               <FaMicrophone className="text-2xl text-emerald-600" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-6 text-justify">
               Want to Host Your Own Event?
             </h2>
-            <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+            <p className="text-gray-600 text-lg mb-8 leading-relaxed text-justify">
               Partner with Bangladesh Debate Federation to organize debate competitions, 
               workshops, or training sessions at your institution or organization.
             </p>

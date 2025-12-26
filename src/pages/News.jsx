@@ -196,25 +196,25 @@ const News = () => {
             <div className="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-bold mb-6 border border-white/30">
               <FaNewspaper className="mr-2" /> Latest Updates
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-justify">
               Debate News & Updates
             </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed text-justify">
               Stay informed with the latest announcements, competition results, 
               training programs, and achievements from Bangladesh Debate Federation.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 justify-start">
               <Link 
                 to="/events" 
                 className="bg-white hover:bg-gray-100 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-white hover:shadow-xl hover:-translate-y-1"
               >
-                View Events <FaArrowRight className="ml-2" />
+                <span className="text-justify">View Events</span> <FaArrowRight className="ml-2" />
               </Link>
               <button 
                 onClick={() => setActiveCategory('announcement')}
                 className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-white/30 hover:shadow-xl hover:-translate-y-1"
               >
-                Announcements
+                <span className="text-justify">Announcements</span>
               </button>
             </div>
           </div>
@@ -236,7 +236,7 @@ const News = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search news by title, content, or tags..."
-                  className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500"
+                  className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-justify"
                 />
               </div>
             </div>
@@ -254,7 +254,7 @@ const News = () => {
                         : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
                     }`}
                   >
-                    {cat.label}
+                    <span className="text-justify">{cat.label}</span>
                     <span className="ml-1 text-xs opacity-80">({cat.count})</span>
                   </button>
                 ))}
@@ -272,10 +272,10 @@ const News = () => {
               <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">
                 <span className="flex items-center">
                   <FaNewspaper className="mr-3 text-emerald-600" />
-                  Featured News
+                  <span className="text-justify">Featured News</span>
                 </span>
               </h2>
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-600 text-justify">
                 Last Updated: {metadata.lastUpdated}
               </div>
             </div>
@@ -291,48 +291,48 @@ const News = () => {
                     />
                     <div className="absolute top-4 left-4">
                       <span className={`px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(item.category)}`}>
-                        {item.category}
+                        <span className="text-justify">{item.category}</span>
                       </span>
                     </div>
                     <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-white/90 backdrop-blur-sm text-emerald-800">
+                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-white/90 backdrop-blur-sm text-emerald-800 text-justify">
                         Featured
                       </span>
                     </div>
                   </div>
                   
                   <div className="p-8">
-                    <div className="flex items-center text-sm text-gray-600 mb-4">
+                    <div className="flex items-center text-sm text-gray-600 mb-4 justify-start">
                       <FaCalendarAlt className="mr-2 text-emerald-600" />
-                      <span className="mr-4">{item.date}</span>
+                      <span className="mr-4 text-justify">{item.date}</span>
                       <FaUser className="mr-2 text-emerald-600" />
-                      <span>{item.author}</span>
+                      <span className="text-justify">{item.author}</span>
                     </div>
                     
-                    <h3 className="text-2xl font-bold text-emerald-900 mb-4 hover:text-emerald-700 transition-colors duration-300">
+                    <h3 className="text-2xl font-bold text-emerald-900 mb-4 hover:text-emerald-700 transition-colors duration-300 text-justify">
                       {item.title}
                     </h3>
                     
-                    <p className="text-gray-700 mb-6 leading-relaxed">
+                    <p className="text-gray-700 mb-6 leading-relaxed text-justify">
                       {item.excerpt}
                     </p>
                     
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4 text-sm text-gray-600">
-                        <span className="flex items-center">
+                        <span className="flex items-center text-justify">
                           <FaEye className="mr-1" /> {item.views}
                         </span>
-                        <span className="flex items-center">
+                        <span className="flex items-center text-justify">
                           <FaComment className="mr-1" /> {item.comments}
                         </span>
-                        <span>{item.readTime}</span>
+                        <span className="text-justify">{item.readTime}</span>
                       </div>
                       
                       <Link 
                         to={`/news/${item.id}`}
-                        className="text-emerald-600 hover:text-emerald-800 font-bold flex items-center hover:underline"
+                        className="text-emerald-600 hover:text-emerald-800 font-bold flex items-center hover:underline justify-start"
                       >
-                        Read Full Story <FaArrowRight className="ml-2" />
+                        <span className="text-justify">Read Full Story</span> <FaArrowRight className="ml-2" />
                       </Link>
                     </div>
                   </div>
@@ -348,10 +348,10 @@ const News = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-8">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">
+              <h2 className="text-2xl md:text-3xl font-bold text-emerald-900 text-justify">
                 Latest News
               </h2>
-              <p className="text-gray-600 mt-2">
+              <p className="text-gray-600 mt-2 text-justify">
                 Showing {filteredNews.length} of {metadata.total} news items
               </p>
             </div>
@@ -360,8 +360,8 @@ const News = () => {
           {filteredNews.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">📰</div>
-              <h3 className="text-2xl font-bold text-gray-700 mb-2">No news found</h3>
-              <p className="text-gray-600 mb-6">Try changing your search or category filter</p>
+              <h3 className="text-2xl font-bold text-gray-700 mb-2 text-justify">No news found</h3>
+              <p className="text-gray-600 mb-6 text-justify">Try changing your search or category filter</p>
               <button 
                 onClick={() => { setSearchTerm(''); setActiveCategory('all'); }}
                 className="text-emerald-600 hover:text-emerald-800 font-bold"
@@ -384,7 +384,7 @@ const News = () => {
                       />
                       <div className="absolute top-4 left-4">
                         <span className={`px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(item.category)}`}>
-                          {item.category}
+                          <span className="text-justify">{item.category}</span>
                         </span>
                       </div>
                       <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -401,26 +401,26 @@ const News = () => {
 
                     {/* News Content */}
                     <div className="p-6">
-                      <div className="flex items-center text-xs text-gray-600 mb-3">
+                      <div className="flex items-center text-xs text-gray-600 mb-3 justify-start">
                         <FaCalendarAlt className="mr-1.5 text-emerald-600" />
-                        <span>{item.date}</span>
+                        <span className="text-justify">{item.date}</span>
                         <span className="mx-2">•</span>
                         <FaUser className="mr-1.5 text-emerald-600" />
-                        <span>{item.author}</span>
+                        <span className="text-justify">{item.author}</span>
                       </div>
                       
-                      <h3 className="text-lg font-bold text-emerald-900 mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
+                      <h3 className="text-lg font-bold text-emerald-900 mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2 text-justify">
                         {item.title}
                       </h3>
                       
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      <p className="text-gray-600 text-sm mb-4 line-clamp-3 text-justify">
                         {item.excerpt}
                       </p>
                       
                       {/* Tags */}
                       <div className="flex flex-wrap gap-2 mb-4">
                         {item.tags.map((tag, index) => (
-                          <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
+                          <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded text-justify">
                             #{tag}
                           </span>
                         ))}
@@ -429,20 +429,20 @@ const News = () => {
                       {/* Stats */}
                       <div className="flex items-center justify-between pt-4 border-t border-emerald-50">
                         <div className="flex items-center space-x-4 text-xs text-gray-500">
-                          <span className="flex items-center">
+                          <span className="flex items-center text-justify">
                             <FaEye className="mr-1" /> {item.views}
                           </span>
-                          <span className="flex items-center">
+                          <span className="flex items-center text-justify">
                             <FaComment className="mr-1" /> {item.comments}
                           </span>
-                          <span>{item.readTime}</span>
+                          <span className="text-justify">{item.readTime}</span>
                         </div>
                         
                         <Link 
                           to={`/news/${item.id}`}
-                          className="text-emerald-600 hover:text-emerald-800 font-bold text-sm flex items-center hover:underline"
+                          className="text-emerald-600 hover:text-emerald-800 font-bold text-sm flex items-center hover:underline justify-start"
                         >
-                          Read More <FaArrowRight className="ml-1.5 text-xs" />
+                          <span className="text-justify">Read More</span> <FaArrowRight className="ml-1.5 text-xs" />
                         </Link>
                       </div>
                     </div>
@@ -461,10 +461,10 @@ const News = () => {
             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6 border border-white/30">
               <FaNewspaper className="text-2xl text-white" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-justify">
               Subscribe to Our Newsletter
             </h2>
-            <p className="text-lg text-white/90 mb-8 leading-relaxed">
+            <p className="text-lg text-white/90 mb-8 leading-relaxed text-justify">
               Get the latest debate news, competition updates, and training opportunities 
               delivered directly to your inbox. No spam, unsubscribe anytime.
             </p>
@@ -472,13 +472,13 @@ const News = () => {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 rounded-lg focus:ring-2 focus:ring-white/50 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500"
+                className="flex-1 px-4 py-3 rounded-lg focus:ring-2 focus:ring-white/50 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-justify"
               />
               <button className="bg-white hover:bg-gray-100 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 border border-white hover:shadow-xl hover:-translate-y-1 whitespace-nowrap">
-                Subscribe Now
+                <span className="text-justify">Subscribe Now</span>
               </button>
             </form>
-            <p className="text-white/70 text-sm mt-4">
+            <p className="text-white/70 text-sm mt-4 text-justify">
               Join 15,000+ subscribers who receive our weekly newsletter
             </p>
           </div>
@@ -489,10 +489,10 @@ const News = () => {
       <section className="py-12 md:py-16 lg:py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4 text-justify">
               News Archive
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto text-justify">
               Browse news from previous years and months
             </p>
           </div>
@@ -504,10 +504,10 @@ const News = () => {
               { year: "2022", count: "38 articles", color: "bg-purple-100" }
             ].map((archive, index) => (
               <div key={index} className={`${archive.color} rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-2`}>
-                <div className="text-4xl font-bold text-emerald-900 mb-2">{archive.year}</div>
-                <div className="text-gray-700 mb-4">{archive.count}</div>
-                <button className="text-emerald-600 hover:text-emerald-800 font-bold text-sm flex items-center">
-                  Browse Archive <FaArrowRight className="ml-2" />
+                <div className="text-4xl font-bold text-emerald-900 mb-2 text-justify">{archive.year}</div>
+                <div className="text-gray-700 mb-4 text-justify">{archive.count}</div>
+                <button className="text-emerald-600 hover:text-emerald-800 font-bold text-sm flex items-center justify-start">
+                  <span className="text-justify">Browse Archive</span> <FaArrowRight className="ml-2" />
                 </button>
               </div>
             ))}

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -81,7 +82,7 @@ const About = () => {
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight">
                 About Bangladesh Debate Federation
               </h1>
-              <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed text-justify">
                 Bangladesh Debate Federation (BDF) is a non-profit voluntary organization dedicated to spreading 
                 the art of debate and the power of public speaking to every corner of our nation. Founded in 2010, 
                 we work to bring logical reasoning and critical thinking to all age groups—from students to 
@@ -120,7 +121,7 @@ const About = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
                         <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                           <h4 className="text-2xl font-bold mb-2">{image.caption}</h4>
-                          <p className="text-gray-200">{image.description}</p>
+                          <p className="text-gray-200 text-justify">{image.description}</p>
                         </div>
                       </div>
                     </div>
@@ -182,7 +183,7 @@ const About = () => {
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">Our Mission</h2>
               </div>
-              <p className="text-gray-700 text-lg leading-relaxed">
+              <p className="text-gray-700 text-lg leading-relaxed text-justify">
                 Bangladesh Debate Federation (BDF) works to develop skills in debate, public speaking, 
                 logical reasoning, and critical thinking across all segments of society. Through partnerships 
                 with educational institutions, private sector actors, civil society organizations, and 
@@ -198,7 +199,7 @@ const About = () => {
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">Our Vision</h2>
               </div>
-              <p className="text-gray-700 text-lg leading-relaxed">
+              <p className="text-gray-700 text-lg leading-relaxed text-justify">
                 To cultivate a society where ideas are examined through logic, dialogue is guided by reason, 
                 and public narratives are shaped with integrity. We envision a just and informed Bangladesh 
                 where every individual develops the skills to solve problems, understand one another, and 
@@ -216,7 +217,7 @@ const About = () => {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-4">
               Our Core Values
             </h2>
-            <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
+            <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto text-justify">
               The pillars that guide our work and define our identity
             </p>
           </div>
@@ -233,7 +234,7 @@ const About = () => {
                   {value.icon}
                 </div>
                 <h3 className="text-xl font-bold text-emerald-900 mb-3 text-center">{value.title}</h3>
-                <p className="text-gray-600 text-center">{value.description}</p>
+                <p className="text-gray-600 text-center text-justify">{value.description}</p>
               </div>
             ))}
           </div>

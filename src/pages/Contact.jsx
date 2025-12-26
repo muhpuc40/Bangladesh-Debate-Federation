@@ -31,12 +31,12 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const contactInfo = [
-    {
-      icon: <FaMapMarkerAlt />,
-      title: "Head Office",
-      details: "House: 128, Road: 04\nMohammadia Housing Society\nMohammadpur, Dhaka",
-      color: "bg-blue-100 text-blue-600"
-    },
+    // {
+    //   icon: <FaMapMarkerAlt />,
+    //   title: "Head Office",
+    //   details: "House: 128, Road: 04\nMohammadia Housing Society\nMohammadpur, Dhaka",
+    //   color: "bg-blue-100 text-blue-600"
+    // },
     // {
     //   icon: <FaPhone />,
     //   title: "Phone Numbers",

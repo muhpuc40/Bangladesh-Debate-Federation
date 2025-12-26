@@ -265,7 +265,7 @@ const Home = () => {
             
             {/* Mobile Order: First show "ABOUT BDF" label */}
             <div className="lg:hidden w-full">
-              <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200">
+              <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200 text-justify">
                 ABOUT BDF
               </div>
             </div>
@@ -326,15 +326,15 @@ const Home = () => {
             <div className="w-full order-3 lg:order-2">
               {/* Desktop: Show "ABOUT BDF" label */}
               <div className="hidden lg:block">
-                <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200">
+                <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200 text-justify">
                   ABOUT BDF
                 </div>
               </div>
               
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-4 sm:mb-6 leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-4 sm:mb-6 leading-tight text-justify">
                 Leading Debate Excellence in <span className="text-emerald-600">Bangladesh</span>
               </h2>
-              <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-4 sm:mb-6 md:mb-8 leading-relaxed">
+              <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-4 sm:mb-6 md:mb-8 leading-relaxed text-justify">
                 Bangladesh Debate Federation (BDF) started its journey on the first quarter of the last decade of the previous century when democracy just appeared to the country as the form of government. Through a long period, BDF could able to build a generation who can lead, who can speak and who can represent. Since 1992 Bangladesh Debate Federation (BDF) is the central debate platform in the debating arena of Bangladesh. With a view to explore democracy in every sphere of the country, accessible to the mass people and increases the boundary of debate beyond the Dhaka city few legends of the debating arena has started there journey through debate. Birupakkha Pal, Dr. Niamot Elahi, Dr. Abdun Nur Tushar were the gypsy of that caravan. Since its launching BDF is organizing National Debate Festival in every two year regularly as well as training workshops, several competitions, mini-fests, Inter University debate championships, national school debate championship etc. Recently BDF has started to give debate award for performing and organizing debate activities.
               </p>
               
@@ -381,10 +381,10 @@ const Home = () => {
 <section className="py-8 md:py-12 lg:py-16 bg-white overflow-hidden">
   <div className="container mx-auto px-4">
     <div className="text-center mb-8 md:mb-10">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-2">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-2 text-justify">
         Our Esteemed Partners
       </h2>
-      <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
+      <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto text-justify">
         Collaborating with leading organizations to promote debate culture in Bangladesh
       </p>
     </div>
@@ -552,17 +552,17 @@ const Home = () => {
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 md:mb-8">
             {/* Left Side - Text Only */}
             <div className="mb-4 lg:mb-0">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 leading-tight">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 leading-tight text-justify">
                 Join Our Next 
                 <span className="relative inline-block ml-2">
-                  <span className="text-emerald-600 relative">
+                  <span className="text-emerald-600 relative text-justify">
                     Debate Events
                     {/* Animated underline */}
                     <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
                   </span>
                 </span>
               </h2>
-              <p className="text-gray-600 text-sm sm:text-base max-w-xl mt-2">
+              <p className="text-gray-600 text-sm sm:text-base max-w-xl mt-2 text-justify">
                 Participate in exciting debate competitions and workshops across Bangladesh
               </p>
             </div>
@@ -578,7 +578,7 @@ const Home = () => {
                 
                 {/* Button Content */}
                 <span className="relative z-10 flex items-center">
-                  <span className="mr-2 text-sm font-semibold tracking-wide">Browse All Events</span>
+                  <span className="mr-2 text-sm font-semibold tracking-wide text-justify">Browse All Events</span>
                   <div className="relative">
                     <FaArrowRight className="text-sm transform group-hover:translate-x-1 transition-transform duration-300" />
                     <FaArrowRight className="absolute top-0 left-0 text-sm opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-300" />
@@ -603,7 +603,7 @@ const Home = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
-                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold border border-emerald-200 text-black">
+                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold border border-emerald-200 text-black text-justify">
                     {event.category}
                   </div>
                   {/* Gradient overlay */}
@@ -612,11 +612,11 @@ const Home = () => {
                 
                 {/* Event Content - Flexible height with button at bottom */}
                 <div className="p-4 sm:p-5 md:p-6 flex flex-col flex-grow">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-emerald-900 mb-2 sm:mb-3 line-clamp-2">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-emerald-900 mb-2 sm:mb-3 line-clamp-2 text-justify">
                     {event.title}
                   </h3>
                   
-                  <p className="text-gray-700 text-xs sm:text-sm md:text-base mb-3 sm:mb-4 leading-relaxed line-clamp-3 flex-grow">
+                  <p className="text-gray-700 text-xs sm:text-sm md:text-base mb-3 sm:mb-4 leading-relaxed line-clamp-3 flex-grow text-justify">
                     {event.description}
                   </p>
                   
@@ -627,8 +627,8 @@ const Home = () => {
                         <FaCalendar className="text-emerald-600 text-xs" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs text-gray-500 truncate">Date</p>
-                        <p className="font-semibold text-emerald-800 text-sm truncate">{event.date}</p>
+                        <p className="text-xs text-gray-500 truncate text-justify">Date</p>
+                        <p className="font-semibold text-emerald-800 text-sm truncate text-justify">{event.date}</p>
                       </div>
                     </div>
                     
@@ -637,8 +637,8 @@ const Home = () => {
                         <FaMapMarkerAlt className="text-emerald-600 text-xs" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs text-gray-500 truncate">Location</p>
-                        <p className="font-semibold text-emerald-800 text-sm truncate">{event.location}</p>
+                        <p className="text-xs text-gray-500 truncate text-justify">Location</p>
+                        <p className="font-semibold text-emerald-800 text-sm truncate text-justify">{event.location}</p>
                       </div>
                     </div>
                     
@@ -647,8 +647,8 @@ const Home = () => {
                         <FaClock className="text-emerald-600 text-xs" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs text-gray-500 truncate">Time</p>
-                        <p className="font-semibold text-emerald-800 text-sm truncate">{event.time}</p>
+                        <p className="text-xs text-gray-500 truncate text-justify">Time</p>
+                        <p className="font-semibold text-emerald-800 text-sm truncate text-justify">{event.time}</p>
                       </div>
                     </div>
                   </div>
@@ -659,7 +659,7 @@ const Home = () => {
                       to={`/events/${event.id}`} 
                       className="group/btn inline-flex items-center justify-center w-full text-center bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 border border-emerald-600 hover:shadow-md hover:scale-[1.02] text-xs sm:text-sm"
                     >
-                      <span className="mr-1">Know More</span>
+                      <span className="mr-1 text-justify">Know More</span>
                       <div className="relative">
                         <FaArrowRight className="text-xs transform group-hover/btn:translate-x-0.5 transition-transform duration-300" />
                         <FaArrowRight className="absolute top-0 left-0 text-xs opacity-0 group-hover/btn:opacity-30 group-hover/btn:translate-x-1 transition-all duration-300" />
@@ -682,7 +682,7 @@ const Home = () => {
               
               {/* Button Content */}
               <span className="relative z-10 flex items-center">
-                <span className="mr-2 text-sm font-semibold tracking-wide">Browse All Events</span>
+                <span className="mr-2 text-sm font-semibold tracking-wide text-justify">Browse All Events</span>
                 <div className="relative">
                   <FaArrowRight className="text-sm transform group-hover:translate-x-1 transition-transform duration-300" />
                   <FaArrowRight className="absolute top-0 left-0 text-sm opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-300" />
@@ -726,17 +726,17 @@ const Home = () => {
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 md:mb-8">
             {/* Left Side - Text with Animation (Compact) */}
             <div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 mb-2">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 mb-2 text-justify">
                 Latest News & 
                 <span className="relative inline-block ml-2">
-                  <span className="text-emerald-600 relative">
+                  <span className="text-emerald-600 relative text-justify">
                     Announcements
                     {/* Animated underline - Same as Events section */}
                     <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
                   </span>
                 </span>
               </h2>
-              <p className="text-gray-600 text-sm sm:text-base max-w-xl">
+              <p className="text-gray-600 text-sm sm:text-base max-w-xl text-justify">
                 Stay updated with the latest announcements, competition results and upcoming events
               </p>
             </div>
@@ -752,7 +752,7 @@ const Home = () => {
                 
                 {/* Button Content - Compact */}
                 <span className="relative z-10 flex items-center">
-                  <span className="mr-2 text-sm">View All News</span>
+                  <span className="mr-2 text-sm text-justify">View All News</span>
                   <div className="relative">
                     <FaArrowRight className="text-sm transform group-hover:translate-x-1 transition-transform duration-300" />
                     <FaArrowRight className="absolute top-0 left-0 text-sm opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-300" />
@@ -778,7 +778,7 @@ const Home = () => {
                     loading="lazy"
                   />
                   {/* Category Badge on Image - Compact */}
-                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold border border-emerald-200 text-emerald-800">
+                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold border border-emerald-200 text-emerald-800 text-justify">
                     {news.category}
                   </div>
                   {/* Gradient Overlay */}
@@ -788,17 +788,17 @@ const Home = () => {
                 {/* News Content - Compact */}
                 <div className="p-4 sm:p-5">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-gray-500 text-xs flex items-center">
+                    <span className="text-gray-500 text-xs flex items-center text-justify">
                       <FaCalendar className="mr-1.5 text-emerald-600 text-xs" /> {news.date}
                     </span>
-                    <span className="text-gray-400 text-xs">{news.readTime}</span>
+                    <span className="text-gray-400 text-xs text-justify">{news.readTime}</span>
                   </div>
                   
-                  <h3 className="text-lg sm:text-xl font-bold text-emerald-900 mb-2 sm:mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-emerald-900 mb-2 sm:mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2 text-justify">
                     {news.title}
                   </h3>
                   
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3 text-justify">
                     {news.excerpt}
                   </p>
                   
@@ -807,13 +807,13 @@ const Home = () => {
                       to={`/news/${index + 1}`}
                       className="inline-flex items-center text-emerald-600 font-semibold text-sm hover:text-emerald-800 transition-colors duration-300 group/readmore"
                     >
-                      Read Full Story 
+                      <span className="text-justify">Read Full Story</span>
                       <FaArrowRight className="ml-1.5 text-xs group-hover/readmore:translate-x-1 transition-transform duration-300" />
                     </Link>
                     
                     <div className="flex items-center space-x-1">
                       <FaUsers className="text-gray-400 text-xs" />
-                      <span className="text-gray-400 text-xs">{news.viewers}</span>
+                      <span className="text-gray-400 text-xs text-justify">{news.viewers}</span>
                     </div>
                   </div>
                 </div>
@@ -832,7 +832,7 @@ const Home = () => {
               
               {/* Button Content */}
               <span className="relative z-10 flex items-center">
-                <span className="mr-2 text-sm">View All News</span>
+                <span className="mr-2 text-sm text-justify">View All News</span>
                 <div className="relative">
                   <FaArrowRight className="text-sm transform group-hover:translate-x-1 transition-transform duration-300" />
                   <FaArrowRight className="absolute top-0 left-0 text-sm opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-300" />

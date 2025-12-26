@@ -222,14 +222,14 @@ const DebateClubDirectory = () => {
       <section className="relative py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight text-justify">
               Debate Club Directory
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed text-justify">
               Find debate clubs from universities across Bangladesh. Connect with fellow debaters, 
               club presidents, and general secretaries to collaborate and participate in events.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 justify-start">
               <a 
                 href="#search"
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1"
@@ -251,10 +251,10 @@ const DebateClubDirectory = () => {
       <section id="search" className="py-8 bg-white border-b border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-emerald-900 mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-emerald-900 mb-4 text-justify">
               Find Debate Clubs
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-justify">
               Search through our comprehensive directory of university debate clubs in Bangladesh
             </p>
           </div>
@@ -270,14 +270,14 @@ const DebateClubDirectory = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search by club name, university, president, or general secretary..."
-                className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500"
+                className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-justify"
               />
             </div>
           </div>
 
           {/* Filters */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div>
+            <div className="text-justify">
               <label className="block text-gray-700 font-medium mb-2">
                 <FaUniversity className="inline mr-2 text-emerald-600" /> University
               </label>
@@ -293,7 +293,7 @@ const DebateClubDirectory = () => {
               </select>
             </div>
 
-            <div>
+            <div className="text-justify">
               <label className="block text-gray-700 font-medium mb-2">
                 <FaMapMarkerAlt className="inline mr-2 text-emerald-600" /> Region
               </label>
@@ -309,7 +309,7 @@ const DebateClubDirectory = () => {
               </select>
             </div>
 
-            <div className="flex items-end">
+            <div className="flex items-end text-justify">
               <button
                 onClick={() => {
                   setSearchTerm('');
@@ -325,7 +325,7 @@ const DebateClubDirectory = () => {
 
           {/* Results Count */}
           <div className="flex justify-between items-center mb-4">
-            <div className="text-gray-600">
+            <div className="text-gray-600 text-justify">
               Found <span className="font-bold text-emerald-700">{filteredClubs.length}</span> debate clubs
             </div>
             <div className="flex gap-2">
@@ -354,8 +354,8 @@ const DebateClubDirectory = () => {
           {filteredClubs.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-gray-700 mb-2">No clubs found</h3>
-              <p className="text-gray-600 mb-6">Try adjusting your search criteria or filters</p>
+              <h3 className="text-2xl font-bold text-gray-700 mb-2 text-justify">No clubs found</h3>
+              <p className="text-gray-600 mb-6 text-justify">Try adjusting your search criteria or filters</p>
               <button 
                 onClick={() => { setSearchTerm(''); setSelectedUniversity('all'); setSelectedRegion('all'); }}
                 className="text-emerald-600 hover:text-emerald-800 font-bold"
@@ -371,32 +371,34 @@ const DebateClubDirectory = () => {
                   <thead className="bg-emerald-50">
                     <tr>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        <div className="flex items-center">
+                        <div className="flex items-center justify-start">
                           <FaUniversity className="mr-2" /> Club & University
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        <div className="flex items-center">
+                        <div className="flex items-center justify-start">
                           <FaUserTie className="mr-2" /> President
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        <div className="flex items-center">
+                        <div className="flex items-center justify-start">
                           <FaUserGraduate className="mr-2" /> General Secretary
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        <div className="flex items-center">
+                        <div className="flex items-center justify-start">
                           <FaPhone className="mr-2" /> Contact
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        <div className="flex items-center">
+                        <div className="flex items-center justify-start">
                           <FaEnvelope className="mr-2" /> Email
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        Details
+                        <div className="text-justify">
+                          Details
+                        </div>
                       </th>
                     </tr>
                   </thead>
@@ -404,30 +406,30 @@ const DebateClubDirectory = () => {
                     {filteredClubs.map((club) => (
                       <tr key={club.id} className="hover:bg-emerald-50 transition-colors duration-300">
                         <td className="px-6 py-4">
-                          <div className="font-bold text-emerald-900">{club.clubName}</div>
-                          <div className="text-sm text-gray-600 mt-1">{club.university}</div>
-                          <div className="flex items-center mt-1 text-xs text-gray-500">
+                          <div className="font-bold text-emerald-900 text-justify">{club.clubName}</div>
+                          <div className="text-sm text-gray-600 mt-1 text-justify">{club.university}</div>
+                          <div className="flex items-center mt-1 text-xs text-gray-500 justify-start">
                             <FaMapMarkerAlt className="mr-1" /> {club.location}
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="font-medium text-gray-900">{club.president}</div>
+                          <div className="font-medium text-gray-900 text-justify">{club.president}</div>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="font-medium text-gray-900">{club.generalSecretary}</div>
+                          <div className="font-medium text-gray-900 text-justify">{club.generalSecretary}</div>
                         </td>
                         <td className="px-6 py-4">
-                          <a href={`tel:${club.contact}`} className="text-emerald-600 hover:text-emerald-800 hover:underline font-medium">
+                          <a href={`tel:${club.contact}`} className="text-emerald-600 hover:text-emerald-800 hover:underline font-medium text-justify">
                             {club.contact}
                           </a>
                         </td>
                         <td className="px-6 py-4">
-                          <a href={`mailto:${club.email}`} className="text-emerald-600 hover:text-emerald-800 hover:underline truncate block max-w-xs">
+                          <a href={`mailto:${club.email}`} className="text-emerald-600 hover:text-emerald-800 hover:underline truncate block max-w-xs text-justify">
                             {club.email}
                           </a>
                         </td>
                         <td className="px-6 py-4">
-                          <button className="text-emerald-600 hover:text-emerald-800 font-medium flex items-center text-sm">
+                          <button className="text-emerald-600 hover:text-emerald-800 font-medium flex items-center text-sm justify-start">
                             <FaEye className="mr-1" /> View
                           </button>
                         </td>
@@ -447,11 +449,11 @@ const DebateClubDirectory = () => {
                           <FaUniversity />
                         </div>
                         <div>
-                          <h3 className="font-bold text-emerald-900">{club.clubName}</h3>
-                          <p className="text-sm text-gray-600">{club.university}</p>
+                          <h3 className="font-bold text-emerald-900 text-justify">{club.clubName}</h3>
+                          <p className="text-sm text-gray-600 text-justify">{club.university}</p>
                         </div>
                       </div>
-                      <div className="flex items-center text-sm text-gray-500 mb-4">
+                      <div className="flex items-center text-sm text-gray-500 mb-4 justify-start">
                         <FaMapMarkerAlt className="mr-1" /> {club.location}
                       </div>
                     </div>
@@ -462,8 +464,8 @@ const DebateClubDirectory = () => {
                           <FaUserTie className="text-emerald-600" />
                         </div>
                         <div>
-                          <div className="text-xs text-gray-500">President</div>
-                          <div className="font-medium text-gray-900">{club.president}</div>
+                          <div className="text-xs text-gray-500 text-justify">President</div>
+                          <div className="font-medium text-gray-900 text-justify">{club.president}</div>
                         </div>
                       </div>
 
@@ -472,8 +474,8 @@ const DebateClubDirectory = () => {
                           <FaUserGraduate className="text-emerald-600" />
                         </div>
                         <div>
-                          <div className="text-xs text-gray-500">General Secretary</div>
-                          <div className="font-medium text-gray-900">{club.generalSecretary}</div>
+                          <div className="text-xs text-gray-500 text-justify">General Secretary</div>
+                          <div className="font-medium text-gray-900 text-justify">{club.generalSecretary}</div>
                         </div>
                       </div>
 
@@ -482,8 +484,8 @@ const DebateClubDirectory = () => {
                           <FaPhone className="text-emerald-600" />
                         </div>
                         <div>
-                          <div className="text-xs text-gray-500">Contact</div>
-                          <a href={`tel:${club.contact}`} className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline">
+                          <div className="text-xs text-gray-500 text-justify">Contact</div>
+                          <a href={`tel:${club.contact}`} className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline text-justify">
                             {club.contact}
                           </a>
                         </div>
@@ -494,8 +496,8 @@ const DebateClubDirectory = () => {
                           <FaEnvelope className="text-emerald-600" />
                         </div>
                         <div>
-                          <div className="text-xs text-gray-500">Email</div>
-                          <a href={`mailto:${club.email}`} className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline truncate block">
+                          <div className="text-xs text-gray-500 text-justify">Email</div>
+                          <a href={`mailto:${club.email}`} className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline truncate block text-justify">
                             {club.email}
                           </a>
                         </div>
@@ -503,10 +505,10 @@ const DebateClubDirectory = () => {
                     </div>
 
                     <div className="pt-4 border-t border-emerald-100 flex justify-between items-center">
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-gray-500 text-justify">
                         Est. {club.established} • {club.members} members
                       </div>
-                      <button className="text-emerald-600 hover:text-emerald-800 font-medium flex items-center text-sm">
+                      <button className="text-emerald-600 hover:text-emerald-800 font-medium flex items-center text-sm justify-start">
                         <FaEye className="mr-1" /> Details
                       </button>
                     </div>
@@ -525,10 +527,10 @@ const DebateClubDirectory = () => {
             <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
               <FaUniversity className="text-2xl text-emerald-600" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-6 text-justify">
               Want to Add Your Debate Club?
             </h2>
-            <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+            <p className="text-gray-600 text-lg mb-8 leading-relaxed text-justify">
               If your university debate club is not listed here, you can register it with 
               Bangladesh Debate Federation to be included in our official directory.
             </p>
