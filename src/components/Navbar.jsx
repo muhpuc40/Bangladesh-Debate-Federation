@@ -73,7 +73,7 @@ const Navbar = () => {
                   `px-4 py-2 rounded-full transition-all duration-300 font-medium whitespace-nowrap ${
                     isActive
                       ? 'text-white font-bold bg-emerald-600/90 shadow-lg'
-                      : 'text-emerald-100 hover:text-white hover:bg-emerald-500/30'
+                      : 'text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30'
                   }`
                 }
               >
@@ -86,7 +86,7 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center">
             <Link
               to="/signin"
-              className="text-emerald-100 hover:text-white border border-emerald-300/50 hover:border-emerald-300 font-bold py-2 px-5 rounded-full transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-lg backdrop-blur-sm bg-emerald-600/20 ml-3 text-base"
+              className="text-emerald-800 hover:text-emerald-900 border border-emerald-300/50 hover:border-emerald-600 font-bold py-2 px-5 rounded-full transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-lg backdrop-blur-sm bg-emerald-100/20 ml-3 text-base"
             >
               <FaSignInAlt className="mr-2" /> 
               Sign In
@@ -97,7 +97,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-2 lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-emerald-100 hover:text-white focus:outline-none p-3 hover:bg-emerald-500/20 rounded-full transition-all duration-300 backdrop-blur-sm bg-emerald-600/20"
+              className="text-emerald-800 hover:text-emerald-900 focus:outline-none p-3 hover:bg-emerald-500/20 rounded-full transition-all duration-300 backdrop-blur-sm bg-emerald-100/20"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
@@ -141,7 +141,7 @@ const Navbar = () => {
                       `px-4 py-3 rounded-lg transition-all duration-300 font-medium ${
                         isActive
                           ? 'text-white font-bold bg-emerald-600/80 shadow-lg'
-                          : 'text-emerald-100 hover:text-white hover:bg-emerald-500/30'
+                          : 'text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30'
                       }`
                     }
                   >
@@ -156,7 +156,7 @@ const Navbar = () => {
               <Link
                 to="/signin"
                 onClick={closeMenu}
-                className="w-full text-white hover:text-emerald-100 border border-emerald-300/50 hover:border-emerald-300 font-bold py-3 px-6 rounded-lg text-center transition-all duration-300 flex items-center justify-center hover:scale-[1.02] backdrop-blur-sm bg-emerald-600/30"
+                className="w-full text-emerald-800 hover:text-emerald-900 border border-emerald-300/50 hover:border-emerald-600 font-bold py-3 px-6 rounded-lg text-center transition-all duration-300 flex items-center justify-center hover:scale-[1.02] backdrop-blur-sm bg-emerald-100/30"
               >
                 <FaSignInAlt className="mr-2" /> Sign In
               </Link>

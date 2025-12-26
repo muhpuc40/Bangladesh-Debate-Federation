@@ -157,18 +157,8 @@ const ExecutiveCommittee = () => {
               international relations working together to promote debate culture nationwide.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link 
-                to="#members" 
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1"
-              >
-                <FaUsers className="mr-2" /> Meet Our Team
-              </Link>
-              <Link 
-                to="#committees" 
-                className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1"
-              >
-                <FaBuilding className="mr-2" /> Committee Structure
-              </Link>
+             
+          
             </div>
           </div>
         </div>
