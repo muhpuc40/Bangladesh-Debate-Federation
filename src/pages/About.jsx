@@ -99,9 +99,6 @@ const About = () => {
             
             {/* Image Gallery Slider */}
             <div className="relative">
-              <div className="mb-4">
-                <h3 className="text-xl font-bold text-emerald-900">Our Journey Gallery</h3>
-              </div>
               
               {/* Slider Container */}
               <div className="relative h-[400px] w-full overflow-hidden rounded-xl border-2 border-emerald-200 shadow-xl">
@@ -168,46 +165,7 @@ const About = () => {
                 </div>
               </div>
 
-              {/* Thumbnail Navigation */}
-              <div className="flex justify-center mt-4 space-x-2">
-                {galleryImages.map((image, index) => (
-                  <button
-                    key={image.id}
-                    onClick={() => goToSlide(index)}
-                    className={`w-16 h-16 overflow-hidden rounded-lg border-2 transition-all duration-300 ${
-                      index === currentSlide 
-                        ? 'border-emerald-500 ring-2 ring-emerald-200' 
-                        : 'border-gray-200 hover:border-emerald-300'
-                    }`}
-                  >
-                    <img
-                      src={image.url}
-                      alt={`Thumbnail ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
-
-              {/* Gallery Stats
-              <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div className="bg-white p-3 rounded-lg border border-emerald-100 text-center shadow-sm hover:shadow-md transition-shadow">
-                  <div className="text-xl font-bold text-emerald-700">15K+</div>
-                  <div className="text-xs text-gray-600">Trained Debaters</div>
-                </div>
-                <div className="bg-white p-3 rounded-lg border border-emerald-100 text-center shadow-sm hover:shadow-md transition-shadow">
-                  <div className="text-xl font-bold text-emerald-700">64</div>
-                  <div className="text-xs text-gray-600">Districts Covered</div>
-                </div>
-                <div className="bg-white p-3 rounded-lg border border-emerald-100 text-center shadow-sm hover:shadow-md transition-shadow">
-                  <div className="text-xl font-bold text-emerald-700">250+</div>
-                  <div className="text-xs text-gray-600">Events Organized</div>
-                </div>
-                <div className="bg-white p-3 rounded-lg border border-emerald-100 text-center shadow-sm hover:shadow-md transition-shadow">
-                  <div className="text-xl font-bold text-emerald-700">500+</div>
-                  <div className="text-xs text-gray-600">Institutions</div>
-                </div>
-              </div> */}
+              {/* No gallery stats - clean design */}
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ const Navbar = () => {
     { path: '/about', label: 'About Us' },
     { path: '/executive-committee', label: 'Committee' },
     { path: '/events', label: 'Events' },
-    { path: '/debate-club-directory', label: 'Directory' }, // শুধু "Directory" নাম
+    { path: '/debate-club-directory', label: 'Directory' },
     { path: '/resources', label: 'Resources' },
     { path: '/gallery', label: 'Gallery' },
     { path: '/contact', label: 'Contact' },
@@ -48,12 +48,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-sm border-b border-emerald-100 sticky top-0 z-50">
+    <nav className="fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* নেভবারের উচ্চতা কমানো হয়েছে */}
-        <div className="flex justify-between items-center py-1 md:py-2">
-          {/* Logo - বড় করা হয়েছে */}
-          <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0">
+        <div className="flex justify-between items-center py-4">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0 z-10">
             <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex-shrink-0">
               <img 
                 src="https://i.ibb.co/Ldwswy4m/logo.png" 
@@ -64,17 +63,17 @@ const Navbar = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation - ফন্ট এবং প্যাডিং সামান্য বাড়ানো */}
-          <div className="hidden lg:flex items-center space-x-1">
+          {/* Desktop Navigation - সম্পূর্ণ ট্রান্সপারেন্ট */}
+          <div className="hidden lg:flex items-center space-x-1 backdrop-blur-sm bg-white/5 px-4 py-2 rounded-full">
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
                 className={({ isActive }) =>
-                  `px-3 py-2 rounded-lg transition-all duration-300 font-medium whitespace-nowrap hover:text-emerald-800 ${
+                  `px-4 py-2 rounded-full transition-all duration-300 font-medium whitespace-nowrap ${
                     isActive
-                      ? 'text-emerald-800 font-bold bg-emerald-50'
-                      : 'text-emerald-700 hover:bg-emerald-50'
+                      ? 'text-white font-bold bg-emerald-600/90 shadow-lg'
+                      : 'text-emerald-100 hover:text-white hover:bg-emerald-500/30'
                   }`
                 }
               >
@@ -83,22 +82,22 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Desktop Sign In Button - বড় করা হয়েছে */}
+          {/* Desktop Sign In Button - ট্রান্সপারেন্ট */}
           <div className="hidden lg:flex items-center">
             <Link
               to="/signin"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-5 rounded-lg transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-md ml-3 text-base"
+              className="text-emerald-100 hover:text-white border border-emerald-300/50 hover:border-emerald-300 font-bold py-2 px-5 rounded-full transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-lg backdrop-blur-sm bg-emerald-600/20 ml-3 text-base"
             >
               <FaSignInAlt className="mr-2" /> 
               Sign In
             </Link>
           </div>
 
-          {/* Mobile Menu Button - আইকন বড় করা হয়েছে */}
+          {/* Mobile Menu Button - ট্রান্সপারেন্ট */}
           <div className="flex items-center space-x-2 lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-emerald-700 focus:outline-none p-2 hover:bg-gray-50 rounded-lg transition-all duration-300"
+              className="text-emerald-100 hover:text-white focus:outline-none p-3 hover:bg-emerald-500/20 rounded-full transition-all duration-300 backdrop-blur-sm bg-emerald-600/20"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
@@ -110,29 +109,29 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation Menu - উচ্চতা সামান্য কমানো */}
+        {/* Mobile Navigation Menu - ট্রান্সপারেন্ট */}
         <div 
           ref={menuRef}
-          className={`lg:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+          className={`lg:hidden fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-emerald-900/95 to-emerald-800/95 backdrop-blur-lg shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
           <div className="flex flex-col h-full">
-            {/* Menu Header - প্যাডিং কমানো */}
-            <div className="flex justify-between items-center p-3 border-b border-emerald-100">
-              <h2 className="text-lg font-bold text-emerald-800">Menu</h2>
+            {/* Menu Header - ট্রান্সপারেন্ট */}
+            <div className="flex justify-between items-center p-4 border-b border-emerald-400/30">
+              <h2 className="text-lg font-bold text-white">Menu</h2>
               <button
                 onClick={closeMenu}
-                className="text-emerald-700 hover:text-emerald-800 p-2 hover:bg-gray-100 rounded-lg transition-all duration-300"
+                className="text-white hover:text-emerald-200 p-2 hover:bg-emerald-500/30 rounded-full transition-all duration-300"
                 aria-label="Close menu"
               >
                 <FaTimes className="w-6 h-6" />
               </button>
             </div>
 
-            {/* Menu Items - প্যাডিং সামান্য কমানো */}
-            <div className="flex-1 overflow-y-auto p-3">
-              <div className="flex flex-col space-y-1">
+            {/* Menu Items - ট্রান্সপারেন্ট */}
+            <div className="flex-1 overflow-y-auto p-4">
+              <div className="flex flex-col space-y-2">
                 {navLinks.map((link) => (
                   <NavLink
                     key={link.path}
@@ -141,8 +140,8 @@ const Navbar = () => {
                     className={({ isActive }) =>
                       `px-4 py-3 rounded-lg transition-all duration-300 font-medium ${
                         isActive
-                          ? 'text-emerald-800 font-bold bg-emerald-50'
-                          : 'text-emerald-700 hover:text-emerald-800 hover:bg-emerald-50'
+                          ? 'text-white font-bold bg-emerald-600/80 shadow-lg'
+                          : 'text-emerald-100 hover:text-white hover:bg-emerald-500/30'
                       }`
                     }
                   >
@@ -152,12 +151,12 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Menu Footer - বাটন বড় করা */}
-            <div className="p-3 border-t border-emerald-100">
+            {/* Menu Footer - ট্রান্সপারেন্ট */}
+            <div className="p-4 border-t border-emerald-400/30">
               <Link
                 to="/signin"
                 onClick={closeMenu}
-                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg text-center transition-all duration-300 flex items-center justify-center hover:scale-[1.02] text-base"
+                className="w-full text-white hover:text-emerald-100 border border-emerald-300/50 hover:border-emerald-300 font-bold py-3 px-6 rounded-lg text-center transition-all duration-300 flex items-center justify-center hover:scale-[1.02] backdrop-blur-sm bg-emerald-600/30"
               >
                 <FaSignInAlt className="mr-2" /> Sign In
               </Link>
