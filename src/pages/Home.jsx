@@ -347,45 +347,10 @@ const Home = () => {
                 Leading Debate Excellence in <span className="text-emerald-600">Bangladesh</span>
               </h2>
               <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-4 sm:mb-6 md:mb-8 leading-relaxed">
-                Established in 2010, Bangladesh Debate Federation (BDF) is the premier national body 
-                dedicated to promoting competitive debating, critical thinking, and public speaking 
-                across Bangladesh. We are committed to nurturing the next generation of leaders.
+                Bangladesh Debate Federation (BDF) started its journey on the first quarter of the last decade of the previous century when democracy just appeared to the country as the form of government. Through a long period, BDF could able to build a generation who can lead, who can speak and who can represent. Since 1992 Bangladesh Debate Federation (BDF) is the central debate platform in the debating arena of Bangladesh. With a view to explore democracy in every sphere of the country, accessible to the mass people and increases the boundary of debate beyond the Dhaka city few legends of the debating arena has started there journey through debate. Birupakkha Pal, Dr. Niamot Elahi, Dr. Abdun Nur Tushar were the gypsy of that caravan. Since its launching BDF is organizing National Debate Festival in every two year regularly as well as training workshops, several competitions, mini-fests, Inter University debate championships, national school debate championship etc. Recently BDF has started to give debate award for performing and organizing debate activities.
               </p>
               
-              <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 md:mb-10">
-                <div className="flex items-start">
-                  <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1">
-                    <FaCheckCircle className="text-sm sm:text-base" />
-                  </div>
-                  <span className="text-gray-800 text-sm sm:text-base md:text-lg">
-                    <span className="font-bold text-emerald-700">15,000+</span> Trained Debaters Nationwide
-                  </span>
-                </div>
-                <div className="flex items-start">
-                  <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1">
-                    <FaCheckCircle className="text-sm sm:text-base" />
-                  </div>
-                  <span className="text-gray-800 text-sm sm:text-base md:text-lg">
-                    <span className="font-bold text-emerald-700">250+</span> Events Organized Annually
-                  </span>
-                </div>
-                <div className="flex items-start">
-                  <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1">
-                    <FaCheckCircle className="text-sm sm:text-base" />
-                  </div>
-                  <span className="text-gray-800 text-sm sm:text-base md:text-lg">
-                    <span className="font-bold text-emerald-700">64</span> Districts Covered Across Bangladesh
-                  </span>
-                </div>
-                <div className="flex items-start">
-                  <div className="bg-emerald-100 text-emerald-600 p-1.5 sm:p-2 rounded-full mr-3 sm:mr-4 mt-0.5 sm:mt-1">
-                    <FaCheckCircle className="text-sm sm:text-base" />
-                  </div>
-                  <span className="text-gray-800 text-sm sm:text-base md:text-lg">
-                    <span className="font-bold text-emerald-700">12</span> International Awards & Recognitions
-                  </span>
-                </div>
-              </div>
+           
               
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link 
