@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaTimes, FaSignInAlt, FaChevronDown } from 'react-icons/fa';
@@ -8,6 +9,8 @@ const Navbar = () => {
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
   const [isCommitteeHovered, setIsCommitteeHovered] = useState(false);
   const [isCommitteeDropdownOpen, setIsCommitteeDropdownOpen] = useState(false);
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const [mobileCommitteeOpen, setMobileCommitteeOpen] = useState(false);
   const menuRef = useRef(null);
   const aboutDropdownRef = useRef(null);
   const committeeDropdownRef = useRef(null);
@@ -78,6 +81,8 @@ const Navbar = () => {
     setIsAboutDropdownOpen(false);
     setIsCommitteeHovered(false);
     setIsCommitteeDropdownOpen(false);
+    setMobileAboutOpen(false);
+    setMobileCommitteeOpen(false);
   };
 
   const handleAboutMouseEnter = () => {
@@ -98,6 +103,28 @@ const Navbar = () => {
   const handleCommitteeMouseLeave = () => {
     setIsCommitteeHovered(false);
     setIsCommitteeDropdownOpen(false);
+  };
+
+  // মোবাইল মেনুতে About Us টগল ফাংশন
+  const toggleMobileAbout = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setMobileAboutOpen(!mobileAboutOpen);
+    // Committee মেনু বন্ধ রাখুন যখন About Us খুলছেন
+    if (mobileCommitteeOpen) {
+      setMobileCommitteeOpen(false);
+    }
+  };
+
+  // মোবাইল মেনুতে Committee টগল ফাংশন
+  const toggleMobileCommittee = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setMobileCommitteeOpen(!mobileCommitteeOpen);
+    // About Us মেনু বন্ধ রাখুন যখন Committee খুলছেন
+    if (mobileAboutOpen) {
+      setMobileAboutOpen(false);
+    }
   };
 
   return (
@@ -298,57 +325,137 @@ const Navbar = () => {
 
               {/* About Us with Sub-items in Mobile */}
               <div className="space-y-2">
-                <NavLink
-                  to="/about"
-                  onClick={closeMenu}
-                  className="px-4 py-3 rounded-lg transition-all duration-300 font-medium text-left text-emerald-900 hover:text-emerald-700 hover:border-l-4 hover:border-emerald-300"
-                >
-                  About Us
-                </NavLink>
-                <div className="ml-4 space-y-2 border-l-2 border-emerald-100 pl-4">
-                  {aboutSubItems.map((item) => (
-                    <NavLink
-                      key={item.path}
-                      to={item.path}
-                      onClick={closeMenu}
-                      className="px-4 py-2 rounded-lg transition-all duration-300 font-medium text-left text-sm text-emerald-800 hover:text-emerald-700 hover:border-l-2 hover:border-emerald-300"
+                <div className="relative">
+                  <NavLink
+                    to="/about"
+                    className={({ isActive }) =>
+                      `px-4 py-3 rounded-lg transition-all duration-300 font-medium text-left flex justify-between items-center ${
+                        isActive
+                          ? 'text-emerald-700 border-l-4 border-emerald-300'
+                          : 'text-emerald-900 hover:text-emerald-700 hover:border-l-4 hover:border-emerald-300'
+                      }`
+                    }
+                    onClick={(e) => {
+                      if (mobileAboutOpen) {
+                        e.preventDefault();
+                        setMobileAboutOpen(false);
+                      } else {
+                        closeMenu();
+                      }
+                    }}
+                  >
+                    <span>About Us</span>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleMobileAbout(e);
+                      }}
+                      className="ml-2 p-1 hover:bg-emerald-50 rounded-full transition-colors duration-300"
+                      aria-label="Toggle About Us submenu"
                     >
-                      {item.label}
-                    </NavLink>
-                  ))}
+                      <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${mobileAboutOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                  </NavLink>
                 </div>
+                
+                {mobileAboutOpen && (
+                  <div className="ml-4 pl-4 border-l-2 border-emerald-100">
+                    <div className="flex flex-col space-y-2 mt-2">
+                      {aboutSubItems.map((item) => (
+                        <NavLink
+                          key={item.path}
+                          to={item.path}
+                          onClick={closeMenu}
+                          className={({ isActive }) =>
+                            `block px-4 py-2 rounded-lg transition-all duration-300 font-medium text-left text-sm ${
+                              isActive
+                                ? 'text-emerald-700 border-l-2 border-emerald-300'
+                                : 'text-emerald-800 hover:text-emerald-700 hover:border-l-2 hover:border-emerald-300'
+                            }`
+                          }
+                        >
+                          {item.label}
+                        </NavLink>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Committee with Sub-items in Mobile */}
               <div className="space-y-2">
-                <NavLink
-                  to="/executive-committee"
-                  onClick={closeMenu}
-                  className="px-4 py-3 rounded-lg transition-all duration-300 font-medium text-left text-emerald-900 hover:text-emerald-700 hover:border-l-4 hover:border-emerald-300"
-                >
-                  Committee
-                </NavLink>
-                <div className="ml-4 space-y-2 border-l-2 border-emerald-100 pl-4">
-                  {committeeSubItems.map((item) => (
-                    <NavLink
-                      key={item.path}
-                      to={item.path}
-                      onClick={closeMenu}
-                      className="px-4 py-2 rounded-lg transition-all duration-300 font-medium text-left text-sm text-emerald-800 hover:text-emerald-700 hover:border-l-2 hover:border-emerald-300"
+                <div className="relative">
+                  <NavLink
+                    to="/executive-committee"
+                    className={({ isActive }) =>
+                      `px-4 py-3 rounded-lg transition-all duration-300 font-medium text-left flex justify-between items-center ${
+                        isActive
+                          ? 'text-emerald-700 border-l-4 border-emerald-300'
+                          : 'text-emerald-900 hover:text-emerald-700 hover:border-l-4 hover:border-emerald-300'
+                      }`
+                    }
+                    onClick={(e) => {
+                      if (mobileCommitteeOpen) {
+                        e.preventDefault();
+                        setMobileCommitteeOpen(false);
+                      } else {
+                        closeMenu();
+                      }
+                    }}
+                  >
+                    <span>Committee</span>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleMobileCommittee(e);
+                      }}
+                      className="ml-2 p-1 hover:bg-emerald-50 rounded-full transition-colors duration-300"
+                      aria-label="Toggle Committee submenu"
                     >
-                      {item.label}
-                    </NavLink>
-                  ))}
+                      <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${mobileCommitteeOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                  </NavLink>
                 </div>
+                
+                {mobileCommitteeOpen && (
+                  <div className="ml-4 pl-4 border-l-2 border-emerald-100">
+                    <div className="flex flex-col space-y-2 mt-2">
+                      {committeeSubItems.map((item) => (
+                        <NavLink
+                          key={item.path}
+                          to={item.path}
+                          onClick={closeMenu}
+                          className={({ isActive }) =>
+                            `block px-4 py-2 rounded-lg transition-all duration-300 font-medium text-left text-sm ${
+                              isActive
+                                ? 'text-emerald-700 border-l-2 border-emerald-300'
+                                : 'text-emerald-800 hover:text-emerald-700 hover:border-l-2 hover:border-emerald-300'
+                            }`
+                          }
+                        >
+                          {item.label}
+                        </NavLink>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {/* অন্যান্য লিংক (About Us এবং Committee বাদে) */}
+              {/* অন্যান্য লিংক (Events থেকে শুরু) */}
               {navLinks.slice(3).map((link) => (
                 <NavLink
                   key={link.path}
                   to={link.path}
                   onClick={closeMenu}
-                  className="px-4 py-3 rounded-lg transition-all duration-300 font-medium text-left text-emerald-900 hover:text-emerald-700 hover:border-l-4 hover:border-emerald-300"
+                  className={({ isActive }) =>
+                    `px-4 py-3 rounded-lg transition-all duration-300 font-medium text-left ${
+                      isActive
+                        ? 'text-emerald-700 border-l-4 border-emerald-300'
+                        : 'text-emerald-900 hover:text-emerald-700 hover:border-l-4 hover:border-emerald-300'
+                    }`
+                  }
                 >
                   {link.label}
                 </NavLink>
