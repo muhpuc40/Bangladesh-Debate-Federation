@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   FaUsers, 
@@ -15,25 +15,58 @@ import {
   FaBrain,
   FaEye,
   FaHandsHelping,
-  FaSeedling
+  FaSeedling,
+  FaChevronLeft,
+  FaChevronRight
 } from 'react-icons/fa';
 
 const About = () => {
-  const milestones = [
-    { year: "2010", title: "Foundation", description: "Bangladesh Debate Federation established as a non-profit voluntary organization" },
-    { year: "2012", title: "First National", description: "Organized first national debate competition with 50 teams" },
-    { year: "2015", title: "International Debut", description: "First participation in World Universities Debating Championship" },
-    { year: "2018", title: "Grassroots Expansion", description: "Launched programs reaching educational institutions at all levels" },
-    { year: "2020", title: "Digital Shift", description: "Pioneered online debating and remote training during pandemic" },
-    { year: "2023", title: "National Reach", description: "15,000+ trained debaters, programs in all 64 districts" }
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const galleryImages = [
+    { 
+      id: 1, 
+      url: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+      caption: "National Debate Championship 2023",
+      description: "The grand finale of our annual national tournament featuring top debaters from across Bangladesh"
+    },
+    { 
+      id: 2, 
+      url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+      caption: "Youth Debate Training Camp",
+      description: "Week-long intensive training for young aspiring debaters from rural areas"
+    },
+    { 
+      id: 3, 
+      url: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+      caption: "International Debate Exchange",
+      description: "Cultural exchange program with international debate teams from Asia-Pacific region"
+    },
+    { 
+      id: 4, 
+      url: "https://images.unsplash.com/photo-1551836026-d5c2c0b4d2f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+      caption: "Rural Debate Initiative",
+      description: "Bringing debate education to remote areas through mobile training units"
+    },
+    { 
+      id: 5, 
+      url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+      caption: "University Debate League",
+      description: "Inter-university championship with participants from 50+ institutions"
+    }
   ];
 
-  const teamMembers = [
-    { name: "Dr. Ayesha Rahman", role: "Chairperson", image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
-    { name: "Mr. Kabir Ahmed", role: "Executive Director", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
-    { name: "Ms. Sabrina Khan", role: "Training Director", image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
-    { name: "Mr. Rahim Chowdhury", role: "Partnership Coordinator", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" }
-  ];
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -61,31 +94,121 @@ const About = () => {
                 >
                   Upcoming Events <FaArrowRight className="ml-2" />
                 </Link>
-              
               </div>
             </div>
-            {/* <div className="relative">
-              <div className="bg-emerald-100 rounded-xl p-6 border border-emerald-200 shadow-lg">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white p-4 rounded-lg border border-emerald-100 text-center">
-                    <div className="text-3xl font-bold text-emerald-700 mb-2">15K+</div>
-                    <div className="text-gray-600">Trained Debaters</div>
+            
+            {/* Image Gallery Slider */}
+            <div className="relative">
+              <div className="mb-4">
+                <h3 className="text-xl font-bold text-emerald-900">Our Journey Gallery</h3>
+              </div>
+              
+              {/* Slider Container */}
+              <div className="relative h-[400px] w-full overflow-hidden rounded-xl border-2 border-emerald-200 shadow-xl">
+                {/* Slides */}
+                {galleryImages.map((image, index) => (
+                  <div
+                    key={image.id}
+                    className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                      index === currentSlide ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    <div className="relative h-full w-full">
+                      <img
+                        src={image.url}
+                        alt={image.caption}
+                        className="h-full w-full object-cover"
+                      />
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
+                        <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                          <h4 className="text-2xl font-bold mb-2">{image.caption}</h4>
+                          <p className="text-gray-200">{image.description}</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="bg-white p-4 rounded-lg border border-emerald-100 text-center">
-                    <div className="text-3xl font-bold text-emerald-700 mb-2">64</div>
-                    <div className="text-gray-600">Districts Covered</div>
-                  </div>
-                  <div className="bg-white p-4 rounded-lg border border-emerald-100 text-center">
-                    <div className="text-3xl font-bold text-emerald-700 mb-2">250+</div>
-                    <div className="text-gray-600">Events Organized</div>
-                  </div>
-                  <div className="bg-white p-4 rounded-lg border border-emerald-100 text-center">
-                    <div className="text-3xl font-bold text-emerald-700 mb-2">500+</div>
-                    <div className="text-gray-600">Institutions Reached</div>
-                  </div>
+                ))}
+
+                {/* Navigation Buttons */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full transition-all duration-300"
+                  aria-label="Previous slide"
+                >
+                  <FaChevronLeft className="text-xl" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full transition-all duration-300"
+                  aria-label="Next slide"
+                >
+                  <FaChevronRight className="text-xl" />
+                </button>
+
+                {/* Slide Indicators */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                  {galleryImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => goToSlide(index)}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        index === currentSlide 
+                          ? 'bg-emerald-400 w-8' 
+                          : 'bg-white/60 hover:bg-white'
+                      }`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Slide Counter */}
+                <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                  {currentSlide + 1} / {galleryImages.length}
                 </div>
               </div>
-            </div> */}
+
+              {/* Thumbnail Navigation */}
+              <div className="flex justify-center mt-4 space-x-2">
+                {galleryImages.map((image, index) => (
+                  <button
+                    key={image.id}
+                    onClick={() => goToSlide(index)}
+                    className={`w-16 h-16 overflow-hidden rounded-lg border-2 transition-all duration-300 ${
+                      index === currentSlide 
+                        ? 'border-emerald-500 ring-2 ring-emerald-200' 
+                        : 'border-gray-200 hover:border-emerald-300'
+                    }`}
+                  >
+                    <img
+                      src={image.url}
+                      alt={`Thumbnail ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+
+              {/* Gallery Stats */}
+              <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div className="bg-white p-3 rounded-lg border border-emerald-100 text-center shadow-sm hover:shadow-md transition-shadow">
+                  <div className="text-xl font-bold text-emerald-700">15K+</div>
+                  <div className="text-xs text-gray-600">Trained Debaters</div>
+                </div>
+                <div className="bg-white p-3 rounded-lg border border-emerald-100 text-center shadow-sm hover:shadow-md transition-shadow">
+                  <div className="text-xl font-bold text-emerald-700">64</div>
+                  <div className="text-xs text-gray-600">Districts Covered</div>
+                </div>
+                <div className="bg-white p-3 rounded-lg border border-emerald-100 text-center shadow-sm hover:shadow-md transition-shadow">
+                  <div className="text-xl font-bold text-emerald-700">250+</div>
+                  <div className="text-xs text-gray-600">Events Organized</div>
+                </div>
+                <div className="bg-white p-3 rounded-lg border border-emerald-100 text-center shadow-sm hover:shadow-md transition-shadow">
+                  <div className="text-xl font-bold text-emerald-700">500+</div>
+                  <div className="text-xs text-gray-600">Institutions</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -158,13 +281,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
-      {/* Timeline */}
-  
-
-
-    
-    
     </div>
   );
 };
