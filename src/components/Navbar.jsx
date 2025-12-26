@@ -48,10 +48,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed -top-4 left-0 right-0 z-50">
+    <nav className="fixed top-2 left-0 right-0 z-50"> {/* -top-4 থেকে top-2 করা হয়েছে */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop Navigation - লোগো সহ সম্পূর্ণ ব্যাকগ্রাউন্ড */}
-        <div className="hidden lg:flex items-center justify-between backdrop-blur-sm bg-white/5 rounded-full px-6 py-2 mt-2">
+        <div className="hidden lg:flex items-center justify-between backdrop-blur-sm bg-white/5 rounded-full px-6 py-2"> {/* mt-2 সরানো হয়েছে */}
           {/* Logo - একই ব্যাকগ্রাউন্ডে */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0">
             <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex-shrink-0">
