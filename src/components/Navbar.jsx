@@ -11,6 +11,7 @@ const Navbar = () => {
     { path: '/about', label: 'About Us' },
     { path: '/executive-committee', label: 'Committee' },
     { path: '/events', label: 'Events' },
+    { path: '/debate-club-directory', label: 'Directory' }, // শুধু "Directory" নাম
     { path: '/resources', label: 'Resources' },
     { path: '/gallery', label: 'Gallery' },
     { path: '/contact', label: 'Contact' },

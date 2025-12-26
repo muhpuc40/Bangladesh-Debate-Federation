@@ -189,7 +189,7 @@ const About = () => {
                 ))}
               </div>
 
-              {/* Gallery Stats */}
+              {/* Gallery Stats
               <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
                 <div className="bg-white p-3 rounded-lg border border-emerald-100 text-center shadow-sm hover:shadow-md transition-shadow">
                   <div className="text-xl font-bold text-emerald-700">15K+</div>
@@ -207,7 +207,7 @@ const About = () => {
                   <div className="text-xl font-bold text-emerald-700">500+</div>
                   <div className="text-xs text-gray-600">Institutions</div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
