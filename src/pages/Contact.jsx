@@ -210,8 +210,7 @@ const Contact = () => {
               Contact Us
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-              Get in touch with Bangladesh Debate Federation. Whether you have questions about 
-              events, want to partner with us, or need support, we're here to help.
+              Get in touch with Bangladesh Debate Federation. 
             </p>
             <div className="flex flex-wrap gap-4">
               <a 
