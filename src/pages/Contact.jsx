@@ -31,12 +31,12 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const contactInfo = [
-    // {
-    //   icon: <FaMapMarkerAlt />,
-    //   title: "Head Office",
-    //   details: "House: 128, Road: 04\nMohammadia Housing Society\nMohammadpur, Dhaka",
-    //   color: "bg-blue-100 text-blue-600"
-    // },
+    {
+      icon: <FaMapMarkerAlt />,
+      title: "Head Office",
+      details: "House: 128, Road: 04\nMohammadia Housing Society\nMohammadpur, Dhaka",
+      color: "bg-blue-100 text-blue-600"
+    },
     // {
     //   icon: <FaPhone />,
     //   title: "Phone Numbers",
@@ -407,7 +407,7 @@ const Contact = () => {
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <a
-                      href="https://www.google.com/maps/dir//House+128,+Road+4,+Mohammadia+Housing+Society,+Mohammadpur,+Dhaka"
+                      href="https://maps.app.goo.gl/BHQCH371Ur6tSSAF7"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center text-sm border border-emerald-700 hover:shadow-md"
