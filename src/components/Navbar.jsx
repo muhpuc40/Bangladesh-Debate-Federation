@@ -78,8 +78,8 @@ const Navbar = () => {
                   }`
                 }
               >
-                {/* ডেস্কটপে Executive Committee, বাকিগুলো সাধারণ লেবেল */}
-                {link.path === '/executive-committee' ? 'Executive Committee' : link.label}
+                {/* সব লিংকের লেবেল যেমন আছে তেমন দেখাবে */}
+                {link.label}
               </NavLink>
             ))}
             
@@ -159,7 +159,7 @@ const Navbar = () => {
                     }`
                   }
                 >
-                  {/* মোবাইলে শুধু Committee */}
+                  {/* সব লিংকের লেবেল যেমন আছে তেমন দেখাবে */}
                   {link.label}
                 </NavLink>
               ))}
