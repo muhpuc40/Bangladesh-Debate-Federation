@@ -31,18 +31,18 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const contactInfo = [
-    {
-      icon: <FaMapMarkerAlt />,
-      title: "Head Office",
-      details: "BDF Tower, 123 Debate Road\nDhaka 1212, Bangladesh",
-      color: "bg-blue-100 text-blue-600"
-    },
-    {
-      icon: <FaPhone />,
-      title: "Phone Numbers",
-      details: "01719 142953\n 01717 666166\n 01777 408630",
-      color: "bg-green-100 text-green-600"
-    },
+    // {
+    //   icon: <FaMapMarkerAlt />,
+    //   title: "Head Office",
+    //   details: "House: 128, Road: 04\nMohammadia Housing Society\nMohammadpur, Dhaka",
+    //   color: "bg-blue-100 text-blue-600"
+    // },
+    // {
+    //   icon: <FaPhone />,
+    //   title: "Phone Numbers",
+    //   details: "01719 142953\n 01717 666166\n 01777 408630",
+    //   color: "bg-green-100 text-green-600"
+    // },
     // {
     //   icon: <FaEnvelope />,
     //   title: "Email Addresses",
@@ -386,12 +386,12 @@ const Contact = () => {
               <div className="bg-white rounded-xl border border-emerald-100 overflow-hidden mb-8">
                 <div className="h-64 md:h-96">
                   <iframe
-                    title="BDF Tower Location"
+                    title="Mohammadia Housing Society Location"
                     width="100%"
                     height="100%"
                     frameBorder="0"
                     style={{ border: 0 }}
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.8371030554966!2d90.39427967599152!3d23.797815986369262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c70c15ea1de1%3A0x978b5c38c7aec582!2sDhaka%201212%2C%20Bangladesh!5e0!3m2!1sen!2s!4v1697823426788!5m2!1sen!2s"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.900152110987!2d90.35597247605306!3d23.754855189034535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755bf4f2b9e4613%3A0x1c01e6f8e6f8e6f8!2sHouse%20128%2C%20Road%204%2C%20Mohammadia%20Housing%20Society%2C%20Mohammadpur%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1645587654321!5m2!1sen!2sbd"
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
@@ -403,11 +403,11 @@ const Contact = () => {
                     Find Our Office
                   </h3>
                   <p className="text-gray-600 mb-3">
-                    BDF Tower, 123 Debate Road, Dhaka 1212, Bangladesh
+                    House: 128, Road: 04, Mohammadia Housing Society, Mohammadpur, Dhaka
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <a
-                      href="https://www.google.com/maps/dir//BDF+Tower,+123+Debate+Road,+Dhaka+1212,+Bangladesh"
+                      href="https://www.google.com/maps/dir//House+128,+Road+4,+Mohammadia+Housing+Society,+Mohammadpur,+Dhaka"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center text-sm border border-emerald-700 hover:shadow-md"
