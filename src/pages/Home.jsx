@@ -155,18 +155,6 @@ const Home = () => {
     }
   ];
 
-  // Partners data for marquee
-  const partners = [
-    { name: "Ministry of Education", logo: "🏛️", bg: "bg-emerald-50" },
-    { name: "Youth Development", logo: "🌟", bg: "bg-emerald-50" },
-    { name: "Bangladesh Bank", logo: "🏦", bg: "bg-emerald-50" },
-    { name: "University Grants", logo: "🎓", bg: "bg-emerald-50" },
-    { name: "Prothom Alo", logo: "📰", bg: "bg-emerald-50" },
-    { name: "BTV", logo: "📺", bg: "bg-emerald-50" },
-    { name: "Dhaka University", logo: "🎯", bg: "bg-emerald-50" },
-    { name: "Bangladesh Army", logo: "⚔️", bg: "bg-emerald-50" }
-  ];
-
   // News data with images
   const newsItems = [
     {
@@ -407,13 +395,59 @@ const Home = () => {
             {/* Single marquee row with duplicate content for seamless loop */}
             <div className="flex animate-marqueeSingle whitespace-nowrap">
               {/* First set of partners */}
-              {partners.map((partner, idx) => (
+              {[
+                {
+                  name: "USAID",
+                  logo: "https://i.ibb.co.com/pBXmCwrK/USAID-Identity.png",
+                  alt: "USAID Logo"
+                },
+                {
+                  name: "Bangladesh National Museum",
+                  logo: "https://i.ibb.co.com/zhcJgRGF/bangladesh-national-museum-logo.png",
+                  alt: "Bangladesh National Museum Logo"
+                },
+                {
+                  name: "ICYF",
+                  logo: "https://i.ibb.co.com/GQnWXcV9/download-1.png",
+                  alt: "ICYF Logo"
+                },
+                {
+                  name: "Ministry of Cultural Affairs",
+                  logo: "https://i.ibb.co.com/DP928RvR/Ministry-of-Cultural-Affairs.jpg",
+                  alt: "Ministry of Cultural Affairs Logo"
+                },
+                {
+                  name: "Organisation of Islamic Cooperation",
+                  logo: "https://i.ibb.co.com/1GTdXj11/Organisation-of-Islamic-Cooperation-Logo.png",
+                  alt: "OIC Logo"
+                },
+                {
+                  name: "UNDP",
+                  logo: "https://i.ibb.co.com/VWxTZ5yp/UNDP-logo.png",
+                  alt: "UNDP Logo"
+                },
+                {
+                  name: "Ministry of Foreign Affairs",
+                  logo: "https://i.ibb.co.com/XxjwCmnR/Government-Seal-of-Bangladesh-svg.png",
+                  alt: "Ministry of Foreign Affairs Logo"
+                },
+                {
+                  name: "ILO",
+                  logo: "https://i.ibb.co.com/sdbM8qxH/ilo.png",
+                  alt: "ILO Logo"
+                }
+              ].map((partner, idx) => (
                 <div 
                   key={`${idx}-1`} 
                   className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-20 sm:h-24 w-28 sm:w-32 md:w-36 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
                 >
-                  <div className="text-xl sm:text-2xl md:text-3xl mb-2">
-                    {partner.logo}
+                  <div className="h-10 sm:h-12 md:h-14 flex items-center justify-center mb-2">
+                    <img 
+                      src={partner.logo} 
+                      alt={partner.alt}
+                      className="max-h-full max-w-full object-contain"
+                      loading="lazy"
+                    />
                   </div>
                   <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm px-1">
                     {partner.name}
@@ -422,14 +456,60 @@ const Home = () => {
               ))}
               
               {/* Duplicate set for seamless loop */}
-              {partners.map((partner, idx) => (
+              {[
+                {
+                  name: "USAID",
+                  logo: "https://i.ibb.co.com/pBXmCwrK/USAID-Identity.png",
+                  alt: "USAID Logo"
+                },
+                {
+                  name: "Bangladesh National Museum",
+                  logo: "https://i.ibb.co.com/zhcJgRGF/bangladesh-national-museum-logo.png",
+                  alt: "Bangladesh National Museum Logo"
+                },
+                {
+                  name: "ICYF",
+                  logo: "https://i.ibb.co.com/GQnWXcV9/download-1.png",
+                  alt: "ICYF Logo"
+                },
+                {
+                  name: "Ministry of Cultural Affairs",
+                  logo: "https://i.ibb.co.com/DP928RvR/Ministry-of-Cultural-Affairs.jpg",
+                  alt: "Ministry of Cultural Affairs Logo"
+                },
+                {
+                  name: "Organisation of Islamic Cooperation",
+                  logo: "https://i.ibb.co.com/1GTdXj11/Organisation-of-Islamic-Cooperation-Logo.png",
+                  alt: "OIC Logo"
+                },
+                {
+                  name: "UNDP",
+                  logo: "https://i.ibb.co.com/VWxTZ5yp/UNDP-logo.png",
+                  alt: "UNDP Logo"
+                },
+                {
+                  name: "Ministry of Foreign Affairs",
+                  logo: "https://i.ibb.co.com/XxjwCmnR/Government-Seal-of-Bangladesh-svg.png",
+                  alt: "Ministry of Foreign Affairs Logo"
+                },
+                {
+                  name: "ILO",
+                  logo: "https://i.ibb.co.com/sdbM8qxH/ilo.png",
+                  alt: "ILO Logo"
+                }
+              ].map((partner, idx) => (
                 <div 
                   key={`${idx}-2`} 
                   className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-20 sm:h-24 w-28 sm:w-32 md:w-36 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
                   aria-hidden="true"
                 >
-                  <div className="text-xl sm:text-2xl md:text-3xl mb-2">
-                    {partner.logo}
+                  <div className="h-10 sm:h-12 md:h-14 flex items-center justify-center mb-2">
+                    <img 
+                      src={partner.logo} 
+                      alt={partner.alt}
+                      className="max-h-full max-w-full object-contain"
+                      loading="lazy"
+                    />
                   </div>
                   <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm px-1">
                     {partner.name}

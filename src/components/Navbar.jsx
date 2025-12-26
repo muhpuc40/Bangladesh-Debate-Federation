@@ -78,7 +78,8 @@ const Navbar = () => {
                   }`
                 }
               >
-                {link.label}
+                {/* ডেস্কটপে Executive Committee, বাকিগুলো সাধারণ লেবেল */}
+                {link.path === '/executive-committee' ? 'Executive Committee' : link.label}
               </NavLink>
             ))}
             
@@ -151,14 +152,15 @@ const Navbar = () => {
                   to={link.path}
                   onClick={closeMenu}
                   className={({ isActive }) =>
-                    `px-4 py-3 rounded-lg transition-all duration-300 font-medium text-center ${
+                    `px-4 py-3 rounded-lg transition-all duration-300 font-medium text-left ${
                       isActive
                         ? 'text-emerald-700 font-bold border-l-4 border-emerald-700'
                         : 'text-emerald-900 hover:text-emerald-700 hover:border-l-4 hover:border-emerald-300'
                     }`
                   }
                 >
-                  {link.label === 'Committee' ? 'Executive Committee' : link.label}
+                  {/* মোবাইলে শুধু Committee */}
+                  {link.label}
                 </NavLink>
               ))}
             </div>
