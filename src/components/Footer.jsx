@@ -80,8 +80,7 @@ const Footer = () => {
                   </h4>
                 </div>
                 <p className="text-gray-600 text-xs md:text-sm pl-8">
-                  BDF Tower, 123 Debate Road
-Dhaka 1212, Bangladesh
+                House: 128, Road: 04, Mohammadia Housing Society, Mohammadpur, Dhaka
                 </p>
               </div>
 

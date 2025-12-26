@@ -48,10 +48,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
+    <nav className="fixed -top-4 left-0 right-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop Navigation - লোগো সহ সম্পূর্ণ ব্যাকগ্রাউন্ড */}
-        <div className="hidden lg:flex items-center justify-between backdrop-blur-sm bg-white/5 rounded-full px-6 py-2 mt-4">
+        <div className="hidden lg:flex items-center justify-between backdrop-blur-sm bg-white/5 rounded-full px-6 py-2 mt-2">
           {/* Logo - একই ব্যাকগ্রাউন্ডে */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0">
             <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex-shrink-0">
@@ -94,7 +94,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Layout - আলাদাভাবে */}
-        <div className="flex lg:hidden justify-between items-center py-4">
+        <div className="flex lg:hidden justify-between items-center py-3">
           {/* Mobile Logo - আলাদা */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0 z-10">
             <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex-shrink-0">
