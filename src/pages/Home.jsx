@@ -378,178 +378,201 @@ const Home = () => {
         </style>
       </section>
 
-      {/* Partners with Marquee Cards - FIXED MOBILE VERSION - SINGLE LINE */}
-      <section className="py-8 md:py-12 lg:py-16 bg-white overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8 md:mb-10">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-2">
-              Our Esteemed Partners
-            </h2>
-            <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
-              Collaborating with leading organizations to promote debate culture in Bangladesh
-            </p>
-          </div>
-          
-          {/* Marquee Container - SINGLE LINE */}
-          <div className="relative w-full overflow-hidden py-4">
-            {/* Single marquee row with duplicate content for seamless loop */}
-            <div className="flex animate-marqueeSingle whitespace-nowrap">
-              {/* First set of partners */}
-              {[
-                {
-                  name: "USAID",
-                  logo: "https://i.ibb.co.com/pBXmCwrK/USAID-Identity.png",
-                  alt: "USAID Logo"
-                },
-                {
-                  name: "Bangladesh National Museum",
-                  logo: "https://i.ibb.co.com/zhcJgRGF/bangladesh-national-museum-logo.png",
-                  alt: "Bangladesh National Museum Logo"
-                },
-                {
-                  name: "ICYF",
-                  logo: "https://i.ibb.co.com/GQnWXcV9/download-1.png",
-                  alt: "ICYF Logo"
-                },
-                {
-                  name: "Ministry of Cultural Affairs",
-                  logo: "https://i.ibb.co.com/DP928RvR/Ministry-of-Cultural-Affairs.jpg",
-                  alt: "Ministry of Cultural Affairs Logo"
-                },
-                {
-                  name: "Organisation of Islamic Cooperation",
-                  logo: "https://i.ibb.co.com/1GTdXj11/Organisation-of-Islamic-Cooperation-Logo.png",
-                  alt: "OIC Logo"
-                },
-                {
-                  name: "UNDP",
-                  logo: "https://i.ibb.co.com/VWxTZ5yp/UNDP-logo.png",
-                  alt: "UNDP Logo"
-                },
-                {
-                  name: "Ministry of Foreign Affairs",
-                  logo: "https://i.ibb.co.com/XxjwCmnR/Government-Seal-of-Bangladesh-svg.png",
-                  alt: "Ministry of Foreign Affairs Logo"
-                },
-                {
-                  name: "ILO",
-                  logo: "https://i.ibb.co.com/sdbM8qxH/ilo.png",
-                  alt: "ILO Logo"
-                }
-              ].map((partner, idx) => (
-                <div 
-                  key={`${idx}-1`} 
-                  className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-20 sm:h-24 w-28 sm:w-32 md:w-36 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
-                >
-                  <div className="h-10 sm:h-12 md:h-14 flex items-center justify-center mb-2">
-                    <img 
-                      src={partner.logo} 
-                      alt={partner.alt}
-                      className="max-h-full max-w-full object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm px-1">
-                    {partner.name}
-                  </div>
-                </div>
-              ))}
-              
-              {/* Duplicate set for seamless loop */}
-              {[
-                {
-                  name: "USAID",
-                  logo: "https://i.ibb.co.com/pBXmCwrK/USAID-Identity.png",
-                  alt: "USAID Logo"
-                },
-                {
-                  name: "Bangladesh National Museum",
-                  logo: "https://i.ibb.co.com/zhcJgRGF/bangladesh-national-museum-logo.png",
-                  alt: "Bangladesh National Museum Logo"
-                },
-                {
-                  name: "ICYF",
-                  logo: "https://i.ibb.co.com/GQnWXcV9/download-1.png",
-                  alt: "ICYF Logo"
-                },
-                {
-                  name: "Ministry of Cultural Affairs",
-                  logo: "https://i.ibb.co.com/DP928RvR/Ministry-of-Cultural-Affairs.jpg",
-                  alt: "Ministry of Cultural Affairs Logo"
-                },
-                {
-                  name: "Organisation of Islamic Cooperation",
-                  logo: "https://i.ibb.co.com/1GTdXj11/Organisation-of-Islamic-Cooperation-Logo.png",
-                  alt: "OIC Logo"
-                },
-                {
-                  name: "UNDP",
-                  logo: "https://i.ibb.co.com/VWxTZ5yp/UNDP-logo.png",
-                  alt: "UNDP Logo"
-                },
-                {
-                  name: "Ministry of Foreign Affairs",
-                  logo: "https://i.ibb.co.com/XxjwCmnR/Government-Seal-of-Bangladesh-svg.png",
-                  alt: "Ministry of Foreign Affairs Logo"
-                },
-                {
-                  name: "ILO",
-                  logo: "https://i.ibb.co.com/sdbM8qxH/ilo.png",
-                  alt: "ILO Logo"
-                }
-              ].map((partner, idx) => (
-                <div 
-                  key={`${idx}-2`} 
-                  className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-20 sm:h-24 w-28 sm:w-32 md:w-36 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
-                  aria-hidden="true"
-                >
-                  <div className="h-10 sm:h-12 md:h-14 flex items-center justify-center mb-2">
-                    <img 
-                      src={partner.logo} 
-                      alt={partner.alt}
-                      className="max-h-full max-w-full object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm px-1">
-                    {partner.name}
-                  </div>
-                </div>
-              ))}
+    {/* Partners with Marquee Cards - FIXED WITH BETTER STYLING */}
+<section className="py-8 md:py-12 lg:py-16 bg-white overflow-hidden">
+  <div className="container mx-auto px-4">
+    <div className="text-center mb-8 md:mb-10">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-2">
+        Our Esteemed Partners
+      </h2>
+      <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
+        Collaborating with leading organizations to promote debate culture in Bangladesh
+      </p>
+    </div>
+    
+    {/* Marquee Container - FIXED VERSION */}
+    <div className="relative w-full overflow-hidden py-4">
+      {/* Single marquee row with duplicate content for seamless loop */}
+      <div className="flex animate-marqueeSingle whitespace-nowrap">
+        {/* First set of partners */}
+        {[
+          {
+            name: "USAID",
+            logo: "https://i.ibb.co.com/pBXmCwrK/USAID-Identity.png",
+            alt: "USAID Logo"
+          },
+          {
+            name: "Bangladesh National Museum",
+            logo: "https://i.ibb.co.com/zhcJgRGF/bangladesh-national-museum-logo.png",
+            alt: "Bangladesh National Museum Logo"
+          },
+          {
+            name: "ICYF",
+            logo: "https://i.ibb.co.com/GQnWXcV9/download-1.png",
+            alt: "ICYF Logo"
+          },
+          {
+            name: "Ministry of Cultural Affairs",
+            logo: "https://i.ibb.co.com/DP928RvR/Ministry-of-Cultural-Affairs.jpg",
+            alt: "Ministry of Cultural Affairs Logo"
+          },
+          {
+            name: "Organisation of Islamic Cooperation",
+            logo: "https://i.ibb.co.com/1GTdXj11/Organisation-of-Islamic-Cooperation-Logo.png",
+            alt: "OIC Logo"
+          },
+          {
+            name: "UNDP",
+            logo: "https://i.ibb.co.com/VWxTZ5yp/UNDP-logo.png",
+            alt: "UNDP Logo"
+          },
+          {
+            name: "Ministry of Foreign Affairs",
+            logo: "https://i.ibb.co.com/XxjwCmnR/Government-Seal-of-Bangladesh-svg.png",
+            alt: "Ministry of Foreign Affairs Logo"
+          },
+          {
+            name: "ILO",
+            logo: "https://i.ibb.co.com/sdbM8qxH/ilo.png",
+            alt: "ILO Logo"
+          }
+        ].map((partner, idx) => (
+          <div 
+            key={`${idx}-1`} 
+            className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-24 sm:h-28 w-36 sm:w-40 md:w-44 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
+          >
+            {/* Logo Container with fixed height */}
+            <div className="h-12 sm:h-14 md:h-16 w-full flex items-center justify-center mb-3 px-2">
+              <img 
+                src={partner.logo} 
+                alt={partner.alt}
+                className="max-h-full max-w-full object-contain"
+                loading="lazy"
+              />
+            </div>
+            
+            {/* Text Container with controlled styling */}
+            <div className="w-full px-2">
+              <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm leading-tight line-clamp-2 break-words">
+                {partner.name}
+              </div>
             </div>
           </div>
-        </div>
+        ))}
         
-        {/* Inline CSS for single line marquee animation */}
-        <style>
-          {`
-            @keyframes marqueeSingle {
-              0% {
-                transform: translateX(0);
-              }
-              100% {
-                transform: translateX(-50%);
-              }
-            }
+        {/* Duplicate set for seamless loop */}
+        {[
+          {
+            name: "USAID",
+            logo: "https://i.ibb.co.com/pBXmCwrK/USAID-Identity.png",
+            alt: "USAID Logo"
+          },
+          {
+            name: "Bangladesh National Museum",
+            logo: "https://i.ibb.co.com/zhcJgRGF/bangladesh-national-museum-logo.png",
+            alt: "Bangladesh National Museum Logo"
+          },
+          {
+            name: "ICYF",
+            logo: "https://i.ibb.co.com/GQnWXcV9/download-1.png",
+            alt: "ICYF Logo"
+          },
+          {
+            name: "Ministry of Cultural Affairs",
+            logo: "https://i.ibb.co.com/DP928RvR/Ministry-of-Cultural-Affairs.jpg",
+            alt: "Ministry of Cultural Affairs Logo"
+          },
+          {
+            name: "Organisation of Islamic Cooperation",
+            logo: "https://i.ibb.co.com/1GTdXj11/Organisation-of-Islamic-Cooperation-Logo.png",
+            alt: "OIC Logo"
+          },
+          {
+            name: "UNDP",
+            logo: "https://i.ibb.co.com/VWxTZ5yp/UNDP-logo.png",
+            alt: "UNDP Logo"
+          },
+          {
+            name: "Ministry of Foreign Affairs",
+            logo: "https://i.ibb.co.com/XxjwCmnR/Government-Seal-of-Bangladesh-svg.png",
+            alt: "Ministry of Foreign Affairs Logo"
+          },
+          {
+            name: "ILO",
+            logo: "https://i.ibb.co.com/sdbM8qxH/ilo.png",
+            alt: "ILO Logo"
+          }
+        ].map((partner, idx) => (
+          <div 
+            key={`${idx}-2`} 
+            className="inline-flex bg-emerald-50 p-3 sm:p-4 rounded-lg mx-2 sm:mx-3 md:mx-4 h-24 sm:h-28 w-36 sm:w-40 md:w-44 flex-shrink-0 flex-col items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
+            aria-hidden="true"
+          >
+            {/* Logo Container with fixed height */}
+            <div className="h-12 sm:h-14 md:h-16 w-full flex items-center justify-center mb-3 px-2">
+              <img 
+                src={partner.logo} 
+                alt={partner.alt}
+                className="max-h-full max-w-full object-contain"
+                loading="lazy"
+              />
+            </div>
             
-            .animate-marqueeSingle {
-              animation: marqueeSingle 40s linear infinite;
-              display: flex;
-              width: max-content;
-            }
-            
-            @media (max-width: 640px) {
-              .animate-marqueeSingle {
-                animation: marqueeSingle 35s linear infinite;
-              }
-            }
-            
-            .animate-marqueeSingle:hover {
-              animation-play-state: paused;
-            }
-          `}
-        </style>
-      </section>
+            {/* Text Container with controlled styling */}
+            <div className="w-full px-2">
+              <div className="font-semibold text-center text-emerald-800 text-xs sm:text-sm leading-tight line-clamp-2 break-words">
+                {partner.name}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+  
+  {/* Inline CSS for single line marquee animation */}
+  <style>
+    {`
+      @keyframes marqueeSingle {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      
+      .animate-marqueeSingle {
+        animation: marqueeSingle 40s linear infinite;
+        display: flex;
+        width: max-content;
+      }
+      
+      @media (max-width: 640px) {
+        .animate-marqueeSingle {
+          animation: marqueeSingle 35s linear infinite;
+        }
+      }
+      
+      .animate-marqueeSingle:hover {
+        animation-play-state: paused;
+      }
+      
+      /* Ensure text doesn't overflow */
+      .line-clamp-2 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+      
+      .break-words {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+    `}
+  </style>
+</section>
 
       {/* NEW: Events Section with Perfectly Aligned Cards - COMPACT VERSION */}
       <section className="py-8 md:py-10 lg:py-12 bg-emerald-50">
