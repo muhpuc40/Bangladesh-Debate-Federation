@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaTimes, FaSignInAlt } from 'react-icons/fa';
@@ -93,11 +94,11 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile Menu Button - ট্রান্সপারেন্ট */}
+          {/* Mobile Menu Button - হোয়াইট কালার */}
           <div className="flex items-center space-x-2 lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-emerald-800 hover:text-emerald-900 focus:outline-none p-3 hover:bg-emerald-500/20 rounded-full transition-all duration-300 backdrop-blur-sm bg-emerald-100/20"
+              className="text-white hover:text-emerald-100 focus:outline-none p-3 hover:bg-emerald-700/30 rounded-full transition-all duration-300 backdrop-blur-sm bg-emerald-800/40"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
@@ -109,39 +110,39 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation Menu - ট্রান্সপারেন্ট */}
+        {/* Mobile Navigation Menu - সম্পূর্ণ সাদা ব্যাকগ্রাউন্ড, শুধু টেক্সট */}
         <div 
           ref={menuRef}
-          className={`lg:hidden fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-emerald-900/95 to-emerald-800/95 backdrop-blur-lg shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+          className={`lg:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
           <div className="flex flex-col h-full">
-            {/* Menu Header - ট্রান্সপারেন্ট */}
-            <div className="flex justify-between items-center p-4 border-b border-emerald-400/30">
-              <h2 className="text-lg font-bold text-white">Menu</h2>
+            {/* Menu Header - সাদা ব্যাকগ্রাউন্ড, ডার্ক গ্রীন টেক্সট */}
+            <div className="flex justify-between items-center p-4 border-b border-emerald-100">
+              <h2 className="text-lg font-bold text-emerald-900">Menu</h2>
               <button
                 onClick={closeMenu}
-                className="text-white hover:text-emerald-200 p-2 hover:bg-emerald-500/30 rounded-full transition-all duration-300"
+                className="text-emerald-900 hover:text-emerald-700 p-2 hover:bg-emerald-50 rounded-full transition-all duration-300"
                 aria-label="Close menu"
               >
                 <FaTimes className="w-6 h-6" />
               </button>
             </div>
 
-            {/* Menu Items - ট্রান্সপারেন্ট */}
+            {/* Menu Items - শুধু টেক্সট, কোন ব্যাকগ্রাউন্ড নেই */}
             <div className="flex-1 overflow-y-auto p-4">
-              <div className="flex flex-col space-y-2">
+              <div className="flex flex-col space-y-4">
                 {navLinks.map((link) => (
                   <NavLink
                     key={link.path}
                     to={link.path}
                     onClick={closeMenu}
                     className={({ isActive }) =>
-                      `px-4 py-3 rounded-lg transition-all duration-300 font-medium ${
+                      `px-4 py-3 rounded-lg transition-all duration-300 font-medium text-center ${
                         isActive
-                          ? 'text-white font-bold bg-emerald-600/80 shadow-lg'
-                          : 'text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30'
+                          ? 'text-emerald-700 font-bold border-l-4 border-emerald-700'
+                          : 'text-emerald-900 hover:text-emerald-700 hover:border-l-4 hover:border-emerald-300'
                       }`
                     }
                   >
@@ -151,12 +152,12 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Menu Footer - ট্রান্সপারেন্ট */}
-            <div className="p-4 border-t border-emerald-400/30">
+            {/* Menu Footer - শুধু টেক্সট সাইন ইন বাটন */}
+            <div className="p-4 border-t border-emerald-100">
               <Link
                 to="/signin"
                 onClick={closeMenu}
-                className="w-full text-emerald-800 hover:text-emerald-900 border border-emerald-300/50 hover:border-emerald-600 font-bold py-3 px-6 rounded-lg text-center transition-all duration-300 flex items-center justify-center hover:scale-[1.02] backdrop-blur-sm bg-emerald-100/30"
+                className="w-full text-emerald-900 hover:text-emerald-700 font-bold py-3 px-6 rounded-lg text-center transition-all duration-300 flex items-center justify-center hover:scale-[1.02]"
               >
                 <FaSignInAlt className="mr-2" /> Sign In
               </Link>
