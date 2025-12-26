@@ -243,8 +243,8 @@ const Home = () => {
                     backgroundPosition: 'center'
                   }}
                 >
-                  {/* Gradient overlay for better text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20"></div>
+                  {/* Gradient overlay removed for clear image view */}
+                  {/* <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20"></div> */}
                 </div>
               </SwiperSlide>
             ))}
@@ -257,30 +257,9 @@ const Home = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
               {/* Left Content - Text */}
               <div className="text-white">
-                {/* <div className="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-4 py-2 md:px-5 md:py-2.5 rounded-full mb-6 border border-white/30 hover:bg-white/30 transition-all duration-300">
-                  <FaCalendarAlt className="mr-2 text-sm md:text-base" />
-                  <span className="font-bold text-sm md:text-base lg:text-lg">March 15-20, 2024</span>
-                </div> */}
-                {/* <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 lg:mb-8 leading-tight">
-                  National Debate <span className="text-emerald-300">Festival</span> 2024
-                </h1> */}
-                {/* <p className="text-white/90 mb-6 md:mb-8 lg:mb-10 text-base sm:text-lg md:text-xl leading-relaxed">
-                  Participate in Bangladesh's largest debate competition. 
-                  Participants from all 64 districts, world-class judging panel, and attractive prizes.
-                </p> */}
+                {/* Content removed for cleaner hero section */}
                 <div className="flex flex-wrap gap-3 sm:gap-4 md:gap-5">
-                  {/* <Link 
-                    to="/registration" 
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 lg:py-5 lg:px-10 rounded-lg transition-all duration-300 flex items-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-                  >
-                    <FaPlayCircle className="mr-2 text-base md:text-lg" /> Register Now
-                  </Link> */}
-                  {/* <Link 
-                    to="/events" 
-                    className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-bold py-3 px-6 md:py-4 md:px-8 lg:py-5 lg:px-10 rounded-lg transition-all duration-300 flex items-center border border-white/30 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-                  >
-                    Learn More <FaArrowRight className="ml-2 text-base md:text-lg" />
-                  </Link> */}
+                  {/* Empty for now */}
                 </div>
                 
                 {/* Stats - সংখ্যাগুলো কমেন্ট করে রাখা হয়েছে */}
