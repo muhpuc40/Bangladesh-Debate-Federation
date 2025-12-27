@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -210,14 +209,14 @@ const About = () => {
         </div>
       </section>
 
-      {/* Core Values */}
+      {/* Core Values - UPDATED TO CENTER */}
       <section className="py-12 md:py-16 lg:py-20 bg-emerald-50 border-y border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-4">
               Our Core Values
             </h2>
-            <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto text-justify">
+            <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
               The pillars that guide our work and define our identity
             </p>
           </div>
@@ -234,7 +233,7 @@ const About = () => {
                   {value.icon}
                 </div>
                 <h3 className="text-xl font-bold text-emerald-900 mb-3 text-center">{value.title}</h3>
-                <p className="text-gray-600 text-center text-justify">{value.description}</p>
+                <p className="text-gray-600 text-center">{value.description}</p>
               </div>
             ))}
           </div>

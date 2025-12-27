@@ -377,215 +377,195 @@ const Home = () => {
           `}
         </style>
       </section>
-{/* Partners with Marquee Cards - LOGOS ONLY, NO TEXT, COLORFUL */}
-<section className="py-8 md:py-12 lg:py-16 bg-white overflow-hidden">
-  <div className="container mx-auto px-4">
-    <div className="text-center mb-8 md:mb-10">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-2 text-justify">
-        Our Esteemed Partners
-      </h2>
-      <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto text-justify">
-        Collaborating with leading organizations to promote debate culture in Bangladesh
-      </p>
-    </div>
-    
-    {/* Marquee Container - LOGOS ONLY */}
-    <div className="relative w-full overflow-hidden py-4">
-      {/* Single marquee row with duplicate content for seamless loop */}
-      <div className="flex animate-marqueeSingle whitespace-nowrap">
-        {/* First set of logos */}
-        {[
-          {
-            name: "USAID",
-            logo: "https://i.ibb.co.com/pBXmCwrK/USAID-Identity.png",
-            alt: "USAID Logo"
-          },
-          {
-            name: "Bangladesh National Museum",
-            logo: "https://i.ibb.co.com/zhcJgRGF/bangladesh-national-museum-logo.png",
-            alt: "Bangladesh National Museum Logo"
-          },
-          {
-            name: "ICYF",
-            logo: "https://i.ibb.co.com/GQnWXcV9/download-1.png",
-            alt: "ICYF Logo"
-          },
-          {
-            name: "Ministry of Cultural Affairs",
-            logo: "https://i.ibb.co.com/DP928RvR/Ministry-of-Cultural-Affairs.jpg",
-            alt: "Ministry of Cultural Affairs Logo"
-          },
-          {
-            name: "Organisation of Islamic Cooperation",
-            logo: "https://i.ibb.co.com/1GTdXj11/Organisation-of-Islamic-Cooperation-Logo.png",
-            alt: "OIC Logo"
-          },
-          {
-            name: "UNDP",
-            logo: "https://i.ibb.co.com/VWxTZ5yp/UNDP-logo.png",
-            alt: "UNDP Logo"
-          },
-          {
-            name: "Ministry of Foreign Affairs",
-            logo: "https://i.ibb.co.com/XxjwCmnR/Government-Seal-of-Bangladesh-svg.png",
-            alt: "Ministry of Foreign Affairs Logo"
-          },
-          {
-            name: "ILO",
-            logo: "https://i.ibb.co.com/sdbM8qxH/ilo.png",
-            alt: "ILO Logo"
-          }
-        ].map((partner, idx) => (
-          <div 
-            key={`${idx}-1`} 
-            className="inline-flex bg-emerald-50 p-4 sm:p-5 rounded-lg mx-2 sm:mx-3 md:mx-4 h-28 sm:h-32 md:h-36 w-28 sm:w-32 md:w-36 flex-shrink-0 items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
-          >
-            {/* Logo Container Only - No Text, Colorful Logos */}
-            <div className="h-full w-full flex items-center justify-center p-3">
-              <img 
-                src={partner.logo} 
-                alt={partner.alt}
-                className="max-h-full max-w-full object-contain opacity-80 hover:opacity-100 transition-all duration-300"
-                loading="lazy"
-              />
+
+      {/* Partners with Marquee Cards - LOGOS ONLY, NO TEXT, COLORFUL - CENTERED */}
+      <section className="py-8 md:py-12 lg:py-16 bg-white overflow-hidden">
+        <div className="container mx-auto px-4">
+          {/* Centered Section Header */}
+          <div className="text-center mb-8 md:mb-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-2">
+              Our Esteemed Partners
+            </h2>
+            <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
+              Collaborating with leading organizations to promote debate culture in Bangladesh
+            </p>
+          </div>
+          
+          {/* Marquee Container - LOGOS ONLY */}
+          <div className="relative w-full overflow-hidden py-4">
+            {/* Single marquee row with duplicate content for seamless loop */}
+            <div className="flex animate-marqueeSingle whitespace-nowrap">
+              {/* First set of logos */}
+              {[
+                {
+                  name: "USAID",
+                  logo: "https://i.ibb.co.com/pBXmCwrK/USAID-Identity.png",
+                  alt: "USAID Logo"
+                },
+                {
+                  name: "Bangladesh National Museum",
+                  logo: "https://i.ibb.co.com/zhcJgRGF/bangladesh-national-museum-logo.png",
+                  alt: "Bangladesh National Museum Logo"
+                },
+                {
+                  name: "ICYF",
+                  logo: "https://i.ibb.co.com/GQnWXcV9/download-1.png",
+                  alt: "ICYF Logo"
+                },
+                {
+                  name: "Ministry of Cultural Affairs",
+                  logo: "https://i.ibb.co.com/DP928RvR/Ministry-of-Cultural-Affairs.jpg",
+                  alt: "Ministry of Cultural Affairs Logo"
+                },
+                {
+                  name: "Organisation of Islamic Cooperation",
+                  logo: "https://i.ibb.co.com/1GTdXj11/Organisation-of-Islamic-Cooperation-Logo.png",
+                  alt: "OIC Logo"
+                },
+                {
+                  name: "UNDP",
+                  logo: "https://i.ibb.co.com/VWxTZ5yp/UNDP-logo.png",
+                  alt: "UNDP Logo"
+                },
+                {
+                  name: "Ministry of Foreign Affairs",
+                  logo: "https://i.ibb.co.com/XxjwCmnR/Government-Seal-of-Bangladesh-svg.png",
+                  alt: "Ministry of Foreign Affairs Logo"
+                },
+                {
+                  name: "ILO",
+                  logo: "https://i.ibb.co.com/sdbM8qxH/ilo.png",
+                  alt: "ILO Logo"
+                }
+              ].map((partner, idx) => (
+                <div 
+                  key={`${idx}-1`} 
+                  className="inline-flex bg-emerald-50 p-4 sm:p-5 rounded-lg mx-2 sm:mx-3 md:mx-4 h-28 sm:h-32 md:h-36 w-28 sm:w-32 md:w-36 flex-shrink-0 items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
+                >
+                  {/* Logo Container Only - No Text, Colorful Logos */}
+                  <div className="h-full w-full flex items-center justify-center p-3">
+                    <img 
+                      src={partner.logo} 
+                      alt={partner.alt}
+                      className="max-h-full max-w-full object-contain opacity-80 hover:opacity-100 transition-all duration-300"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ))}
+              
+              {/* Duplicate set for seamless loop */}
+              {[
+                {
+                  name: "USAID",
+                  logo: "https://i.ibb.co.com/pBXmCwrK/USAID-Identity.png",
+                  alt: "USAID Logo"
+                },
+                {
+                  name: "Bangladesh National Museum",
+                  logo: "https://i.ibb.co.com/zhcJgRGF/bangladesh-national-museum-logo.png",
+                  alt: "Bangladesh National Museum Logo"
+                },
+                {
+                  name: "ICYF",
+                  logo: "https://i.ibb.co.com/GQnWXcV9/download-1.png",
+                  alt: "ICYF Logo"
+                },
+                {
+                  name: "Ministry of Cultural Affairs",
+                  logo: "https://i.ibb.co.com/DP928RvR/Ministry-of-Cultural-Affairs.jpg",
+                  alt: "Ministry of Cultural Affairs Logo"
+                },
+                {
+                  name: "Organisation of Islamic Cooperation",
+                  logo: "https://i.ibb.co.com/1GTdXj11/Organisation-of-Islamic-Cooperation-Logo.png",
+                  alt: "OIC Logo"
+                },
+                {
+                  name: "UNDP",
+                  logo: "https://i.ibb.co.com/VWxTZ5yp/UNDP-logo.png",
+                  alt: "UNDP Logo"
+                },
+                {
+                  name: "Ministry of Foreign Affairs",
+                  logo: "https://i.ibb.co.com/XxjwCmnR/Government-Seal-of-Bangladesh-svg.png",
+                  alt: "Ministry of Foreign Affairs Logo"
+                },
+                {
+                  name: "ILO",
+                  logo: "https://i.ibb.co.com/sdbM8qxH/ilo.png",
+                  alt: "ILO Logo"
+                }
+              ].map((partner, idx) => (
+                <div 
+                  key={`${idx}-2`} 
+                  className="inline-flex bg-emerald-50 p-4 sm:p-5 rounded-lg mx-2 sm:mx-3 md:mx-4 h-28 sm:h-32 md:h-36 w-28 sm:w-32 md:w-36 flex-shrink-0 items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
+                  aria-hidden="true"
+                >
+                  {/* Logo Container Only - No Text, Colorful Logos */}
+                  <div className="h-full w-full flex items-center justify-center p-3">
+                    <img 
+                      src={partner.logo} 
+                      alt={partner.alt}
+                      className="max-h-full max-w-full object-contain opacity-80 hover:opacity-100 transition-all duration-300"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+        </div>
         
-        {/* Duplicate set for seamless loop */}
-        {[
-          {
-            name: "USAID",
-            logo: "https://i.ibb.co.com/pBXmCwrK/USAID-Identity.png",
-            alt: "USAID Logo"
-          },
-          {
-            name: "Bangladesh National Museum",
-            logo: "https://i.ibb.co.com/zhcJgRGF/bangladesh-national-museum-logo.png",
-            alt: "Bangladesh National Museum Logo"
-          },
-          {
-            name: "ICYF",
-            logo: "https://i.ibb.co.com/GQnWXcV9/download-1.png",
-            alt: "ICYF Logo"
-          },
-          {
-            name: "Ministry of Cultural Affairs",
-            logo: "https://i.ibb.co.com/DP928RvR/Ministry-of-Cultural-Affairs.jpg",
-            alt: "Ministry of Cultural Affairs Logo"
-          },
-          {
-            name: "Organisation of Islamic Cooperation",
-            logo: "https://i.ibb.co.com/1GTdXj11/Organisation-of-Islamic-Cooperation-Logo.png",
-            alt: "OIC Logo"
-          },
-          {
-            name: "UNDP",
-            logo: "https://i.ibb.co.com/VWxTZ5yp/UNDP-logo.png",
-            alt: "UNDP Logo"
-          },
-          {
-            name: "Ministry of Foreign Affairs",
-            logo: "https://i.ibb.co.com/XxjwCmnR/Government-Seal-of-Bangladesh-svg.png",
-            alt: "Ministry of Foreign Affairs Logo"
-          },
-          {
-            name: "ILO",
-            logo: "https://i.ibb.co.com/sdbM8qxH/ilo.png",
-            alt: "ILO Logo"
-          }
-        ].map((partner, idx) => (
-          <div 
-            key={`${idx}-2`} 
-            className="inline-flex bg-emerald-50 p-4 sm:p-5 rounded-lg mx-2 sm:mx-3 md:mx-4 h-28 sm:h-32 md:h-36 w-28 sm:w-32 md:w-36 flex-shrink-0 items-center justify-center border border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
-            aria-hidden="true"
-          >
-            {/* Logo Container Only - No Text, Colorful Logos */}
-            <div className="h-full w-full flex items-center justify-center p-3">
-              <img 
-                src={partner.logo} 
-                alt={partner.alt}
-                className="max-h-full max-w-full object-contain opacity-80 hover:opacity-100 transition-all duration-300"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-  
-  {/* Inline CSS for single line marquee animation */}
-  <style>
-    {`
-      @keyframes marqueeSingle {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
-      }
-      
-      .animate-marqueeSingle {
-        animation: marqueeSingle 40s linear infinite;
-        display: flex;
-        width: max-content;
-      }
-      
-      @media (max-width: 640px) {
-        .animate-marqueeSingle {
-          animation: marqueeSingle 30s linear infinite;
-        }
-      }
-      
-      .animate-marqueeSingle:hover {
-        animation-play-state: paused;
-      }
-    `}
-  </style>
-</section>
+        {/* Inline CSS for single line marquee animation */}
+        <style>
+          {`
+            @keyframes marqueeSingle {
+              0% {
+                transform: translateX(0);
+              }
+              100% {
+                transform: translateX(-50%);
+              }
+            }
+            
+            .animate-marqueeSingle {
+              animation: marqueeSingle 40s linear infinite;
+              display: flex;
+              width: max-content;
+            }
+            
+            @media (max-width: 640px) {
+              .animate-marqueeSingle {
+                animation: marqueeSingle 30s linear infinite;
+              }
+            }
+            
+            .animate-marqueeSingle:hover {
+              animation-play-state: paused;
+            }
+          `}
+        </style>
+      </section>
+
       {/* NEW: Events Section with Perfectly Aligned Cards - COMPACT VERSION */}
       <section className="py-8 md:py-10 lg:py-12 bg-emerald-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header with Arrow and Button - Compact */}
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 md:mb-8">
-            {/* Left Side - Text Only */}
-            <div className="mb-4 lg:mb-0">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 leading-tight text-justify">
-                Join Our Next 
-                <span className="relative inline-block ml-2">
-                  <span className="text-emerald-600 relative text-justify">
-                    Debate Events
-                    {/* Animated underline */}
-                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
-                  </span>
+          {/* Section Header with Arrow and Button - Compact - CENTERED */}
+          <div className="text-center mb-6 md:mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 leading-tight">
+              Join Our Next 
+              <span className="relative inline-block ml-2">
+                <span className="text-emerald-600 relative">
+                  Debate Events
+                  {/* Animated underline */}
+                  <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
                 </span>
-              </h2>
-              <p className="text-gray-600 text-sm sm:text-base max-w-xl mt-2 text-justify">
-                Participate in exciting debate competitions and workshops across Bangladesh
-              </p>
-            </div>
-            
-            {/* Right Side - Dynamic Browse All Events Button */}
-            <div className="hidden lg:block">
-              <Link 
-                to="/events" 
-                className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-emerald-600 shadow-md"
-              >
-                {/* Shine Effect */}
-                <span className="absolute top-0 left-0 w-6 h-full bg-gradient-to-r from-white/40 via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[200%] transition-all duration-1000"></span>
-                
-                {/* Button Content */}
-                <span className="relative z-10 flex items-center">
-                  <span className="mr-2 text-sm font-semibold tracking-wide text-justify">Browse All Events</span>
-                  <div className="relative">
-                    <FaArrowRight className="text-sm transform group-hover:translate-x-1 transition-transform duration-300" />
-                    <FaArrowRight className="absolute top-0 left-0 text-sm opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-300" />
-                  </div>
-                </span>
-              </Link>
-            </div>
+              </span>
+            </h2>
+            <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto mt-2">
+              Participate in exciting debate competitions and workshops across Bangladesh
+            </p>
           </div>
           
           {/* Grid container with equal height cards - Compact */}
@@ -603,7 +583,7 @@ const Home = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
-                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold border border-emerald-200 text-black text-justify">
+                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold border border-emerald-200 text-black">
                     {event.category}
                   </div>
                   {/* Gradient overlay */}
@@ -612,11 +592,11 @@ const Home = () => {
                 
                 {/* Event Content - Flexible height with button at bottom */}
                 <div className="p-4 sm:p-5 md:p-6 flex flex-col flex-grow">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-emerald-900 mb-2 sm:mb-3 line-clamp-2 text-justify">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-emerald-900 mb-2 sm:mb-3 line-clamp-2">
                     {event.title}
                   </h3>
                   
-                  <p className="text-gray-700 text-xs sm:text-sm md:text-base mb-3 sm:mb-4 leading-relaxed line-clamp-3 flex-grow text-justify">
+                  <p className="text-gray-700 text-xs sm:text-sm md:text-base mb-3 sm:mb-4 leading-relaxed line-clamp-3 flex-grow">
                     {event.description}
                   </p>
                   
@@ -627,8 +607,8 @@ const Home = () => {
                         <FaCalendar className="text-emerald-600 text-xs" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs text-gray-500 truncate text-justify">Date</p>
-                        <p className="font-semibold text-emerald-800 text-sm truncate text-justify">{event.date}</p>
+                        <p className="text-xs text-gray-500 truncate">Date</p>
+                        <p className="font-semibold text-emerald-800 text-sm truncate">{event.date}</p>
                       </div>
                     </div>
                     
@@ -637,8 +617,8 @@ const Home = () => {
                         <FaMapMarkerAlt className="text-emerald-600 text-xs" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs text-gray-500 truncate text-justify">Location</p>
-                        <p className="font-semibold text-emerald-800 text-sm truncate text-justify">{event.location}</p>
+                        <p className="text-xs text-gray-500 truncate">Location</p>
+                        <p className="font-semibold text-emerald-800 text-sm truncate">{event.location}</p>
                       </div>
                     </div>
                     
@@ -647,8 +627,8 @@ const Home = () => {
                         <FaClock className="text-emerald-600 text-xs" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs text-gray-500 truncate text-justify">Time</p>
-                        <p className="font-semibold text-emerald-800 text-sm truncate text-justify">{event.time}</p>
+                        <p className="text-xs text-gray-500 truncate">Time</p>
+                        <p className="font-semibold text-emerald-800 text-sm truncate">{event.time}</p>
                       </div>
                     </div>
                   </div>
@@ -659,7 +639,7 @@ const Home = () => {
                       to={`/events/${event.id}`} 
                       className="group/btn inline-flex items-center justify-center w-full text-center bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 border border-emerald-600 hover:shadow-md hover:scale-[1.02] text-xs sm:text-sm"
                     >
-                      <span className="mr-1 text-justify">Know More</span>
+                      <span className="mr-1">Know More</span>
                       <div className="relative">
                         <FaArrowRight className="text-xs transform group-hover/btn:translate-x-0.5 transition-transform duration-300" />
                         <FaArrowRight className="absolute top-0 left-0 text-xs opacity-0 group-hover/btn:opacity-30 group-hover/btn:translate-x-1 transition-all duration-300" />
@@ -672,7 +652,7 @@ const Home = () => {
           </div>
           
           {/* Mobile & Tablet View - Dynamic Button (Center Aligned) */}
-          <div className="text-center mt-8 md:mt-10 lg:hidden">
+          <div className="text-center mt-8 md:mt-10">
             <Link 
               to="/events" 
               className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-emerald-600 shadow-md mx-auto"
@@ -682,7 +662,7 @@ const Home = () => {
               
               {/* Button Content */}
               <span className="relative z-10 flex items-center">
-                <span className="mr-2 text-sm font-semibold tracking-wide text-justify">Browse All Events</span>
+                <span className="mr-2 text-sm font-semibold tracking-wide">Browse All Events</span>
                 <div className="relative">
                   <FaArrowRight className="text-sm transform group-hover:translate-x-1 transition-transform duration-300" />
                   <FaArrowRight className="absolute top-0 left-0 text-sm opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-300" />
@@ -723,43 +703,20 @@ const Home = () => {
       <section className="py-8 md:py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Compact Header Section */}
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 md:mb-8">
-            {/* Left Side - Text with Animation (Compact) */}
-            <div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 mb-2 text-justify">
-                Latest News & 
-                <span className="relative inline-block ml-2">
-                  <span className="text-emerald-600 relative text-justify">
-                    Announcements
-                    {/* Animated underline - Same as Events section */}
-                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
-                  </span>
+          <div className="text-center mb-6 md:mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 mb-2">
+              Latest News & 
+              <span className="relative inline-block ml-2">
+                <span className="text-emerald-600 relative">
+                  Announcements
+                  {/* Animated underline - Same as Events section */}
+                  <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 rounded-full animate-underline"></span>
                 </span>
-              </h2>
-              <p className="text-gray-600 text-sm sm:text-base max-w-xl text-justify">
-                Stay updated with the latest announcements, competition results and upcoming events
-              </p>
-            </div>
-            
-            {/* Right Side - Dynamic View All News Button (Desktop Only) - Compact */}
-            <div className="hidden lg:block">
-              <Link 
-                to="/news" 
-                className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-emerald-600"
-              >
-                {/* Shine Effect */}
-                <span className="absolute top-0 left-0 w-6 h-full bg-white/30 -skew-x-12 -translate-x-16 group-hover:translate-x-[calc(100%+16px)] transition-all duration-700"></span>
-                
-                {/* Button Content - Compact */}
-                <span className="relative z-10 flex items-center">
-                  <span className="mr-2 text-sm text-justify">View All News</span>
-                  <div className="relative">
-                    <FaArrowRight className="text-sm transform group-hover:translate-x-1 transition-transform duration-300" />
-                    <FaArrowRight className="absolute top-0 left-0 text-sm opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-300" />
-                  </div>
-                </span>
-              </Link>
-            </div>
+              </span>
+            </h2>
+            <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
+              Stay updated with the latest announcements, competition results and upcoming events
+            </p>
           </div>
           
           {/* News Cards Grid with Images - Compact */}
@@ -778,7 +735,7 @@ const Home = () => {
                     loading="lazy"
                   />
                   {/* Category Badge on Image - Compact */}
-                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold border border-emerald-200 text-emerald-800 text-justify">
+                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold border border-emerald-200 text-emerald-800">
                     {news.category}
                   </div>
                   {/* Gradient Overlay */}
@@ -788,17 +745,17 @@ const Home = () => {
                 {/* News Content - Compact */}
                 <div className="p-4 sm:p-5">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-gray-500 text-xs flex items-center text-justify">
+                    <span className="text-gray-500 text-xs flex items-center">
                       <FaCalendar className="mr-1.5 text-emerald-600 text-xs" /> {news.date}
                     </span>
-                    <span className="text-gray-400 text-xs text-justify">{news.readTime}</span>
+                    <span className="text-gray-400 text-xs">{news.readTime}</span>
                   </div>
                   
-                  <h3 className="text-lg sm:text-xl font-bold text-emerald-900 mb-2 sm:mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2 text-justify">
+                  <h3 className="text-lg sm:text-xl font-bold text-emerald-900 mb-2 sm:mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
                     {news.title}
                   </h3>
                   
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3 text-justify">
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                     {news.excerpt}
                   </p>
                   
@@ -807,13 +764,13 @@ const Home = () => {
                       to={`/news/${index + 1}`}
                       className="inline-flex items-center text-emerald-600 font-semibold text-sm hover:text-emerald-800 transition-colors duration-300 group/readmore"
                     >
-                      <span className="text-justify">Read Full Story</span>
+                      <span>Read Full Story</span>
                       <FaArrowRight className="ml-1.5 text-xs group-hover/readmore:translate-x-1 transition-transform duration-300" />
                     </Link>
                     
                     <div className="flex items-center space-x-1">
                       <FaUsers className="text-gray-400 text-xs" />
-                      <span className="text-gray-400 text-xs text-justify">{news.viewers}</span>
+                      <span className="text-gray-400 text-xs">{news.viewers}</span>
                     </div>
                   </div>
                 </div>
@@ -821,8 +778,8 @@ const Home = () => {
             ))}
           </div>
           
-          {/* Mobile & Tablet View - Dynamic Button (Center Aligned) - Compact */}
-          <div className="text-center mt-8 md:mt-10 lg:hidden">
+          {/* View All News Button - Center Aligned */}
+          <div className="text-center mt-8 md:mt-10">
             <Link 
               to="/news" 
               className="group relative inline-flex items-center overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-emerald-600 mx-auto"
@@ -832,7 +789,7 @@ const Home = () => {
               
               {/* Button Content */}
               <span className="relative z-10 flex items-center">
-                <span className="mr-2 text-sm text-justify">View All News</span>
+                <span className="mr-2 text-sm">View All News</span>
                 <div className="relative">
                   <FaArrowRight className="text-sm transform group-hover:translate-x-1 transition-transform duration-300" />
                   <FaArrowRight className="absolute top-0 left-0 text-sm opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-300" />
