@@ -530,7 +530,7 @@ const SignIn = () => {
                 {/* Page Footer - Reduced margins */}
                 <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-amber-300">
                   <p className="text-xs text-gray-500 text-center font-serif">
-                    © {new Date().getFullYear()} Bangladesh Debate Federation • Volume I, Page 1
+                    © {new Date().getFullYear()} Bangladesh Debate Federation 
                   </p>
                 </div>
               </div>

@@ -451,7 +451,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Information Grid */}
-      <section className="py-12 md:py-16 lg:py-20">
+      {/* <section className="py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactInfo.map((info, index) => (
@@ -465,7 +465,7 @@ const Contact = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Debate Club Directory - Commented out as per original */}
       {/* <section className="py-12 md:py-16 lg:py-20 bg-emerald-50">
