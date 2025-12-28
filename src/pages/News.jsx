@@ -47,7 +47,7 @@ const newsData = {
       "comments": 156,
       "readTime": "4 min read",
       "tags": ["international", "victory", "asia"],
-      "featured": true
+      
     },
     {
       "id": 3,
