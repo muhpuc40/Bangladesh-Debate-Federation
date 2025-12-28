@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
 import Root from './Root';
 import Home from './pages/Home';
-import About from './pages/About';
-import MissionVision from './pages/MissionVision'; // নতুন ইম্পোর্ট
-import HallOfFame from './pages/HallOfFame'; // নতুন ইম্পোর্ট
-import AdvisorPanel from './pages/AdvisorPanel'; // নতুন ইম্পোর্ট
+// import About from './pages/About';
+import MissionVision from './pages/MissionVision';
+import HallOfFame from './pages/HallOfFame';
+import AdvisorPanel from './pages/AdvisorPanel';
 import ExecutiveCommittee from './pages/ExecutiveCommittee';
-import PresidiumMember from './pages/PresidiumMember'; // নতুন ইম্পোর্ট
+import PresidiumMember from './pages/PresidiumMember';
 import DebateClubDirectory from './pages/DebateClubDirectory';
 import Events from './pages/Events';
 import News from './pages/News';
@@ -22,13 +22,12 @@ function App() {
     <Routes>
       <Route path="/" element={<Root />}>
         <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        {/* About Us সাবমেনু রাউট */}
+        {/* <Route path="about" element={<About />} /> */}
+        
         <Route path="mission-vision" element={<MissionVision />} />
         <Route path="hall-of-fame" element={<HallOfFame />} />
         <Route path="advisor-panel" element={<AdvisorPanel />} />
         
-        {/* Committee সাবমেনু রাউট */}
         <Route path="executive-committee" element={<ExecutiveCommittee />} />
         <Route path="presidium-member" element={<PresidiumMember />} />
         
