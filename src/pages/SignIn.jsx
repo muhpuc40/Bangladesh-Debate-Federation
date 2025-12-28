@@ -143,7 +143,7 @@ const SignIn = () => {
                 <h2 className="text-xl font-serif font-bold text-gray-800">Sign In</h2>
               </div>
               <div className="w-full h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent mb-3"></div>
-              <p className="text-gray-600 italic text-sm">"Enter the arena of ideas"</p>
+        
             </div>
 
             {/* Form */}
@@ -304,8 +304,8 @@ const SignIn = () => {
           </div>
         </div>
       ) : (
-        /* Desktop Layout */
-        <div className="relative w-full max-w-5xl h-[85vh] perspective-1000">
+        /* Desktop Layout - FIXED VERSION */
+        <div className="relative w-full max-w-5xl h-[80vh] min-h-[600px] max-h-[750px] perspective-1000">
           {/* Book Shadow */}
           <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-11/12 h-8 bg-black/20 blur-lg rounded-full hidden lg:block"></div>
           
@@ -334,8 +334,7 @@ const SignIn = () => {
                   </div>
                   <h1 className="text-xl sm:text-2xl lg:text-4xl font-bold mb-2 sm:mb-3 lg:mb-4 tracking-wide">Bangladesh Debate Federation</h1>
                   <div className="w-32 sm:w-40 lg:w-48 h-1 bg-white/50 rounded-full mx-auto mb-3 sm:mb-4 lg:mb-6"></div>
-                  <p className="text-base sm:text-lg lg:text-xl mb-1 lg:mb-2 opacity-90">The Art of Argumentation</p>
-                  <p className="text-sm sm:text-base lg:text-lg opacity-80">Volume I</p>
+                
                   
                   {/* Page Indicator */}
                   <div className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2">
@@ -343,19 +342,19 @@ const SignIn = () => {
                       <div className="w-2 h-2 sm:w-3 sm:h-3 bg-white rounded-full"></div>
                       <div className="w-2 h-2 sm:w-3 sm:h-3 bg-white/30 rounded-full"></div>
                     </div>
-                    <p className="text-xs sm:text-sm mt-1 lg:mt-2 opacity-70">Page 1 of 2</p>
+                   
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Book Page - Right */}
-            <div className="absolute right-0 top-0 w-full lg:w-3/5 h-full bg-gradient-to-b from-amber-50 to-amber-100 rounded-r-2xl lg:rounded-r-2xl rounded-l-2xl lg:rounded-l-none shadow-xl z-10 overflow-hidden border-l border-amber-200">
+            {/* Book Page - Right - FIXED WITH OVERFLOW */}
+            <div className="absolute right-0 top-0 w-full lg:w-3/5 h-full bg-gradient-to-b from-amber-50 to-amber-100 rounded-r-2xl lg:rounded-r-2xl rounded-l-2xl lg:rounded-l-none shadow-xl z-10 overflow-hidden">
               {/* Page Texture */}
               <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#8B4513_1px,transparent_1px)] [background-size:20px_20px]"></div>
               
-              {/* Page Content */}
-              <div className="relative z-10 w-full h-full p-4 sm:p-6 lg:p-8 flex flex-col">
+              {/* Scrollable Page Content */}
+              <div className="relative z-10 w-full h-full p-4 sm:p-6 lg:p-8 flex flex-col overflow-y-auto custom-scrollbar">
                 {/* Page Header */}
                 <div className="mb-4 sm:mb-6 lg:mb-8">
                   <div className="flex items-center justify-between mb-3 sm:mb-4">
@@ -363,16 +362,14 @@ const SignIn = () => {
                       <FaBookOpen className="text-emerald-600 mr-2 text-sm sm:text-base" />
                       <h2 className="text-lg sm:text-xl lg:text-2xl font-serif font-bold text-gray-800">Sign In</h2>
                     </div>
-                    <div className="text-xs sm:text-sm text-gray-500 font-medium hidden sm:block">
-                      Chapter 1 • Authentication
-                    </div>
+                  
                   </div>
                   <div className="w-full h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent mb-3 sm:mb-4"></div>
-                  <p className="text-gray-600 italic text-sm sm:text-base">"Enter the arena of ideas"</p>
+               
                 </div>
 
                 {/* Back to Home */}
-                <div className="absolute top-2 sm:top-4 right-2 sm:right-4">
+                <div className="absolute top-2 sm:top-4 right-2 sm:right-4 z-20">
                   <Link
                     to="/"
                     className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-white/80 border border-amber-200 rounded-lg text-xs sm:text-sm font-medium text-amber-800 hover:bg-white hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
@@ -383,8 +380,8 @@ const SignIn = () => {
                   </Link>
                 </div>
 
-                {/* Form */}
-                <form className="space-y-4 sm:space-y-6 flex-1" onSubmit={handleSubmit}>
+                {/* Form - Reduced spacing */}
+                <form className="space-y-3 sm:space-y-4 flex-1" onSubmit={handleSubmit}>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2 font-serif">
                       Email Address
@@ -400,14 +397,14 @@ const SignIn = () => {
                         autoComplete="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`appearance-none block w-full pl-9 sm:pl-10 pr-4 py-2.5 sm:py-3 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm sm:text-sm transition-all duration-300 font-serif ${
+                        className={`appearance-none block w-full pl-9 sm:pl-10 pr-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm sm:text-sm transition-all duration-300 font-serif ${
                           errors.email ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                         }`}
                         placeholder="your.email@example.com"
                       />
                     </div>
                     {errors.email && (
-                      <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-red-600 font-serif">{errors.email}</p>
+                      <p className="mt-1 text-xs text-red-600 font-serif">{errors.email}</p>
                     )}
                   </div>
 
@@ -426,7 +423,7 @@ const SignIn = () => {
                         autoComplete="current-password"
                         value={formData.password}
                         onChange={handleChange}
-                        className={`appearance-none block w-full pl-9 sm:pl-10 pr-10 sm:pr-12 py-2.5 sm:py-3 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm sm:text-sm transition-all duration-300 font-serif ${
+                        className={`appearance-none block w-full pl-9 sm:pl-10 pr-10 sm:pr-12 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm sm:text-sm transition-all duration-300 font-serif ${
                           errors.password ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                         }`}
                         placeholder="••••••••"
@@ -445,17 +442,17 @@ const SignIn = () => {
                       </button>
                     </div>
                     {errors.password && (
-                      <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-red-600 font-serif">{errors.password}</p>
+                      <p className="mt-1 text-xs text-red-600 font-serif">{errors.password}</p>
                     )}
                   </div>
 
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between pt-1">
                     <div className="flex items-center">
                       <input
                         id="remember-me"
                         name="remember-me"
                         type="checkbox"
-                        className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded transition duration-300"
+                        className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded transition duration-300"
                       />
                       <label htmlFor="remember-me" className="ml-2 text-xs sm:text-sm text-gray-700 font-serif">
                         Remember me
@@ -472,7 +469,7 @@ const SignIn = () => {
                     </div>
                   </div>
 
-                  <div>
+                  <div className="pt-2">
                     <button
                       type="submit"
                       disabled={isSubmitting}
@@ -493,8 +490,8 @@ const SignIn = () => {
                   </div>
                 </form>
 
-                {/* Social Login */}
-                <div className="mt-4 sm:mt-6">
+                {/* Social Login - Reduced margins */}
+                <div className="mt-3 sm:mt-4">
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center">
                       <div className="w-full border-t border-amber-300"></div>
@@ -504,7 +501,7 @@ const SignIn = () => {
                     </div>
                   </div>
 
-                  <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2 sm:gap-3">
+                  <div className="mt-2 sm:mt-3 grid grid-cols-2 gap-2 sm:gap-3">
                     <button className="w-full inline-flex justify-center items-center py-2 sm:py-2.5 px-3 sm:px-4 border border-amber-300 rounded-lg shadow-sm bg-white/80 text-xs sm:text-sm font-medium text-gray-700 hover:bg-white hover:shadow transition-all duration-300">
                       <FaGoogle className="h-4 w-4 sm:h-5 sm:w-5 text-red-500" />
                       <span className="ml-1.5 sm:ml-2 font-serif">Google</span>
@@ -516,11 +513,11 @@ const SignIn = () => {
                   </div>
                 </div>
 
-                {/* Turn Page Button */}
-                <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-amber-300 text-center">
+                {/* Turn Page Button - Reduced margins */}
+                <div className="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-amber-300 text-center">
                   <button
                     onClick={handleTurnPage}
-                    className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-lg shadow-lg hover:from-amber-600 hover:to-amber-700 hover:shadow-xl transition-all duration-500 hover:scale-105 group"
+                    className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-lg shadow-lg hover:from-amber-600 hover:to-amber-700 hover:shadow-xl transition-all duration-500 hover:scale-105 group"
                   >
                     <FaUserPlus className="mr-2 sm:mr-3 text-sm sm:text-base group-hover:rotate-12 transition-transform duration-300" />
                     <span className="font-serif text-sm sm:text-base">Turn to next page →</span>
@@ -534,8 +531,8 @@ const SignIn = () => {
                   <p className="text-xs text-gray-500 mt-1 sm:mt-2 font-serif">Sign up on page 2</p>
                 </div>
 
-                {/* Page Footer */}
-                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-amber-300">
+                {/* Page Footer - Reduced margins */}
+                <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-amber-300">
                   <p className="text-xs text-gray-500 text-center font-serif">
                     © {new Date().getFullYear()} Bangladesh Debate Federation • Volume I, Page 1
                   </p>
