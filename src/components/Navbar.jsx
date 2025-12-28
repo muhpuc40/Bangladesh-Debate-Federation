@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaTimes, FaSignInAlt, FaChevronDown } from 'react-icons/fa';
@@ -32,7 +31,7 @@ const Navbar = () => {
     { path: '/committee', label: 'Committee', isDropdown: true },
     { path: '/events', label: 'Events' },
     { path: '/debate-club-directory', label: 'Directory' },
-      { path: '/news', label: 'News' },
+    { path: '/news', label: 'News' },
     { path: '/resources', label: 'Resources' },
     { path: '/gallery', label: 'Gallery' },
     { path: '/contact', label: 'Contact' },
@@ -131,7 +130,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-2 left-0 right-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation - আগের মতোই থাকবে */}
         <div className="hidden lg:flex items-center justify-between backdrop-blur-sm bg-white/5 rounded-full px-6 py-2">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0">
@@ -292,10 +291,10 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Navigation Menu - Sidebar Style */}
       <div 
         ref={menuRef}
-        className={`lg:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`lg:hidden fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -314,65 +313,45 @@ const Navbar = () => {
 
           {/* Menu Items */}
           <div className="flex-1 overflow-y-auto p-4">
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-2">
               {/* Home বাটন মোবাইলে প্রথমে */}
               <NavLink
                 to="/"
                 onClick={closeMenu}
-                className="px-4 py-3 rounded-lg transition-all duration-300 font-medium text-left text-emerald-900 hover:text-emerald-700 hover:border-l-4 hover:border-emerald-300"
+                className={({ isActive }) =>
+                  `px-4 py-3 rounded-lg transition-all duration-300 font-medium text-left ${
+                    isActive
+                      ? 'text-emerald-700 bg-emerald-50 border-l-4 border-emerald-500'
+                      : 'text-emerald-900 hover:text-emerald-700 hover:bg-emerald-50'
+                  }`
+                }
               >
                 Home
               </NavLink>
 
               {/* About Us with Sub-items in Mobile */}
-              <div className="space-y-2">
-                <div className="relative">
-                  <NavLink
-                    to="/about"
-                    className={({ isActive }) =>
-                      `px-4 py-3 rounded-lg transition-all duration-300 font-medium text-left flex justify-between items-center ${
-                        isActive
-                          ? 'text-emerald-700 border-l-4 border-emerald-300'
-                          : 'text-emerald-900 hover:text-emerald-700 hover:border-l-4 hover:border-emerald-300'
-                      }`
-                    }
-                    onClick={(e) => {
-                      if (mobileAboutOpen) {
-                        e.preventDefault();
-                        setMobileAboutOpen(false);
-                      } else {
-                        closeMenu();
-                      }
-                    }}
-                  >
-                    <span>About Us</span>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        toggleMobileAbout(e);
-                      }}
-                      className="ml-2 p-1 hover:bg-emerald-50 rounded-full transition-colors duration-300"
-                      aria-label="Toggle About Us submenu"
-                    >
-                      <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${mobileAboutOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                  </NavLink>
+              <div className="space-y-1">
+                <div 
+                  className="flex items-center justify-between px-4 py-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition-all duration-300"
+                  onClick={toggleMobileAbout}
+                >
+                  <span className="font-medium text-emerald-900">About Us</span>
+                  <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${mobileAboutOpen ? 'rotate-180' : ''} text-emerald-700`} />
                 </div>
                 
                 {mobileAboutOpen && (
                   <div className="ml-4 pl-4 border-l-2 border-emerald-100">
-                    <div className="flex flex-col space-y-2 mt-2">
+                    <div className="flex flex-col space-y-1 mt-1">
                       {aboutSubItems.map((item) => (
                         <NavLink
                           key={item.path}
                           to={item.path}
                           onClick={closeMenu}
                           className={({ isActive }) =>
-                            `block px-4 py-2 rounded-lg transition-all duration-300 font-medium text-left text-sm ${
+                            `block px-4 py-2 rounded-lg transition-all duration-300 text-left text-sm ${
                               isActive
-                                ? 'text-emerald-700 border-l-2 border-emerald-300'
-                                : 'text-emerald-800 hover:text-emerald-700 hover:border-l-2 hover:border-emerald-300'
+                                ? 'text-emerald-700 bg-emerald-50 border-l-2 border-emerald-300'
+                                : 'text-emerald-800 hover:text-emerald-700 hover:bg-emerald-50'
                             }`
                           }
                         >
@@ -385,54 +364,28 @@ const Navbar = () => {
               </div>
 
               {/* Committee with Sub-items in Mobile */}
-              <div className="space-y-2">
-                <div className="relative">
-                  <NavLink
-                    to="/executive-committee"
-                    className={({ isActive }) =>
-                      `px-4 py-3 rounded-lg transition-all duration-300 font-medium text-left flex justify-between items-center ${
-                        isActive
-                          ? 'text-emerald-700 border-l-4 border-emerald-300'
-                          : 'text-emerald-900 hover:text-emerald-700 hover:border-l-4 hover:border-emerald-300'
-                      }`
-                    }
-                    onClick={(e) => {
-                      if (mobileCommitteeOpen) {
-                        e.preventDefault();
-                        setMobileCommitteeOpen(false);
-                      } else {
-                        closeMenu();
-                      }
-                    }}
-                  >
-                    <span>Committee</span>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        toggleMobileCommittee(e);
-                      }}
-                      className="ml-2 p-1 hover:bg-emerald-50 rounded-full transition-colors duration-300"
-                      aria-label="Toggle Committee submenu"
-                    >
-                      <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${mobileCommitteeOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                  </NavLink>
+              <div className="space-y-1">
+                <div 
+                  className="flex items-center justify-between px-4 py-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition-all duration-300"
+                  onClick={toggleMobileCommittee}
+                >
+                  <span className="font-medium text-emerald-900">Committee</span>
+                  <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${mobileCommitteeOpen ? 'rotate-180' : ''} text-emerald-700`} />
                 </div>
                 
                 {mobileCommitteeOpen && (
                   <div className="ml-4 pl-4 border-l-2 border-emerald-100">
-                    <div className="flex flex-col space-y-2 mt-2">
+                    <div className="flex flex-col space-y-1 mt-1">
                       {committeeSubItems.map((item) => (
                         <NavLink
                           key={item.path}
                           to={item.path}
                           onClick={closeMenu}
                           className={({ isActive }) =>
-                            `block px-4 py-2 rounded-lg transition-all duration-300 font-medium text-left text-sm ${
+                            `block px-4 py-2 rounded-lg transition-all duration-300 text-left text-sm ${
                               isActive
-                                ? 'text-emerald-700 border-l-2 border-emerald-300'
-                                : 'text-emerald-800 hover:text-emerald-700 hover:border-l-2 hover:border-emerald-300'
+                                ? 'text-emerald-700 bg-emerald-50 border-l-2 border-emerald-300'
+                                : 'text-emerald-800 hover:text-emerald-700 hover:bg-emerald-50'
                             }`
                           }
                         >
@@ -453,8 +406,8 @@ const Navbar = () => {
                   className={({ isActive }) =>
                     `px-4 py-3 rounded-lg transition-all duration-300 font-medium text-left ${
                       isActive
-                        ? 'text-emerald-700 border-l-4 border-emerald-300'
-                        : 'text-emerald-900 hover:text-emerald-700 hover:border-l-4 hover:border-emerald-300'
+                        ? 'text-emerald-700 bg-emerald-50 border-l-4 border-emerald-500'
+                        : 'text-emerald-900 hover:text-emerald-700 hover:bg-emerald-50'
                     }`
                   }
                 >
@@ -469,7 +422,7 @@ const Navbar = () => {
             <Link
               to="/signin"
               onClick={closeMenu}
-              className="w-full text-emerald-900 hover:text-emerald-700 font-bold py-3 px-6 rounded-lg text-center transition-all duration-300 flex items-center justify-center hover:scale-[1.02]"
+              className="w-full text-emerald-800 hover:text-emerald-900 border border-emerald-300 hover:border-emerald-600 font-bold py-3 px-6 rounded-lg text-center transition-all duration-300 flex items-center justify-center hover:scale-[1.02]"
             >
               <FaSignInAlt className="mr-2" /> Sign In
             </Link>

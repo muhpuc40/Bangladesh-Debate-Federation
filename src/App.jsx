@@ -2,8 +2,12 @@ import { Routes, Route } from 'react-router-dom';
 import Root from './Root';
 import Home from './pages/Home';
 import About from './pages/About';
-import ExecutiveCommittee from './pages/ExecutiveCommittee'; 
-import DebateClubDirectory from './pages/DebateClubDirectory'; // নতুন ইম্পোর্ট
+import MissionVision from './pages/MissionVision'; // নতুন ইম্পোর্ট
+import HallOfFame from './pages/HallOfFame'; // নতুন ইম্পোর্ট
+import AdvisorPanel from './pages/AdvisorPanel'; // নতুন ইম্পোর্ট
+import ExecutiveCommittee from './pages/ExecutiveCommittee';
+import PresidiumMember from './pages/PresidiumMember'; // নতুন ইম্পোর্ট
+import DebateClubDirectory from './pages/DebateClubDirectory';
 import Events from './pages/Events';
 import News from './pages/News';
 import Resources from './pages/Resources';
@@ -19,10 +23,18 @@ function App() {
       <Route path="/" element={<Root />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="executive-committee" element={<ExecutiveCommittee />} /> 
-        <Route path="debate-club-directory" element={<DebateClubDirectory />} /> {/* নতুন রাউট */}
+        {/* About Us সাবমেনু রাউট */}
+        <Route path="mission-vision" element={<MissionVision />} />
+        <Route path="hall-of-fame" element={<HallOfFame />} />
+        <Route path="advisor-panel" element={<AdvisorPanel />} />
+        
+        {/* Committee সাবমেনু রাউট */}
+        <Route path="executive-committee" element={<ExecutiveCommittee />} />
+        <Route path="presidium-member" element={<PresidiumMember />} />
+        
+        <Route path="debate-club-directory" element={<DebateClubDirectory />} />
         <Route path="events" element={<Events />} />
-             <Route path="news" element={<News />} />
+        <Route path="news" element={<News />} />
         <Route path="resources" element={<Resources />} />
         <Route path="gallery" element={<Gallery />} />
         <Route path="contact" element={<Contact />} />

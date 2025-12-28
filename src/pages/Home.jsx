@@ -68,7 +68,7 @@ const Home = () => {
   const events = [
     {
       id: 1,
-      title: "National Youth Debate Championship 2024",
+      title: "National Youth DebateChampionship 2024",
       description: "Open for all universities and colleges across Bangladesh. Showcase your debating skills at the national level.",
       date: "April 15-20, 2024",
       location: "Dhaka University Campus",
