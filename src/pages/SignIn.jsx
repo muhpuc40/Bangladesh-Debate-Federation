@@ -111,7 +111,7 @@ const SignIn = () => {
           {/* Mobile Header */}
           <div className="relative z-10 p-6 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white">
             <div className="flex items-center justify-center mb-4">
-              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full p-2 border-2 border-white/30">
+              <div className="w-16 h-16 bg-white rounded-full p-2 border-2 border-white/30">
                 <img 
                   src="https://i.ibb.co/Ldwswy4m/logo.png" 
                   alt="Bangladesh Debate Federation Logo" 
@@ -164,7 +164,7 @@ const SignIn = () => {
                     autoComplete="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`appearance-none block w-full pl-10 pr-4 py-3 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif ${
+                    className={`appearance-none block w-full pl-10 pr-4 py-3 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
                       errors.email ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                     }`}
                     placeholder="your.email@example.com"
@@ -191,7 +191,7 @@ const SignIn = () => {
                     autoComplete="current-password"
                     value={formData.password}
                     onChange={handleChange}
-                    className={`appearance-none block w-full pl-10 pr-12 py-3 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif ${
+                    className={`appearance-none block w-full pl-10 pr-12 py-3 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
                       errors.password ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                     }`}
                     placeholder="••••••••"
@@ -325,7 +325,7 @@ const SignIn = () => {
                 </div>
                 
                 <div className="relative z-20 text-center">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 mx-auto mb-4 sm:mb-6 lg:mb-8 bg-white/10 backdrop-blur-sm rounded-full p-2 sm:p-4 border-2 border-white/20 shadow-xl">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 mx-auto mb-4 sm:mb-6 lg:mb-8 bg-white rounded-full p-2 sm:p-4 border-2 border-white/20 shadow-xl">
                     <img 
                       src="https://i.ibb.co/Ldwswy4m/logo.png" 
                       alt="Bangladesh Debate Federation Logo" 
@@ -334,7 +334,6 @@ const SignIn = () => {
                   </div>
                   <h1 className="text-xl sm:text-2xl lg:text-4xl font-bold mb-2 sm:mb-3 lg:mb-4 tracking-wide">Bangladesh Debate Federation</h1>
                   <div className="w-32 sm:w-40 lg:w-48 h-1 bg-white/50 rounded-full mx-auto mb-3 sm:mb-4 lg:mb-6"></div>
-                
                   
                   {/* Page Indicator */}
                   <div className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2">
@@ -342,7 +341,6 @@ const SignIn = () => {
                       <div className="w-2 h-2 sm:w-3 sm:h-3 bg-white rounded-full"></div>
                       <div className="w-2 h-2 sm:w-3 sm:h-3 bg-white/30 rounded-full"></div>
                     </div>
-                   
                   </div>
                 </div>
               </div>
@@ -362,10 +360,8 @@ const SignIn = () => {
                       <FaBookOpen className="text-emerald-600 mr-2 text-sm sm:text-base" />
                       <h2 className="text-lg sm:text-xl lg:text-2xl font-serif font-bold text-gray-800">Sign In</h2>
                     </div>
-                  
                   </div>
                   <div className="w-full h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent mb-3 sm:mb-4"></div>
-               
                 </div>
 
                 {/* Back to Home */}
@@ -397,7 +393,7 @@ const SignIn = () => {
                         autoComplete="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`appearance-none block w-full pl-9 sm:pl-10 pr-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm sm:text-sm transition-all duration-300 font-serif ${
+                        className={`appearance-none block w-full pl-9 sm:pl-10 pr-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm sm:text-sm transition-all duration-300 font-serif text-black ${
                           errors.email ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                         }`}
                         placeholder="your.email@example.com"
@@ -423,7 +419,7 @@ const SignIn = () => {
                         autoComplete="current-password"
                         value={formData.password}
                         onChange={handleChange}
-                        className={`appearance-none block w-full pl-9 sm:pl-10 pr-10 sm:pr-12 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm sm:text-sm transition-all duration-300 font-serif ${
+                        className={`appearance-none block w-full pl-9 sm:pl-10 pr-10 sm:pr-12 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm sm:text-sm transition-all duration-300 font-serif text-black ${
                           errors.password ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                         }`}
                         placeholder="••••••••"

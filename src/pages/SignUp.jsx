@@ -231,7 +231,7 @@ const SignUp = () => {
                         type="text"
                         value={formData.fullName}
                         onChange={handleChange}
-                        className={`appearance-none block w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif ${
+                        className={`appearance-none block w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
                           errors.fullName ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                         }`}
                         placeholder="John Doe"
@@ -255,7 +255,7 @@ const SignUp = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`appearance-none block w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif ${
+                        className={`appearance-none block w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
                           errors.email ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                         }`}
                         placeholder="john@example.com"
@@ -279,7 +279,7 @@ const SignUp = () => {
                         type="tel"
                         value={formData.phone}
                         onChange={handleChange}
-                        className={`appearance-none block w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif ${
+                        className={`appearance-none block w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
                           errors.phone ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                         }`}
                         placeholder="+880 1XXX XXXXXX"
@@ -303,7 +303,7 @@ const SignUp = () => {
                         type="text"
                         value={formData.institution}
                         onChange={handleChange}
-                        className={`appearance-none block w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif ${
+                        className={`appearance-none block w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
                           errors.institution ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                         }`}
                         placeholder="School/College/University"
@@ -328,7 +328,7 @@ const SignUp = () => {
                           type={showPassword ? "text" : "password"}
                           value={formData.password}
                           onChange={handleChange}
-                          className={`appearance-none block w-full px-3 sm:px-4 pr-8 sm:pr-10 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif ${
+                          className={`appearance-none block w-full px-3 sm:px-4 pr-8 sm:pr-10 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
                             errors.password ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                           }`}
                           placeholder="••••••••"
@@ -366,7 +366,7 @@ const SignUp = () => {
                           type={showConfirmPassword ? "text" : "password"}
                           value={formData.confirmPassword}
                           onChange={handleChange}
-                          className={`appearance-none block w-full px-3 sm:px-4 pr-8 sm:pr-10 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif ${
+                          className={`appearance-none block w-full px-3 sm:px-4 pr-8 sm:pr-10 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
                             errors.confirmPassword ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                           }`}
                           placeholder="••••••••"
@@ -489,7 +489,7 @@ const SignUp = () => {
               </div>
               
               <div className="relative z-20 text-center px-2">
-                <div className={`mx-auto mb-4 sm:mb-6 md:mb-8 bg-white/10 backdrop-blur-sm rounded-full p-2 sm:p-3 md:p-4 border-2 border-white/20 shadow-xl ${
+                <div className={`mx-auto mb-4 sm:mb-6 md:mb-8 bg-white rounded-full p-2 sm:p-3 md:p-4 border-2 border-white/20 shadow-xl ${
                   isTablet ? 'w-20 h-20 sm:w-24 sm:h-24' : 'w-24 h-24 sm:w-32 sm:h-32'
                 }`}>
                   <img 
