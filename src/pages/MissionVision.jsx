@@ -44,25 +44,12 @@ const MissionVision = () => {
     },
     { 
       id: 4, 
-      url: "https://images.unsplash.com/photo-1551836026-d5c2c0b4d2f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
-      caption: "Rural Debate Initiative",
-      description: "Bringing debate education to remote areas through mobile training units"
-    },
-    { 
-      id: 5, 
       url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
       caption: "University Debate League",
       description: "Inter-university championship with participants from 50+ institutions"
     }
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
-  };
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
@@ -117,31 +104,12 @@ const MissionVision = () => {
                         className="h-full w-full object-cover"
                       />
                       {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
-                        <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                          <h4 className="text-2xl font-bold mb-2">{image.caption}</h4>
-                          <p className="text-gray-200 text-justify">{image.description}</p>
-                        </div>
-                      </div>
+
                     </div>
                   </div>
                 ))}
 
-                {/* Navigation Buttons */}
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full transition-all duration-300"
-                  aria-label="Previous slide"
-                >
-                  <FaChevronLeft className="text-xl" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full transition-all duration-300"
-                  aria-label="Next slide"
-                >
-                  <FaChevronRight className="text-xl" />
-                </button>
+
 
                 {/* Slide Indicators */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">

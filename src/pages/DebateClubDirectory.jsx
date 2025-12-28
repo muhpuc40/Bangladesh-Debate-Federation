@@ -112,81 +112,6 @@ const DebateClubDirectory = () => {
       status: "Active",
       facebookId: "RU.Debate.Association",
       facebookUrl: "https://facebook.com/RUDebateAssociation"
-    },
-    {
-      id: 8,
-      clubName: "Khulna University Debating Society",
-      university: "Khulna University",
-      president: "Sajjad Ahmed",
-      generalSecretary: "Roksana Khatun",
-      contact: "01766 998877",
-      email: "kuds@ku.ac.bd",
-      location: "Khulna",
-      established: "2002",
-      members: "75",
-      status: "Active",
-      facebookId: "KhulnaUniDebating",
-      facebookUrl: "https://facebook.com/KhulnaUniDebating"
-    },
-    {
-      id: 9,
-      clubName: "Islamic University Debate Club",
-      university: "Islamic University, Bangladesh",
-      president: "Jamil Ahmed",
-      generalSecretary: "Sabrina Islam",
-      contact: "01733 445566",
-      email: "iudc@iu.ac.bd",
-      location: "Kushtia",
-      established: "2004",
-      members: "65",
-      status: "Active",
-      facebookId: "IUDebateClub",
-      facebookUrl: "https://facebook.com/IUDebateClub"
-    },
-    {
-      id: 10,
-      clubName: "DUET Debate Forum",
-      university: "Dhaka University of Engineering & Technology",
-      president: "Kamrul Hasan",
-      generalSecretary: "Naznin Sultana",
-      contact: "01788 776655",
-      email: "ddf@duet.ac.bd",
-      location: "Gazipur",
-      established: "2006",
-      members: "70",
-      status: "Active",
-      facebookId: "DUETDebateForum",
-      facebookUrl: "https://facebook.com/DUETDebateForum"
-    },
-    {
-      id: 11,
-      clubName: "MIST Debating Society",
-      university: "Military Institute of Science & Technology",
-      president: "Saifuddin Munna",
-      generalSecretary: "Ayesha Siddiqa",
-      contact: "01799 887766",
-      email: "mds@mist.ac.bd",
-      location: "Dhaka",
-      established: "2008",
-      members: "60",
-      status: "Active",
-      facebookId: "MIST.Debating.Society",
-      facebookUrl: "https://facebook.com/MISTDebatingSociety"
-    },
-    {
-      id: 12,
-      clubName: "Comilla University Debate Circle",
-      university: "Comilla University",
-      president: "Farid Ahmed",
-      generalSecretary: "Sharmin Akter",
-      contact: "01744 556677",
-      email: "cudc@cou.ac.bd",
-      location: "Comilla",
-      established: "2010",
-      members: "55",
-      status: "Active",
-      facebookId: "ComillaUniversityDebate",
-      facebookUrl: "https://facebook.com/ComillaUniversityDebate"
     }
   ];
 
@@ -253,15 +178,15 @@ const DebateClubDirectory = () => {
               Debate Club Directory
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed text-justify">
-              Find debate clubs from universities across Bangladesh. Connect with fellow debaters, 
-              club presidents, and general secretaries to collaborate and participate in events.
+              Find debate clubs from Universities across Bangladesh...
             </p>
             <div className="flex flex-wrap gap-4 justify-start">
               <a 
                 href="#search"
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1"
               >
-                <FaSearch className="mr-2" /> Search Clubs
+                <FaSearch className="mr-2" /> Find Debate Clubs
+
               </a>
             </div>
           </div>
@@ -273,11 +198,8 @@ const DebateClubDirectory = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <h2 className="text-2xl md:text-3xl font-bold text-emerald-900 mb-4 text-justify">
-              Find Debate Clubs
+              Search
             </h2>
-            <p className="text-gray-600 text-justify">
-              Search through our comprehensive directory of university debate clubs in Bangladesh
-            </p>
           </div>
 
           {/* Search Bar */}

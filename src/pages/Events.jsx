@@ -33,8 +33,8 @@ const eventsData = {
     },
     {
       "id": 2,
-      "title": "Asian Parliamentary Debate Workshop",
-      "description": "Intensive training on Asian Parliamentary format for college students",
+      "title": "Asian Parliamentary Debate",
+      "description": "Intensive traning on Asian Parliamentary format for college students",
       "date": "March 25-27, 2024",
       "time": "10:00 AM - 4:00 PM",
       "location": "Online (Zoom)",
@@ -47,7 +47,7 @@ const eventsData = {
     },
     {
       "id": 3,
-      "title": "Inter-University Debate Championship",
+      "title": "Inter-University Debate",
       "description": "Annual competition among universities across Bangladesh",
       "date": "February 10-15, 2024",
       "time": "9:00 AM - 8:00 PM",
@@ -59,55 +59,16 @@ const eventsData = {
       "status": "Completed",
       "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
-    {
-      "id": 4,
-      "title": "Youth Parliament Session",
-      "description": "Simulated parliamentary debate for school students",
-      "date": "April 5-7, 2024",
-      "time": "10:00 AM - 5:00 PM",
-      "location": "Bangabandhu International Conference Center",
-      "type": "upcoming",
-      "category": "national",
-      "participants": "1000",
-      "registrationDeadline": "March 30, 2024",
-      "status": "Open for Registration",
-      "image": "https://images.unsplash.com/photo-1551135049-8a33b2fb2d5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": 5,
-      "title": "International Debate Exchange Program",
-      "description": "Cultural exchange and debate competition with international teams",
-      "date": "May 20-25, 2024",
-      "time": "All Day",
-      "location": "Multiple Venues",
-      "type": "upcoming",
-      "category": "international",
-      "participants": "300",
-      "registrationDeadline": "April 30, 2024",
-      "status": "Coming Soon",
-      "image": "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": 6,
-      "title": "Adjudicator Certification Program",
-      "description": "Professional training for aspiring debate judges",
-      "date": "January 15-20, 2024",
-      "time": "9:00 AM - 5:00 PM",
-      "location": "BDF Training Center, Dhaka",
-      "type": "completed",
-      "category": "training",
-      "participants": "150",
-      "certified": "120",
-      "status": "Completed",
-      "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    }
+
+
+
   ],
-  "metadata": {
-    "total": 6,
-    "upcoming": 4,
-    "completed": 2,
-    "lastUpdated": "2024-03-01"
-  }
+  // "metadata": {
+  //   "total": 6,
+  //   "upcoming": 4,
+  //   "completed": 2,
+  //   "lastUpdated": "2024-03-01"
+  // }
 };
 
 // Filters data in JSON format
@@ -130,7 +91,7 @@ const Events = () => {
   // Extract events array from eventsData object
   const events = eventsData.events;
   const filters = filtersData.filters;
-  const metadata = eventsData.metadata;
+  //const metadata = eventsData.metadata;
 
   const filteredEvents = events.filter(event => {
     const matchesFilter = activeFilter === 'all' || 
@@ -178,9 +139,7 @@ const Events = () => {
               Events & Competitions
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed text-justify">
-              Discover upcoming debate competitions, training workshops, and special events 
-              organized by Bangladesh Debate Federation. Register now to participate in 
-              transformative experiences.
+              Discover upcoming debate competitions, training, workshops organized by Bangladesh Debate Federation.
             </p>
            
           </div>
@@ -244,13 +203,13 @@ const Events = () => {
                 <span className="text-gray-500 text-lg ml-2">({filteredEvents.length})</span>
               </h2>
               <p className="text-sm text-gray-600 mt-1">
-                Total Events: {metadata.total} | Upcoming: {metadata.upcoming} | Completed: {metadata.completed}
+                {/* Total Events: {metadata.total} | Upcoming: {metadata.upcoming} | Completed: {metadata.completed} */}
               </p>
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-gray-600 text-sm text-justify">
-                <FaRegCalendarCheck className="inline mr-1" />
-                {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                {/* <FaRegCalendarCheck className="inline mr-1" /> */}
+                {/* {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })} */}
               </span>
             </div>
           </div>
