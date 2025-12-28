@@ -189,30 +189,30 @@ const News = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-900 to-emerald-700 text-white">
+      {/* Hero Section - White Background */}
+      <section className="relative py-12 md:py-16 lg:py-20 bg-white text-emerald-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl">
-            <div className="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-bold mb-6 border border-white/30">
+            <div className="inline-flex items-center bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-bold mb-6 border border-emerald-200">
               <FaNewspaper className="mr-2" /> Latest Updates
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-justify">
               Debate News & Updates
             </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed text-justify">
+            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed text-justify">
               Stay informed with the latest announcements, competition results, 
               training programs, and achievements from Bangladesh Debate Federation.
             </p>
             <div className="flex flex-wrap gap-4 justify-start">
               <Link 
                 to="/events" 
-                className="bg-white hover:bg-gray-100 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-white hover:shadow-xl hover:-translate-y-1"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-600 hover:shadow-xl hover:-translate-y-1"
               >
                 <span className="text-justify">View Events</span> <FaArrowRight className="ml-2" />
               </Link>
               <button 
                 onClick={() => setActiveCategory('announcement')}
-                className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-white/30 hover:shadow-xl hover:-translate-y-1"
+                className="bg-white hover:bg-emerald-50 text-emerald-600 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1"
               >
                 <span className="text-justify">Announcements</span>
               </button>
