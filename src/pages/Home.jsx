@@ -35,7 +35,7 @@ const Home = () => {
     },
     {
       id: 2,
-      url: "https://i.ibb.co.com/B2N66Ys9/489340193-1210730720860094-9028792961535166633-n.jpg",
+      url: "https://i.ibb.co.com/MkTLQsv1/Whats-App-Image-2025-12-28-at-11-14-00-AM.jpg",
       alt: "Debate Training Session"
     },
     {

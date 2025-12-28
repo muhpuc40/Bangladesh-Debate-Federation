@@ -3,15 +3,17 @@ import { Link } from 'react-router-dom';
 import { 
   FaCalendarAlt, 
   FaUser, 
-  FaTag, 
   FaArrowRight,
   FaSearch,
-  FaFilter,
-  FaShareAlt,
   FaBookmark,
   FaEye,
   FaComment,
-  FaNewspaper
+  FaNewspaper,
+  FaBullhorn,
+  FaExclamationTriangle,
+  FaBell,
+  FaRegClock,
+  FaFire
 } from 'react-icons/fa';
 
 // News data in JSON format
@@ -132,16 +134,6 @@ const newsData = {
       "tags": ["results", "bangla", "competition"]
     }
   ],
-  "categories": [
-    { "id": "all", "label": "All News", "count": 8 },
-    { "id": "announcement", "label": "Announcements", "count": 1 },
-    { "id": "achievement", "label": "Achievements", "count": 1 },
-    { "id": "education", "label": "Education", "count": 1 },
-    { "id": "workshop", "label": "Workshops", "count": 1 },
-    { "id": "scholarship", "label": "Scholarships", "count": 1 },
-    { "id": "training", "label": "Training", "count": 1 },
-    { "id": "results", "label": "Results", "count": 1 }
-  ],
   "metadata": {
     "total": 8,
     "featured": 2,
@@ -149,24 +141,80 @@ const newsData = {
   }
 };
 
+// Announcement/Notices data
+const announcementsData = [
+  {
+    id: 1,
+    title: "Registration Deadline Extended",
+    description: "Last date for National Debate Festival registration extended to March 25, 2024",
+    time: "2 hours ago",
+    type: "urgent",
+    icon: <FaExclamationTriangle className="text-red-500" />,
+    category: "Deadline"
+  },
+  {
+    id: 2,
+    title: "Server Maintenance",
+    description: "BDF website will be temporarily unavailable on March 20, 2024 (10 PM - 2 AM)",
+    time: "5 hours ago",
+    type: "maintenance",
+    icon: <FaBullhorn className="text-blue-500" />,
+    category: "Technical"
+  },
+  {
+    id: 3,
+    title: "Workshop Venue Changed",
+    description: "Free Online Workshop venue changed from Auditorium to Room 302",
+    time: "1 day ago",
+    type: "update",
+    icon: <FaBell className="text-yellow-500" />,
+    category: "Update"
+  },
+  {
+    id: 4,
+    title: "New Mobile App Launched",
+    description: "Download the new BDF mobile app from Google Play Store and App Store",
+    time: "2 days ago",
+    type: "new",
+    icon: <FaFire className="text-orange-500" />,
+    category: "Technology"
+  },
+  {
+    id: 5,
+    title: "Scholarship Interview Schedule",
+    description: "Interviews for Debate Scholarship Program scheduled for March 22-24, 2024",
+    time: "3 days ago",
+    type: "schedule",
+    icon: <FaRegClock className="text-purple-500" />,
+    category: "Schedule"
+  },
+  {
+    id: 6,
+    title: "Holiday Notice",
+    description: "BDF office will remain closed on March 26, 2024 for Independence Day",
+    time: "4 days ago",
+    type: "holiday",
+    icon: <FaBullhorn className="text-green-500" />,
+    category: "Holiday"
+  }
+];
+
 const News = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
   // Extract data from JSON
   const news = newsData.news;
-  const categories = newsData.categories;
   const metadata = newsData.metadata;
 
-  // Filter news based on category and search
+  // Filter news based on search only
   const filteredNews = news.filter(item => {
-    const matchesCategory = activeCategory === 'all' || 
-                           item.category.toLowerCase() === activeCategory;
     const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          item.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          item.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    return matchesCategory && matchesSearch;
+                         item.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
+                         item.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         item.author.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesSearch;
   });
 
   // Get featured news
@@ -189,18 +237,18 @@ const News = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section - White Background */}
+      {/* Hero Section */}
       <section className="relative py-12 md:py-16 lg:py-20 bg-white text-emerald-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl">
             <div className="inline-flex items-center bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-bold mb-6 border border-emerald-200">
               <FaNewspaper className="mr-2" /> Latest Updates
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-justify">
-              Debate News & Updates
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              Debate News & Announcements
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed text-justify">
-              Stay informed with the latest announcements, competition results, 
+            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+              Stay informed with the latest news, announcements, competition results, 
               training programs, and achievements from Bangladesh Debate Federation.
             </p>
             <div className="flex flex-wrap gap-4 justify-start">
@@ -208,312 +256,284 @@ const News = () => {
                 to="/events" 
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-600 hover:shadow-xl hover:-translate-y-1"
               >
-                <span className="text-justify">View Events</span> <FaArrowRight className="ml-2" />
+                <span>View Events</span> <FaArrowRight className="ml-2" />
               </Link>
-              <button 
-                onClick={() => setActiveCategory('announcement')}
-                className="bg-white hover:bg-emerald-50 text-emerald-600 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1"
-              >
-                <span className="text-justify">Announcements</span>
-              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Search and Filter */}
-      <section className="py-8 bg-white border-b border-emerald-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-6">
+      {/* Main Content with Two Columns */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          
+          {/* Left Column - News (2/3 width) */}
+          <div className="lg:w-2/3">
+            
             {/* Search Bar */}
-            <div className="flex-1">
+            <div className="mb-8">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaSearch className="text-gray-400" />
+                  <FaSearch className="text-gray-400 text-xl" />
                 </div>
                 <input
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Search news by title, content, or tags..."
-                  className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-justify"
+                  placeholder="Search news articles by title, content, tags, or author..."
+                  className="w-full pl-12 pr-4 py-4 border-2 border-emerald-200 rounded-xl focus:ring-4 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-lg hover:border-emerald-300 shadow-sm"
                 />
+                {searchTerm && (
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                    <button 
+                      onClick={() => setSearchTerm('')}
+                      className="text-gray-500 hover:text-red-500 transition-colors duration-200"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* Categories */}
-            <div className="flex overflow-x-auto lg:overflow-visible">
-              <div className="flex gap-2">
-                {categories.map(cat => (
-                  <button
-                    key={cat.id}
-                    onClick={() => setActiveCategory(cat.id)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300 ${
-                      activeCategory === cat.id
-                        ? 'bg-emerald-600 text-white'
-                        : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
-                    }`}
-                  >
-                    <span className="text-justify">{cat.label}</span>
-                    <span className="ml-1 text-xs opacity-80">({cat.count})</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured News */}
-      {featuredNews.length > 0 && (
-        <section className="py-12 bg-emerald-50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">
-                <span className="flex items-center">
+            {/* Featured News Section */}
+            {featuredNews.length > 0 && (
+              <div className="mb-12">
+                <h2 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center">
                   <FaNewspaper className="mr-3 text-emerald-600" />
-                  <span className="text-justify">Featured News</span>
-                </span>
-              </h2>
-              <div className="text-sm text-gray-600 text-justify">
-                Last Updated: {metadata.lastUpdated}
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {featuredNews.map(item => (
-                <div key={item.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
-                  <div className="relative h-64 overflow-hidden">
-                    <img 
-                      src={item.image} 
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(item.category)}`}>
-                        <span className="text-justify">{item.category}</span>
-                      </span>
-                    </div>
-                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-white/90 backdrop-blur-sm text-emerald-800 text-justify">
-                        Featured
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <div className="p-8">
-                    <div className="flex items-center text-sm text-gray-600 mb-4 justify-start">
-                      <FaCalendarAlt className="mr-2 text-emerald-600" />
-                      <span className="mr-4 text-justify">{item.date}</span>
-                      <FaUser className="mr-2 text-emerald-600" />
-                      <span className="text-justify">{item.author}</span>
-                    </div>
-                    
-                    <h3 className="text-2xl font-bold text-emerald-900 mb-4 hover:text-emerald-700 transition-colors duration-300 text-justify">
-                      {item.title}
-                    </h3>
-                    
-                    <p className="text-gray-700 mb-6 leading-relaxed text-justify">
-                      {item.excerpt}
-                    </p>
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4 text-sm text-gray-600">
-                        <span className="flex items-center text-justify">
-                          <FaEye className="mr-1" /> {item.views}
-                        </span>
-                        <span className="flex items-center text-justify">
-                          <FaComment className="mr-1" /> {item.comments}
-                        </span>
-                        <span className="text-justify">{item.readTime}</span>
+                  Featured News
+                </h2>
+                <div className="bg-gradient-to-r from-emerald-50 to-white rounded-2xl p-6 border border-emerald-100">
+                  {featuredNews.map(item => (
+                    <div key={item.id} className="mb-6 last:mb-0">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <img 
+                            src={item.image} 
+                            alt={item.title}
+                            className="w-24 h-24 rounded-lg object-cover"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
+                              {item.category}
+                            </span>
+                            <span className="text-xs text-gray-500 flex items-center">
+                              <FaCalendarAlt className="mr-1" /> {item.date}
+                            </span>
+                          </div>
+                          <h3 className="text-lg font-bold text-emerald-900 mb-2 hover:text-emerald-700 transition-colors duration-300">
+                            {item.title}
+                          </h3>
+                          <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                            {item.excerpt}
+                          </p>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-3 text-xs text-gray-500">
+                              <span className="flex items-center">
+                                <FaEye className="mr-1" /> {item.views}
+                              </span>
+                              <span className="flex items-center">
+                                <FaComment className="mr-1" /> {item.comments}
+                              </span>
+                            </div>
+                            <Link 
+                              to={`/news/${item.id}`}
+                              className="text-emerald-600 hover:text-emerald-800 font-bold text-sm flex items-center"
+                            >
+                              Read More <FaArrowRight className="ml-1 text-xs" />
+                            </Link>
+                          </div>
+                        </div>
                       </div>
-                      
-                      <Link 
-                        to={`/news/${item.id}`}
-                        className="text-emerald-600 hover:text-emerald-800 font-bold flex items-center hover:underline justify-start"
-                      >
-                        <span className="text-justify">Read Full Story</span> <FaArrowRight className="ml-2" />
-                      </Link>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+              </div>
+            )}
 
-      {/* All News Grid */}
-      <section className="py-12 md:py-16 lg:py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-8">
+            {/* All News Grid */}
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-emerald-900 text-justify">
-                Latest News
-              </h2>
-              <p className="text-gray-600 mt-2 text-justify">
-                Showing {filteredNews.length} of {metadata.total} news items
-              </p>
-            </div>
-          </div>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-emerald-900">
+                  Latest News
+                </h2>
+                <div className="text-sm text-gray-600">
+                  {searchTerm ? (
+                    <span className="flex items-center">
+                      <FaSearch className="mr-2" />
+                      {filteredNews.length} results for "{searchTerm}"
+                    </span>
+                  ) : (
+                    <span>{metadata.total} articles</span>
+                  )}
+                </div>
+              </div>
 
-          {filteredNews.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">📰</div>
-              <h3 className="text-2xl font-bold text-gray-700 mb-2 text-justify">No news found</h3>
-              <p className="text-gray-600 mb-6 text-justify">Try changing your search or category filter</p>
-              <button 
-                onClick={() => { setSearchTerm(''); setActiveCategory('all'); }}
-                className="text-emerald-600 hover:text-emerald-800 font-bold"
-              >
-                Clear all filters
-              </button>
-            </div>
-          ) : (
-            <>
-              {/* News Grid - এখন সব news একসাথে দেখাবে */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredNews.map(item => (
-                  <div key={item.id} className="group bg-white rounded-xl border border-emerald-100 overflow-hidden hover:border-emerald-300 hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
-                    {/* News Image */}
-                    <div className="relative h-48 overflow-hidden">
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(item.category)}`}>
-                          <span className="text-justify">{item.category}</span>
-                        </span>
-                      </div>
-                      <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="flex space-x-2">
+              {filteredNews.length === 0 ? (
+                <div className="text-center py-12 bg-gray-50 rounded-xl">
+                  <FaSearch className="text-4xl text-gray-400 mx-auto mb-4" />
+                  <h3 className="text-xl font-bold text-gray-700 mb-2">No news found</h3>
+                  <p className="text-gray-600 mb-4">
+                    No articles match your search "{searchTerm}"
+                  </p>
+                  <button 
+                    onClick={() => setSearchTerm('')}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-300"
+                  >
+                    Show All News
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {filteredNews.map(item => (
+                    <div key={item.id} className="bg-white rounded-xl border border-emerald-100 overflow-hidden hover:border-emerald-300 hover:shadow-lg transition-all duration-300">
+                      <div className="relative h-48 overflow-hidden">
+                        <img 
+                          src={item.image} 
+                          alt={item.title}
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                        <div className="absolute top-4 left-4">
+                          <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
+                            {item.category}
+                          </span>
+                        </div>
+                        <div className="absolute top-4 right-4">
                           <button className="bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110">
                             <FaBookmark className="text-sm" />
                           </button>
-                          <button className="bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110">
-                            <FaShareAlt className="text-sm" />
+                        </div>
+                      </div>
+                      
+                      <div className="p-6">
+                        <div className="flex items-center text-xs text-gray-600 mb-3">
+                          <FaCalendarAlt className="mr-1.5 text-emerald-600" />
+                          <span>{item.date}</span>
+                          <span className="mx-2">•</span>
+                          <FaUser className="mr-1.5 text-emerald-600" />
+                          <span>{item.author}</span>
+                        </div>
+                        
+                        <h3 className="text-lg font-bold text-emerald-900 mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
+                          {item.title}
+                        </h3>
+                        
+                        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                          {item.excerpt}
+                        </p>
+                        
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {item.tags.map((tag, index) => (
+                            <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
+                        
+                        <div className="flex items-center justify-between pt-4 border-t border-emerald-50">
+                          <div className="flex items-center space-x-3 text-xs text-gray-500">
+                            <span className="flex items-center">
+                              <FaEye className="mr-1" /> {item.views}
+                            </span>
+                            <span className="flex items-center">
+                              <FaComment className="mr-1" /> {item.comments}
+                            </span>
+                            <span>{item.readTime}</span>
+                          </div>
+                          
+                          <Link 
+                            to={`/news/${item.id}`}
+                            className="text-emerald-600 hover:text-emerald-800 font-bold text-sm flex items-center"
+                          >
+                            Read More <FaArrowRight className="ml-1.5 text-xs" />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right Column - Announcements (1/3 width) */}
+          <div className="lg:w-1/3">
+            <div className="sticky top-8">
+              {/* Announcements Header */}
+              <div className="bg-emerald-600 text-white rounded-t-xl p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <h2 className="text-2xl font-bold flex items-center">
+                    <FaBullhorn className="mr-3" />
+                    Announcements
+                  </h2>
+                  <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
+                    {announcementsData.length} Active
+                  </span>
+                </div>
+                <p className="text-emerald-100 text-sm">
+                  Important notices and updates from BDF
+                </p>
+              </div>
+
+              {/* Announcements List */}
+              <div className="bg-white border border-emerald-100 rounded-b-xl overflow-hidden">
+                {announcementsData.map(announcement => (
+                  <div 
+                    key={announcement.id}
+                    className="p-5 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors duration-200"
+                  >
+                    <div className="flex items-start space-x-3">
+                      <div className="flex-shrink-0 mt-1">
+                        {announcement.icon}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="px-2 py-0.5 bg-gray-100 text-xs font-bold text-gray-700 rounded">
+                            {announcement.category}
+                          </span>
+                          <span className="text-xs text-gray-500 flex items-center">
+                            <FaRegClock className="mr-1" /> {announcement.time}
+                          </span>
+                        </div>
+                        <h3 className="font-bold text-gray-900 mb-2">
+                          {announcement.title}
+                        </h3>
+                        <p className="text-sm text-gray-600 mb-3">
+                          {announcement.description}
+                        </p>
+                        <div className="flex items-center justify-between">
+                          <span className={`text-xs px-2 py-1 rounded ${
+                            announcement.type === 'urgent' ? 'bg-red-100 text-red-700' :
+                            announcement.type === 'update' ? 'bg-yellow-100 text-yellow-700' :
+                            announcement.type === 'new' ? 'bg-orange-100 text-orange-700' :
+                            'bg-gray-100 text-gray-700'
+                          }`}>
+                            {announcement.type.charAt(0).toUpperCase() + announcement.type.slice(1)}
+                          </span>
+                          <button className="text-emerald-600 hover:text-emerald-800 text-sm font-medium flex items-center">
+                            Details <FaArrowRight className="ml-1 text-xs" />
                           </button>
                         </div>
                       </div>
                     </div>
-
-                    {/* News Content */}
-                    <div className="p-6">
-                      <div className="flex items-center text-xs text-gray-600 mb-3 justify-start">
-                        <FaCalendarAlt className="mr-1.5 text-emerald-600" />
-                        <span className="text-justify">{item.date}</span>
-                        <span className="mx-2">•</span>
-                        <FaUser className="mr-1.5 text-emerald-600" />
-                        <span className="text-justify">{item.author}</span>
-                      </div>
-                      
-                      <h3 className="text-lg font-bold text-emerald-900 mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2 text-justify">
-                        {item.title}
-                      </h3>
-                      
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-3 text-justify">
-                        {item.excerpt}
-                      </p>
-                      
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {item.tags.map((tag, index) => (
-                          <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded text-justify">
-                            #{tag}
-                          </span>
-                        ))}
-                      </div>
-                      
-                      {/* Stats */}
-                      <div className="flex items-center justify-between pt-4 border-t border-emerald-50">
-                        <div className="flex items-center space-x-4 text-xs text-gray-500">
-                          <span className="flex items-center text-justify">
-                            <FaEye className="mr-1" /> {item.views}
-                          </span>
-                          <span className="flex items-center text-justify">
-                            <FaComment className="mr-1" /> {item.comments}
-                          </span>
-                          <span className="text-justify">{item.readTime}</span>
-                        </div>
-                        
-                        <Link 
-                          to={`/news/${item.id}`}
-                          className="text-emerald-600 hover:text-emerald-800 font-bold text-sm flex items-center hover:underline justify-start"
-                        >
-                          <span className="text-justify">Read More</span> <FaArrowRight className="ml-1.5 text-xs" />
-                        </Link>
-                      </div>
-                    </div>
                   </div>
                 ))}
-              </div>
-            </>
-          )}
-        </div>
-      </section>
 
-      {/* Newsletter Subscription */}
-      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-900 to-emerald-700 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6 border border-white/30">
-              <FaNewspaper className="text-2xl text-white" />
+                {/* View All Button */}
+                <div className="p-4 border-t border-gray-100 bg-gray-50">
+                  <button className="w-full bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-4 rounded-lg border border-emerald-200 hover:border-emerald-300 transition-all duration-300 flex items-center justify-center">
+                    <FaBullhorn className="mr-2" />
+                    View All Announcements
+                    <FaArrowRight className="ml-2" />
+                  </button>
+                </div>
+              </div>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-justify">
-              Subscribe to Our Newsletter
-            </h2>
-            <p className="text-lg text-white/90 mb-8 leading-relaxed text-justify">
-              Get the latest debate news, competition updates, and training opportunities 
-              delivered directly to your inbox. No spam, unsubscribe anytime.
-            </p>
-            <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 rounded-lg focus:ring-2 focus:ring-white/50 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-justify"
-              />
-              <button className="bg-white hover:bg-gray-100 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 border border-white hover:shadow-xl hover:-translate-y-1 whitespace-nowrap">
-                <span className="text-justify">Subscribe Now</span>
-              </button>
-            </form>
-            <p className="text-white/70 text-sm mt-4 text-justify">
-              Join 15,000+ subscribers who receive our weekly newsletter
-            </p>
           </div>
         </div>
-      </section>
-
-      {/* Archive Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4 text-justify">
-              News Archive
-            </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto text-justify">
-              Browse news from previous years and months
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {[
-              { year: "2024", count: "8 articles", color: "bg-emerald-100" },
-              { year: "2023", count: "42 articles", color: "bg-blue-100" },
-              { year: "2022", count: "38 articles", color: "bg-purple-100" }
-            ].map((archive, index) => (
-              <div key={index} className={`${archive.color} rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-2`}>
-                <div className="text-4xl font-bold text-emerald-900 mb-2 text-justify">{archive.year}</div>
-                <div className="text-gray-700 mb-4 text-justify">{archive.count}</div>
-                <button className="text-emerald-600 hover:text-emerald-800 font-bold text-sm flex items-center justify-start">
-                  <span className="text-justify">Browse Archive</span> <FaArrowRight className="ml-2" />
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   );
 };

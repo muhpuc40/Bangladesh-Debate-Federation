@@ -572,7 +572,7 @@ const DebateClubDirectory = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section
       <section className="py-12 md:py-16 lg:py-20 bg-white border-t border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto">
@@ -606,7 +606,7 @@ const DebateClubDirectory = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Print Styles */}
       <style>{`
