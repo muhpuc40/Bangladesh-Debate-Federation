@@ -447,6 +447,7 @@ const Navbar = () => {
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   const [mobileCommitteeOpen, setMobileCommitteeOpen] = useState(false);
   const menuRef = useRef(null);
+  const mobileMenuRef = useRef(null); // মোবাইল মেনুর জন্য আলাদা ref
   const aboutDropdownRef = useRef(null);
   const committeeDropdownRef = useRef(null);
 
@@ -476,9 +477,13 @@ const Navbar = () => {
   // বাইরে ক্লিক করলে মেনু ও ড্রপডাউন বন্ধ করার ফাংশন
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsMenuOpen(false);
+      // মোবাইল মেনু বন্ধ করা
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target) && 
+          isMenuOpen && !event.target.closest('.mobile-menu-button')) {
+        closeMenu();
       }
+      
+      // ডেস্কটপ ড্রপডাউন বন্ধ করা
       if (aboutDropdownRef.current && !aboutDropdownRef.current.contains(event.target)) {
         setIsAboutHovered(false);
         setIsAboutDropdownOpen(false);
@@ -491,7 +496,7 @@ const Navbar = () => {
 
     const handleEscapeKey = (event) => {
       if (event.key === 'Escape') {
-        setIsMenuOpen(false);
+        closeMenu();
         setIsAboutHovered(false);
         setIsAboutDropdownOpen(false);
         setIsCommitteeHovered(false);
@@ -499,14 +504,39 @@ const Navbar = () => {
       }
     };
 
+    // মোবাইল মেনু ওভারলে যোগ করা
+    const addOverlay = () => {
+      if (isMenuOpen) {
+        const overlay = document.createElement('div');
+        overlay.id = 'mobile-menu-overlay';
+        overlay.className = 'fixed inset-0 bg-black/30 z-40 lg:hidden';
+        overlay.addEventListener('click', () => closeMenu());
+        document.body.appendChild(overlay);
+        document.body.style.overflow = 'hidden'; // স্ক্রল বন্ধ
+      }
+    };
+
+    const removeOverlay = () => {
+      const overlay = document.getElementById('mobile-menu-overlay');
+      if (overlay) {
+        overlay.remove();
+      }
+      document.body.style.overflow = ''; // স্ক্রল ফিরিয়ে আনা
+    };
+
     if (isMenuOpen || isAboutHovered || isAboutDropdownOpen || isCommitteeHovered || isCommitteeDropdownOpen) {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleEscapeKey);
+      
+      if (isMenuOpen) {
+        addOverlay();
+      }
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleEscapeKey);
+      removeOverlay();
     };
   }, [isMenuOpen, isAboutHovered, isAboutDropdownOpen, isCommitteeHovered, isCommitteeDropdownOpen]);
 
@@ -519,6 +549,16 @@ const Navbar = () => {
     setIsCommitteeDropdownOpen(false);
     setMobileAboutOpen(false);
     setMobileCommitteeOpen(false);
+  };
+
+  // মোবাইল মেনু টগল করার ফাংশন
+  const toggleMobileMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    // মোবাইল মেনু খুললে সাবমেনু বন্ধ রাখা
+    if (!isMenuOpen) {
+      setMobileAboutOpen(false);
+      setMobileCommitteeOpen(false);
+    }
   };
 
   const handleAboutMouseEnter = () => {
@@ -698,8 +738,8 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Layout - এখানে backdrop-blur-sm এবং background যোগ করা হয়েছে */}
-        <div className="flex lg:hidden justify-between items-center py-3 backdrop-blur-sm bg-white/5 rounded-full px-4">
+        {/* Mobile Layout - এখানে backdrop আরো সূক্ষ্ম করা হয়েছে */}
+        <div className="flex lg:hidden justify-between items-center py-3 backdrop-blur-xs bg-white/3 rounded-full px-4">
           {/* Mobile Logo */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0 z-10">
             <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex-shrink-0">
@@ -712,10 +752,10 @@ const Navbar = () => {
             </div>
           </Link>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - গ্রীন ব্যাকগ্রাউন্ড রিমুভ করা হয়েছে, আইকন কালার ডিপ গ্রীন */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-white hover:text-emerald-100 focus:outline-none p-3 hover:bg-emerald-700/30 rounded-full transition-all duration-300 backdrop-blur-sm bg-emerald-800/40"
+            onClick={toggleMobileMenu}
+            className="text-emerald-900 hover:text-emerald-700 focus:outline-none p-3 rounded-full transition-all duration-300 mobile-menu-button"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
           >
@@ -729,7 +769,7 @@ const Navbar = () => {
 
       {/* Mobile Navigation Menu - Sidebar Style */}
       <div 
-        ref={menuRef}
+        ref={mobileMenuRef}
         className={`lg:hidden fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
