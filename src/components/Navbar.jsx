@@ -154,10 +154,10 @@ const Navbar = () => {
     <nav className="fixed top-2 left-0 right-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center justify-between backdrop-blur-sm bg-white/5 rounded-full px-3 py-0.5"> {/* px-3 py-0.5 দিয়ে ছোট করেছি */}
-          {/* Logo - ছোট করার জন্য w-12 h-12 করেছি */}
+        <div className="hidden lg:flex items-center justify-between backdrop-blur-sm bg-white/5 rounded-full px-3.5 py-1.5"> {/* px-3.5 py-1.5 দিয়ে হালকা ছোট */}
+          {/* Logo - সামান্য ছোট করার জন্য w-13 h-13 করেছি */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0">
-            <div className="w-12 h-12 flex-shrink-0"> {/* আগে w-14 h-14 ছিল */}
+            <div className="w-13 h-13 flex-shrink-0"> {/* w-13 h-13 - সামান্য ছোট */}
               <img 
                 src="https://i.ibb.co/Ldwswy4m/logo.png" 
                 alt="Bangladesh Debate Federation Logo" 
@@ -172,7 +172,7 @@ const Navbar = () => {
             {/* Home - শুধু একবার দেখানো হবে Logo এর পরে */}
             <NavLink
               to="/"
-              className="px-3 py-1 rounded-full transition-all duration-300 font-medium whitespace-nowrap text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-xs" /* px-3 py-1 এবং text-xs */
+              className="px-3 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm" /* px-3 py-1.5 */
             >
               Home
             </NavLink>
@@ -184,12 +184,12 @@ const Navbar = () => {
             >
               <button
                 onClick={handleAboutClick}
-                className={`px-3 py-1 rounded-full transition-all duration-300 font-medium whitespace-nowrap flex items-center text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-xs cursor-pointer ${
+                className={`px-3 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap flex items-center text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm cursor-pointer ${
                   isAboutDropdownOpen ? 'bg-emerald-500/30 text-emerald-900' : ''
-                }`} /* px-3 py-1 এবং text-xs */
+                }`} /* px-3 py-1.5 */
               >
                 About Us
-                <FaChevronDown className={`ml-1 w-2.5 h-2.5 transition-transform duration-300 ${isAboutDropdownOpen ? 'rotate-180' : ''}`} /> {/* আগে w-3 h-3 ছিল */}
+                <FaChevronDown className={`ml-1 w-3 h-3 transition-transform duration-300 ${isAboutDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               
               {isAboutDropdownOpen && (
@@ -223,12 +223,12 @@ const Navbar = () => {
             >
               <button
                 onClick={handleCommitteeClick}
-                className={`px-3 py-1 rounded-full transition-all duration-300 font-medium whitespace-nowrap flex items-center text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-xs cursor-pointer ${
+                className={`px-3 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap flex items-center text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm cursor-pointer ${
                   isCommitteeDropdownOpen ? 'bg-emerald-500/30 text-emerald-900' : ''
-                }`} /* px-3 py-1 এবং text-xs */
+                }`} /* px-3 py-1.5 */
               >
                 Committee
-                <FaChevronDown className={`ml-1 w-2.5 h-2.5 transition-transform duration-300 ${isCommitteeDropdownOpen ? 'rotate-180' : ''}`} /> {/* আগে w-3 h-3 ছিল */}
+                <FaChevronDown className={`ml-1 w-3 h-3 transition-transform duration-300 ${isCommitteeDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               
               {isCommitteeDropdownOpen && (
@@ -260,7 +260,7 @@ const Navbar = () => {
               <NavLink
                 key={link.path}
                 to={link.path}
-                className="px-3 py-1 rounded-full transition-all duration-300 font-medium whitespace-nowrap text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-xs" /* px-3 py-1 এবং text-xs */
+                className="px-3 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm" /* px-3 py-1.5 */
               >
                 {link.label}
               </NavLink>
@@ -269,19 +269,19 @@ const Navbar = () => {
             {/* Sign In Button */}
             <Link
               to="/signin"
-              className="text-white bg-emerald-700 hover:bg-emerald-800 border border-emerald-700 font-bold py-1 px-3 rounded-full transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-lg ml-2 text-xs" /* py-1 px-3 এবং text-xs */
+              className="text-white bg-emerald-700 hover:bg-emerald-800 border border-emerald-700 font-bold py-1.5 px-3.5 rounded-full transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-lg ml-2 text-sm" /* px-3.5 দিয়ে সামান্য ছোট */
             >
-              <FaSignInAlt className="mr-1.5 w-2.5 h-2.5" /> {/* আগে w-3 h-3 ছিল */}
+              <FaSignInAlt className="mr-1.5 w-3 h-3" />
               Sign In
             </Link>
           </div>
         </div>
 
         {/* Mobile Layout */}
-        <div className="flex lg:hidden justify-between items-center backdrop-blur-sm bg-white/5 rounded-full px-3 py-1.5"> {/* py-1.5 দিয়ে ছোট করেছি */}
-          {/* Logo - মোবাইলেও ছোট */}
+        <div className="flex lg:hidden justify-between items-center backdrop-blur-sm bg-white/5 rounded-full px-3 py-1.5"> {/* py-1.5 দিয়ে হালকা ছোট */}
+          {/* Logo - মোবাইলেও সামান্য ছোট */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0 z-10">
-            <div className="w-10 h-10 flex-shrink-0"> {/* আগে w-12 h-12 ছিল */}
+            <div className="w-11 h-11 flex-shrink-0"> {/* w-11 h-11 - সামান্য ছোট */}
               <img 
                 src="https://i.ibb.co/Ldwswy4m/logo.png" 
                 alt="Bangladesh Debate Federation Logo" 
