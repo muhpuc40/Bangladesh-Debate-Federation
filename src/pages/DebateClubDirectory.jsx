@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { FaSearch, FaUniversity, FaUserTie, FaUserGraduate, FaPhone, FaEnvelope, FaFilter, FaDownload, FaPrint, FaEye, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaSearch, FaUniversity, FaUserTie, FaUserGraduate, FaPhone, FaEnvelope, FaFilter, FaDownload, FaPrint, FaEye, FaMapMarkerAlt, FaFacebook } from 'react-icons/fa';
 
 const DebateClubDirectory = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedUniversity, setSelectedUniversity] = useState('all');
   const [selectedRegion, setSelectedRegion] = useState('all');
 
-  // Debate club data with all required fields
+  // Debate club data with all required fields including Facebook
   const debateClubs = [
     {
       id: 1,
@@ -19,7 +19,9 @@ const DebateClubDirectory = () => {
       location: "Dhaka",
       established: "1995",
       members: "150",
-      status: "Active"
+      status: "Active",
+      facebookId: "DU.Debate.Society",
+      facebookUrl: "https://facebook.com/DUDebateSociety"
     },
     {
       id: 2,
@@ -32,7 +34,9 @@ const DebateClubDirectory = () => {
       location: "Dhaka",
       established: "2001",
       members: "120",
-      status: "Active"
+      status: "Active",
+      facebookId: "BUET.Oratory.Club",
+      facebookUrl: "https://facebook.com/BUETOratoryClub"
     },
     {
       id: 3,
@@ -45,7 +49,9 @@ const DebateClubDirectory = () => {
       location: "Savar, Dhaka",
       established: "1998",
       members: "90",
-      status: "Active"
+      status: "Active",
+      facebookId: "JahangirnagarDebatingClub",
+      facebookUrl: "https://facebook.com/JahangirnagarDebatingClub"
     },
     {
       id: 4,
@@ -58,7 +64,9 @@ const DebateClubDirectory = () => {
       location: "Chittagong",
       established: "2000",
       members: "110",
-      status: "Active"
+      status: "Active",
+      facebookId: "CUDebateForum",
+      facebookUrl: "https://facebook.com/CUDebateForum"
     },
     {
       id: 5,
@@ -71,7 +79,9 @@ const DebateClubDirectory = () => {
       location: "Dhaka",
       established: "2005",
       members: "130",
-      status: "Active"
+      status: "Active",
+      facebookId: "NSUDebateClub",
+      facebookUrl: "https://facebook.com/NSUDebateClub"
     },
     {
       id: 6,
@@ -84,7 +94,9 @@ const DebateClubDirectory = () => {
       location: "Dhaka",
       established: "2003",
       members: "100",
-      status: "Active"
+      status: "Active",
+      facebookId: "BRACUDebate",
+      facebookUrl: "https://facebook.com/BRACUDebate"
     },
     {
       id: 7,
@@ -97,7 +109,9 @@ const DebateClubDirectory = () => {
       location: "Rajshahi",
       established: "1997",
       members: "85",
-      status: "Active"
+      status: "Active",
+      facebookId: "RU.Debate.Association",
+      facebookUrl: "https://facebook.com/RUDebateAssociation"
     },
     {
       id: 8,
@@ -110,7 +124,9 @@ const DebateClubDirectory = () => {
       location: "Khulna",
       established: "2002",
       members: "75",
-      status: "Active"
+      status: "Active",
+      facebookId: "KhulnaUniDebating",
+      facebookUrl: "https://facebook.com/KhulnaUniDebating"
     },
     {
       id: 9,
@@ -123,7 +139,9 @@ const DebateClubDirectory = () => {
       location: "Kushtia",
       established: "2004",
       members: "65",
-      status: "Active"
+      status: "Active",
+      facebookId: "IUDebateClub",
+      facebookUrl: "https://facebook.com/IUDebateClub"
     },
     {
       id: 10,
@@ -136,7 +154,9 @@ const DebateClubDirectory = () => {
       location: "Gazipur",
       established: "2006",
       members: "70",
-      status: "Active"
+      status: "Active",
+      facebookId: "DUETDebateForum",
+      facebookUrl: "https://facebook.com/DUETDebateForum"
     },
     {
       id: 11,
@@ -149,7 +169,9 @@ const DebateClubDirectory = () => {
       location: "Dhaka",
       established: "2008",
       members: "60",
-      status: "Active"
+      status: "Active",
+      facebookId: "MIST.Debating.Society",
+      facebookUrl: "https://facebook.com/MISTDebatingSociety"
     },
     {
       id: 12,
@@ -162,7 +184,9 @@ const DebateClubDirectory = () => {
       location: "Comilla",
       established: "2010",
       members: "55",
-      status: "Active"
+      status: "Active",
+      facebookId: "ComillaUniversityDebate",
+      facebookUrl: "https://facebook.com/ComillaUniversityDebate"
     }
   ];
 
@@ -176,7 +200,8 @@ const DebateClubDirectory = () => {
       club.clubName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       club.university.toLowerCase().includes(searchTerm.toLowerCase()) ||
       club.president.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      club.generalSecretary.toLowerCase().includes(searchTerm.toLowerCase());
+      club.generalSecretary.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      club.facebookId.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesUniversity = selectedUniversity === 'all' || club.university === selectedUniversity;
     const matchesRegion = selectedRegion === 'all' || club.location === selectedRegion;
@@ -186,7 +211,7 @@ const DebateClubDirectory = () => {
 
   // Function to download directory as CSV
   const downloadCSV = () => {
-    const headers = ['Club Name', 'University', 'President', 'General Secretary', 'Contact', 'Email', 'Location', 'Established', 'Members'];
+    const headers = ['Club Name', 'University', 'President', 'General Secretary', 'Contact', 'Email', 'Location', 'Established', 'Members', 'Facebook ID', 'Facebook URL'];
     const csvContent = [
       headers.join(','),
       ...filteredClubs.map(club => [
@@ -198,7 +223,9 @@ const DebateClubDirectory = () => {
         `"${club.email}"`,
         `"${club.location}"`,
         club.established,
-        club.members
+        club.members,
+        `"${club.facebookId}"`,
+        `"${club.facebookUrl}"`
       ].join(','))
     ].join('\n');
 
@@ -236,12 +263,6 @@ const DebateClubDirectory = () => {
               >
                 <FaSearch className="mr-2" /> Search Clubs
               </a>
-              <button 
-                onClick={downloadCSV}
-                className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1"
-              >
-                <FaDownload className="mr-2" /> Download Directory
-              </button>
             </div>
           </div>
         </div>
@@ -269,7 +290,7 @@ const DebateClubDirectory = () => {
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search by club name, university, president, or general secretary..."
+                placeholder="Search by club name, university, president, general secretary or Facebook ID..."
                 className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-justify"
               />
             </div>
@@ -396,8 +417,8 @@ const DebateClubDirectory = () => {
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        <div className="text-justify">
-                          Details
+                        <div className="flex items-center justify-start">
+                          <FaFacebook className="mr-2 text-blue-600" /> Facebook
                         </div>
                       </th>
                     </tr>
@@ -429,9 +450,16 @@ const DebateClubDirectory = () => {
                           </a>
                         </td>
                         <td className="px-6 py-4">
-                          <button className="text-emerald-600 hover:text-emerald-800 font-medium flex items-center text-sm justify-start">
-                            <FaEye className="mr-1" /> View
-                          </button>
+                          <a 
+                            href={club.facebookUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:text-blue-800 font-medium flex items-center text-sm justify-start hover:underline"
+                            title={`Visit ${club.facebookId} on Facebook`}
+                          >
+                            <FaFacebook className="mr-2" />
+                            View Profile
+                          </a>
                         </td>
                       </tr>
                     ))}
@@ -502,15 +530,39 @@ const DebateClubDirectory = () => {
                           </a>
                         </div>
                       </div>
+
+                      {/* Facebook Link for Mobile */}
+                      <div className="flex items-center">
+                        <div className="bg-emerald-50 p-2 rounded-lg mr-3">
+                          <FaFacebook className="text-blue-600" />
+                        </div>
+                        <div>
+                          <div className="text-xs text-gray-500 text-justify">Facebook</div>
+                          <a 
+                            href={club.facebookUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium text-blue-600 hover:text-blue-800 hover:underline text-justify"
+                          >
+                            @{club.facebookId}
+                          </a>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="pt-4 border-t border-emerald-100 flex justify-between items-center">
                       <div className="text-xs text-gray-500 text-justify">
                         Est. {club.established} • {club.members} members
                       </div>
-                      <button className="text-emerald-600 hover:text-emerald-800 font-medium flex items-center text-sm justify-start">
-                        <FaEye className="mr-1" /> Details
-                      </button>
+                      <a 
+                        href={club.facebookUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800 font-medium flex items-center text-sm justify-start hover:underline"
+                      >
+                        <FaFacebook className="mr-1" />
+                        Visit Facebook
+                      </a>
                     </div>
                   </div>
                 ))}
@@ -520,37 +572,41 @@ const DebateClubDirectory = () => {
         </div>
       </section>
 
-      {/* CTA Section
-      <section className="py-12 md:py-16 lg:py-20 bg-white">
+      {/* CTA Section */}
+      <section className="py-12 md:py-16 lg:py-20 bg-white border-t border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto">
             <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FaUniversity className="text-2xl text-emerald-600" />
+              <FaFacebook className="text-2xl text-blue-600" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-6 text-justify">
-              Want to Add Your Debate Club?
+              Follow Your Favorite Debate Clubs
             </h2>
             <p className="text-gray-600 text-lg mb-8 leading-relaxed text-justify">
-              If your university debate club is not listed here, you can register it with 
-              Bangladesh Debate Federation to be included in our official directory.
+              Stay updated with events, tournaments, and activities by following your university's debate club on Facebook. 
+              Click on any club's Facebook link to connect with them directly.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <a 
-                href="mailto:directory@debatefederation.org" 
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
+                href="https://facebook.com" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center"
               >
-                Register Your Club
+                <FaFacebook className="mr-2" />
+                Visit Facebook
               </a>
               <a 
-                href="/contact" 
-                className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 border border-emerald-300"
+                href="mailto:directory@debatefederation.org" 
+                className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 border border-emerald-300 flex items-center justify-center"
               >
-                Contact For Updates
+                <FaEnvelope className="mr-2" />
+                Update Club Info
               </a>
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* Print Styles */}
       <style>{`
@@ -577,6 +633,16 @@ const DebateClubDirectory = () => {
           th {
             background-color: #f0f9ff !important;
             -webkit-print-color-adjust: exact;
+          }
+          
+          /* Hide Facebook column in print */
+          th:nth-child(6), td:nth-child(6) {
+            display: none;
+          }
+          
+          /* Hide CTA section in print */
+          section:last-child {
+            display: none;
           }
         }
       `}</style>

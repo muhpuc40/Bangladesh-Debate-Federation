@@ -32,6 +32,7 @@ const Navbar = () => {
     { path: '/committee', label: 'Committee', isDropdown: true },
     { path: '/events', label: 'Events' },
     { path: '/debate-club-directory', label: 'Directory' },
+      { path: '/news', label: 'News' },
     { path: '/resources', label: 'Resources' },
     { path: '/gallery', label: 'Gallery' },
     { path: '/contact', label: 'Contact' },
