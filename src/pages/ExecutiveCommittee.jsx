@@ -28,11 +28,11 @@ const ExecutiveCommittee = () => {
       linkedin: "https://www.linkedin.com/in/mohammed-saifuddin-munna-aab67a10a/"
     },
     {
-      name: "Ms. Ayesha Rahman",
-      position: "Vice President",
+      name: "Md Saifuddin Munna",
+      position: "President",
       description: "Experienced debate coach with 15+ years in competitive debating. Champion of National Debate Championship 2010.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      gmail: "ayesha.rahman@example.com",
+      image: "https://admin.puc.ac.bd/ProfilePictures/Munna_eee_Saifuddin%20Munna.JPG?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      gmail: "munna.puc@gmail.com",
       facebook: "https://facebook.com/ayesha.rahman",
       linkedin: "https://linkedin.com/in/ayesharahman"
     },
@@ -153,8 +153,7 @@ const ExecutiveCommittee = () => {
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
               Meet the dedicated leaders steering Bangladesh Debate Federation. 
-              Our committee comprises experts in education, debate, finance, and 
-              international relations working together to promote debate culture nationwide.
+
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
              
@@ -171,36 +170,7 @@ const ExecutiveCommittee = () => {
             Our Leadership Team
           </h2>
 
-          {/* Single Card - First Member (centered) */}
-          <div className="flex justify-center mb-12">
-            <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-emerald-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="flex flex-col items-center p-6">
-                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-emerald-100 shadow-lg mb-5">
-                  <img 
-                    src={committeeMembers[0].image} 
-                    alt={committeeMembers[0].name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="text-center mb-4">
-                  <h3 className="text-xl font-bold text-emerald-900">
-                    {committeeMembers[0].name}
-                  </h3>
-                  <p className="text-emerald-600 font-medium mt-1">
-                    {committeeMembers[0].position}
-                  </p>
-                </div>
-                <p className="text-gray-600 text-center text-sm leading-relaxed">
-                  {committeeMembers[0].description}
-                </p>
-                <SocialLinks 
-                  gmail={committeeMembers[0].gmail}
-                  facebook={committeeMembers[0].facebook}
-                  linkedin={committeeMembers[0].linkedin}
-                />
-              </div>
-            </div>
-          </div>
+
 
           {/* Two Cards - Second and Third Members */}
           <div className="flex justify-center mb-8">
