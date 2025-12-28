@@ -182,20 +182,7 @@ const Events = () => {
               organized by Bangladesh Debate Federation. Register now to participate in 
               transformative experiences.
             </p>
-            <div className="flex flex-wrap gap-4 justify-start">
-              <Link 
-                to="/registration" 
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1"
-              >
-                <FaRegCalendarCheck className="mr-2" /> Register for Events
-              </Link>
-              <button 
-                onClick={() => setActiveFilter('upcoming')}
-                className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1"
-              >
-                View Upcoming Events
-              </button>
-            </div>
+           
           </div>
         </div>
       </section>
