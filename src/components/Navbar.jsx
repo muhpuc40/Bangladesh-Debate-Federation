@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaTimes, FaSignInAlt, FaChevronDown } from 'react-icons/fa';
@@ -24,8 +25,8 @@ const Navbar = () => {
     { path: '/presidium-member', label: 'Presidium Member' },
   ];
 
+  // Home আলাদাভাবে দেখানো হবে, তাই navLinks থেকে রিমুভ করা হয়েছে
   const navLinks = [
-    { path: '/', label: 'Home' },
     { path: '/events', label: 'Events' },
     { path: '/debate-club-directory', label: 'Directory' },
     { path: '/news', label: 'News' },
@@ -153,10 +154,10 @@ const Navbar = () => {
     <nav className="fixed top-2 left-0 right-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center justify-between backdrop-blur-sm bg-white/5 rounded-full px-5 py-1.5">
-          {/* Logo */}
+        <div className="hidden lg:flex items-center justify-between backdrop-blur-sm bg-white/5 rounded-full px-3 py-0.5"> {/* px-3 py-0.5 দিয়ে ছোট করেছি */}
+          {/* Logo - ছোট করার জন্য w-12 h-12 করেছি */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 flex-shrink-0">
+            <div className="w-12 h-12 flex-shrink-0"> {/* আগে w-14 h-14 ছিল */}
               <img 
                 src="https://i.ibb.co/Ldwswy4m/logo.png" 
                 alt="Bangladesh Debate Federation Logo" 
@@ -168,10 +169,10 @@ const Navbar = () => {
 
           {/* Navigation Links */}
           <div className="flex items-center space-x-0">
-            {/* Home */}
+            {/* Home - শুধু একবার দেখানো হবে Logo এর পরে */}
             <NavLink
               to="/"
-              className="px-3.5 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm"
+              className="px-3 py-1 rounded-full transition-all duration-300 font-medium whitespace-nowrap text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-xs" /* px-3 py-1 এবং text-xs */
             >
               Home
             </NavLink>
@@ -183,12 +184,12 @@ const Navbar = () => {
             >
               <button
                 onClick={handleAboutClick}
-                className={`px-3.5 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap flex items-center text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm cursor-pointer ${
+                className={`px-3 py-1 rounded-full transition-all duration-300 font-medium whitespace-nowrap flex items-center text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-xs cursor-pointer ${
                   isAboutDropdownOpen ? 'bg-emerald-500/30 text-emerald-900' : ''
-                }`}
+                }`} /* px-3 py-1 এবং text-xs */
               >
                 About Us
-                <FaChevronDown className={`ml-1 w-3 h-3 transition-transform duration-300 ${isAboutDropdownOpen ? 'rotate-180' : ''}`} />
+                <FaChevronDown className={`ml-1 w-2.5 h-2.5 transition-transform duration-300 ${isAboutDropdownOpen ? 'rotate-180' : ''}`} /> {/* আগে w-3 h-3 ছিল */}
               </button>
               
               {isAboutDropdownOpen && (
@@ -222,12 +223,12 @@ const Navbar = () => {
             >
               <button
                 onClick={handleCommitteeClick}
-                className={`px-3.5 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap flex items-center text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm cursor-pointer ${
+                className={`px-3 py-1 rounded-full transition-all duration-300 font-medium whitespace-nowrap flex items-center text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-xs cursor-pointer ${
                   isCommitteeDropdownOpen ? 'bg-emerald-500/30 text-emerald-900' : ''
-                }`}
+                }`} /* px-3 py-1 এবং text-xs */
               >
                 Committee
-                <FaChevronDown className={`ml-1 w-3 h-3 transition-transform duration-300 ${isCommitteeDropdownOpen ? 'rotate-180' : ''}`} />
+                <FaChevronDown className={`ml-1 w-2.5 h-2.5 transition-transform duration-300 ${isCommitteeDropdownOpen ? 'rotate-180' : ''}`} /> {/* আগে w-3 h-3 ছিল */}
               </button>
               
               {isCommitteeDropdownOpen && (
@@ -254,12 +255,12 @@ const Navbar = () => {
               )}
             </div>
             
-            {/* অন্যান্য লিংক */}
+            {/* অন্যান্য লিংক - Home ছাড়া */}
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
-                className="px-3.5 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm"
+                className="px-3 py-1 rounded-full transition-all duration-300 font-medium whitespace-nowrap text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-xs" /* px-3 py-1 এবং text-xs */
               >
                 {link.label}
               </NavLink>
@@ -268,19 +269,19 @@ const Navbar = () => {
             {/* Sign In Button */}
             <Link
               to="/signin"
-              className="text-white bg-emerald-700 hover:bg-emerald-800 border border-emerald-700 font-bold py-1.5 px-4 rounded-full transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-lg ml-2 text-sm"
+              className="text-white bg-emerald-700 hover:bg-emerald-800 border border-emerald-700 font-bold py-1 px-3 rounded-full transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-lg ml-2 text-xs" /* py-1 px-3 এবং text-xs */
             >
-              <FaSignInAlt className="mr-1.5 w-3 h-3" /> 
+              <FaSignInAlt className="mr-1.5 w-2.5 h-2.5" /> {/* আগে w-3 h-3 ছিল */}
               Sign In
             </Link>
           </div>
         </div>
 
         {/* Mobile Layout */}
-        <div className="flex lg:hidden justify-between items-center backdrop-blur-sm bg-white/5 rounded-full px-3 py-2">
-          {/* Logo */}
+        <div className="flex lg:hidden justify-between items-center backdrop-blur-sm bg-white/5 rounded-full px-3 py-1.5"> {/* py-1.5 দিয়ে ছোট করেছি */}
+          {/* Logo - মোবাইলেও ছোট */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0 z-10">
-            <div className="w-12 h-12 flex-shrink-0">
+            <div className="w-10 h-10 flex-shrink-0"> {/* আগে w-12 h-12 ছিল */}
               <img 
                 src="https://i.ibb.co/Ldwswy4m/logo.png" 
                 alt="Bangladesh Debate Federation Logo" 
@@ -292,7 +293,7 @@ const Navbar = () => {
 
           <button
             onClick={toggleMobileMenu}
-            className="text-emerald-800 hover:text-emerald-900 focus:outline-none p-2.5 hover:bg-emerald-500/20 rounded-full transition-all duration-300 mobile-menu-button backdrop-blur-sm"
+            className="text-emerald-800 hover:text-emerald-900 focus:outline-none p-2 hover:bg-emerald-500/20 rounded-full transition-all duration-300 mobile-menu-button backdrop-blur-sm"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
           >
@@ -327,7 +328,7 @@ const Navbar = () => {
           {/* Menu Items */}
           <div className="flex-1 overflow-y-auto p-2.5">
             <div className="flex flex-col space-y-0.5">
-              {/* Home */}
+              {/* Home - মোবাইলে একবারই দেখানো হবে */}
               <NavLink
                 to="/"
                 onClick={closeMenu}
@@ -410,7 +411,7 @@ const Navbar = () => {
                 )}
               </div>
 
-              {/* অন্যান্য লিংক */}
+              {/* অন্যান্য লিংক - Home ছাড়া */}
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}
