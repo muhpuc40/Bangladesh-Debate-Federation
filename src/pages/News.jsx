@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   FaCalendarAlt, 
@@ -201,6 +201,8 @@ const announcementsData = [
 
 const News = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const featuredScrollRef = useRef(null);
+  const announcementScrollRef = useRef(null);
 
   // Extract data from JSON
   const news = newsData.news;
@@ -233,6 +235,49 @@ const News = () => {
       'Results': 'bg-red-100 text-red-800'
     };
     return colors[category] || 'bg-gray-100 text-gray-800';
+  };
+
+  // Handle mouse wheel events separately for each scrollable area
+  const handleFeaturedWheel = (e) => {
+    if (featuredScrollRef.current) {
+      const isAtTop = featuredScrollRef.current.scrollTop === 0;
+      const isAtBottom = featuredScrollRef.current.scrollTop + featuredScrollRef.current.clientHeight >= 
+                        featuredScrollRef.current.scrollHeight - 1;
+      
+      // If scrolling up at top, let the page scroll
+      if (isAtTop && e.deltaY < 0) {
+        return;
+      }
+      // If scrolling down at bottom, let the page scroll
+      if (isAtBottom && e.deltaY > 0) {
+        return;
+      }
+      
+      // Otherwise, scroll the featured news container
+      e.stopPropagation();
+      featuredScrollRef.current.scrollTop += e.deltaY;
+    }
+  };
+
+  const handleAnnouncementWheel = (e) => {
+    if (announcementScrollRef.current) {
+      const isAtTop = announcementScrollRef.current.scrollTop === 0;
+      const isAtBottom = announcementScrollRef.current.scrollTop + announcementScrollRef.current.clientHeight >= 
+                        announcementScrollRef.current.scrollHeight - 1;
+      
+      // If scrolling up at top, let the page scroll
+      if (isAtTop && e.deltaY < 0) {
+        return;
+      }
+      // If scrolling down at bottom, let the page scroll
+      if (isAtBottom && e.deltaY > 0) {
+        return;
+      }
+      
+      // Otherwise, scroll the announcement container
+      e.stopPropagation();
+      announcementScrollRef.current.scrollTop += e.deltaY;
+    }
   };
 
   return (
@@ -285,7 +330,7 @@ const News = () => {
               </div>
             </div>
 
-            {/* Featured News Section */}
+            {/* Featured News Section - Separate Scrollable Container */}
             {featuredNews.length > 0 && (
               <div className="mb-12">
                 <h2 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center">
@@ -293,56 +338,66 @@ const News = () => {
                   Featured News
                 </h2>
                 <div className="bg-gradient-to-r from-emerald-50 to-white rounded-2xl p-6 border border-emerald-100">
-                  {featuredNews.map(item => (
-                    <div key={item.id} className="mb-6 last:mb-0">
-                      <div className="flex items-start space-x-4">
-                        <div className="flex-shrink-0">
-                          <img 
-                            src={item.image} 
-                            alt={item.title}
-                            className="w-24 h-24 rounded-lg object-cover"
-                          />
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
-                              {item.category}
-                            </span>
-                            <span className="text-xs text-gray-500 flex items-center">
-                              <FaCalendarAlt className="mr-1" /> {item.date}
-                            </span>
+                  {/* Scrollable container for Featured News */}
+                  <div 
+                    ref={featuredScrollRef}
+                    onWheel={handleFeaturedWheel}
+                    className="max-h-[600px] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-emerald-300/80 scrollbar-track-emerald-100/50 hover:scrollbar-thumb-emerald-400 scroll-smooth"
+                    style={{
+                      scrollBehavior: 'smooth',
+                    }}
+                  >
+                    {featuredNews.map(item => (
+                      <div key={item.id} className="mb-6 last:mb-0 p-4 hover:bg-emerald-50/50 rounded-lg transition-all duration-300">
+                        <div className="flex items-start space-x-4">
+                          <div className="flex-shrink-0">
+                            <img 
+                              src={item.image} 
+                              alt={item.title}
+                              className="w-24 h-24 rounded-lg object-cover"
+                            />
                           </div>
-                          <h3 className="text-lg font-bold text-emerald-900 mb-2 hover:text-emerald-700 transition-colors duration-300">
-                            {item.title}
-                          </h3>
-                          <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-                            {item.excerpt}
-                          </p>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-3 text-xs text-gray-500">
-                              <span className="flex items-center">
-                                <FaEye className="mr-1" /> {item.views}
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
+                                {item.category}
                               </span>
-                              <span className="flex items-center">
-                                <FaComment className="mr-1" /> {item.comments}
+                              <span className="text-xs text-gray-500 flex items-center">
+                                <FaCalendarAlt className="mr-1" /> {item.date}
                               </span>
                             </div>
-                            <Link 
-                              to={`/news/${item.id}`}
-                              className="text-emerald-600 hover:text-emerald-800 font-bold text-sm flex items-center"
-                            >
-                              Read More <FaArrowRight className="ml-1 text-xs" />
-                            </Link>
+                            <h3 className="text-lg font-bold text-emerald-900 mb-2 hover:text-emerald-700 transition-colors duration-300">
+                              {item.title}
+                            </h3>
+                            <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                              {item.excerpt}
+                            </p>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center space-x-3 text-xs text-gray-500">
+                                <span className="flex items-center">
+                                  <FaEye className="mr-1" /> {item.views}
+                                </span>
+                                <span className="flex items-center">
+                                  <FaComment className="mr-1" /> {item.comments}
+                                </span>
+                              </div>
+                              <Link 
+                                to={`/news/${item.id}`}
+                                className="text-emerald-600 hover:text-emerald-800 font-bold text-sm flex items-center"
+                              >
+                                Read More <FaArrowRight className="ml-1 text-xs" />
+                              </Link>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
 
-            {/* All News Grid */}
+            {/* All News Grid - Main Content (Not Scrollable) */}
             <div>
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold text-emerald-900">
@@ -447,7 +502,7 @@ const News = () => {
             </div>
           </div>
 
-          {/* Right Column - Announcements (1/3 width) - Made Sticky with more offset */}
+          {/* Right Column - Announcements (1/3 width) - Separate Scrollable Container */}
           <div className="lg:w-1/3">
             <div className="sticky top-20 z-10">
               {/* Announcements Header */}
@@ -466,49 +521,58 @@ const News = () => {
                 </p>
               </div>
 
-              {/* Announcements List */}
-              <div className="bg-white border border-emerald-100 rounded-b-xl overflow-hidden max-h-[calc(100vh-240px)] overflow-y-auto">
-                {announcementsData.map(announcement => (
-                  <div 
-                    key={announcement.id}
-                    className="p-5 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors duration-200"
-                  >
-                    <div className="flex items-start space-x-3">
-                      <div className="flex-shrink-0 mt-1">
-                        {announcement.icon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="px-2 py-0.5 bg-gray-100 text-xs font-bold text-gray-700 rounded">
-                            {announcement.category}
-                          </span>
-                          <span className="text-xs text-gray-500 flex items-center">
-                            <FaRegClock className="mr-1" /> {announcement.time}
-                          </span>
+              {/* Announcements List - Separate Scrollable Container */}
+              <div className="bg-white border border-emerald-100 rounded-b-xl overflow-hidden">
+                <div 
+                  ref={announcementScrollRef}
+                  onWheel={handleAnnouncementWheel}
+                  className="max-h-[calc(100vh-280px)] overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-300/80 scrollbar-track-emerald-100/50 hover:scrollbar-thumb-emerald-400 scroll-smooth"
+                  style={{
+                    scrollBehavior: 'smooth',
+                  }}
+                >
+                  {announcementsData.map(announcement => (
+                    <div 
+                      key={announcement.id}
+                      className="p-5 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors duration-200"
+                    >
+                      <div className="flex items-start space-x-3">
+                        <div className="flex-shrink-0 mt-1">
+                          {announcement.icon}
                         </div>
-                        <h3 className="font-bold text-gray-900 mb-2">
-                          {announcement.title}
-                        </h3>
-                        <p className="text-sm text-gray-600 mb-3">
-                          {announcement.description}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <span className={`text-xs px-2 py-1 rounded ${
-                            announcement.type === 'urgent' ? 'bg-red-100 text-red-700' :
-                            announcement.type === 'update' ? 'bg-yellow-100 text-yellow-700' :
-                            announcement.type === 'new' ? 'bg-orange-100 text-orange-700' :
-                            'bg-gray-100 text-gray-700'
-                          }`}>
-                            {announcement.type.charAt(0).toUpperCase() + announcement.type.slice(1)}
-                          </span>
-                          <button className="text-emerald-600 hover:text-emerald-800 text-sm font-medium flex items-center">
-                            Details <FaArrowRight className="ml-1 text-xs" />
-                          </button>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="px-2 py-0.5 bg-gray-100 text-xs font-bold text-gray-700 rounded">
+                              {announcement.category}
+                            </span>
+                            <span className="text-xs text-gray-500 flex items-center">
+                              <FaRegClock className="mr-1" /> {announcement.time}
+                            </span>
+                          </div>
+                          <h3 className="font-bold text-gray-900 mb-2">
+                            {announcement.title}
+                          </h3>
+                          <p className="text-sm text-gray-600 mb-3">
+                            {announcement.description}
+                          </p>
+                          <div className="flex items-center justify-between">
+                            <span className={`text-xs px-2 py-1 rounded ${
+                              announcement.type === 'urgent' ? 'bg-red-100 text-red-700' :
+                              announcement.type === 'update' ? 'bg-yellow-100 text-yellow-700' :
+                              announcement.type === 'new' ? 'bg-orange-100 text-orange-700' :
+                              'bg-gray-100 text-gray-700'
+                            }`}>
+                              {announcement.type.charAt(0).toUpperCase() + announcement.type.slice(1)}
+                            </span>
+                            <button className="text-emerald-600 hover:text-emerald-800 text-sm font-medium flex items-center">
+                              Details <FaArrowRight className="ml-1 text-xs" />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
 
                 {/* View All Button */}
                 <div className="p-4 border-t border-gray-100 bg-gray-50">
@@ -523,6 +587,34 @@ const News = () => {
           </div>
         </div>
       </div>
+
+      {/* Add custom CSS for smooth scrolling */}
+      <style jsx>{`
+        /* Custom scrollbar styling for extra smoothness */
+        .scrollbar-thin::-webkit-scrollbar {
+          width: 8px;
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar-track {
+          background: rgba(209, 250, 229, 0.3);
+          border-radius: 10px;
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+          background: rgba(16, 185, 129, 0.6);
+          border-radius: 10px;
+          transition: background 0.3s ease;
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+          background: rgba(16, 185, 129, 0.8);
+        }
+        
+        .scrollbar-thin {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(16, 185, 129, 0.6) rgba(209, 250, 229, 0.3);
+        }
+      `}</style>
     </div>
   );
 };
