@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { FaSearch, FaUniversity, FaUserTie, FaUserGraduate, FaPhone, FaEnvelope, FaFilter, FaDownload, FaPrint, FaEye, FaMapMarkerAlt, FaFacebook } from 'react-icons/fa';
 
@@ -340,7 +341,7 @@ const DebateClubDirectory = () => {
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
                         <div className="flex items-center justify-start">
-                          <FaFacebook className="mr-2 text-blue-600" /> Facebook
+                          <FaFacebook className="mr-2 text-blue-600" /> Link
                         </div>
                       </th>
                     </tr>
@@ -376,11 +377,10 @@ const DebateClubDirectory = () => {
                             href={club.facebookUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-blue-600 hover:text-blue-800 font-medium flex items-center text-sm justify-start hover:underline"
+                            className="text-blue-600 hover:text-blue-800 font-medium flex items-center justify-center text-lg"
                             title={`Visit ${club.facebookId} on Facebook`}
                           >
-                            <FaFacebook className="mr-2" />
-                            View Profile
+                            <FaFacebook />
                           </a>
                         </td>
                       </tr>
@@ -453,20 +453,20 @@ const DebateClubDirectory = () => {
                         </div>
                       </div>
 
-                      {/* Facebook Link for Mobile */}
+                      {/* Link for Mobile */}
                       <div className="flex items-center">
                         <div className="bg-emerald-50 p-2 rounded-lg mr-3">
                           <FaFacebook className="text-blue-600" />
                         </div>
                         <div>
-                          <div className="text-xs text-gray-500 text-justify">Facebook</div>
+                          <div className="text-xs text-gray-500 text-justify">Link</div>
                           <a 
                             href={club.facebookUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="font-medium text-blue-600 hover:text-blue-800 hover:underline text-justify"
                           >
-                            @{club.facebookId}
+                            Visit Link
                           </a>
                         </div>
                       </div>
@@ -483,7 +483,7 @@ const DebateClubDirectory = () => {
                         className="text-blue-600 hover:text-blue-800 font-medium flex items-center text-sm justify-start hover:underline"
                       >
                         <FaFacebook className="mr-1" />
-                        Visit Facebook
+                        Visit Link
                       </a>
                     </div>
                   </div>
@@ -493,42 +493,6 @@ const DebateClubDirectory = () => {
           )}
         </div>
       </section>
-
-      {/* CTA Section
-      <section className="py-12 md:py-16 lg:py-20 bg-white border-t border-emerald-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FaFacebook className="text-2xl text-blue-600" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-6 text-justify">
-              Follow Your Favorite Debate Clubs
-            </h2>
-            <p className="text-gray-600 text-lg mb-8 leading-relaxed text-justify">
-              Stay updated with events, tournaments, and activities by following your university's debate club on Facebook. 
-              Click on any club's Facebook link to connect with them directly.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a 
-                href="https://facebook.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center"
-              >
-                <FaFacebook className="mr-2" />
-                Visit Facebook
-              </a>
-              <a 
-                href="mailto:directory@debatefederation.org" 
-                className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 border border-emerald-300 flex items-center justify-center"
-              >
-                <FaEnvelope className="mr-2" />
-                Update Club Info
-              </a>
-            </div>
-          </div>
-        </div>
-      </section> */}
 
       {/* Print Styles */}
       <style>{`
@@ -557,7 +521,7 @@ const DebateClubDirectory = () => {
             -webkit-print-color-adjust: exact;
           }
           
-          /* Hide Facebook column in print */
+          /* Hide Link column in print */
           th:nth-child(6), td:nth-child(6) {
             display: none;
           }

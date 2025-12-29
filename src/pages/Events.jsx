@@ -34,7 +34,7 @@ const eventsData = {
     {
       "id": 2,
       "title": "Asian Parliamentary Debate",
-      "description": "Intensive traning on Asian Parliamentary format for college students",
+      "description": "Intensive training on Asian Parliamentary format for college students",
       "date": "March 25-27, 2024",
       "time": "10:00 AM - 4:00 PM",
       "location": "Online (Zoom)",
@@ -59,19 +59,10 @@ const eventsData = {
       "status": "Completed",
       "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
-
-
-
   ],
-  // "metadata": {
-  //   "total": 6,
-  //   "upcoming": 4,
-  //   "completed": 2,
-  //   "lastUpdated": "2024-03-01"
-  // }
 };
 
-// Filters data in JSON format
+// Filters data in JSON format (keeping for internal logic but not displaying)
 const filtersData = {
   "filters": [
     { "id": "all", "label": "All Events" },
@@ -91,7 +82,6 @@ const Events = () => {
   // Extract events array from eventsData object
   const events = eventsData.events;
   const filters = filtersData.filters;
-  //const metadata = eventsData.metadata;
 
   const filteredEvents = events.filter(event => {
     const matchesFilter = activeFilter === 'all' || 
@@ -141,7 +131,6 @@ const Events = () => {
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed text-justify">
               Discover upcoming debate competitions, training, workshops organized by Bangladesh Debate Federation.
             </p>
-           
           </div>
         </div>
       </section>
@@ -166,16 +155,16 @@ const Events = () => {
               </div>
             </div>
 
-            {/* Filter Button for Mobile */}
-            <div className="md:hidden">
+            {/* Filter Button for Mobile - Removed since filter chips are removed */}
+            {/* <div className="md:hidden">
               <button className="w-full flex items-center justify-center bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg border border-emerald-200 hover:bg-emerald-100 transition-all duration-300">
                 <FaFilter className="mr-2" /> Filter
               </button>
-            </div>
+            </div> */}
           </div>
 
-          {/* Filter Chips */}
-          <div className="flex flex-wrap gap-2">
+          {/* Filter Chips - REMOVED */}
+          {/* <div className="flex flex-wrap gap-2">
             {filters.map(filter => (
               <button
                 key={filter.id}
@@ -189,7 +178,7 @@ const Events = () => {
                 {filter.label}
               </button>
             ))}
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -199,7 +188,7 @@ const Events = () => {
           <div className="flex justify-between items-center mb-8">
             <div className="text-justify">
               <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">
-                {getFilterLabel(activeFilter)}
+                All Events
                 <span className="text-gray-500 text-lg ml-2">({filteredEvents.length})</span>
               </h2>
               <p className="text-sm text-gray-600 mt-1">
@@ -218,12 +207,12 @@ const Events = () => {
             <div className="text-center py-12">
               <div className="text-6xl mb-4">📅</div>
               <h3 className="text-2xl font-bold text-gray-700 mb-2 text-justify">No events found</h3>
-              <p className="text-gray-600 mb-6 text-justify">Try changing your search or filter criteria</p>
+              <p className="text-gray-600 mb-6 text-justify">Try changing your search criteria</p>
               <button 
                 onClick={() => { setSearchTerm(''); setActiveFilter('all'); }}
                 className="text-emerald-600 hover:text-emerald-800 font-bold"
               >
-                Clear all filters
+                Clear search
               </button>
             </div>
           ) : (
@@ -322,8 +311,6 @@ const Events = () => {
           )}
         </div>
       </section>
-
-    
     </div>
   );
 };
