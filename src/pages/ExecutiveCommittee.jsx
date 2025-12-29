@@ -1,18 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { 
-  FaUserTie, 
-  FaUsers, 
-  FaAward, 
-  FaCalendarAlt,
-  FaBuilding,
-  FaEnvelope,
-  FaPhone,
-  FaLinkedin,
-  FaTwitter,
-  FaArrowRight,
-  FaGoogle, // Gmail আইকোন
-  FaFacebook, // Facebook আইকোন
+  FaGoogle,
+  FaFacebook,
+  FaLinkedin
 } from 'react-icons/fa';
 
 const ExecutiveCommittee = () => {
@@ -69,41 +59,12 @@ const ExecutiveCommittee = () => {
     {
       name: "Mr. Arif Chowdhury",
       position: "Public Relations Director",
-    
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       gmail: "arif.chowdhury@example.com",
       facebook: "https://facebook.com/arif.chowdhury",
       linkedin: "https://linkedin.com/in/arifchowdhury"
     }
   ];
-
-  // Committee structure data
-  // const committeeStructure = [
-  //   {
-  //     title: "Executive Board",
-  //     description: "Overall governance and strategic direction of the federation",
-  //     members: "7 members",
-  //     icon: <FaUserTie className="text-emerald-600 text-2xl" />
-  //   },
-  //   {
-  //     title: "Academic Committee",
-  //     description: "Curriculum development, judge training, and educational standards",
-  //     members: "12 members",
-  //     icon: <FaAward className="text-emerald-600 text-2xl" />
-  //   },
-  //   {
-  //     title: "Events & Tournament Committee",
-  //     description: "Organizes national and regional debate tournaments",
-  //     members: "15 members",
-  //     icon: <FaCalendarAlt className="text-emerald-600 text-2xl" />
-  //   },
-  //   {
-  //     title: "Finance & Resource Committee",
-  //     description: "Financial oversight, fundraising, and resource management",
-  //     members: "8 members",
-  //     icon: <FaBuilding className="text-emerald-600 text-2xl" />
-  //   }
-  // ];
 
   // Social link component for member cards
   const SocialLinks = ({ gmail, facebook, linkedin }) => (
@@ -139,7 +100,7 @@ const ExecutiveCommittee = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
+      <section className="relative pt-20 md:pt-24 py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
           <div className="max-w-3xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight">
@@ -147,12 +108,7 @@ const ExecutiveCommittee = () => {
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
               Meet the dedicated leaders steering Bangladesh Debate Federation. 
-
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-             
-          
-            </div>
           </div>
         </div>
       </section>
@@ -163,8 +119,6 @@ const ExecutiveCommittee = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-emerald-900 text-center mb-12">
             Our Leadership Team
           </h2>
-
-
 
           {/* Two Cards - Second and Third Members */}
           <div className="flex justify-center mb-8">
@@ -236,10 +190,6 @@ const ExecutiveCommittee = () => {
           </div>
         </div>
       </section>
-
-
-
- 
     </div>
   );
 };

@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { FaSearch, FaUniversity, FaUserTie, FaUserGraduate, FaPhone, FaEnvelope, FaFilter, FaDownload, FaPrint, FaEye, FaMapMarkerAlt, FaFacebook } from 'react-icons/fa';
+import { FaSearch, FaUniversity, FaUserTie, FaUserGraduate, FaPhone, FaEnvelope, FaFilter, FaDownload, FaPrint, FaMapMarkerAlt, FaFacebook } from 'react-icons/fa';
 
 const DebateClubDirectory = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -172,7 +171,7 @@ const DebateClubDirectory = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
+      <section className="relative pt-20 md:pt-24 py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight text-justify">
@@ -187,7 +186,6 @@ const DebateClubDirectory = () => {
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1"
               >
                 <FaSearch className="mr-2" /> Find Debate Clubs
-
               </a>
             </div>
           </div>

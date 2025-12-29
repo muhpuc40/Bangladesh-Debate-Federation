@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import { 
   FaUsers, 
   FaTrophy, 
-  FaMapMarkerAlt, 
   FaCalendarAlt,
-  FaCheckCircle,
   FaArrowRight,
   FaHandshake,
   FaGlobeAsia,
@@ -50,7 +48,6 @@ const MissionVision = () => {
     }
   ];
 
-
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
@@ -58,7 +55,7 @@ const MissionVision = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
+      <section className="relative pt-20 md:pt-24 py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-center">
             <div>
@@ -103,13 +100,9 @@ const MissionVision = () => {
                         alt={image.caption}
                         className="h-full w-full object-cover"
                       />
-                      {/* Gradient Overlay */}
-
                     </div>
                   </div>
                 ))}
-
-
 
                 {/* Slide Indicators */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
@@ -132,8 +125,6 @@ const MissionVision = () => {
                   {currentSlide + 1} / {galleryImages.length}
                 </div>
               </div>
-
-              {/* No gallery stats - clean design */}
             </div>
           </div>
         </div>

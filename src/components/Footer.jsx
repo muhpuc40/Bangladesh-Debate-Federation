@@ -64,14 +64,11 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Empty Middle Column for spacing */}
-          <div className="hidden lg:block"></div>
-
-          {/* Contact Information - Right Side */}
-          <div>
-            <div className="space-y-4 md:space-y-5">
+          {/* Contact Information - Centered Column */}
+          <div className="col-span-1 lg:col-span-1 flex flex-col items-center justify-center">
+            <div className="space-y-4 md:space-y-5 w-full max-w-xs">
               <div>
-                <div className="flex items-center mb-2">
+                <div className="flex items-center mb-2 justify-center">
                   <div className="bg-emerald-100 p-1.5 rounded-full mr-2 group hover:bg-emerald-200 transition-all duration-300">
                     <FaMapMarkerAlt className="text-emerald-600 text-xs group-hover:scale-110 transition-transform duration-300" />
                   </div>
@@ -79,13 +76,13 @@ const Footer = () => {
                     Head Office
                   </h4>
                 </div>
-                <p className="text-gray-600 text-xs md:text-sm pl-8">
-                House: 128, Road: 04, Mohammadia Housing Society, Mohammadpur, Dhaka
+                <p className="text-gray-600 text-xs md:text-sm text-center">
+                  House: 128, Road: 04, Mohammadia Housing Society, Mohammadpur, Dhaka
                 </p>
               </div>
 
               <div>
-                <div className="flex items-center mb-2">
+                <div className="flex items-center mb-2 justify-center">
                   <div className="bg-emerald-100 p-1.5 rounded-full mr-2 group hover:bg-emerald-200 transition-all duration-300">
                     <FaPhone className="text-emerald-600 text-xs group-hover:scale-110 transition-transform duration-300" />
                   </div>
@@ -93,15 +90,17 @@ const Footer = () => {
                     Contact
                   </h4>
                 </div>
-                <p className="text-gray-600 text-xs md:text-sm pl-8">
+                <p className="text-gray-600 text-xs md:text-sm text-center">
                   Phone: +880 1719 142953<br />
                   Phone: +880 1717 666166<br />
-                  Phone: +880 1777 408630<br />
-        
+                  Phone: +880 1777 408630
                 </p>
               </div>
             </div>
           </div>
+
+          {/* Empty Right Column for spacing */}
+          <div className="hidden lg:block"></div>
         </div>
 
         {/* Copyright and Legal */}

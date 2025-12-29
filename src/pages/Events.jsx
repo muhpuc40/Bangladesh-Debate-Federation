@@ -5,13 +5,10 @@ import {
   FaMapMarkerAlt, 
   FaUsers, 
   FaClock,
-  FaFilter,
   FaSearch,
   FaArrowRight,
   FaRegCalendarCheck,
-  FaTrophy,
-  FaMicrophone,
-  FaUniversity
+  FaTrophy
 } from 'react-icons/fa';
 
 // Events data in JSON format
@@ -62,26 +59,12 @@ const eventsData = {
   ],
 };
 
-// Filters data in JSON format (keeping for internal logic but not displaying)
-const filtersData = {
-  "filters": [
-    { "id": "all", "label": "All Events" },
-    { "id": "upcoming", "label": "Upcoming" },
-    { "id": "ongoing", "label": "Ongoing" },
-    { "id": "completed", "label": "Completed" },
-    { "id": "national", "label": "National" },
-    { "id": "international", "label": "International" },
-    { "id": "training", "label": "Training" }
-  ]
-};
-
 const Events = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   
   // Extract events array from eventsData object
   const events = eventsData.events;
-  const filters = filtersData.filters;
 
   const filteredEvents = events.filter(event => {
     const matchesFilter = activeFilter === 'all' || 
@@ -92,12 +75,6 @@ const Events = () => {
                          event.location.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesFilter && matchesSearch;
   });
-
-  // Function to get filter label
-  const getFilterLabel = (filterId) => {
-    const filter = filters.find(f => f.id === filterId);
-    return filter ? filter.label : 'All Events';
-  };
 
   // Function to get event status color
   const getStatusColor = (eventType) => {
@@ -122,7 +99,7 @@ const Events = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
+      <section className="relative pt-20 md:pt-24 py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight text-justify">
@@ -154,31 +131,7 @@ const Events = () => {
                 />
               </div>
             </div>
-
-            {/* Filter Button for Mobile - Removed since filter chips are removed */}
-            {/* <div className="md:hidden">
-              <button className="w-full flex items-center justify-center bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-lg border border-emerald-200 hover:bg-emerald-100 transition-all duration-300">
-                <FaFilter className="mr-2" /> Filter
-              </button>
-            </div> */}
           </div>
-
-          {/* Filter Chips - REMOVED */}
-          {/* <div className="flex flex-wrap gap-2">
-            {filters.map(filter => (
-              <button
-                key={filter.id}
-                onClick={() => setActiveFilter(filter.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeFilter === filter.id
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
-                }`}
-              >
-                {filter.label}
-              </button>
-            ))}
-          </div> */}
         </div>
       </section>
 
@@ -191,14 +144,10 @@ const Events = () => {
                 All Events
                 <span className="text-gray-500 text-lg ml-2">({filteredEvents.length})</span>
               </h2>
-              <p className="text-sm text-gray-600 mt-1">
-                {/* Total Events: {metadata.total} | Upcoming: {metadata.upcoming} | Completed: {metadata.completed} */}
-              </p>
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-gray-600 text-sm text-justify">
                 {/* <FaRegCalendarCheck className="inline mr-1" /> */}
-                {/* {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })} */}
               </span>
             </div>
           </div>
