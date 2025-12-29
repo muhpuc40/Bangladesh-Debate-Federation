@@ -21,7 +21,6 @@ const ExecutiveCommittee = () => {
     {
       name: "Md Saifuddin Munna",
       position: "President",
-      description: "",
       image: "https://admin.puc.ac.bd/ProfilePictures/Munna_eee_Saifuddin%20Munna.JPG",
       gmail: "munna.puc@gmail.com",
       facebook: "https://www.facebook.com/share/1K5Sydesw9/",
@@ -30,7 +29,6 @@ const ExecutiveCommittee = () => {
     {
       name: "Md Saifuddin Munna",
       position: "President",
-      description: "Experienced debate coach with 15+ years in competitive debating. Champion of National Debate Championship 2010.",
       image: "https://admin.puc.ac.bd/ProfilePictures/Munna_eee_Saifuddin%20Munna.JPG?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       gmail: "munna.puc@gmail.com",
       facebook: "https://facebook.com/ayesha.rahman",
@@ -39,7 +37,6 @@ const ExecutiveCommittee = () => {
     {
       name: "Mr. Kamal Hossain",
       position: "Secretary General",
-      description: "Oversees daily operations and national debate circuit. Former international debate judge with extensive tournament experience.",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       gmail: "kamal.hossain@example.com",
       facebook: "https://facebook.com/kamal.hossain",
@@ -48,7 +45,6 @@ const ExecutiveCommittee = () => {
     {
       name: "Ms. Fatima Akter",
       position: "Treasurer",
-      description: "Financial management expert with background in nonprofit organizations. Ensures sustainable growth of debate initiatives.",
       image: "https://images.unsplash.com/photo-1494790108755-2616b786d4b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       gmail: "fatima.akter@example.com",
       facebook: "https://facebook.com/fatima.akter",
@@ -57,7 +53,6 @@ const ExecutiveCommittee = () => {
     {
       name: "Dr. Rahim Khan",
       position: "Academic Director",
-      description: "Develops debate curriculum for schools and universities. PhD in Rhetoric and Communication.",
       image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       gmail: "rahim.khan@example.com",
       facebook: "https://facebook.com/rahim.khan",
@@ -66,7 +61,6 @@ const ExecutiveCommittee = () => {
     {
       name: "Ms. Nusrat Jahan",
       position: "International Affairs Director",
-      description: "Manages international partnerships and exchange programs. Fluent in 4 languages with global debate network.",
       image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       gmail: "nusrat.jahan@example.com",
       facebook: "https://facebook.com/nusrat.jahan",
@@ -75,7 +69,7 @@ const ExecutiveCommittee = () => {
     {
       name: "Mr. Arif Chowdhury",
       position: "Public Relations Director",
-      description: "Former journalist overseeing public relations and media outreach. Expert in digital communication strategies.",
+    
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       gmail: "arif.chowdhury@example.com",
       facebook: "https://facebook.com/arif.chowdhury",
@@ -196,9 +190,7 @@ const ExecutiveCommittee = () => {
                         {member.position}
                       </p>
                     </div>
-                    <p className="text-gray-600 text-center text-sm leading-relaxed">
-                      {member.description}
-                    </p>
+
                     <SocialLinks 
                       gmail={member.gmail}
                       facebook={member.facebook}
@@ -233,9 +225,6 @@ const ExecutiveCommittee = () => {
                       {member.position}
                     </p>
                   </div>
-                  <p className="text-gray-600 text-center text-sm leading-relaxed">
-                    {member.description}
-                  </p>
                   <SocialLinks 
                     gmail={member.gmail}
                     facebook={member.facebook}
