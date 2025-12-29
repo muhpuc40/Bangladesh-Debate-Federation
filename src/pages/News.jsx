@@ -259,8 +259,8 @@ const News = () => {
           {/* Left Column - News (2/3 width) */}
           <div className="lg:w-2/3">
             
-            {/* Search Bar */}
-            <div className="mb-8">
+            {/* Search Bar - Made Sticky with offset for navbar */}
+            <div className="sticky top-16 z-20 bg-white pt-4 pb-6 mb-8 -mt-2 border-b border-emerald-100">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FaSearch className="text-gray-400 text-xl" />
@@ -270,7 +270,7 @@ const News = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search news articles by title, content, tags, or author..."
-                  className="w-full pl-12 pr-4 py-4 border-2 border-emerald-200 rounded-xl focus:ring-4 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-lg hover:border-emerald-300 shadow-sm"
+                  className="w-full pl-12 pr-4 py-3 border-2 border-emerald-200 rounded-xl focus:ring-4 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-base hover:border-emerald-300 shadow-sm"
                 />
                 {searchTerm && (
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
@@ -447,9 +447,9 @@ const News = () => {
             </div>
           </div>
 
-          {/* Right Column - Announcements (1/3 width) */}
+          {/* Right Column - Announcements (1/3 width) - Made Sticky with more offset */}
           <div className="lg:w-1/3">
-            <div className="sticky top-8">
+            <div className="sticky top-20 z-10">
               {/* Announcements Header */}
               <div className="bg-emerald-600 text-white rounded-t-xl p-6">
                 <div className="flex items-center justify-between mb-2">
@@ -467,7 +467,7 @@ const News = () => {
               </div>
 
               {/* Announcements List */}
-              <div className="bg-white border border-emerald-100 rounded-b-xl overflow-hidden">
+              <div className="bg-white border border-emerald-100 rounded-b-xl overflow-hidden max-h-[calc(100vh-240px)] overflow-y-auto">
                 {announcementsData.map(announcement => (
                   <div 
                     key={announcement.id}
