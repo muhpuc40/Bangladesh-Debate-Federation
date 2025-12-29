@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaTimes, FaSignInAlt, FaChevronDown } from 'react-icons/fa';
@@ -38,14 +37,18 @@ const Navbar = () => {
   // বাইরে ক্লিক করলে মেনু ও ড্রপডাউন বন্ধ করার ফাংশন
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // মোবাইল মেনু বাইরে ক্লিক করলে বন্ধ হবে
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target) && 
           isMenuOpen && !event.target.closest('.mobile-menu-button')) {
         closeMenu();
       }
       
+      // ডেস্কটপ About ড্রপডাউন বাইরে ক্লিক করলে বন্ধ হবে
       if (aboutDropdownRef.current && !aboutDropdownRef.current.contains(event.target)) {
         setIsAboutDropdownOpen(false);
       }
+      
+      // ডেস্কটপ Committee ড্রপডাউন বাইরে ক্লিক করলে বন্ধ হবে
       if (committeeDropdownRef.current && !committeeDropdownRef.current.contains(event.target)) {
         setIsCommitteeDropdownOpen(false);
       }
@@ -78,9 +81,30 @@ const Navbar = () => {
       document.body.style.overflow = '';
     };
 
+    // সব ক্লিকে বাইরের ক্লিক হ্যান্ডলিং যোগ করুন
+    const handleGlobalClick = (event) => {
+      // শুধু ডেস্কটপ ড্রপডাউনের জন্য
+      if (!window.matchMedia('(max-width: 1023px)').matches) {
+        // About ড্রপডাউন
+        if (isAboutDropdownOpen && aboutDropdownRef.current && 
+            !aboutDropdownRef.current.contains(event.target) &&
+            !event.target.closest('button[class*="About"]')) {
+          setIsAboutDropdownOpen(false);
+        }
+        
+        // Committee ড্রপডাউন
+        if (isCommitteeDropdownOpen && committeeDropdownRef.current && 
+            !committeeDropdownRef.current.contains(event.target) &&
+            !event.target.closest('button[class*="Committee"]')) {
+          setIsCommitteeDropdownOpen(false);
+        }
+      }
+    };
+
     if (isMenuOpen || isAboutDropdownOpen || isCommitteeDropdownOpen) {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleEscapeKey);
+      document.addEventListener('click', handleGlobalClick);
       
       if (isMenuOpen) {
         addOverlay();
@@ -90,6 +114,7 @@ const Navbar = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener('click', handleGlobalClick);
       removeOverlay();
     };
   }, [isMenuOpen, isAboutDropdownOpen, isCommitteeDropdownOpen]);
@@ -154,10 +179,10 @@ const Navbar = () => {
     <nav className="fixed top-2 left-0 right-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center justify-between backdrop-blur-sm bg-white/5 rounded-full px-3.5 py-1.5"> {/* px-3.5 py-1.5 দিয়ে হালকা ছোট */}
-          {/* Logo - সামান্য ছোট করার জন্য w-13 h-13 করেছি */}
+        <div className="hidden lg:flex items-center justify-between backdrop-blur-sm bg-white/5 rounded-full px-3.5 py-1.5">
+          {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0">
-            <div className="w-13 h-13 flex-shrink-0"> {/* w-13 h-13 - সামান্য ছোট */}
+            <div className="w-13 h-13 flex-shrink-0">
               <img 
                 src="https://i.ibb.co/Ldwswy4m/logo.png" 
                 alt="Bangladesh Debate Federation Logo" 
@@ -169,10 +194,10 @@ const Navbar = () => {
 
           {/* Navigation Links */}
           <div className="flex items-center space-x-0">
-            {/* Home - শুধু একবার দেখানো হবে Logo এর পরে */}
+            {/* Home */}
             <NavLink
               to="/"
-              className="px-3 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm" /* px-3 py-1.5 */
+              className="px-3 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm"
             >
               Home
             </NavLink>
@@ -186,7 +211,7 @@ const Navbar = () => {
                 onClick={handleAboutClick}
                 className={`px-3 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap flex items-center text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm cursor-pointer ${
                   isAboutDropdownOpen ? 'bg-emerald-500/30 text-emerald-900' : ''
-                }`} /* px-3 py-1.5 */
+                }`}
               >
                 About Us
                 <FaChevronDown className={`ml-1 w-3 h-3 transition-transform duration-300 ${isAboutDropdownOpen ? 'rotate-180' : ''}`} />
@@ -225,7 +250,7 @@ const Navbar = () => {
                 onClick={handleCommitteeClick}
                 className={`px-3 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap flex items-center text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm cursor-pointer ${
                   isCommitteeDropdownOpen ? 'bg-emerald-500/30 text-emerald-900' : ''
-                }`} /* px-3 py-1.5 */
+                }`}
               >
                 Committee
                 <FaChevronDown className={`ml-1 w-3 h-3 transition-transform duration-300 ${isCommitteeDropdownOpen ? 'rotate-180' : ''}`} />
@@ -255,12 +280,12 @@ const Navbar = () => {
               )}
             </div>
             
-            {/* অন্যান্য লিংক - Home ছাড়া */}
+            {/* অন্যান্য লিংক */}
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
-                className="px-3 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm" /* px-3 py-1.5 */
+                className="px-3 py-1.5 rounded-full transition-all duration-300 font-medium whitespace-nowrap text-emerald-800 hover:text-emerald-900 hover:bg-emerald-500/30 text-sm"
               >
                 {link.label}
               </NavLink>
@@ -269,7 +294,7 @@ const Navbar = () => {
             {/* Sign In Button */}
             <Link
               to="/signin"
-              className="text-white bg-emerald-700 hover:bg-emerald-800 border border-emerald-700 font-bold py-1.5 px-3.5 rounded-full transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-lg ml-2 text-sm" /* px-3.5 দিয়ে সামান্য ছোট */
+              className="text-white bg-emerald-700 hover:bg-emerald-800 border border-emerald-700 font-bold py-1.5 px-3.5 rounded-full transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-lg ml-2 text-sm"
             >
               <FaSignInAlt className="mr-1.5 w-3 h-3" />
               Sign In
@@ -278,10 +303,10 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Layout */}
-        <div className="flex lg:hidden justify-between items-center backdrop-blur-sm bg-white/5 rounded-full px-3 py-1.5"> {/* py-1.5 দিয়ে হালকা ছোট */}
-          {/* Logo - মোবাইলেও সামান্য ছোট */}
+        <div className="flex lg:hidden justify-between items-center backdrop-blur-sm bg-white/5 rounded-full px-3 py-1.5">
+          {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 min-w-0 z-10">
-            <div className="w-11 h-11 flex-shrink-0"> {/* w-11 h-11 - সামান্য ছোট */}
+            <div className="w-11 h-11 flex-shrink-0">
               <img 
                 src="https://i.ibb.co/Ldwswy4m/logo.png" 
                 alt="Bangladesh Debate Federation Logo" 
@@ -328,7 +353,7 @@ const Navbar = () => {
           {/* Menu Items */}
           <div className="flex-1 overflow-y-auto p-2.5">
             <div className="flex flex-col space-y-0.5">
-              {/* Home - মোবাইলে একবারই দেখানো হবে */}
+              {/* Home */}
               <NavLink
                 to="/"
                 onClick={closeMenu}
@@ -345,13 +370,13 @@ const Navbar = () => {
 
               {/* About Us - Mobile */}
               <div className="space-y-0.5">
-                <div 
-                  className="flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-emerald-50 cursor-pointer transition-all duration-300"
+                <button
                   onClick={toggleMobileAbout}
+                  className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-emerald-50 cursor-pointer transition-all duration-300 text-left"
                 >
                   <span className="font-medium text-emerald-900 text-xs">About Us</span>
                   <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${mobileAboutOpen ? 'rotate-180' : ''} text-emerald-700`} />
-                </div>
+                </button>
                 
                 {mobileAboutOpen && (
                   <div className="ml-2.5 pl-2.5 border-l-2 border-emerald-100">
@@ -379,13 +404,13 @@ const Navbar = () => {
 
               {/* Committee - Mobile */}
               <div className="space-y-0.5">
-                <div 
-                  className="flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-emerald-50 cursor-pointer transition-all duration-300"
+                <button
                   onClick={toggleMobileCommittee}
+                  className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-emerald-50 cursor-pointer transition-all duration-300 text-left"
                 >
                   <span className="font-medium text-emerald-900 text-xs">Committee</span>
                   <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${mobileCommitteeOpen ? 'rotate-180' : ''} text-emerald-700`} />
-                </div>
+                </button>
                 
                 {mobileCommitteeOpen && (
                   <div className="ml-2.5 pl-2.5 border-l-2 border-emerald-100">
@@ -411,7 +436,7 @@ const Navbar = () => {
                 )}
               </div>
 
-              {/* অন্যান্য লিংক - Home ছাড়া */}
+              {/* অন্যান্য লিংক */}
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}
@@ -431,7 +456,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Menu Footer - Sign In with Deep Green Background */}
+          {/* Menu Footer - Sign In */}
           <div className="p-2.5 border-t border-emerald-100">
             <Link
               to="/signin"
