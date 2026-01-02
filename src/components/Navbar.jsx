@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaTimes, FaSignInAlt, FaChevronDown } from 'react-icons/fa';
@@ -330,7 +331,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Navigation Menu - আগের মতো সাইডবার, কিন্তু বাটন ফুল কভার */}
       <div 
         ref={mobileMenuRef}
         className={`lg:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
@@ -339,28 +340,28 @@ const Navbar = () => {
       >
         <div className="flex flex-col h-full">
           {/* Menu Header */}
-          <div className="flex justify-between items-center p-2.5 border-b border-emerald-100">
-            <h2 className="text-sm font-bold text-emerald-900">Menu</h2>
+          <div className="flex justify-between items-center p-4 border-b border-emerald-100">
+            <h2 className="text-lg font-bold text-emerald-900">Menu</h2>
             <button
               onClick={closeMenu}
-              className="text-emerald-900 hover:text-emerald-700 p-1 hover:bg-emerald-50 rounded-full transition-all duration-300"
+              className="text-emerald-900 hover:text-emerald-700 p-2 hover:bg-emerald-50 rounded-full transition-all duration-300"
               aria-label="Close menu"
             >
-              <FaTimes className="w-5 h-5" />
+              <FaTimes className="w-6 h-6" />
             </button>
           </div>
 
-          {/* Menu Items */}
-          <div className="flex-1 overflow-y-auto p-2.5">
-            <div className="flex flex-col space-y-0.5">
-              {/* Home */}
+          {/* Menu Items - বাটনগুলো ফুল কভার */}
+          <div className="flex-1 overflow-y-auto p-4">
+            <div className="flex flex-col space-y-2">
+              {/* Home - ফুল কভার */}
               <NavLink
                 to="/"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  `px-2.5 py-1.5 rounded-lg transition-all duration-300 font-medium text-left text-xs ${
+                  `block w-full text-left px-4 py-3 rounded-lg transition-all duration-300 font-medium text-sm ${
                     isActive
-                      ? 'text-emerald-700 bg-emerald-50 border-l-3 border-emerald-500'
+                      ? 'text-emerald-700 bg-emerald-50 border-l-4 border-emerald-500'
                       : 'text-emerald-900 hover:text-emerald-700 hover:bg-emerald-50'
                   }`
                 }
@@ -368,84 +369,80 @@ const Navbar = () => {
                 Home
               </NavLink>
 
-              {/* About Us - Mobile */}
-              <div className="space-y-0.5">
+              {/* About Us - Mobile - ফুল কভার */}
+              <div className="space-y-2">
                 <button
                   onClick={toggleMobileAbout}
-                  className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-emerald-50 cursor-pointer transition-all duration-300 text-left"
+                  className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition-all duration-300 text-left"
                 >
-                  <span className="font-medium text-emerald-900 text-xs">About Us</span>
-                  <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${mobileAboutOpen ? 'rotate-180' : ''} text-emerald-700`} />
+                  <span className="font-medium text-emerald-900 text-sm">About Us</span>
+                  <FaChevronDown className={`w-4 h-4 transition-transform duration-300 ${mobileAboutOpen ? 'rotate-180' : ''} text-emerald-700`} />
                 </button>
                 
                 {mobileAboutOpen && (
-                  <div className="ml-2.5 pl-2.5 border-l-2 border-emerald-100">
-                    <div className="flex flex-col space-y-0.5">
-                      {aboutSubItems.map((item) => (
-                        <NavLink
-                          key={item.path}
-                          to={item.path}
-                          onClick={closeMenu}
-                          className={({ isActive }) =>
-                            `block px-2.5 py-1 rounded-lg transition-all duration-300 text-left text-xs ${
-                              isActive
-                                ? 'text-emerald-700 bg-emerald-50 border-l-2 border-emerald-300'
-                                : 'text-emerald-800 hover:text-emerald-700 hover:bg-emerald-50'
-                            }`
-                          }
-                        >
-                          {item.label}
-                        </NavLink>
-                      ))}
-                    </div>
+                  <div className="space-y-1">
+                    {aboutSubItems.map((item) => (
+                      <NavLink
+                        key={item.path}
+                        to={item.path}
+                        onClick={closeMenu}
+                        className={({ isActive }) =>
+                          `block w-full text-left px-6 py-2 rounded-lg transition-all duration-300 text-sm ${
+                            isActive
+                              ? 'text-emerald-700 bg-emerald-50 border-l-2 border-emerald-300'
+                              : 'text-emerald-800 hover:text-emerald-700 hover:bg-emerald-50'
+                          }`
+                        }
+                      >
+                        {item.label}
+                      </NavLink>
+                    ))}
                   </div>
                 )}
               </div>
 
-              {/* Committee - Mobile */}
-              <div className="space-y-0.5">
+              {/* Committee - Mobile - ফুল কভার */}
+              <div className="space-y-2">
                 <button
                   onClick={toggleMobileCommittee}
-                  className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-emerald-50 cursor-pointer transition-all duration-300 text-left"
+                  className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition-all duration-300 text-left"
                 >
-                  <span className="font-medium text-emerald-900 text-xs">Committee</span>
-                  <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${mobileCommitteeOpen ? 'rotate-180' : ''} text-emerald-700`} />
+                  <span className="font-medium text-emerald-900 text-sm">Committee</span>
+                  <FaChevronDown className={`w-4 h-4 transition-transform duration-300 ${mobileCommitteeOpen ? 'rotate-180' : ''} text-emerald-700`} />
                 </button>
                 
                 {mobileCommitteeOpen && (
-                  <div className="ml-2.5 pl-2.5 border-l-2 border-emerald-100">
-                    <div className="flex flex-col space-y-0.5">
-                      {committeeSubItems.map((item) => (
-                        <NavLink
-                          key={item.path}
-                          to={item.path}
-                          onClick={closeMenu}
-                          className={({ isActive }) =>
-                            `block px-2.5 py-1 rounded-lg transition-all duration-300 text-left text-xs ${
-                              isActive
-                                ? 'text-emerald-700 bg-emerald-50 border-l-2 border-emerald-300'
-                                : 'text-emerald-800 hover:text-emerald-700 hover:bg-emerald-50'
-                            }`
-                          }
-                        >
-                          {item.label}
-                        </NavLink>
-                      ))}
-                    </div>
+                  <div className="space-y-1">
+                    {committeeSubItems.map((item) => (
+                      <NavLink
+                        key={item.path}
+                        to={item.path}
+                        onClick={closeMenu}
+                        className={({ isActive }) =>
+                          `block w-full text-left px-6 py-2 rounded-lg transition-all duration-300 text-sm ${
+                            isActive
+                              ? 'text-emerald-700 bg-emerald-50 border-l-2 border-emerald-300'
+                              : 'text-emerald-800 hover:text-emerald-700 hover:bg-emerald-50'
+                          }`
+                        }
+                      >
+                        {item.label}
+                      </NavLink>
+                    ))}
                   </div>
                 )}
               </div>
 
-              {/* অন্যান্য লিংক */}
+              {/* অন্যান্য লিংক - ফুল কভার */}
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}
                   to={link.path}
                   onClick={closeMenu}
                   className={({ isActive }) =>
-                    `px-2.5 py-1.5 rounded-lg transition-all duration-300 font-medium text-left text-xs ${
+                    `block w-full text-left px-4 py-3 rounded-lg transition-all duration-300 font-medium text-sm ${
                       isActive
-                        ? 'text-emerald-700 bg-emerald-50 border-l-3 border-emerald-500'
+                        ? 'text-emerald-700 bg-emerald-50 border-l-4 border-emerald-500'
                         : 'text-emerald-900 hover:text-emerald-700 hover:bg-emerald-50'
                     }`
                   }
@@ -456,14 +453,14 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Menu Footer - Sign In */}
-          <div className="p-2.5 border-t border-emerald-100">
+          {/* Menu Footer - Sign In - ফুল কভার */}
+          <div className="p-4 border-t border-emerald-100">
             <Link
               to="/signin"
               onClick={closeMenu}
-              className="w-full text-white bg-emerald-700 hover:bg-emerald-800 font-bold py-1.5 px-3 rounded-lg text-center transition-all duration-300 flex items-center justify-center hover:scale-[1.02] text-xs"
+              className="block w-full text-white bg-emerald-700 hover:bg-emerald-800 font-bold py-3 px-4 rounded-lg text-center transition-all duration-300 hover:scale-[1.02] text-sm"
             >
-              <FaSignInAlt className="mr-1.5 w-3 h-3" /> Sign In
+              <FaSignInAlt className="inline mr-2 w-4 h-4" /> Sign In
             </Link>
           </div>
         </div>
