@@ -263,9 +263,7 @@ const MissionVision = () => {
               
               {/* Image Navigation Instructions */}
               <div className="mt-20 text-center">
-                <p className="text-gray-600 text-sm md:text-base">
-                  <span className="font-semibold text-emerald-700">Tip:</span> Click on images to send to back, use arrows to navigate, or click dots below
-                </p>
+                
               </div>
             </div>
           </div>
