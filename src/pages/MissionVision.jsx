@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   FaUsers, 
@@ -18,10 +18,22 @@ import {
   FaChevronRight
 } from 'react-icons/fa';
 
-// Stack Component with Navigation
-const Stack = ({ cards, randomRotation = true, sensitivity = 180, sendToBackOnClick = true }) => {
+// Stack Component with Auto Slide
+const Stack = ({ cards, randomRotation = true, sensitivity = 180, sendToBackOnClick = true, autoSlideInterval = 3000 }) => {
   const [zIndices, setZIndices] = useState(cards.map((_, i) => i));
   const [activeCard, setActiveCard] = useState(0);
+
+  // Auto slide functionality (3 seconds)
+  useEffect(() => {
+    if (autoSlideInterval <= 0) return;
+    
+    const intervalId = setInterval(() => {
+      const newIndex = (activeCard + 1) % cards.length;
+      bringCardToFront(newIndex);
+    }, autoSlideInterval);
+    
+    return () => clearInterval(intervalId);
+  }, [activeCard, cards.length, autoSlideInterval]);
 
   const handleMouseMove = (e, cardIndex) => {
     if (!randomRotation) return;
@@ -137,23 +149,6 @@ const Stack = ({ cards, randomRotation = true, sensitivity = 180, sendToBackOnCl
         );
       })}
       
-      {/* Navigation Buttons */}
-      <button
-        onClick={handlePrevCard}
-        className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 md:p-3 rounded-full z-50 transition-all duration-300 hover:scale-110"
-        aria-label="Previous image"
-      >
-        <FaChevronLeft className="text-lg md:text-xl" />
-      </button>
-      
-      <button
-        onClick={handleNextCard}
-        className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 md:p-3 rounded-full z-50 transition-all duration-300 hover:scale-110"
-        aria-label="Next image"
-      >
-        <FaChevronRight className="text-lg md:text-xl" />
-      </button>
-      
       {/* Thumbnail Navigation */}
       <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex space-x-2 z-50">
         {cards.map((_, index) => (
@@ -179,26 +174,22 @@ const MissionVision = () => {
     { 
       id: 1, 
       url: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
-      // caption: "National Debate Championship 2023",
-      // description: "The grand finale of our annual national tournament featuring top debaters from across Bangladesh"
+
     },
     { 
       id: 2, 
       url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
-      // caption: "Youth Debate Training Camp",
-      // description: "Week-long intensive training for young aspiring debaters from rural areas"
+
     },
     { 
       id: 3, 
       url: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
-      // caption: "International Debate Exchange",
-      // description: "Cultural exchange program with international debate teams from Asia-Pacific region"
+
     },
     { 
       id: 4, 
       url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
-      // caption: "University Debate League",
-      // description: "Inter-university championship with participants from 50+ institutions"
+ 
     }
   ];
 
@@ -231,14 +222,15 @@ const MissionVision = () => {
               </div>
             </div>
             
-            {/* Stack Image Gallery with Navigation */}
+            {/* Stack Image Gallery with Auto Slide (3 seconds) */}
             <div className="relative">
               <div className="w-[300px] h-[400px] md:w-[350px] md:h-[450px] lg:w-[400px] lg:h-[500px] mx-auto">
                 <Stack
                   randomRotation={true}
                   sensitivity={180}
                   sendToBackOnClick={true}
-                  cards={galleryImages.map((image, i) => (
+                  autoSlideInterval={3000} // Auto slide every 3 seconds
+                  cards={galleryImages.map((image) => (
                     <div 
                       key={image.id}
                       className="relative w-full h-full rounded-xl overflow-hidden border-2 border-emerald-200 shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-emerald-300"
@@ -253,17 +245,9 @@ const MissionVision = () => {
                         <h3 className="text-white font-bold text-lg md:text-xl mb-1 md:mb-2">{image.caption}</h3>
                         <p className="text-white/90 text-sm md:text-base">{image.description}</p>
                       </div>
-                      <div className="absolute top-3 right-3 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-                        {i + 1}/{galleryImages.length}
-                      </div>
                     </div>
                   ))}
                 />
-              </div>
-              
-              {/* Image Navigation Instructions */}
-              <div className="mt-20 text-center">
-                
               </div>
             </div>
           </div>
