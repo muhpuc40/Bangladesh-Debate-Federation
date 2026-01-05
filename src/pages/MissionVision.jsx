@@ -29,10 +29,10 @@ const MissionVision = () => {
   ];
 
   const imageCaptions = [
-    { caption: "National Debate Championship", description: "Annual competition bringing together the best debaters" },
-    { caption: "Youth Leadership Workshop", description: "Empowering young minds through debate" },
-    { caption: "International Collaboration", description: "Building bridges through dialogue" },
-    { caption: "Community Outreach", description: "Spreading debate culture nationwide" }
+    { caption: "", description: "" },
+    { caption: "", description: "" },
+    { caption: "", description: "" },
+    { caption: "", description: "" }
   ];
 
   return (
