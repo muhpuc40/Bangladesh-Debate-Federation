@@ -210,7 +210,7 @@ const MissionVision = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-center">
             <div>
               <div className="inline-flex items-center bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-bold mb-6 border border-emerald-200">
-                <FaHeart className="mr-2" /> Our Story
+                <FaHeart className="mr-2 text-red-500" /> Our Story
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight">
                 About Bangladesh Debate Federation
