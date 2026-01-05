@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import Stack from './Stack'; // নতুন Stack কম্পোনেন্ট ইম্পোর্ট করুন
 import { 
   FaUsers, 
   FaTrophy, 
@@ -18,179 +19,20 @@ import {
   FaChevronRight
 } from 'react-icons/fa';
 
-// Stack Component with Auto Slide
-const Stack = ({ cards, randomRotation = true, sensitivity = 180, sendToBackOnClick = true, autoSlideInterval = 3000 }) => {
-  const [zIndices, setZIndices] = useState(cards.map((_, i) => i));
-  const [activeCard, setActiveCard] = useState(0);
-
-  // Auto slide functionality (3 seconds)
-  useEffect(() => {
-    if (autoSlideInterval <= 0) return;
-    
-    const intervalId = setInterval(() => {
-      const newIndex = (activeCard + 1) % cards.length;
-      bringCardToFront(newIndex);
-    }, autoSlideInterval);
-    
-    return () => clearInterval(intervalId);
-  }, [activeCard, cards.length, autoSlideInterval]);
-
-  const handleMouseMove = (e, cardIndex) => {
-    if (!randomRotation) return;
-
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const mouseX = e.clientX - centerX;
-    const mouseY = e.clientY - centerY;
-    
-    const rotateY = (mouseX / (rect.width / 2)) * 10;
-    const rotateX = -(mouseY / (rect.height / 2)) * 10;
-    
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  };
-
-  const handleMouseLeave = (e) => {
-    if (!randomRotation) return;
-    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-  };
-
-  const handleCardClick = (index) => {
-    if (sendToBackOnClick) {
-      const newZIndices = [...zIndices];
-      const currentZIndex = newZIndices[index];
-      
-      // Move clicked card to the back
-      newZIndices[index] = 0;
-      
-      // Update other cards' z-indices
-      newZIndices.forEach((z, i) => {
-        if (i !== index && z > currentZIndex) {
-          newZIndices[i] = z - 1;
-        }
-      });
-      
-      setZIndices(newZIndices);
-      setActiveCard(index);
-    }
-  };
-
-  const handlePrevCard = () => {
-    const newIndex = (activeCard - 1 + cards.length) % cards.length;
-    bringCardToFront(newIndex);
-  };
-
-  const handleNextCard = () => {
-    const newIndex = (activeCard + 1) % cards.length;
-    bringCardToFront(newIndex);
-  };
-
-  const bringCardToFront = (index) => {
-    const newZIndices = [...zIndices];
-    const currentZIndex = newZIndices[index];
-    const maxZIndex = Math.max(...newZIndices);
-    
-    // Bring clicked card to front
-    newZIndices[index] = maxZIndex + 1;
-    
-    // Update other cards' z-indices
-    newZIndices.forEach((z, i) => {
-      if (i !== index && z > currentZIndex) {
-        newZIndices[i] = z - 1;
-      }
-    });
-    
-    setZIndices(newZIndices);
-    setActiveCard(index);
-  };
-
-  const generateRandomRotation = () => {
-    if (!randomRotation) return { transform: 'none' };
-    
-    const angle = Math.random() * 10 - 5; // -5 to 5 degrees
-    return {
-      transform: `rotate(${angle}deg)`
-    };
-  };
-
-  return (
-    <div style={{ 
-      position: 'relative', 
-      width: '100%', 
-      height: '100%',
-      perspective: '1000px'
-    }}>
-      {cards.map((card, index) => {
-        const baseRotation = generateRandomRotation();
-        const zIndex = zIndices[index];
-        
-        return (
-          <div
-            key={index}
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              zIndex,
-              transition: 'transform 0.3s ease, z-index 0.3s ease',
-              cursor: 'pointer',
-              ...baseRotation
-            }}
-            onMouseMove={(e) => handleMouseMove(e, index)}
-            onMouseLeave={handleMouseLeave}
-            onClick={() => handleCardClick(index)}
-            className={`${activeCard === index ? 'ring-2 ring-emerald-400' : ''}`}
-          >
-            {card}
-          </div>
-        );
-      })}
-      
-      {/* Thumbnail Navigation */}
-      <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex space-x-2 z-50">
-        {cards.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => bringCardToFront(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              activeCard === index 
-                ? 'bg-emerald-600 w-8' 
-                : 'bg-gray-300 hover:bg-emerald-400'
-            }`}
-            aria-label={`Go to image ${index + 1}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
 // Main MissionVision Component
 const MissionVision = () => {
   const galleryImages = [
-    { 
-      id: 1, 
-      url: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+    "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  ];
 
-    },
-    { 
-      id: 2, 
-      url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
-
-    },
-    { 
-      id: 3, 
-      url: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
-
-    },
-    { 
-      id: 4, 
-      url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
- 
-    }
+  const imageCaptions = [
+    { caption: "National Debate Championship", description: "Annual competition bringing together the best debaters" },
+    { caption: "Youth Leadership Workshop", description: "Empowering young minds through debate" },
+    { caption: "International Collaboration", description: "Building bridges through dialogue" },
+    { caption: "Community Outreach", description: "Spreading debate culture nationwide" }
   ];
 
   return (
@@ -229,21 +71,28 @@ const MissionVision = () => {
                   randomRotation={true}
                   sensitivity={180}
                   sendToBackOnClick={true}
-                  autoSlideInterval={3000} // Auto slide every 3 seconds
-                  cards={galleryImages.map((image) => (
+                  autoplay={true}
+                  autoplayDelay={3000}
+                  pauseOnHover={true}
+                  mobileClickOnly={true}
+                  cards={galleryImages.map((src, i) => (
                     <div 
-                      key={image.id}
-                      className="relative w-full h-full rounded-xl overflow-hidden border-2 border-emerald-200 shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-emerald-300"
+                      key={i}
+                      className="relative w-full h-full rounded-xl overflow-hidden border-2 border-emerald-200 shadow-xl"
                     >
                       <img 
-                        src={image.url} 
-                        alt={image.caption} 
-                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        src={src} 
+                        alt={imageCaptions[i].caption} 
+                        className="w-full h-full object-cover"
                         loading="lazy"
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 md:p-5">
-                        <h3 className="text-white font-bold text-lg md:text-xl mb-1 md:mb-2">{image.caption}</h3>
-                        <p className="text-white/90 text-sm md:text-base">{image.description}</p>
+                        <h3 className="text-white font-bold text-lg md:text-xl mb-1 md:mb-2">
+                          {imageCaptions[i].caption}
+                        </h3>
+                        <p className="text-white/90 text-sm md:text-base">
+                          {imageCaptions[i].description}
+                        </p>
                       </div>
                     </div>
                   ))}
