@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
@@ -164,8 +165,6 @@ const SignUp = () => {
                       className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-white/80 border border-amber-200 rounded-lg text-xs sm:text-sm font-medium text-amber-800 hover:bg-white hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
                     >
                       <FaArrowLeft className="mr-1 sm:mr-2" />
-                      {/* <span className="hidden sm:inline">Previous Page</span> */}
-                      {/* <span className="inline sm:hidden">Prev</span> */}
                     </button>
                     <Link
                       to="/"
@@ -304,7 +303,7 @@ const SignUp = () => {
                         type="text"
                         value={formData.institution}
                         onChange={handleChange}
-                        className={`appearance-none block w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
+                        className={`appearance-none block w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
                           errors.institution ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                         }`}
                         placeholder="School/College/University"
@@ -489,7 +488,7 @@ const SignUp = () => {
                 <div className="absolute top-10 right-10 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 border-white rounded-full"></div>
               </div>
               
-              <div className="relative z-20 text-center px-2">
+              <div className="relative z-20 text-center">
                 <div className={`mx-auto mb-4 sm:mb-6 md:mb-8 bg-white rounded-full p-2 sm:p-3 md:p-4 border-2 border-white/20 shadow-xl ${
                   isTablet ? 'w-20 h-20 sm:w-24 sm:h-24' : 'w-24 h-24 sm:w-32 sm:h-32'
                 }`}>
@@ -499,22 +498,15 @@ const SignUp = () => {
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <h1 className={`font-bold mb-3 sm:mb-4 tracking-wide ${
+                
+                {/* বাংলাদেশ ডিবেট ফেডারেশন টেক্সট - SignIn পেজের মতো স্টাইল */}
+                <h1 className={`font-bold mb-2 sm:mb-3 md:mb-4 tracking-wide ${
                   isTablet ? 'text-xl sm:text-2xl' : 'text-2xl sm:text-3xl md:text-4xl'
                 }`}>
-                  Join The Debate
+                  Bangladesh Debate Federation
                 </h1>
-                <div className={`h-1 bg-white/50 rounded-full mx-auto mb-4 sm:mb-6 ${
-                  isTablet ? 'w-32 sm:w-40' : 'w-40 sm:w-48'
-                }`}></div>
-                
-                {/* Page Indicator */}
-                <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2">
-                  <div className="flex items-center space-x-1 sm:space-x-2">
-                    <div className={`${isTablet ? 'w-2 h-2' : 'w-2 h-2 sm:w-3 sm:h-3'} bg-white/30 rounded-full`}></div>
-                    <div className={`${isTablet ? 'w-2 h-2' : 'w-2 h-2 sm:w-3 sm:h-3'} bg-white rounded-full`}></div>
-                  </div>
-                </div>
+                {/* The Art of Argumentation টেক্সট কমেন্ট আউট করা হয়েছে SignIn পেজের মতো */}
+                {/* <p className="text-white/90 text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8">The Art of Argumentation</p> */}
               </div>
             </div>
           </div>
