@@ -441,7 +441,7 @@ const SignUp = () => {
                 </form>
               )}
 
-              {/* Back to Sign In */}
+              {/* Back to Sign In - REMOVED THE EXTRA TEXT LINE */}
               <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-amber-300 text-center">
                 <button
                   onClick={handleTurnBack}
@@ -464,14 +464,14 @@ const SignUp = () => {
                     </div>
                   </div>
                 </button>
-                <p className="text-xs text-gray-500 mt-1 sm:mt-2 font-serif">Sign in on page 1</p>
+                {/* REMOVED: <p className="text-xs text-gray-500 mt-1 sm:mt-2 font-serif">Sign in on page 1</p> */}
               </div>
 
-              {/* Page Footer */}
+              {/* Page Footer - REMOVED THE COPYRIGHT LINE */}
               <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-amber-300">
-                <p className="text-xs text-gray-500 text-center font-serif">
+                {/* REMOVED: <p className="text-xs text-gray-500 text-center font-serif">
                   © {new Date().getFullYear()} Bangladesh Debate Federation 
-                </p>
+                </p> */}
               </div>
             </div>
           </div>
