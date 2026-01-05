@@ -192,17 +192,17 @@ const DebateClubDirectory = () => {
         </div>
       </section>
 
-      {/* Search and Filter Section */}
-      <section id="search" className="py-8 bg-white border-b border-emerald-100">
+      {/* Search and Filter Section - NOT Sticky */}
+      <section id="search" className="py-4 bg-white border-b border-emerald-100 shadow-lg">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-emerald-900 mb-4 text-justify">
-              Search
+          <div className="mb-4">
+            <h2 className="text-xl md:text-2xl font-bold text-emerald-900 mb-2 text-justify">
+              Search Debate Clubs
             </h2>
           </div>
 
           {/* Search Bar */}
-          <div className="mb-6">
+          <div className="mb-4">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <FaSearch className="text-gray-400" />
@@ -212,13 +212,13 @@ const DebateClubDirectory = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search by club name, university, president, general secretary or Facebook ID..."
-                className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-justify"
+                className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-justify shadow-sm"
               />
             </div>
           </div>
 
           {/* Filters */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <div className="text-justify">
               <label className="block text-gray-700 font-medium mb-2">
                 <FaUniversity className="inline mr-2 text-emerald-600" /> University
@@ -226,7 +226,7 @@ const DebateClubDirectory = () => {
               <select
                 value={selectedUniversity}
                 onChange={(e) => setSelectedUniversity(e.target.value)}
-                className="w-full px-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 bg-white text-black"
+                className="w-full px-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 bg-white text-black shadow-sm"
               >
                 <option value="all">All Universities</option>
                 {universities.map((uni, index) => (
@@ -242,7 +242,7 @@ const DebateClubDirectory = () => {
               <select
                 value={selectedRegion}
                 onChange={(e) => setSelectedRegion(e.target.value)}
-                className="w-full px-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 bg-white text-black"
+                className="w-full px-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 bg-white text-black shadow-sm"
               >
                 <option value="all">All Regions</option>
                 {regions.map((region, index) => (
@@ -258,29 +258,29 @@ const DebateClubDirectory = () => {
                   setSelectedUniversity('all');
                   setSelectedRegion('all');
                 }}
-                className="w-full bg-emerald-100 hover:bg-emerald-200 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-300"
+                className="w-full bg-emerald-100 hover:bg-emerald-200 text-emerald-700 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-300 shadow-sm"
               >
                 <FaFilter className="mr-2" /> Clear Filters
               </button>
             </div>
           </div>
 
-          {/* Results Count */}
-          <div className="flex justify-between items-center mb-4">
+          {/* Results Count and Actions */}
+          <div className="flex justify-between items-center pt-2 border-t border-emerald-100">
             <div className="text-gray-600 text-justify">
               Found <span className="font-bold text-emerald-700">{filteredClubs.length}</span> debate clubs
             </div>
             <div className="flex gap-2">
               <button
                 onClick={downloadCSV}
-                className="bg-white hover:bg-emerald-50 text-emerald-700 font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-md text-sm"
+                className="bg-white hover:bg-emerald-50 text-emerald-700 font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-md text-sm shadow-sm"
                 title="Download CSV"
               >
                 <FaDownload className="mr-2" /> CSV
               </button>
               <button
                 onClick={printDirectory}
-                className="bg-white hover:bg-emerald-50 text-emerald-700 font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-md text-sm"
+                className="bg-white hover:bg-emerald-50 text-emerald-700 font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-md text-sm shadow-sm"
                 title="Print Directory"
               >
                 <FaPrint className="mr-2" /> Print
@@ -291,7 +291,7 @@ const DebateClubDirectory = () => {
       </section>
 
       {/* Directory Table Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-emerald-50">
+      <section className="py-8 md:py-12 lg:py-16 bg-emerald-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {filteredClubs.length === 0 ? (
             <div className="text-center py-12">
@@ -365,7 +365,7 @@ const DebateClubDirectory = () => {
                             {club.contact}
                           </a>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6-4">
                           <a href={`mailto:${club.email}`} className="text-emerald-600 hover:text-emerald-800 hover:underline truncate block max-w-xs text-justify">
                             {club.email}
                           </a>
@@ -527,6 +527,11 @@ const DebateClubDirectory = () => {
           /* Hide CTA section in print */
           section:last-child {
             display: none;
+          }
+          
+          /* Hide search section in print */
+          #search {
+            display: none !important;
           }
         }
       `}</style>
