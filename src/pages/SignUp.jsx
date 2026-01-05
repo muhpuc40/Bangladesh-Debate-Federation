@@ -154,9 +154,30 @@ const SignUp = () => {
             
             {/* Page Content */}
             <div className="relative z-10 w-full h-full p-4 sm:p-6 md:p-8 flex flex-col">
-              {/* Page Header */}
+              {/* Page Header - POSITION CHANGED */}
               <div className="mb-4 sm:mb-6">
                 <div className="flex items-center justify-between mb-3 sm:mb-4">
+                  {/* Navigation Buttons - MOVED TO LEFT */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleTurnBack}
+                      className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-white/80 border border-amber-200 rounded-lg text-xs sm:text-sm font-medium text-amber-800 hover:bg-white hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
+                    >
+                      <FaArrowLeft className="mr-1 sm:mr-2" />
+                      {/* <span className="hidden sm:inline">Previous Page</span> */}
+                      {/* <span className="inline sm:hidden">Prev</span> */}
+                    </button>
+                    <Link
+                      to="/"
+                      className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-white/80 border border-amber-200 rounded-lg text-xs sm:text-sm font-medium text-amber-800 hover:bg-white hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
+                    >
+                      <FaHome className="mr-1 sm:mr-2" />
+                      <span className="hidden sm:inline">Home</span>
+                      <span className="inline sm:hidden">Home</span>
+                    </Link>
+                  </div>
+                  
+                  {/* Sign Up Title - MOVED TO RIGHT */}
                   <div className="flex items-center">
                     <FaBook className="text-emerald-600 mr-2" />
                     <h2 className={`font-serif font-bold text-gray-800 ${
@@ -165,26 +186,6 @@ const SignUp = () => {
                   </div>
                 </div>
                 <div className="w-full h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent mb-3 sm:mb-4"></div>
-              </div>
-
-              {/* Navigation Buttons */}
-              <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex gap-2 z-20">
-                <button
-                  onClick={handleTurnBack}
-                  className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-white/80 border border-amber-200 rounded-lg text-xs sm:text-sm font-medium text-amber-800 hover:bg-white hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
-                >
-                  <FaArrowLeft className="mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">Previous Page</span>
-                  <span className="inline sm:hidden">Prev</span>
-                </button>
-                <Link
-                  to="/"
-                  className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-white/80 border border-amber-200 rounded-lg text-xs sm:text-sm font-medium text-amber-800 hover:bg-white hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
-                >
-                  <FaHome className="mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">Home</span>
-                  <span className="inline sm:hidden">Home</span>
-                </Link>
               </div>
 
               {isSuccess ? (
@@ -303,7 +304,7 @@ const SignUp = () => {
                         type="text"
                         value={formData.institution}
                         onChange={handleChange}
-                        className={`appearance-none block w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
+                        className={`appearance-none block w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
                           errors.institution ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
                         }`}
                         placeholder="School/College/University"
@@ -451,7 +452,7 @@ const SignUp = () => {
                   <span className={`font-serif ${
                     isTablet ? 'text-sm' : 'text-base'
                   }`}>
-                    ← Previous page
+                    ← Sign In
                   </span>
                   <div className={`ml-2 sm:ml-3 relative ${
                     isTablet ? 'w-4 h-4' : 'w-6 h-6'
@@ -506,8 +507,6 @@ const SignUp = () => {
                 <div className={`h-1 bg-white/50 rounded-full mx-auto mb-4 sm:mb-6 ${
                   isTablet ? 'w-32 sm:w-40' : 'w-40 sm:w-48'
                 }`}></div>
-               
-               
                 
                 {/* Page Indicator */}
                 <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2">
@@ -515,7 +514,6 @@ const SignUp = () => {
                     <div className={`${isTablet ? 'w-2 h-2' : 'w-2 h-2 sm:w-3 sm:h-3'} bg-white/30 rounded-full`}></div>
                     <div className={`${isTablet ? 'w-2 h-2' : 'w-2 h-2 sm:w-3 sm:h-3'} bg-white rounded-full`}></div>
                   </div>
-                 
                 </div>
               </div>
             </div>

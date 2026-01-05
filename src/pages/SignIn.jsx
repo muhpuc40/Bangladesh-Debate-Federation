@@ -125,8 +125,15 @@ const SignIn = () => {
 
           {/* Mobile Content */}
           <div className="relative z-10 p-6">
-            {/* Back to Home - Mobile */}
-            <div className="mb-6">
+            {/* Back to Home - Mobile (MOVED TO TOP RIGHT) */}
+            <div className="mb-6 flex justify-between items-center">
+              {/* Sign In Title on LEFT */}
+              <div className="flex items-center">
+                <FaBookOpen className="text-emerald-600 mr-2" />
+                <h2 className="text-xl font-serif font-bold text-gray-800">Sign In</h2>
+              </div>
+              
+              {/* Back to Home Button on RIGHT */}
               <Link
                 to="/"
                 className="inline-flex items-center px-4 py-2 bg-white/90 border border-amber-200 rounded-lg text-sm font-medium text-amber-800 hover:bg-white hover:shadow transition-all duration-300"
@@ -136,15 +143,7 @@ const SignIn = () => {
               </Link>
             </div>
 
-            {/* Form Title */}
-            <div className="mb-6">
-              <div className="flex items-center mb-3">
-                <FaBookOpen className="text-emerald-600 mr-2" />
-                <h2 className="text-xl font-serif font-bold text-gray-800">Sign In</h2>
-              </div>
-              <div className="w-full h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent mb-3"></div>
-        
-            </div>
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent mb-6"></div>
 
             {/* Form */}
             <form className="space-y-4" onSubmit={handleSubmit}>
@@ -260,29 +259,6 @@ const SignIn = () => {
               </div>
             </form>
 
-            {/* Social Login - Mobile */}
-            <div className="mt-6">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-amber-300"></div>
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-4 bg-amber-50 text-gray-500 font-serif">Or continue with</span>
-                </div>
-              </div>
-
-              <div className="mt-4 grid grid-cols-2 gap-3">
-                <button className="w-full inline-flex justify-center items-center py-2.5 px-4 border border-amber-300 rounded-lg shadow-sm bg-white/80 text-sm font-medium text-gray-700 hover:bg-white hover:shadow transition-all duration-300">
-                  <FaGoogle className="h-5 w-5 text-red-500" />
-                  <span className="ml-2 font-serif">Google</span>
-                </button>
-                <button className="w-full inline-flex justify-center items-center py-2.5 px-4 border border-amber-300 rounded-lg shadow-sm bg-white/80 text-sm font-medium text-gray-700 hover:bg-white hover:shadow transition-all duration-300">
-                  <FaFacebook className="h-5 w-5 text-blue-600" />
-                  <span className="ml-2 font-serif">Facebook</span>
-                </button>
-              </div>
-            </div>
-
             {/* Sign Up Link - Mobile */}
             <div className="mt-8 pt-6 border-t border-amber-300 text-center">
               <button
@@ -292,13 +268,12 @@ const SignIn = () => {
                 <FaUserPlus className="mr-3" />
                 <span className="font-serif">Create New Account</span>
               </button>
-              <p className="text-xs text-gray-500 mt-2 font-serif">Don't have an account? Sign up</p>
             </div>
 
             {/* Footer - Mobile */}
             <div className="mt-6 pt-4 border-t border-amber-300">
               <p className="text-xs text-gray-500 text-center font-serif">
-                © {new Date().getFullYear()} Bangladesh Debate Federation • Volume I
+                {/* Volume I removed */}
               </p>
             </div>
           </div>
@@ -333,15 +308,7 @@ const SignIn = () => {
                     />
                   </div>
                   <h1 className="text-xl sm:text-2xl lg:text-4xl font-bold mb-2 sm:mb-3 lg:mb-4 tracking-wide">Bangladesh Debate Federation</h1>
-                  <div className="w-32 sm:w-40 lg:w-48 h-1 bg-white/50 rounded-full mx-auto mb-3 sm:mb-4 lg:mb-6"></div>
-                  
-                  {/* Page Indicator */}
-                  <div className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-white rounded-full"></div>
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-white/30 rounded-full"></div>
-                    </div>
-                  </div>
+                  {/* <p className="text-white/90 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 lg:mb-8">The Art of Argumentation</p> */}
                 </div>
               </div>
             </div>
@@ -353,27 +320,26 @@ const SignIn = () => {
               
               {/* Scrollable Page Content */}
               <div className="relative z-10 w-full h-full p-4 sm:p-6 lg:p-8 flex flex-col overflow-y-auto custom-scrollbar">
-                {/* Page Header */}
+                {/* Page Header with Sign In on LEFT and Back to Home on RIGHT */}
                 <div className="mb-4 sm:mb-6 lg:mb-8">
                   <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    {/* Sign In Title on LEFT */}
                     <div className="flex items-center">
                       <FaBookOpen className="text-emerald-600 mr-2 text-sm sm:text-base" />
                       <h2 className="text-lg sm:text-xl lg:text-2xl font-serif font-bold text-gray-800">Sign In</h2>
                     </div>
+                    
+                    {/* Back to Home Button on RIGHT */}
+                    <Link
+                      to="/"
+                      className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-white/80 border border-amber-200 rounded-lg text-xs sm:text-sm font-medium text-amber-800 hover:bg-white hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
+                    >
+                      <FaHome className="mr-1.5 sm:mr-2" />
+                      <span className="hidden sm:inline">Back to Home</span>
+                      <span className="inline sm:hidden">Home</span>
+                    </Link>
                   </div>
                   <div className="w-full h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent mb-3 sm:mb-4"></div>
-                </div>
-
-                {/* Back to Home */}
-                <div className="absolute top-2 sm:top-4 right-2 sm:right-4 z-20">
-                  <Link
-                    to="/"
-                    className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-white/80 border border-amber-200 rounded-lg text-xs sm:text-sm font-medium text-amber-800 hover:bg-white hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
-                  >
-                    <FaHome className="mr-1.5 sm:mr-2" />
-                    <span className="hidden sm:inline">Back to Home</span>
-                    <span className="inline sm:hidden">Home</span>
-                  </Link>
                 </div>
 
                 {/* Form - Reduced spacing */}
@@ -486,37 +452,14 @@ const SignIn = () => {
                   </div>
                 </form>
 
-                {/* Social Login - Reduced margins */}
-                <div className="mt-3 sm:mt-4">
-                  <div className="relative">
-                    <div className="absolute inset-0 flex items-center">
-                      <div className="w-full border-t border-amber-300"></div>
-                    </div>
-                    <div className="relative flex justify-center text-xs sm:text-sm">
-                      <span className="px-3 sm:px-4 bg-amber-100/80 text-gray-500 font-serif">Or continue with</span>
-                    </div>
-                  </div>
-
-                  <div className="mt-2 sm:mt-3 grid grid-cols-2 gap-2 sm:gap-3">
-                    <button className="w-full inline-flex justify-center items-center py-2 sm:py-2.5 px-3 sm:px-4 border border-amber-300 rounded-lg shadow-sm bg-white/80 text-xs sm:text-sm font-medium text-gray-700 hover:bg-white hover:shadow transition-all duration-300">
-                      <FaGoogle className="h-4 w-4 sm:h-5 sm:w-5 text-red-500" />
-                      <span className="ml-1.5 sm:ml-2 font-serif">Google</span>
-                    </button>
-                    <button className="w-full inline-flex justify-center items-center py-2 sm:py-2.5 px-3 sm:px-4 border border-amber-300 rounded-lg shadow-sm bg-white/80 text-xs sm:text-sm font-medium text-gray-700 hover:bg-white hover:shadow transition-all duration-300">
-                      <FaFacebook className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
-                      <span className="ml-1.5 sm:ml-2 font-serif">Facebook</span>
-                    </button>
-                  </div>
-                </div>
-
                 {/* Turn Page Button - Reduced margins */}
-                <div className="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-amber-300 text-center">
+                <div className="mt-6 sm:mt-8 pt-3 sm:pt-4 border-t border-amber-300 text-center">
                   <button
                     onClick={handleTurnPage}
                     className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-lg shadow-lg hover:from-amber-600 hover:to-amber-700 hover:shadow-xl transition-all duration-500 hover:scale-105 group"
                   >
                     <FaUserPlus className="mr-2 sm:mr-3 text-sm sm:text-base group-hover:rotate-12 transition-transform duration-300" />
-                    <span className="font-serif text-sm sm:text-base">Turn to next page →</span>
+                    <span className="font-serif text-sm sm:text-base">Sign UP →</span>
                     <div className="ml-2 sm:ml-3 relative w-5 h-5 sm:w-6 sm:h-6 hidden sm:block">
                       <div className="absolute inset-0 bg-white/20 rounded-full animate-ping"></div>
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -524,13 +467,12 @@ const SignIn = () => {
                       </div>
                     </div>
                   </button>
-                  <p className="text-xs text-gray-500 mt-1 sm:mt-2 font-serif">Sign up on page 2</p>
                 </div>
 
                 {/* Page Footer - Reduced margins */}
                 <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-amber-300">
                   <p className="text-xs text-gray-500 text-center font-serif">
-                    © {new Date().getFullYear()} Bangladesh Debate Federation 
+                    {/* Volume I removed */}
                   </p>
                 </div>
               </div>
