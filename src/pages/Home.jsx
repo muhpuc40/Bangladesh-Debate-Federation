@@ -24,6 +24,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import 'swiper/css/pagination';
 
+// Import Stack component
+import Stack from './Stack';
+
 const Home = () => {
   // Background images for hero slider
   const heroBackgrounds = [
@@ -44,22 +47,22 @@ const Home = () => {
     }
   ];
 
-  // About Us images (3 small images)
+  // About Us images (3 small images) for Stack component
   const aboutImages = [
     {
       id: 1,
       url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      alt: "National Debate Competition"
+      // alt: "National Debate Competition"
     },
     {
       id: 2,
       url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      alt: "Debate Training Workshop"
+      // alt: "Debate Training Workshop"
     },
     {
       id: 3,
       url: "https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      alt: "Debate Award Ceremony"
+      // alt: "Debate Award Ceremony"
     }
   ];
 
@@ -167,7 +170,7 @@ const Home = () => {
       image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       alt: "Registration Announcement",
       readTime: "2 min read",
-      viewers: "245+"
+    
     },
     {
       category: "Results",
@@ -179,7 +182,7 @@ const Home = () => {
       image: "https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       alt: "Championship Results",
       readTime: "3 min read",
-      viewers: "318+"
+
     },
     {
       category: "Training",
@@ -191,7 +194,7 @@ const Home = () => {
       image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       alt: "Workshop Training",
       readTime: "4 min read",
-      viewers: "192+"
+   
     }
   ];
 
@@ -258,7 +261,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About Us Section (Replaces Quick Links) - UPDATED MOBILE ORDER */}
+      {/* About Us Section with Stack Component */}
       <section className="py-12 md:py-16 lg:py-20 bg-white" id="about-section">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
@@ -270,55 +273,36 @@ const Home = () => {
               </div>
             </div>
             
-            {/* Left Side - 3 Small Images Grid (Mobile: Show after label, Desktop: Show as left column) */}
+            {/* Left Side - Stack Component (Mobile: Show after label, Desktop: Show as left column) */}
             <div className="w-full order-2 lg:order-1">
-              <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
-                {aboutImages.map((image, index) => (
-                  <div 
-                    key={image.id} 
-                    ref={el => {
-                      // Intersection Observer for slide-up animation
-                      if (el && typeof window !== 'undefined') {
-                        const observer = new IntersectionObserver(
-                          (entries) => {
-                            entries.forEach((entry) => {
-                              if (entry.isIntersecting) {
-                                entry.target.classList.add('animate-slide-up');
-                                entry.target.style.opacity = '1';
-                                entry.target.style.transform = 'translateY(0)';
-                              }
-                            });
-                          },
-                          {
-                            threshold: 0.2,
-                            rootMargin: '0px 0px -30px 0px'
-                          }
-                        );
-                        
-                        observer.observe(el);
-                        return () => observer.disconnect();
-                      }
-                    }}
-                    className={`relative overflow-hidden rounded-lg md:rounded-xl border border-emerald-100 hover:border-emerald-300 transition-all duration-700 hover:shadow-xl hover:-translate-y-2 ${
-                      index === 1 ? 'row-span-2' : 'row-span-1'
-                    }`}
-                    style={{ 
-                      opacity: 0,
-                      transform: 'translateY(30px)',
-                      transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'
-                    }}
-                  >
-                    <div className={`aspect-square overflow-hidden ${index === 1 ? 'h-full' : ''}`}>
+              <div className="relative w-full h-64 sm:h-72 md:h-80 lg:h-96">
+                <Stack
+                  randomRotation={true}
+                  sensitivity={180}
+                  sendToBackOnClick={true}
+                  autoplay={true}
+                  autoplayDelay={3000}
+                  pauseOnHover={true}
+                  mobileClickOnly={true}
+                  cards={aboutImages.map((image, i) => (
+                    <div 
+                      key={image.id}
+                      className="relative w-full h-full rounded-lg md:rounded-xl overflow-hidden border border-emerald-200 shadow-lg"
+                    >
                       <img 
                         src={image.url} 
                         alt={image.alt}
-                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                        className="w-full h-full object-cover"
                         loading="lazy"
                       />
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 md:p-4">
+                        <p className="text-white font-medium text-sm md:text-base">
+                          {image.alt}
+                        </p>
+                      </div>
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                ))}
+                  ))}
+                />
               </div>
             </div>
             
@@ -338,8 +322,6 @@ const Home = () => {
                 Bangladesh Debate Federation (BDF) started its journey on the first quarter of the last decade of the previous century when democracy just appeared to the country as the form of government. Through a long period, BDF could able to build a generation who can lead, who can speak and who can represent. Since 1992 Bangladesh Debate Federation (BDF) is the central debate platform in the debating arena of Bangladesh. With a view to explore democracy in every sphere of the country, accessible to the mass people and increases the boundary of debate beyond the Dhaka city few legends of the debating arena has started there journey through debate. Birupakkha Pal, Dr. Niamot Elahi, Dr. Abdun Nur Tushar were the gypsy of that caravan. Since its launching BDF is organizing National Debate Festival in every two year regularly as well as training workshops, several competitions, mini-fests, Inter University debate championships, national school debate championship etc. Recently BDF has started to give debate award for performing and organizing debate activities.
               </p>
               
-           
-              
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link 
                   to="/about" 
@@ -357,25 +339,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-        
-        {/* CSS for slide up animation */}
-        <style>
-          {`
-            @keyframes slideUp {
-              0% {
-                opacity: 0;
-                transform: translateY(30px);
-              }
-              100% {
-                opacity: 1;
-                transform: translateY(0);
-              }
-            }
-            .animate-slide-up {
-              animation: slideUp 0.8s ease-out forwards;
-            }
-          `}
-        </style>
       </section>
 
       {/* Partners with Marquee Cards - LOGOS ONLY, NO TEXT, COLORFUL */}
@@ -735,7 +698,6 @@ const Home = () => {
 </section>
 
       {/* Latest News - Compact Version */}
-     {/* Latest News - Compact Version */}
 <section className="py-8 md:py-12 lg:py-16 bg-white">
   <div className="container mx-auto px-4 sm:px-6 lg:px-8">
     {/* Compact Header Section */}

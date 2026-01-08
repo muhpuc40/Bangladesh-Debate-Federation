@@ -71,10 +71,10 @@ const MissionVision = () => {
                   randomRotation={true}
                   sensitivity={180}
                   sendToBackOnClick={true}
-                  autoplay={true}
+                  autoplay={true}  // সব ডিভাইসে অটো স্লাইড চালু
                   autoplayDelay={3000}
-                  pauseOnHover={true}
-                  mobileClickOnly={true}
+                  pauseOnHover={true}  // শুধু ডেস্কটপে হোভার করলে pause হবে
+                  mobileClickOnly={true}  // মোবাইলে শুধু ক্লিক কাজ করবে
                   cards={galleryImages.map((src, i) => (
                     <div 
                       key={i}

@@ -134,7 +134,8 @@ export default function Stack({
   };
 
   useEffect(() => {
-    if (autoplay && stack.length > 1 && !isPaused) {
+    // অটো স্লাইড শুধুমাত্র চালু থাকলে এবং paused না হলে
+    if (autoplay && !isPaused) {
       const interval = setInterval(() => {
         const topCardId = stack[stack.length - 1].id;
         sendToBack(topCardId);
