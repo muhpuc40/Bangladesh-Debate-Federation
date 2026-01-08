@@ -12,7 +12,7 @@ import {
   FaFilter
 } from 'react-icons/fa';
 
-// Events data in JSON format
+
 const eventsData = {
   "events": [
     {
@@ -21,7 +21,7 @@ const eventsData = {
       "description": "Bangladesh's largest debate competition with participants from all 64 districts",
       "date": "March 15-20, 2024",
       "time": "9:00 AM - 6:00 PM",
-      "location": "Dhaka University Campus",
+      "location": "Dhaka University",
       "type": "upcoming",
       "category": "national",
       "participants": "5000+",

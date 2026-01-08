@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Root from './Root';
 import Home from './pages/Home';
-// import About from './pages/About';
+
 import MissionVision from './pages/MissionVision';
 import HallOfFame from './pages/HallOfFame';
 import AdvisorPanel from './pages/AdvisorPanel';
@@ -22,8 +22,6 @@ function App() {
     <Routes>
       <Route path="/" element={<Root />}>
         <Route index element={<Home />} />
-        {/* <Route path="about" element={<About />} /> */}
-        
         <Route path="mission-vision" element={<MissionVision />} />
         <Route path="hall-of-fame" element={<HallOfFame />} />
         <Route path="advisor-panel" element={<AdvisorPanel />} />
