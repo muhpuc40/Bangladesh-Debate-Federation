@@ -315,7 +315,7 @@ const News = () => {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Search news articles by title, content, tags, or author..."
+                  placeholder="Search news by title, content, tags or author..."
                   className="w-full pl-12 pr-4 py-3 border-2 border-emerald-200 rounded-xl focus:ring-4 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-base hover:border-emerald-300 shadow-sm"
                 />
                 {searchTerm && (

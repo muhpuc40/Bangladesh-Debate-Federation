@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaSearch, FaUniversity, FaUserTie, FaUserGraduate, FaPhone, FaEnvelope, FaFilter, FaDownload, FaPrint, FaMapMarkerAlt, FaFacebook } from 'react-icons/fa';
+import { FaSearch, FaUniversity, FaUserTie, FaUserGraduate, FaPhone, FaEnvelope, FaFilter, FaDownload, FaPrint, FaMapMarkerAlt, FaFacebook,FaLink } from 'react-icons/fa';
 
 const DebateClubDirectory = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -39,21 +39,6 @@ const DebateClubDirectory = () => {
       facebookUrl: "https://facebook.com/BUETOratoryClub"
     },
     {
-      id: 3,
-      clubName: "Jahangirnagar Debating Club",
-      university: "Jahangirnagar University",
-      president: "Sadia Afrin",
-      generalSecretary: "Kamal Hossain",
-      contact: "01777 408630",
-      email: "jdc@juniv.edu",
-      location: "Savar, Dhaka",
-      established: "1998",
-      members: "90",
-      status: "Active",
-      facebookId: "JahangirnagarDebatingClub",
-      facebookUrl: "https://facebook.com/JahangirnagarDebatingClub"
-    },
-    {
       id: 4,
       clubName: "Chittagong University Debate Forum",
       university: "University of Chittagong",
@@ -73,9 +58,9 @@ const DebateClubDirectory = () => {
       clubName: "North South University Debate Club",
       university: "North South University",
       president: "Zarin Tasnim",
-      generalSecretary: "Rayhan Chowdhury",
+      generalSecretary: "Rayhan",
       contact: "01987 654321",
-      email: "debateclub@northsouth.edu",
+      email: "dc@northsouth.edu",
       location: "Dhaka",
       established: "2005",
       members: "130",
@@ -339,7 +324,7 @@ const DebateClubDirectory = () => {
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
                         <div className="flex items-center justify-start">
-                          <FaFacebook className="mr-2 text-blue-600" /> Link
+                          <FaLink className="mr-2" /> Link
                         </div>
                       </th>
                     </tr>

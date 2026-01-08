@@ -119,7 +119,7 @@ const Footer = () => {
                 Terms of Service
               </Link>
               <Link to="/code-of-conduct" className="text-gray-500 hover:text-emerald-700">
-                Code of Conduct
+                Developers Info
               </Link>
             </div>
           </div>
