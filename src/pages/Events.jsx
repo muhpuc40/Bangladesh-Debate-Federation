@@ -260,7 +260,7 @@ const Events = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search events by title, description, or location..."
-                  className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-full focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300"
+                  className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-full focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black"
                 />
                 {searchTerm && (
                   <button
