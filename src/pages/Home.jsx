@@ -261,85 +261,115 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About Us Section with Stack Component */}
-      <section className="py-12 md:py-16 lg:py-20 bg-white" id="about-section">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
-            
-            {/* Mobile Order: First show "ABOUT BDF" label */}
-            <div className="lg:hidden w-full">
-              <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200 text-justify">
-                ABOUT BDF
-              </div>
-            </div>
-            
-            {/* Left Side - Stack Component (Mobile: Show after label, Desktop: Show as left column) */}
-            <div className="w-full order-2 lg:order-1">
-              <div className="relative w-full h-64 sm:h-72 md:h-80 lg:h-96">
-                <Stack
-                  randomRotation={true}
-                  sensitivity={180}
-                  sendToBackOnClick={true}
-                  autoplay={true}
-                  autoplayDelay={3000}
-                  pauseOnHover={true}
-                  mobileClickOnly={true}
-                  cards={aboutImages.map((image, i) => (
-                    <div 
-                      key={image.id}
-                      className="relative w-full h-full rounded-lg md:rounded-xl overflow-hidden border border-emerald-200 shadow-lg"
-                    >
-                      <img 
-                        src={image.url} 
-                        alt={image.alt}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 md:p-4">
-                        <p className="text-white font-medium text-sm md:text-base">
-                          {image.alt}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+  {/* About Us Section with Stack Component */}
+<section className="py-12 md:py-16 lg:py-20 bg-white" id="about-section">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
+      
+      {/* Mobile Order: First show "ABOUT BDF" label */}
+      <div className="lg:hidden w-full">
+        <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200 text-justify">
+          ABOUT BDF
+        </div>
+      </div>
+      
+      {/* Left Side - Image Display */}
+      <div className="w-full order-2 lg:order-1">
+        {/* Mobile View: Swiper Slider */}
+        <div className="lg:hidden">
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={10}
+            slidesPerView={1}
+            pagination={{ clickable: true }}
+            className="h-64 sm:h-72 md:h-80"
+          >
+            {aboutImages.map((image) => (
+              <SwiperSlide key={image.id}>
+                <div className="relative w-full h-full rounded-lg md:rounded-xl overflow-hidden border border-emerald-200 shadow-lg">
+                  <img 
+                    src={image.url} 
+                    alt={`About Image ${image.id}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 md:p-4">
+                    <p className="text-white font-medium text-sm md:text-base">
+                      {/* Add alt text if needed */}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        
+        {/* Desktop View: Stack Component */}
+        <div className="hidden lg:block relative w-full h-64 sm:h-72 md:h-80 lg:h-96">
+          <Stack
+            randomRotation={true}
+            sensitivity={180}
+            sendToBackOnClick={true}
+            autoplay={true}
+            autoplayDelay={3000}
+            pauseOnHover={true}
+            mobileClickOnly={true}
+            cards={aboutImages.map((image) => (
+              <div 
+                key={image.id}
+                className="relative w-full h-full rounded-lg md:rounded-xl overflow-hidden border border-emerald-200 shadow-lg"
+              >
+                <img 
+                  src={image.url} 
+                  alt={`About Image ${image.id}`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
                 />
-              </div>
-            </div>
-            
-            {/* Right Side - About Us Content (Mobile: Show after images, Desktop: Show as right column) */}
-            <div className="w-full order-3 lg:order-2">
-              {/* Desktop: Show "ABOUT BDF" label */}
-              <div className="hidden lg:block">
-                <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200 text-justify">
-                  ABOUT BDF
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 md:p-4">
+                  <p className="text-white font-medium text-sm md:text-base">
+                    {/* Add alt text if needed */}
+                  </p>
                 </div>
               </div>
-              
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-4 sm:mb-6 leading-tight text-justify">
-                Leading Debate Excellence in <span className="text-emerald-600">Bangladesh</span>
-              </h2>
-              <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-4 sm:mb-6 md:mb-8 leading-relaxed text-justify">
-                Bangladesh Debate Federation (BDF) started its journey on the first quarter of the last decade of the previous century when democracy just appeared to the country as the form of government. Through a long period, BDF could able to build a generation who can lead, who can speak and who can represent. Since 1992 Bangladesh Debate Federation (BDF) is the central debate platform in the debating arena of Bangladesh. With a view to explore democracy in every sphere of the country, accessible to the mass people and increases the boundary of debate beyond the Dhaka city few legends of the debating arena has started there journey through debate. Birupakkha Pal, Dr. Niamot Elahi, Dr. Abdun Nur Tushar were the gypsy of that caravan. Since its launching BDF is organizing National Debate Festival in every two year regularly as well as training workshops, several competitions, mini-fests, Inter University debate championships, national school debate championship etc. Recently BDF has started to give debate award for performing and organizing debate activities.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <Link 
-                  to="/about" 
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-                >
-                  Know More <FaArrowRight className="ml-2 text-sm sm:text-base md:text-base" />
-                </Link>
-                <Link 
-                  to="/events" 
-                  className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-                >
-                  Upcoming Events
-                </Link>
-              </div>
-            </div>
+            ))}
+          />
+        </div>
+      </div>
+      
+      {/* Right Side - About Us Content (Mobile: Show after images, Desktop: Show as right column) */}
+      <div className="w-full order-3 lg:order-2">
+        {/* Desktop: Show "ABOUT BDF" label */}
+        <div className="hidden lg:block">
+          <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200 text-justify">
+            ABOUT BDF
           </div>
         </div>
-      </section>
+        
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-4 sm:mb-6 leading-tight text-justify">
+          Leading Debate Excellence in <span className="text-emerald-600">Bangladesh</span>
+        </h2>
+        <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-4 sm:mb-6 md:mb-8 leading-relaxed text-justify">
+          Bangladesh Debate Federation (BDF) started its journey on the first quarter of the last decade of the previous century when democracy just appeared to the country as the form of government. Through a long period, BDF could able to build a generation who can lead, who can speak and who can represent. Since 1992 Bangladesh Debate Federation (BDF) is the central debate platform in the debating arena of Bangladesh. With a view to explore democracy in every sphere of the country, accessible to the mass people and increases the boundary of debate beyond the Dhaka city few legends of the debating arena has started there journey through debate. Birupakkha Pal, Dr. Niamot Elahi, Dr. Abdun Nur Tushar were the gypsy of that caravan. Since its launching BDF is organizing National Debate Festival in every two year regularly as well as training workshops, several competitions, mini-fests, Inter University debate championships, national school debate championship etc. Recently BDF has started to give debate award for performing and organizing debate activities.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <Link 
+            to="/about" 
+            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
+          >
+            Know More <FaArrowRight className="ml-2 text-sm sm:text-base md:text-base" />
+          </Link>
+          <Link 
+            to="/events" 
+            className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
+          >
+            Upcoming Events
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Partners with Marquee Cards - LOGOS ONLY, NO TEXT, COLORFUL */}
       <section className="py-8 md:py-12 lg:py-16 bg-white overflow-hidden">
@@ -697,7 +727,7 @@ const Home = () => {
   </style>
 </section>
 
-      {/* Latest News - Compact Version */}
+ /* Latest News - Compact Version */
 <section className="py-8 md:py-12 lg:py-16 bg-white">
   <div className="container mx-auto px-4 sm:px-6 lg:px-8">
     {/* Compact Header Section */}
@@ -790,10 +820,7 @@ const Home = () => {
                 <FaArrowRight className="ml-1.5 text-xs group-hover/readmore:translate-x-1 transition-transform duration-300" />
               </Link>
               
-              <div className="flex items-center space-x-1">
-                <FaUsers className="text-gray-400 text-xs" />
-                <span className="text-gray-400 text-xs text-left">{news.viewers}</span>
-              </div>
+              {/* ভিউয়ার কাউন্টার রিমুভ করা হয়েছে */}
             </div>
           </div>
         </div>

@@ -19,6 +19,12 @@ import {
   FaChevronRight
 } from 'react-icons/fa';
 
+// Import Swiper components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+
 // Main MissionVision Component
 const MissionVision = () => {
   const galleryImages = [
@@ -67,36 +73,71 @@ const MissionVision = () => {
             {/* Stack Image Gallery with Auto Slide (3 seconds) */}
             <div className="relative">
               <div className="w-[300px] h-[400px] md:w-[350px] md:h-[450px] lg:w-[400px] lg:h-[500px] mx-auto">
-                <Stack
-                  randomRotation={true}
-                  sensitivity={180}
-                  sendToBackOnClick={true}
-                  autoplay={true}  // সব ডিভাইসে অটো স্লাইড চালু
-                  autoplayDelay={3000}
-                  pauseOnHover={true}  // শুধু ডেস্কটপে হোভার করলে pause হবে
-                  mobileClickOnly={true}  // মোবাইলে শুধু ক্লিক কাজ করবে
-                  cards={galleryImages.map((src, i) => (
-                    <div 
-                      key={i}
-                      className="relative w-full h-full rounded-xl overflow-hidden border-2 border-emerald-200 shadow-xl"
-                    >
-                      <img 
-                        src={src} 
-                        alt={imageCaptions[i].caption} 
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 md:p-5">
-                        <h3 className="text-white font-bold text-lg md:text-xl mb-1 md:mb-2">
-                          {imageCaptions[i].caption}
-                        </h3>
-                        <p className="text-white/90 text-sm md:text-base">
-                          {imageCaptions[i].description}
-                        </p>
+                {/* Mobile View: Swiper Slider */}
+                <div className="lg:hidden w-full h-full">
+                  <Swiper
+                    modules={[Pagination]}
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    pagination={{ clickable: true }}
+                    className="h-full rounded-xl"
+                  >
+                    {galleryImages.map((src, i) => (
+                      <SwiperSlide key={i}>
+                        <div className="relative w-full h-full rounded-xl overflow-hidden border-2 border-emerald-200 shadow-xl">
+                          <img 
+                            src={src} 
+                            alt={imageCaptions[i].caption} 
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 md:p-5">
+                            <h3 className="text-white font-bold text-lg md:text-xl mb-1 md:mb-2">
+                              {imageCaptions[i].caption}
+                            </h3>
+                            <p className="text-white/90 text-sm md:text-base">
+                              {imageCaptions[i].description}
+                            </p>
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
+                
+                {/* Desktop View: Stack Component */}
+                <div className="hidden lg:block w-full h-full">
+                  <Stack
+                    randomRotation={true}
+                    sensitivity={180}
+                    sendToBackOnClick={true}
+                    autoplay={true}  // সব ডিভাইসে অটো স্লাইড চালু
+                    autoplayDelay={3000}
+                    pauseOnHover={true}  // শুধু ডেস্কটপে হোভার করলে pause হবে
+                    mobileClickOnly={true}  // মোবাইলে শুধু ক্লিক কাজ করবে
+                    cards={galleryImages.map((src, i) => (
+                      <div 
+                        key={i}
+                        className="relative w-full h-full rounded-xl overflow-hidden border-2 border-emerald-200 shadow-xl"
+                      >
+                        <img 
+                          src={src} 
+                          alt={imageCaptions[i].caption} 
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 md:p-5">
+                          <h3 className="text-white font-bold text-lg md:text-xl mb-1 md:mb-2">
+                            {imageCaptions[i].caption}
+                          </h3>
+                          <p className="text-white/90 text-sm md:text-base">
+                            {imageCaptions[i].description}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                />
+                    ))}
+                  />
+                </div>
               </div>
             </div>
           </div>
