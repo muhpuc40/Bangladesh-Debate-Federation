@@ -224,9 +224,11 @@ const Events = () => {
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight">
               Events & Competitions
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-             Discover upcoming debate competitions, training, workshops organized by Bangladesh Debate Federation.
-            </p>
+            {/* <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+              Discover upcoming debate competitions, training workshops, and special events 
+              organized by Bangladesh Debate Federation. Register now to participate in 
+              transformative experiences.
+            </p> */}
             {/* <div className="flex flex-wrap gap-4">
               <Link 
                 to="/registration" 
@@ -451,3 +453,7 @@ const Events = () => {
 };
 
 export default Events;
+
+
+
+Discover upcoming debate competitions, training, workshops organized by Bangladesh Debate Federation.
