@@ -283,14 +283,13 @@ const News = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative pt-20 md:pt-24 py-12 md:py-16 lg:py-20 bg-white text-emerald-900">
+      <section className="relative pt-16 md:pt-20 py-8 md:py-12 bg-white text-emerald-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl">
-            {/* মোবাইলে whitespace-normal, sm এবং উপরের ডিভাইসে whitespace-nowrap */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight whitespace-normal sm:whitespace-nowrap">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight whitespace-normal sm:whitespace-nowrap">
               Debate News & Announcements
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl text-gray-700 mb-6 md:mb-8 leading-relaxed">
               Stay informed with the latest news, announcements, competition results, 
               training programs, and achievements from Bangladesh Debate Federation.
             </p>
@@ -299,30 +298,30 @@ const News = () => {
       </section>
 
       {/* Main Content with Two Columns */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+        <div className="flex flex-col lg:flex-row gap-6 md:gap-8">
           
           {/* Left Column - News (2/3 width) */}
           <div className="lg:w-2/3">
             
-            {/* Search Bar - Sticky only on desktop */}
-            <div className="sticky top-16 z-20 bg-white pt-4 pb-6 mb-8 -mt-2 border-b border-emerald-100 max-lg:static">
+            {/* Search Bar - ট্রান্সপারেন্ট ব্যাকগ্রাউন্ড */}
+            <div className="sticky top-0 lg:top-4 z-30 py-4 md:py-5 mb-6 -mt-2">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaSearch className="text-gray-400 text-xl" />
+                  <FaSearch className="text-gray-400 text-lg md:text-xl" />
                 </div>
                 <input
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search news by title, content, tags or author..."
-                  className="w-full pl-12 pr-4 py-3 border-2 border-emerald-200 rounded-xl focus:ring-4 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-base hover:border-emerald-300 shadow-sm"
+                  className="w-full pl-12 pr-4 py-3 md:py-3.5 bg-white/95 backdrop-blur-sm border-2 border-emerald-200 rounded-xl focus:ring-4 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-sm md:text-base hover:border-emerald-300 shadow-lg"
                 />
                 {searchTerm && (
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
                     <button 
                       onClick={() => setSearchTerm('')}
-                      className="text-gray-500 hover:text-red-500 transition-colors duration-200"
+                      className="text-gray-500 hover:text-red-500 transition-colors duration-200 text-sm md:text-base"
                     >
                       Clear
                     </button>
@@ -331,35 +330,31 @@ const News = () => {
               </div>
             </div>
 
-            {/* Featured News Section - Separate Scrollable Container */}
+            {/* Featured News Section */}
             {featuredNews.length > 0 && (
-              <div className="mb-12">
-                <h2 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center">
-                  <FaNewspaper className="mr-3 text-emerald-600" />
+              <div className="mb-10">
+                <h2 className="text-xl md:text-2xl font-bold text-emerald-900 mb-4 md:mb-6 flex items-center">
+                  <FaNewspaper className="mr-2 md:mr-3 text-emerald-600" />
                   Featured News
                 </h2>
-                <div className="bg-gradient-to-r from-emerald-50 to-white rounded-2xl p-6 border border-emerald-100">
-                  {/* Scrollable container for Featured News */}
+                <div className="bg-gradient-to-r from-emerald-50 to-white rounded-xl md:rounded-2xl p-4 md:p-6 border border-emerald-100">
                   <div 
                     ref={featuredScrollRef}
                     onWheel={handleFeaturedWheel}
-                    className="max-h-[600px] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-emerald-300/80 scrollbar-track-emerald-100/50 hover:scrollbar-thumb-emerald-400 scroll-smooth"
-                    style={{
-                      scrollBehavior: 'smooth',
-                    }}
+                    className="max-h-[500px] md:max-h-[600px] overflow-y-auto pr-3 md:pr-4 scrollbar-thin scrollbar-thumb-emerald-300/80 scrollbar-track-emerald-100/50 hover:scrollbar-thumb-emerald-400 scroll-smooth"
                   >
                     {featuredNews.map(item => (
-                      <div key={item.id} className="mb-6 last:mb-0 p-4 hover:bg-emerald-50/50 rounded-lg transition-all duration-300">
-                        <div className="flex items-start space-x-4">
+                      <div key={item.id} className="mb-4 md:mb-6 last:mb-0 p-3 md:p-4 hover:bg-emerald-50/50 rounded-lg transition-all duration-300">
+                        <div className="flex items-start space-x-3 md:space-x-4">
                           <div className="flex-shrink-0">
                             <img 
                               src={item.image} 
                               alt={item.title}
-                              className="w-24 h-24 rounded-lg object-cover"
+                              className="w-20 h-20 md:w-24 md:h-24 rounded-lg object-cover"
                             />
                           </div>
                           <div className="flex-1">
-                            <div className="flex items-center justify-between mb-2">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
                               <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
                                 {item.category}
                               </span>
@@ -367,14 +362,14 @@ const News = () => {
                                 <FaCalendarAlt className="mr-1" /> {item.date}
                               </span>
                             </div>
-                            <h3 className="text-lg font-bold text-emerald-900 mb-2 hover:text-emerald-700 transition-colors duration-300">
+                            <h3 className="text-base md:text-lg font-bold text-emerald-900 mb-1 md:mb-2 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
                               {item.title}
                             </h3>
-                            <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                            <p className="text-gray-600 text-xs md:text-sm mb-2 md:mb-3 line-clamp-2">
                               {item.excerpt}
                             </p>
                             <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-3 text-xs text-gray-500">
+                              <div className="flex items-center space-x-2 md:space-x-3 text-xs text-gray-500">
                                 <span className="flex items-center">
                                   <FaEye className="mr-1" /> {item.views}
                                 </span>
@@ -384,7 +379,7 @@ const News = () => {
                               </div>
                               <Link 
                                 to={`/news/${item.id}`}
-                                className="text-emerald-600 hover:text-emerald-800 font-bold text-sm flex items-center"
+                                className="text-emerald-600 hover:text-emerald-800 font-bold text-xs md:text-sm flex items-center"
                               >
                                 Read More <FaArrowRight className="ml-1 text-xs" />
                               </Link>
@@ -398,16 +393,16 @@ const News = () => {
               </div>
             )}
 
-            {/* All News Grid - Main Content (Not Scrollable) */}
+            {/* All News Grid */}
             <div>
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-emerald-900">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 md:mb-6 gap-2">
+                <h2 className="text-xl md:text-2xl font-bold text-emerald-900">
                   Latest News
                 </h2>
-                <div className="text-sm text-gray-600">
+                <div className="text-xs md:text-sm text-gray-600">
                   {searchTerm ? (
                     <span className="flex items-center">
-                      <FaSearch className="mr-2" />
+                      <FaSearch className="mr-1 md:mr-2" />
                       {filteredNews.length} results for "{searchTerm}"
                     </span>
                   ) : (
@@ -417,82 +412,64 @@ const News = () => {
               </div>
 
               {filteredNews.length === 0 ? (
-                <div className="text-center py-12 bg-gray-50 rounded-xl">
-                  <FaSearch className="text-4xl text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold text-gray-700 mb-2">No news found</h3>
-                  <p className="text-gray-600 mb-4">
+                <div className="text-center py-8 md:py-12 bg-gray-50 rounded-xl">
+                  <FaSearch className="text-3xl md:text-4xl text-gray-400 mx-auto mb-3 md:mb-4" />
+                  <h3 className="text-lg md:text-xl font-bold text-gray-700 mb-2">No news found</h3>
+                  <p className="text-gray-600 mb-4 text-sm md:text-base">
                     No articles match your search "{searchTerm}"
                   </p>
                   <button 
                     onClick={() => setSearchTerm('')}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-300"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 md:px-6 rounded-lg transition-all duration-300 text-sm md:text-base"
                   >
                     Show All News
                   </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   {filteredNews.map(item => (
                     <div key={item.id} className="bg-white rounded-xl border border-emerald-100 overflow-hidden hover:border-emerald-300 hover:shadow-lg transition-all duration-300">
-                      <div className="relative h-48 overflow-hidden">
+                      <div className="relative h-40 md:h-48 overflow-hidden">
                         <img 
                           src={item.image} 
                           alt={item.title}
                           className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                         />
-                        <div className="absolute top-4 left-4">
+                        <div className="absolute top-3 left-3">
                           <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
                             {item.category}
                           </span>
                         </div>
-                        <div className="absolute top-4 right-4">
-                          <button className="bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110">
-                            <FaBookmark className="text-sm" />
+                        <div className="absolute top-3 right-3">
+                          <button className="bg-white/90 hover:bg-white text-gray-800 p-1.5 md:p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110">
+                            <FaBookmark className="text-xs md:text-sm" />
                           </button>
                         </div>
                       </div>
                       
-                      <div className="p-6">
-                        <div className="flex items-center text-xs text-gray-600 mb-3">
+                      <div className="p-4 md:p-6">
+                        <div className="flex items-center text-xs text-gray-600 mb-2 md:mb-3">
                           <FaCalendarAlt className="mr-1.5 text-emerald-600" />
                           <span>{item.date}</span>
-                          <span className="mx-2">•</span>
+                          <span className="mx-1.5 md:mx-2">•</span>
                           <FaUser className="mr-1.5 text-emerald-600" />
                           <span>{item.author}</span>
                         </div>
                         
-                        <h3 className="text-lg font-bold text-emerald-900 mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
+                        <h3 className="text-base md:text-lg font-bold text-emerald-900 mb-2 md:mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
                           {item.title}
                         </h3>
                         
-                        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                        <p className="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3">
                           {item.excerpt}
                         </p>
                         
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {item.tags.map((tag, index) => (
-                            <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
-                              #{tag}
-                            </span>
-                          ))}
-                        </div>
-                        
-                        <div className="flex items-center justify-between pt-4 border-t border-emerald-50">
-                          <div className="flex items-center space-x-3 text-xs text-gray-500">
-                            <span className="flex items-center">
-                              <FaEye className="mr-1" /> {item.views}
-                            </span>
-                            <span className="flex items-center">
-                              <FaComment className="mr-1" /> {item.comments}
-                            </span>
-                            <span>{item.readTime}</span>
-                          </div>
-                          
+                        <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-emerald-50">
                           <Link 
                             to={`/news/${item.id}`}
-                            className="text-emerald-600 hover:text-emerald-800 font-bold text-sm flex items-center"
+                            className="text-emerald-600 hover:text-emerald-800 font-bold text-xs md:text-sm flex items-center"
                           >
-                            Read More <FaArrowRight className="ml-1.5 text-xs" />
+                            Read More <FaArrowRight className="ml-1 md:ml-1.5 text-xs" />
                           </Link>
                         </div>
                       </div>
@@ -503,61 +480,58 @@ const News = () => {
             </div>
           </div>
 
-          {/* Right Column - Announcements (1/3 width) - Separate Scrollable Container */}
+          {/* Right Column - Announcements (1/3 width) */}
           <div className="lg:w-1/3">
-            <div className="sticky top-20 z-10">
+            <div className="lg:sticky lg:top-4 z-20">
               {/* Announcements Header */}
-              <div className="bg-emerald-600 text-white rounded-t-xl p-6">
+              <div className="bg-emerald-600 text-white rounded-t-xl p-4 md:p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <h2 className="text-2xl font-bold flex items-center">
-                    <FaBullhorn className="mr-3" />
+                  <h2 className="text-xl md:text-2xl font-bold flex items-center">
+                    <FaBullhorn className="mr-2 md:mr-3" />
                     Announcements
                   </h2>
-                  <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
+                  <span className="bg-white/20 px-2 md:px-3 py-1 rounded-full text-xs md:text-sm">
                     {announcementsData.length} Active
                   </span>
                 </div>
-                <p className="text-emerald-100 text-sm">
+                <p className="text-emerald-100 text-xs md:text-sm">
                   Important notices and updates from BDF
                 </p>
               </div>
 
-              {/* Announcements List - Separate Scrollable Container */}
+              {/* Announcements List */}
               <div className="bg-white border border-emerald-100 rounded-b-xl overflow-hidden">
                 <div 
                   ref={announcementScrollRef}
                   onWheel={handleAnnouncementWheel}
-                  className="max-h-[calc(100vh-280px)] overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-300/80 scrollbar-track-emerald-100/50 hover:scrollbar-thumb-emerald-400 scroll-smooth"
-                  style={{
-                    scrollBehavior: 'smooth',
-                  }}
+                  className="max-h-[400px] md:max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-300/80 scrollbar-track-emerald-100/50 hover:scrollbar-thumb-emerald-400 scroll-smooth"
                 >
                   {announcementsData.map(announcement => (
                     <div 
                       key={announcement.id}
-                      className="p-5 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors duration-200"
+                      className="p-3 md:p-5 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors duration-200"
                     >
-                      <div className="flex items-start space-x-3">
-                        <div className="flex-shrink-0 mt-1">
+                      <div className="flex items-start space-x-2 md:space-x-3">
+                        <div className="flex-shrink-0 mt-0.5 md:mt-1">
                           {announcement.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="px-2 py-0.5 bg-gray-100 text-xs font-bold text-gray-700 rounded">
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-1 gap-1">
+                            <span className="px-2 py-0.5 bg-gray-100 text-xs font-bold text-gray-700 rounded w-fit">
                               {announcement.category}
                             </span>
                             <span className="text-xs text-gray-500 flex items-center">
                               <FaRegClock className="mr-1" /> {announcement.time}
                             </span>
                           </div>
-                          <h3 className="font-bold text-gray-900 mb-2">
+                          <h3 className="font-bold text-gray-900 mb-1 md:mb-2 text-sm md:text-base">
                             {announcement.title}
                           </h3>
-                          <p className="text-sm text-gray-600 mb-3">
+                          <p className="text-xs md:text-sm text-gray-600 mb-2 md:mb-3">
                             {announcement.description}
                           </p>
-                          <div className="flex items-center justify-between">
-                            <span className={`text-xs px-2 py-1 rounded ${
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <span className={`text-xs px-2 py-1 rounded w-fit ${
                               announcement.type === 'urgent' ? 'bg-red-100 text-red-700' :
                               announcement.type === 'update' ? 'bg-yellow-100 text-yellow-700' :
                               announcement.type === 'new' ? 'bg-orange-100 text-orange-700' :
@@ -565,7 +539,7 @@ const News = () => {
                             }`}>
                               {announcement.type.charAt(0).toUpperCase() + announcement.type.slice(1)}
                             </span>
-                            <button className="text-emerald-600 hover:text-emerald-800 text-sm font-medium flex items-center">
+                            <button className="text-emerald-600 hover:text-emerald-800 text-xs md:text-sm font-medium flex items-center justify-end sm:justify-start">
                               Details <FaArrowRight className="ml-1 text-xs" />
                             </button>
                           </div>
@@ -576,11 +550,11 @@ const News = () => {
                 </div>
 
                 {/* View All Button */}
-                <div className="p-4 border-t border-gray-100 bg-gray-50">
-                  <button className="w-full bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-4 rounded-lg border border-emerald-200 hover:border-emerald-300 transition-all duration-300 flex items-center justify-center">
-                    <FaBullhorn className="mr-2" />
+                <div className="p-3 md:p-4 border-t border-gray-100 bg-gray-50">
+                  <button className="w-full bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-2.5 md:py-3 px-4 rounded-lg border border-emerald-200 hover:border-emerald-300 transition-all duration-300 flex items-center justify-center text-sm md:text-base">
+                    <FaBullhorn className="mr-1.5 md:mr-2" />
                     View All Announcements
-                    <FaArrowRight className="ml-2" />
+                    <FaArrowRight className="ml-1.5 md:ml-2" />
                   </button>
                 </div>
               </div>
@@ -593,7 +567,7 @@ const News = () => {
       <style jsx>{`
         /* Custom scrollbar styling for extra smoothness */
         .scrollbar-thin::-webkit-scrollbar {
-          width: 8px;
+          width: 6px;
         }
         
         .scrollbar-thin::-webkit-scrollbar-track {
@@ -614,6 +588,13 @@ const News = () => {
         .scrollbar-thin {
           scrollbar-width: thin;
           scrollbar-color: rgba(16, 185, 129, 0.6) rgba(209, 250, 229, 0.3);
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 1024px) {
+          .lg\:sticky {
+            position: static;
+          }
         }
       `}</style>
     </div>
