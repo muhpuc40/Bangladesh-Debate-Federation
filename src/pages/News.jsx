@@ -346,14 +346,15 @@ const News = () => {
                     {featuredNews.map(item => (
                       <div key={item.id} className="mb-4 md:mb-6 last:mb-0 p-3 md:p-4 hover:bg-emerald-50/50 rounded-lg transition-all duration-300">
                         <div className="flex items-start space-x-3 md:space-x-4">
-                          <div className="flex-shrink-0">
+                          {/* শুধুমাত্র মোবাইলে ইমেজ লুকানোর জন্য hidden sm:flex */}
+                          <div className="flex-shrink-0 hidden sm:block">
                             <img 
                               src={item.image} 
                               alt={item.title}
                               className="w-20 h-20 md:w-24 md:h-24 rounded-lg object-cover"
                             />
                           </div>
-                          <div className="flex-1">
+                          <div className={`${item.id === 1 ? 'w-full' : 'flex-1'}`}>
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
                               <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
                                 {item.category}
