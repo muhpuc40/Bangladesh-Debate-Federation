@@ -355,14 +355,14 @@ const News = () => {
                             />
                           </div>
                           <div className={`${item.id === 1 ? 'w-full' : 'flex-1'}`}>
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
-                              <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
-                                {item.category}
-                              </span>
-                              <span className="text-xs text-gray-500 flex items-center">
-                                <FaCalendarAlt className="mr-1" /> {item.date}
-                              </span>
-                            </div>
+                            {/* শুধুমাত্র Announcement ক্যাটাগরি লুকানোর জন্য */}
+                            {item.category !== 'Announcement' && (
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
+                                <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
+                                  {item.category}
+                                </span>
+                              </div>
+                            )}
                             <h3 className="text-base md:text-lg font-bold text-emerald-900 mb-1 md:mb-2 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
                               {item.title}
                             </h3>
@@ -370,14 +370,6 @@ const News = () => {
                               {item.excerpt}
                             </p>
                             <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-2 md:space-x-3 text-xs text-gray-500">
-                                <span className="flex items-center">
-                                  <FaEye className="mr-1" /> {item.views}
-                                </span>
-                                <span className="flex items-center">
-                                  <FaComment className="mr-1" /> {item.comments}
-                                </span>
-                              </div>
                               <Link 
                                 to={`/news/${item.id}`}
                                 className="text-emerald-600 hover:text-emerald-800 font-bold text-xs md:text-sm flex items-center"
@@ -436,11 +428,14 @@ const News = () => {
                           alt={item.title}
                           className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                         />
-                        <div className="absolute top-3 left-3">
-                          <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
-                            {item.category}
-                          </span>
-                        </div>
+                        {/* শুধুমাত্র Announcement ক্যাটাগরি লুকানোর জন্য */}
+                        {item.category !== 'Announcement' && (
+                          <div className="absolute top-3 left-3">
+                            <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
+                              {item.category}
+                            </span>
+                          </div>
+                        )}
                         <div className="absolute top-3 right-3">
                           <button className="bg-white/90 hover:bg-white text-gray-800 p-1.5 md:p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110">
                             <FaBookmark className="text-xs md:text-sm" />
