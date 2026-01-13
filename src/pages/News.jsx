@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -304,8 +305,8 @@ const News = () => {
           {/* Left Column - News (2/3 width) */}
           <div className="lg:w-2/3">
             
-            {/* Search Bar - ট্রান্সপারেন্ট ব্যাকগ্রাউন্ড */}
-            <div className="sticky top-0 lg:top-4 z-30 py-4 md:py-5 mb-6 -mt-2">
+            {/* সার্চবার - আগের মত */}
+            <div className="sticky top-16 md:top-20 z-30 py-4 md:py-5 mb-6 -mt-2">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FaSearch className="text-gray-400 text-lg md:text-xl" />
@@ -478,7 +479,8 @@ const News = () => {
 
           {/* Right Column - Announcements (1/3 width) */}
           <div className="lg:w-1/3">
-            <div className="lg:sticky lg:top-4 z-20">
+            {/* Sticky Announcements - সার্চবারের মত স্টিকি */}
+            <div className="sticky top-16 md:top-20 z-30 py-4 md:py-5 mb-6 -mt-2">
               {/* Announcements Header */}
               <div className="bg-emerald-600 text-white rounded-t-xl p-4 md:p-6">
                 <div className="flex items-center justify-between mb-2">
@@ -512,12 +514,10 @@ const News = () => {
                           {announcement.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-1 gap-1">
+                          {/* Category only - time removed */}
+                          <div className="mb-1">
                             <span className="px-2 py-0.5 bg-gray-100 text-xs font-bold text-gray-700 rounded w-fit">
                               {announcement.category}
-                            </span>
-                            <span className="text-xs text-gray-500 flex items-center">
-                              <FaRegClock className="mr-1" /> {announcement.time}
                             </span>
                           </div>
                           <h3 className="font-bold text-gray-900 mb-1 md:mb-2 text-sm md:text-base">
@@ -588,8 +588,8 @@ const News = () => {
         
         /* Mobile responsiveness */
         @media (max-width: 1024px) {
-          .lg\:sticky {
-            position: static;
+          .sticky {
+            position: static !important;
           }
         }
       `}</style>
