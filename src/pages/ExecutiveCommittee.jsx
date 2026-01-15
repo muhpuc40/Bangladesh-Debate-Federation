@@ -17,14 +17,6 @@ const ExecutiveCommittee = () => {
       linkedin: "https://www.linkedin.com/in/mohammed-saifuddin-munna-aab67a10a/"
     },
     {
-      name: "Md Saifuddin Munna",
-      position: "President",
-      image: "https://admin.puc.ac.bd/ProfilePictures/Munna_eee_Saifuddin%20Munna.JPG?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      gmail: "munna.puc@gmail.com",
-      facebook: "https://facebook.com/ayesha.rahman",
-      linkedin: "https://linkedin.com/in/ayesharahman"
-    },
-    {
       name: "Mr. Kamal Hossain",
       position: "Secretary General",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
@@ -68,13 +60,13 @@ const ExecutiveCommittee = () => {
 
   // Social link component for member cards
   const SocialLinks = ({ gmail, facebook, linkedin }) => (
-    <div className="flex justify-center space-x-3 mt-4 pt-4 border-t border-emerald-50">
+    <div className="flex justify-center space-x-4 mt-4 pt-4 border-t-2 border-emerald-100">
       <a 
         href={`mailto:${gmail}`}
         className="bg-red-100 hover:bg-red-200 text-red-600 p-2 rounded-full transition-all duration-300 hover:shadow-md"
         title="Send Email"
       >
-        <FaGoogle className="text-sm" />
+        <FaGoogle className="text-base" />
       </a>
       <a 
         href={facebook}
@@ -83,7 +75,7 @@ const ExecutiveCommittee = () => {
         className="bg-blue-100 hover:bg-blue-200 text-blue-600 p-2 rounded-full transition-all duration-300 hover:shadow-md"
         title="Facebook Profile"
       >
-        <FaFacebook className="text-sm" />
+        <FaFacebook className="text-base" />
       </a>
       <a 
         href={linkedin}
@@ -92,7 +84,7 @@ const ExecutiveCommittee = () => {
         className="bg-blue-50 hover:bg-blue-100 text-blue-700 p-2 rounded-full transition-all duration-300 hover:shadow-md"
         title="LinkedIn Profile"
       >
-        <FaLinkedin className="text-sm" />
+        <FaLinkedin className="text-base" />
       </a>
     </div>
   );
@@ -120,27 +112,27 @@ const ExecutiveCommittee = () => {
             Our Leadership Team
           </h2>
 
-          {/* Two Cards - Second and Third Members */}
-          <div className="flex justify-center mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
-              {committeeMembers.slice(1, 3).map((member, index) => (
+          {/* Top 2 Cards - President and Secretary General */}
+          <div className="flex justify-center mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
+              {committeeMembers.slice(0, 2).map((member, index) => (
                 <div 
                   key={index} 
-                  className="bg-white rounded-xl shadow-lg overflow-hidden border border-emerald-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  className="bg-white rounded-xl shadow-lg overflow-hidden border border-emerald-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
                 >
-                  <div className="flex flex-col items-center p-6">
-                    <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-emerald-100 shadow-lg mb-5">
+                  <div className="flex flex-col items-center p-6 flex-grow">
+                    <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-emerald-100 shadow-lg mb-6">
                       <img 
                         src={member.image} 
                         alt={member.name}
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="text-center mb-4">
+                    <div className="text-center mb-4 flex-grow">
                       <h3 className="text-xl font-bold text-emerald-900">
                         {member.name}
                       </h3>
-                      <p className="text-emerald-600 font-medium mt-1">
+                      <p className="text-emerald-600 font-medium mt-2">
                         {member.position}
                       </p>
                     </div>
@@ -156,29 +148,30 @@ const ExecutiveCommittee = () => {
             </div>
           </div>
 
-          {/* Four Cards - Remaining members */}
+          {/* Bottom 4 Cards - Remaining members */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {committeeMembers.slice(3, 7).map((member, index) => (
+            {committeeMembers.slice(2, 6).map((member, index) => (
               <div 
                 key={index} 
-                className="bg-white rounded-xl shadow-lg overflow-hidden border border-emerald-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="bg-white rounded-xl shadow-lg overflow-hidden border border-emerald-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
               >
-                <div className="flex flex-col items-center p-6">
-                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-emerald-100 shadow-lg mb-5">
+                <div className="flex flex-col items-center p-6 flex-grow">
+                  <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-emerald-100 shadow-lg mb-6">
                     <img 
                       src={member.image} 
                       alt={member.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="text-center mb-4">
+                  <div className="text-center mb-4 flex-grow">
                     <h3 className="text-xl font-bold text-emerald-900">
                       {member.name}
                     </h3>
-                    <p className="text-emerald-600 font-medium mt-1">
+                    <p className="text-emerald-600 font-medium mt-2">
                       {member.position}
                     </p>
                   </div>
+
                   <SocialLinks 
                     gmail={member.gmail}
                     facebook={member.facebook}
