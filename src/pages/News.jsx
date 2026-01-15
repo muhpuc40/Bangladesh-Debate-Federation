@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -437,11 +436,7 @@ const News = () => {
                             </span>
                           </div>
                         )}
-                        <div className="absolute top-3 right-3">
-                          <button className="bg-white/90 hover:bg-white text-gray-800 p-1.5 md:p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110">
-                            <FaBookmark className="text-xs md:text-sm" />
-                          </button>
-                        </div>
+                        {/* Bookmark icon removed as requested */}
                       </div>
                       
                       <div className="p-4 md:p-6">
