@@ -159,10 +159,10 @@ const DebateClubDirectory = () => {
       <section className="relative pt-20 md:pt-24 py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight text-justify">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight">
               Debate Club Directory
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed text-justify">
+            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
               Find debate clubs from Universities across Bangladesh...
             </p>
             <div className="flex flex-wrap gap-4 justify-start">
@@ -181,7 +181,7 @@ const DebateClubDirectory = () => {
       <section id="search" className="py-4 bg-white border-b border-emerald-100 shadow-lg">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-4">
-            <h2 className="text-xl md:text-2xl font-bold text-emerald-900 mb-2 text-justify">
+            <h2 className="text-xl md:text-2xl font-bold text-emerald-900 mb-2">
               Search Debate Clubs
             </h2>
           </div>
@@ -197,14 +197,14 @@ const DebateClubDirectory = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search by club name, university, president, general secretary or Facebook ID..."
-                className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-justify shadow-sm"
+                className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 shadow-sm"
               />
             </div>
           </div>
 
           {/* Filters */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <div className="text-justify">
+            <div>
               <label className="block text-gray-700 font-medium mb-2">
                 <FaUniversity className="inline mr-2 text-emerald-600" /> University
               </label>
@@ -220,7 +220,7 @@ const DebateClubDirectory = () => {
               </select>
             </div>
 
-            <div className="text-justify">
+            <div>
               <label className="block text-gray-700 font-medium mb-2">
                 <FaMapMarkerAlt className="inline mr-2 text-emerald-600" /> Region
               </label>
@@ -236,7 +236,7 @@ const DebateClubDirectory = () => {
               </select>
             </div>
 
-            <div className="flex items-end text-justify">
+            <div className="flex items-end">
               <button
                 onClick={() => {
                   setSearchTerm('');
@@ -252,7 +252,7 @@ const DebateClubDirectory = () => {
 
           {/* Results Count and Actions */}
           <div className="flex justify-between items-center pt-2 border-t border-emerald-100">
-            <div className="text-gray-600 text-justify">
+            <div className="text-gray-600">
               Found <span className="font-bold text-emerald-700">{filteredClubs.length}</span> debate clubs
             </div>
             <div className="flex gap-2">
@@ -281,8 +281,8 @@ const DebateClubDirectory = () => {
           {filteredClubs.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-gray-700 mb-2 text-justify">No clubs found</h3>
-              <p className="text-gray-600 mb-6 text-justify">Try adjusting your search criteria or filters</p>
+              <h3 className="text-2xl font-bold text-gray-700 mb-2">No clubs found</h3>
+              <p className="text-gray-600 mb-6">Try adjusting your search criteria or filters</p>
               <button 
                 onClick={() => { setSearchTerm(''); setSelectedUniversity('all'); setSelectedRegion('all'); }}
                 className="text-emerald-600 hover:text-emerald-800 font-bold"
@@ -298,32 +298,32 @@ const DebateClubDirectory = () => {
                   <thead className="bg-emerald-50">
                     <tr>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        <div className="flex items-center justify-start">
+                        <div className="flex items-center">
                           <FaUniversity className="mr-2" /> Club & University
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        <div className="flex items-center justify-start">
+                        <div className="flex items-center">
                           <FaUserTie className="mr-2" /> President
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        <div className="flex items-center justify-start">
+                        <div className="flex items-center">
                           <FaUserGraduate className="mr-2" /> General Secretary
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        <div className="flex items-center justify-start">
+                        <div className="flex items-center">
                           <FaPhone className="mr-2" /> Contact
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        <div className="flex items-center justify-start">
+                        <div className="flex items-center">
                           <FaEnvelope className="mr-2" /> Email
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
-                        <div className="flex items-center justify-start">
+                        <div className="flex items-center">
                           <FaLink className="mr-2" /> Link
                         </div>
                       </th>
@@ -333,25 +333,25 @@ const DebateClubDirectory = () => {
                     {filteredClubs.map((club) => (
                       <tr key={club.id} className="hover:bg-emerald-50 transition-colors duration-300">
                         <td className="px-6 py-4">
-                          <div className="font-bold text-emerald-900 text-justify">{club.clubName}</div>
-                          <div className="text-sm text-gray-600 mt-1 text-justify">{club.university}</div>
-                          <div className="flex items-center mt-1 text-xs text-gray-500 justify-start">
+                          <div className="font-bold text-emerald-900">{club.clubName}</div>
+                          <div className="text-sm text-gray-600 mt-1">{club.university}</div>
+                          <div className="flex items-center mt-1 text-xs text-gray-500">
                             <FaMapMarkerAlt className="mr-1" /> {club.location}
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="font-medium text-gray-900 text-justify">{club.president}</div>
+                          <div className="font-medium text-gray-900">{club.president}</div>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="font-medium text-gray-900 text-justify">{club.generalSecretary}</div>
+                          <div className="font-medium text-gray-900">{club.generalSecretary}</div>
                         </td>
                         <td className="px-6 py-4">
-                          <a href={`tel:${club.contact}`} className="text-emerald-600 hover:text-emerald-800 hover:underline font-medium text-justify">
+                          <a href={`tel:${club.contact}`} className="text-emerald-600 hover:text-emerald-800 hover:underline font-medium">
                             {club.contact}
                           </a>
                         </td>
-                        <td className="px-6-4">
-                          <a href={`mailto:${club.email}`} className="text-emerald-600 hover:text-emerald-800 hover:underline truncate block max-w-xs text-justify">
+                        <td className="px-6 py-4">
+                          <a href={`mailto:${club.email}`} className="text-emerald-600 hover:text-emerald-800 hover:underline truncate block max-w-xs">
                             {club.email}
                           </a>
                         </td>
@@ -372,7 +372,7 @@ const DebateClubDirectory = () => {
                 </table>
               </div>
 
-              {/* Mobile Card View */}
+              {/* Mobile Card View - WITHOUT Facebook icon and bottom section */}
               <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6">
                 {filteredClubs.map((club) => (
                   <div key={club.id} className="bg-white rounded-xl border border-emerald-100 p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
@@ -382,23 +382,23 @@ const DebateClubDirectory = () => {
                           <FaUniversity />
                         </div>
                         <div>
-                          <h3 className="font-bold text-emerald-900 text-justify">{club.clubName}</h3>
-                          <p className="text-sm text-gray-600 text-justify">{club.university}</p>
+                          <h3 className="font-bold text-emerald-900">{club.clubName}</h3>
+                          <p className="text-sm text-gray-600">{club.university}</p>
                         </div>
                       </div>
-                      <div className="flex items-center text-sm text-gray-500 mb-4 justify-start">
+                      <div className="flex items-center text-sm text-gray-500 mb-4">
                         <FaMapMarkerAlt className="mr-1" /> {club.location}
                       </div>
                     </div>
 
-                    <div className="space-y-3 mb-4">
+                    <div className="space-y-3">
                       <div className="flex items-center">
                         <div className="bg-emerald-50 p-2 rounded-lg mr-3">
                           <FaUserTie className="text-emerald-600" />
                         </div>
                         <div>
-                          <div className="text-xs text-gray-500 text-justify">President</div>
-                          <div className="font-medium text-gray-900 text-justify">{club.president}</div>
+                          <div className="text-xs text-gray-500">President</div>
+                          <div className="font-medium text-gray-900">{club.president}</div>
                         </div>
                       </div>
 
@@ -407,8 +407,8 @@ const DebateClubDirectory = () => {
                           <FaUserGraduate className="text-emerald-600" />
                         </div>
                         <div>
-                          <div className="text-xs text-gray-500 text-justify">General Secretary</div>
-                          <div className="font-medium text-gray-900 text-justify">{club.generalSecretary}</div>
+                          <div className="text-xs text-gray-500">General Secretary</div>
+                          <div className="font-medium text-gray-900">{club.generalSecretary}</div>
                         </div>
                       </div>
 
@@ -417,8 +417,8 @@ const DebateClubDirectory = () => {
                           <FaPhone className="text-emerald-600" />
                         </div>
                         <div>
-                          <div className="text-xs text-gray-500 text-justify">Contact</div>
-                          <a href={`tel:${club.contact}`} className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline text-justify">
+                          <div className="text-xs text-gray-500">Contact</div>
+                          <a href={`tel:${club.contact}`} className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline">
                             {club.contact}
                           </a>
                         </div>
@@ -429,45 +429,30 @@ const DebateClubDirectory = () => {
                           <FaEnvelope className="text-emerald-600" />
                         </div>
                         <div>
-                          <div className="text-xs text-gray-500 text-justify">Email</div>
-                          <a href={`mailto:${club.email}`} className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline truncate block text-justify">
+                          <div className="text-xs text-gray-500">Email</div>
+                          <a href={`mailto:${club.email}`} className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline truncate block">
                             {club.email}
                           </a>
                         </div>
                       </div>
 
-                      {/* Link for Mobile */}
+                      {/* Link for Mobile - WITHOUT Facebook icon */}
                       <div className="flex items-center">
                         <div className="bg-emerald-50 p-2 rounded-lg mr-3">
-                          <FaFacebook className="text-blue-600" />
+                          <FaLink className="text-emerald-600" />
                         </div>
                         <div>
-                          <div className="text-xs text-gray-500 text-justify">Link</div>
+                          <div className="text-xs text-gray-500">Link</div>
                           <a 
                             href={club.facebookUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-medium text-blue-600 hover:text-blue-800 hover:underline text-justify"
+                            className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline"
                           >
                             Visit Link
                           </a>
                         </div>
                       </div>
-                    </div>
-
-                    <div className="pt-4 border-t border-emerald-100 flex justify-between items-center">
-                      <div className="text-xs text-gray-500 text-justify">
-                        Est. {club.established} • {club.members} members
-                      </div>
-                      <a 
-                        href={club.facebookUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 font-medium flex items-center text-sm justify-start hover:underline"
-                      >
-                        <FaFacebook className="mr-1" />
-                        Visit Link
-                      </a>
                     </div>
                   </div>
                 ))}
