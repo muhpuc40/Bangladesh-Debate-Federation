@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaSearch, FaUniversity, FaUserTie, FaUserGraduate, FaPhone, FaEnvelope, FaFilter, FaDownload, FaPrint, FaMapMarkerAlt, FaFacebook,FaLink } from 'react-icons/fa';
+import { FaSearch, FaUniversity, FaUserTie, FaUserGraduate, FaPhone, FaEnvelope, FaFilter, FaDownload, FaPrint, FaMapMarkerAlt, FaFacebook, FaLink } from 'react-icons/fa';
 
 const DebateClubDirectory = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -312,7 +312,7 @@ const DebateClubDirectory = () => {
                           <FaUserGraduate className="mr-2" /> General Secretary
                         </div>
                       </th>
-                      <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
+                      <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider whitespace-nowrap">
                         <div className="flex items-center">
                           <FaPhone className="mr-2" /> Contact
                         </div>
@@ -345,7 +345,7 @@ const DebateClubDirectory = () => {
                         <td className="px-6 py-4">
                           <div className="font-medium text-gray-900">{club.generalSecretary}</div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 whitespace-nowrap">
                           <a href={`tel:${club.contact}`} className="text-emerald-600 hover:text-emerald-800 hover:underline font-medium">
                             {club.contact}
                           </a>
@@ -372,7 +372,7 @@ const DebateClubDirectory = () => {
                 </table>
               </div>
 
-              {/* Mobile Card View - WITHOUT Facebook icon and bottom section */}
+              {/* Mobile Card View */}
               <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6">
                 {filteredClubs.map((club) => (
                   <div key={club.id} className="bg-white rounded-xl border border-emerald-100 p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
@@ -418,7 +418,7 @@ const DebateClubDirectory = () => {
                         </div>
                         <div>
                           <div className="text-xs text-gray-500">Contact</div>
-                          <a href={`tel:${club.contact}`} className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline">
+                          <a href={`tel:${club.contact}`} className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline truncate block">
                             {club.contact}
                           </a>
                         </div>
@@ -436,7 +436,6 @@ const DebateClubDirectory = () => {
                         </div>
                       </div>
 
-                      {/* Link for Mobile - WITHOUT Facebook icon */}
                       <div className="flex items-center">
                         <div className="bg-emerald-50 p-2 rounded-lg mr-3">
                           <FaLink className="text-emerald-600" />
@@ -447,7 +446,7 @@ const DebateClubDirectory = () => {
                             href={club.facebookUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline"
+                            className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline truncate block"
                           >
                             Visit Link
                           </a>
@@ -502,6 +501,11 @@ const DebateClubDirectory = () => {
           /* Hide search section in print */
           #search {
             display: none !important;
+          }
+          
+          /* Ensure contact numbers stay on one line in print */
+          td {
+            white-space: nowrap !important;
           }
         }
       `}</style>
