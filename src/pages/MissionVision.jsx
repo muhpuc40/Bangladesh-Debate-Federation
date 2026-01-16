@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Stack from './Stack'; // নতুন Stack কম্পোনেন্ট ইম্পোর্ট করুন
@@ -21,24 +22,37 @@ import {
 
 // Import Swiper components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Pagination } from 'swiper/modules'; // Navigation রিমুভ করা হয়েছে
 import 'swiper/css';
-import 'swiper/css/pagination';
+import 'swiper/css/pagination'; // Navigation CSS রিমুভ করা হয়েছে
 
 // Main MissionVision Component
 const MissionVision = () => {
   const galleryImages = [
-    "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  ];
-
-  const imageCaptions = [
-    { caption: "", description: "" },
-    { caption: "", description: "" },
-    { caption: "", description: "" },
-    { caption: "", description: "" }
+    {
+      id: 1,
+      url: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      caption: "",
+      description: ""
+    },
+    {
+      id: 2,
+      url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      caption: "",
+      description: ""
+    },
+    {
+      id: 3,
+      url: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      caption: "",
+      description: ""
+    },
+    {
+      id: 4,
+      url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      caption: "",
+      description: ""
+    }
   ];
 
   return (
@@ -70,74 +84,80 @@ const MissionVision = () => {
               </div>
             </div>
             
-            {/* Stack Image Gallery with Auto Slide (3 seconds) */}
-            <div className="relative">
-              <div className="w-[300px] h-[400px] md:w-[350px] md:h-[450px] lg:w-[400px] lg:h-[500px] mx-auto">
-                {/* Mobile View: Swiper Slider */}
-                <div className="lg:hidden w-full h-full">
-                  <Swiper
-                    modules={[Pagination]}
-                    spaceBetween={0}
-                    slidesPerView={1}
-                    pagination={{ clickable: true }}
-                    className="h-full rounded-xl"
-                  >
-                    {galleryImages.map((src, i) => (
-                      <SwiperSlide key={i}>
-                        <div className="relative w-full h-full rounded-xl overflow-hidden border-2 border-emerald-200 shadow-xl">
-                          <img 
-                            src={src} 
-                            alt={imageCaptions[i].caption} 
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 md:p-5">
-                            <h3 className="text-white font-bold text-lg md:text-xl mb-1 md:mb-2">
-                              {imageCaptions[i].caption}
-                            </h3>
-                            <p className="text-white/90 text-sm md:text-base">
-                              {imageCaptions[i].description}
-                            </p>
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                </div>
-                
-                {/* Desktop View: Stack Component */}
-                <div className="hidden lg:block w-full h-full">
-                  <Stack
-                    randomRotation={true}
-                    sensitivity={180}
-                    sendToBackOnClick={true}
-                    autoplay={true}  // সব ডিভাইসে অটো স্লাইড চালু
-                    autoplayDelay={3000}
-                    pauseOnHover={true}  // শুধু ডেস্কটপে হোভার করলে pause হবে
-                    mobileClickOnly={true}  // মোবাইলে শুধু ক্লিক কাজ করবে
-                    cards={galleryImages.map((src, i) => (
-                      <div 
-                        key={i}
-                        className="relative w-full h-full rounded-xl overflow-hidden border-2 border-emerald-200 shadow-xl"
-                      >
+            {/* Stack Image Gallery with Auto Slide (3 seconds) - FIXED SIZE */}
+            <div className="relative w-full">
+              {/* Mobile View: Swiper Slider - Smaller Size, No Navigation Icons */}
+              <div className="lg:hidden w-full h-48 sm:h-56 md:h-64">
+                <Swiper
+                  modules={[Pagination]} // Navigation রিমুভ করা হয়েছে
+                  spaceBetween={10}
+                  slidesPerView={1}
+                  pagination={{ 
+                    clickable: true,
+                    dynamicBullets: true 
+                  }}
+                  autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                  }}
+                  loop={true}
+                  className="h-full rounded-xl"
+                >
+                  {galleryImages.map((image) => (
+                    <SwiperSlide key={image.id}>
+                      <div className="relative w-full h-full rounded-xl overflow-hidden border-2 border-emerald-200 shadow-xl">
                         <img 
-                          src={src} 
-                          alt={imageCaptions[i].caption} 
+                          src={image.url} 
+                          alt={image.caption}
                           className="w-full h-full object-cover"
                           loading="lazy"
                         />
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 md:p-5">
-                          <h3 className="text-white font-bold text-lg md:text-xl mb-1 md:mb-2">
-                            {imageCaptions[i].caption}
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4">
+                          <h3 className="text-white font-bold text-base md:text-lg mb-1">
+                            {image.caption}
                           </h3>
-                          <p className="text-white/90 text-sm md:text-base">
-                            {imageCaptions[i].description}
+                          <p className="text-white/90 text-xs md:text-sm">
+                            {image.description}
                           </p>
                         </div>
                       </div>
-                    ))}
-                  />
-                </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+              
+              {/* Desktop View: Stack Component - Original Size */}
+              <div className="hidden lg:block relative w-full h-[300px] md:h-[350px] lg:h-[400px]">
+                <Stack
+                  randomRotation={true}
+                  sensitivity={180}
+                  sendToBackOnClick={true}
+                  autoplay={true}  // সব ডিভাইসে অটো স্লাইড চালু
+                  autoplayDelay={3000}
+                  pauseOnHover={true}  // শুধু ডেস্কটপে হোভার করলে pause হবে
+                  mobileClickOnly={true}  // মোবাইলে শুধু ক্লিক কাজ করবে
+                  cards={galleryImages.map((image) => (
+                    <div 
+                      key={image.id}
+                      className="relative w-full h-full rounded-xl overflow-hidden border-2 border-emerald-200 shadow-xl"
+                    >
+                      <img 
+                        src={image.url} 
+                        alt={image.caption}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 md:p-5">
+                        <h3 className="text-white font-bold text-lg md:text-xl mb-1 md:mb-2">
+                          {image.caption}
+                        </h3>
+                        <p className="text-white/90 text-sm md:text-base">
+                          {image.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                />
               </div>
             </div>
           </div>
