@@ -1,137 +1,90 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  FaCalendarAlt, 
-  FaMapMarkerAlt, 
-  FaUsers, 
+import {
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaUsers,
   FaClock,
   FaSearch,
   FaArrowRight,
   FaRegCalendarCheck,
   FaTrophy,
   FaFilter,
-  FaMicrophone,
-  FaUniversity
 } from 'react-icons/fa';
-
-
-const eventsData = {
-  "events": [
-    {
-      "id": 1,
-      "title": "National Debate Festival 2024",
-      "description": "Bangladesh's largest debate competition with participants from all 64 districts",
-      "date": "March 15-20, 2024",
-      "time": "9:00 AM - 6:00 PM",
-      "location": "Dhaka University Campus",
-      "type": "upcoming",
-      "category": "national",
-      "participants": "5000+",
-      "registrationDeadline": "March 10, 2024",
-      "status": "Open for Registration",
-      "image": "https://i.ibb.co.com/HfwY09Kt/Gemini-Generated-Image-sozxjesozxjesozx.png"
-    },
-    {
-      "id": 2,
-      "title": "Asian Parliamentary Debate Workshop",
-      "description": "Intensive training on Asian Parliamentary format for college students",
-      "date": "March 25-27, 2024",
-      "time": "10:00 AM - 4:00 PM",
-      "location": "Online (Zoom)",
-      "type": "upcoming",
-      "category": "training",
-      "participants": "200",
-      "registrationDeadline": "March 20, 2024",
-      "status": "Open for Registration",
-      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": 3,
-      "title": "Inter-University Debate Championship",
-      "description": "Annual competition among universities across Bangladesh",
-      "date": "February 10-15, 2024",
-      "time": "9:00 AM - 8:00 PM",
-      "location": "Rajshahi University",
-      "type": "completed",
-      "category": "national",
-      "participants": "2000+",
-      "winner": "Dhaka University",
-      "status": "Completed",
-      "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": 4,
-      "title": "Youth Parliament Session",
-      "description": "Simulated parliamentary debate for school students",
-      "date": "April 5-7, 2024",
-      "time": "10:00 AM - 5:00 PM",
-      "location": "Bangabandhu International Conference Center",
-      "type": "upcoming",
-      "category": "national",
-      "participants": "1000",
-      "registrationDeadline": "March 30, 2024",
-      "status": "Open for Registration",
-      "image": "https://images.unsplash.com/photo-1551135049-8a33b2fb2d5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": 5,
-      "title": "International Debate Exchange Program",
-      "description": "Cultural exchange and debate competition with international teams",
-      "date": "May 20-25, 2024",
-      "time": "All Day",
-      "location": "Multiple Venues",
-      "type": "upcoming",
-      "category": "international",
-      "participants": "300",
-      "registrationDeadline": "April 30, 2024",
-      "status": "Coming Soon",
-      "image": "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": 6,
-      "title": "Adjudicator Certification Program",
-      "description": "Professional training for aspiring debate judges",
-      "date": "January 15-20, 2024",
-      "time": "9:00 AM - 5:00 PM",
-      "location": "BDF Training Center, Dhaka",
-      "type": "completed",
-      "category": "training",
-      "participants": "150",
-      "certified": "120",
-      "status": "Completed",
-      "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-};
 
 const Events = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [visibleCards, setVisibleCards] = useState([]);
-  const eventsSectionRef = useRef(null);
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const observerRef = useRef(null);
-  
-  // Extract events array from eventsData object
-  const events = eventsData.events;
+
+  // Fetch events from API
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Add timeout for the fetch request
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+        const response = await fetch('http://192.168.0.109:8000/api/events', {
+          signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+          setEvents(result.data || []);
+        } else {
+          throw new Error(result.message || 'Failed to fetch events');
+        }
+      } catch (err) {
+        console.error('Error fetching events:', err);
+        if (err.name === 'AbortError') {
+          setError('Request timed out. Please try again.');
+        } else if (err.message.includes('Failed to fetch')) {
+          setError('Unable to connect to server. Please check your connection.');
+        } else {
+          setError(err.message || 'An error occurred while fetching events');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   // ফিল্টার অপশনস
   const filterOptions = [
     { id: 'all', label: 'All Events' },
     { id: 'upcoming', label: 'Upcoming' },
-    { id: 'ongoing', label: 'Ongoing' },
     { id: 'completed', label: 'Completed' },
-    { id: 'national', label: 'National' },
-    { id: 'international', label: 'International' },
     { id: 'training', label: 'Training' }
   ];
 
   const filteredEvents = events.filter(event => {
-    const matchesFilter = activeFilter === 'all' || 
-                         event.type === activeFilter || 
-                         event.category === activeFilter;
-    const matchesSearch = event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         event.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         event.location.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter = activeFilter === 'all' ||
+      (event.type && event.type === activeFilter) ||
+      (event.category && event.category === activeFilter);
+
+    const matchesSearch = (
+      (event.title && event.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (event.description && event.description.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (event.location && event.location.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+
     return matchesFilter && matchesSearch;
   });
 
@@ -188,14 +141,43 @@ const Events = () => {
   // Function to get category label
   const getCategoryLabel = (category) => {
     const labels = {
-      'national': '🇧🇩 National',
-      'international': '🌍 International',
-      'training': '🎓 Training'
+      'national': 'National',
+      'international': 'International',
+      'training': 'Training'
     };
     return labels[category] || category;
   };
 
-  // Function to get filter button style (ক্যাপসুল/পিল আকৃতির জন্য)
+  // Function to format date from API
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Date not specified';
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    } catch {
+      return dateString;
+    }
+  };
+
+  // Function to format time from API
+  const formatTime = (timeString) => {
+    if (!timeString) return 'Time not specified';
+    try {
+      const [hours, minutes] = timeString.split(':');
+      const hour = parseInt(hours);
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      const formattedHour = hour % 12 || 12;
+      return `${formattedHour}:${minutes} ${ampm}`;
+    } catch {
+      return timeString;
+    }
+  };
+
+  // Function to get filter button style
   const getFilterButtonStyle = (filterId) => {
     const isActive = activeFilter === filterId;
     if (isActive) {
@@ -208,12 +190,54 @@ const Events = () => {
   // Function to get card animation class
   const getCardAnimationClass = (cardId) => {
     const isVisible = visibleCards.includes(cardId);
-    return `event-card bg-white rounded-xl border border-emerald-100 overflow-hidden hover:shadow-xl transition-all duration-300 transform ${
-      isVisible 
-        ? 'opacity-100 translate-y-0' 
-        : 'opacity-0 translate-y-4'
-    } hover:-translate-y-2`;
+    return `event-card bg-white rounded-xl border border-emerald-100 overflow-hidden hover:shadow-xl transition-all duration-300 transform ${isVisible
+      ? 'opacity-100 translate-y-0'
+      : 'opacity-0 translate-y-4'
+      } hover:-translate-y-2`;
   };
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <div className="container mx-auto px-4 py-20">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-600"></div>
+            <p className="mt-4 text-gray-600 text-lg">Loading events...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-white">
+        <div className="container mx-auto px-4 py-20">
+          <div className="max-w-md mx-auto text-center">
+            <div className="text-6xl mb-4">❌</div>
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">Error loading events</h3>
+            <p className="text-gray-600 mb-6">{error}</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => window.location.reload()}
+                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300"
+              >
+                Try Again
+              </button>
+              <Link
+                to="/"
+                className="border border-emerald-600 text-emerald-600 hover:bg-emerald-50 font-bold py-3 px-6 rounded-full transition-all duration-300"
+              >
+                Go to Home
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -225,22 +249,8 @@ const Events = () => {
               Events & Competitions
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-             Discover upcoming debate competitions, training, workshops organized by Bangladesh Debate Federation.
+              Discover upcoming debate competitions, training, workshops organized by Bangladesh Debate Federation.
             </p>
-            {/* <div className="flex flex-wrap gap-4">
-              <Link 
-                to="/registration" 
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 flex items-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1"
-              >
-                <FaRegCalendarCheck className="mr-2" /> Register for Events
-              </Link>
-              <button 
-                onClick={() => setActiveFilter('upcoming')}
-                className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 rounded-full transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1"
-              >
-                View Upcoming Events
-              </button>
-            </div> */}
           </div>
         </div>
       </section>
@@ -272,7 +282,7 @@ const Events = () => {
                 )}
               </div>
             </div>
-            
+
             <button
               onClick={() => {
                 setActiveFilter('all');
@@ -291,7 +301,7 @@ const Events = () => {
                 <FaFilter className="text-gray-600 mr-2" />
                 <span className="text-gray-700 font-medium">Filter by:</span>
               </div>
-              
+
               <div className="flex-1">
                 <div className="flex flex-wrap gap-2">
                   {filterOptions.map((filter) => (
@@ -329,28 +339,36 @@ const Events = () => {
           {filteredEvents.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">📅</div>
-              <h3 className="text-2xl font-bold text-gray-700 mb-2">No events found</h3>
-              <p className="text-gray-600 mb-6">Try changing your search or filter criteria</p>
-              <button 
-                onClick={() => { setSearchTerm(''); setActiveFilter('all'); }}
-                className="border border-emerald-600 text-emerald-600 hover:bg-emerald-50 font-bold py-2 px-6 rounded-full transition-all duration-300"
-              >
-                Reset Filters
-              </button>
+              <h3 className="text-2xl font-bold text-gray-700 mb-2">
+                {events.length === 0 ? 'No events available' : 'No events found'}
+              </h3>
+              <p className="text-gray-600 mb-6">
+                {events.length === 0
+                  ? 'Check back later for upcoming events.'
+                  : 'Try changing your search or filter criteria'}
+              </p>
+              {events.length > 0 && (
+                <button
+                  onClick={() => { setSearchTerm(''); setActiveFilter('all'); }}
+                  className="border border-emerald-600 text-emerald-600 hover:bg-emerald-50 font-bold py-2 px-6 rounded-full transition-all duration-300"
+                >
+                  Reset Filters
+                </button>
+              )}
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredEvents.map((event, index) => (
-                <div 
-                  key={event.id} 
+                <div
+                  key={event.id}
                   data-card-id={event.id}
                   className={getCardAnimationClass(event.id)}
                   style={{ transitionDelay: `${index * 50}ms` }}
                 >
                   {/* Event Image */}
                   <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={event.image} 
+                    <img
+                      src={event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}
                       alt={event.title}
                       className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                       onError={(e) => {
@@ -359,7 +377,7 @@ const Events = () => {
                     />
                     <div className="absolute top-4 left-4">
                       <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(event.type)}`}>
-                        {event.status}
+                        {event.status || event.type}
                       </span>
                     </div>
                     <div className="absolute top-4 right-4">
@@ -375,59 +393,65 @@ const Events = () => {
                       {event.title}
                     </h3>
                     <p className="text-gray-600 mb-4 text-sm line-clamp-2">{event.description}</p>
-                    
+
                     {/* Event Details */}
                     <div className="space-y-3 mb-6">
                       <div className="flex items-center text-gray-600 text-sm">
                         <FaCalendarAlt className="mr-3 text-emerald-600 flex-shrink-0" />
-                        <span className="font-medium">{event.date}</span>
+                        <span className="font-medium">{formatDate(event.date)}</span>
                       </div>
-                      <div className="flex items-center text-gray-600 text-sm">
-                        <FaClock className="mr-3 text-emerald-600 flex-shrink-0" />
-                        <span>{event.time}</span>
-                      </div>
-                      <div className="flex items-center text-gray-600 text-sm">
-                        <FaMapMarkerAlt className="mr-3 text-emerald-600 flex-shrink-0" />
-                        <span className="truncate">{event.location}</span>
-                      </div>
-                      <div className="flex items-center text-gray-600 text-sm">
-                        <FaUsers className="mr-3 text-emerald-600 flex-shrink-0" />
-                        <span>{event.participants} Participants</span>
-                      </div>
+                      {event.time && (
+                        <div className="flex items-center text-gray-600 text-sm">
+                          <FaClock className="mr-3 text-emerald-600 flex-shrink-0" />
+                          <span>{formatTime(event.time)}</span>
+                        </div>
+                      )}
+                      {event.location && (
+                        <div className="flex items-center text-gray-600 text-sm">
+                          <FaMapMarkerAlt className="mr-3 text-emerald-600 flex-shrink-0" />
+                          <span className="truncate">{event.location}</span>
+                        </div>
+                      )}
+                      {event.participants && (
+                        <div className="flex items-center text-gray-600 text-sm">
+                          <FaUsers className="mr-3 text-emerald-600 flex-shrink-0" />
+                          <span>{event.participants} Participants</span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Event Specific Info */}
-                    {event.type === 'upcoming' && event.registrationDeadline && (
+                    {event.type === 'upcoming' && event.registration_deadline && (
                       <div className="bg-yellow-50 border border-yellow-100 rounded-lg p-3 mb-4">
                         <div className="flex items-center text-yellow-800 text-sm">
                           <FaClock className="mr-2 flex-shrink-0" />
                           <span className="font-bold">Registration Deadline:</span>
-                          <span className="ml-2">{event.registrationDeadline}</span>
+                          <span className="ml-2">{formatDate(event.registration_deadline)}</span>
                         </div>
                       </div>
                     )}
 
-                    {event.type === 'completed' && event.winner && (
+                    {event.type === 'completed' && (
                       <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-3 mb-4">
                         <div className="flex items-center text-emerald-800 text-sm">
                           <FaTrophy className="mr-2 flex-shrink-0" />
-                          <span className="font-bold">Winner:</span>
-                          <span className="ml-2">{event.winner}</span>
+                          <span className="font-bold">Status:</span>
+                          <span className="ml-2">{event.status}</span>
                         </div>
                       </div>
                     )}
 
                     {/* Action Buttons */}
                     <div className="flex justify-between items-center">
-                      <Link 
+                      <Link
                         to={`/event/${event.id}`}
                         className="text-emerald-600 hover:text-emerald-800 font-bold flex items-center hover:underline text-sm"
                       >
                         View Details <FaArrowRight className="ml-2" />
                       </Link>
-                      
-                      {event.type === 'upcoming' && event.status === 'Open for Registration' && (
-                        <Link 
+
+                      {event.type === 'upcoming' && event.status === 'Open' && (
+                        <Link
                           to={`/registration/${event.id}`}
                           className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 text-sm"
                         >
@@ -442,10 +466,6 @@ const Events = () => {
           )}
         </div>
       </section>
-
-
-
-     
     </div>
   );
 };
