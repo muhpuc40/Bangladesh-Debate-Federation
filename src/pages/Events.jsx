@@ -32,7 +32,7 @@ const Events = () => {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-        const response = await fetch('http://192.168.0.109:8000/api/events', {
+        const response = await fetch('http://127.0.0.1:8000/api/events', {
           signal: controller.signal
         });
 
