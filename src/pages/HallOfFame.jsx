@@ -7,7 +7,7 @@ const HallOfFame = () => {
       name: "1st Executive Committee",
       president: "Dr. Biru Paksha Paul",
       secretary: "Mohammad Niamot Ali Elahi",
-      presidentImage: "https://i.ibb.co.com/example/president1.jpg",
+      presidentImage: "https://i.ibb.co.com/Q70kGtZ5/biru-paksha-paul.jpg",
       secretaryImage: "https://i.ibb.co.com/example/secretary1.jpg",
     },
     {
@@ -15,7 +15,7 @@ const HallOfFame = () => {
       name: "2nd Executive Committee",
       president: "Dr. Biru Paksha Paul",
       secretary: "Dr. Abdun or Tushar",
-      presidentImage: "https://i.ibb.co.com/example/president2.jpg",
+      presidentImage: "https://i.ibb.co.com/Q70kGtZ5/biru-paksha-paul.jpg",
       secretaryImage: "https://i.ibb.co.com/example/secretary2.jpg",
     },
     {
@@ -24,7 +24,7 @@ const HallOfFame = () => {
       president: "A.K.M Shamsul Kabir",
       secretary: "Imran Khan",
       presidentImage: "https://i.ibb.co.com/example/president3.jpg",
-      secretaryImage: "https://i.ibb.co.com/example/secretary3.jpg",
+      secretaryImage: "https://i.ibb.co.com/vCJ854fX/imran-khan.webp",
     },
     {
       id: 4,
@@ -40,7 +40,7 @@ const HallOfFame = () => {
       president: "Hasan Mahmud Biplob",
       secretary: "Tasin Uddin Ahmed",
       presidentImage: "https://i.ibb.co.com/example/president5.jpg",
-      secretaryImage: "https://i.ibb.co.com/example/secretary5.jpg",
+      secretaryImage: "https://i.ibb.co.com/Y4KMMTn9/tahsin-uddin.jpg",
     },
     {
       id: 6,
@@ -48,15 +48,15 @@ const HallOfFame = () => {
       president: "Bulbul Hasan",
       secretary: "Asif Newaz",
       presidentImage: "https://i.ibb.co.com/example/president6.jpg",
-      secretaryImage: "https://i.ibb.co.com/example/secretary6.jpg",
+      secretaryImage: "https://i.ibb.co.com/zVGKVYz5/Asif-Newaz.jpg",
     },
     {
       id: 7,
       name: "7th Executive Committee",
       president: "Tasin Uddin Ahmed",
       secretary: "Sanjib Saha",
-      presidentImage: "https://i.ibb.co.com/example/president7.jpg",
-      secretaryImage: "https://i.ibb.co.com/example/secretary7.jpg",
+      presidentImage: "https://i.ibb.co.com/Y4KMMTn9/tahsin-uddin.jpg",
+      secretaryImage: "https://i.ibb.co.com/JRkk6v0K/sanjib-saha.jpg",
     },
     {
       id: 8,
@@ -64,31 +64,31 @@ const HallOfFame = () => {
       president: "Dr. Abdun or Tushar",
       secretary: "Mahfuz Mishu",
       presidentImage: "https://i.ibb.co.com/example/president8.jpg",
-      secretaryImage: "https://i.ibb.co.com/example/secretary8.jpg",
+      secretaryImage: "https://i.ibb.co.com/N6Xx0Y5g/Mahfuz-mishu.jpg",
     },
     {
       id: 9,
       name: "9th Executive Committee",
       president: "Sanjib Saha",
       secretary: "Abdullah Md Shukrana",
-      presidentImage: "https://i.ibb.co.com/example/president9.jpg",
-      secretaryImage: "https://i.ibb.co.com/example/secretary9.jpg",
+      presidentImage: "https://i.ibb.co.com/JRkk6v0K/sanjib-saha.jpg",
+      secretaryImage: "https://i.ibb.co.com/S49bQYVy/shukrana.jpg",
     },
     {
       id: 10,
       name: "10th Executive Committee",
       president: "Abdullah Md Shukrana",
       secretary: "Murad Rony",
-      presidentImage: "https://i.ibb.co.com/example/president10.jpg",
-      secretaryImage: "https://i.ibb.co.com/example/secretary10.jpg",
+      presidentImage: "https://i.ibb.co.com/S49bQYVy/shukrana.jpg",
+      secretaryImage: "https://i.ibb.co.com/ZzBMcNZW/murad-rony.jpg",
     },
     {
       id: 11,
       name: "11th Executive Committee",
       president: "Mohammed Saifuddin Munna (Acting)",
       secretary: "Zehad Al Mehedi",
-      presidentImage: "https://i.ibb.co.com/example/president11.jpg",
-      secretaryImage: "https://i.ibb.co.com/example/secretary11.jpg",
+      presidentImage: "https://admin.puc.ac.bd/ProfilePictures/Munna_eee_Saifuddin%20Munna.JPG",
+      secretaryImage: "https://i.ibb.co.com/nqYtDDt8/zeyad-al-mehedi.jpg",
     },
   ];
 
@@ -125,17 +125,7 @@ const HallOfFame = () => {
                       </h2>
                     </div>
                     
-                    <div className="space-y-6">
-                      <div>
-                        <h3 className="text-sm font-semibold text-gray-500 mb-2">PRESIDENT</h3>
-                        <p className="text-xl font-bold text-emerald-700">{committee.president}</p>
-                      </div>
-                      
-                      <div>
-                        <h3 className="text-sm font-semibold text-gray-500 mb-2">GENERAL SECRETARY</h3>
-                        <p className="text-xl font-bold text-emerald-700">{committee.secretary}</p>
-                      </div>
-                    </div>
+                    {/* Removed President and Secretary text sections */}
                   </div>
                 </div>
 
@@ -185,8 +175,6 @@ const HallOfFame = () => {
             </div>
           ))}
         </div>
-
-      
       </div>
     </div>
   );
