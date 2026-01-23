@@ -283,9 +283,9 @@ const News = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative pt-16 md:pt-20 py-8 md:py-12 bg-white text-emerald-900">
+      <section className="relative pt-0 py-8 md:py-12 bg-white text-emerald-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl">
+          <div className="max-w-4xl mt-6 md:mt-8">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight whitespace-normal sm:whitespace-nowrap">
               Debate News & Announcements
             </h1>
@@ -304,8 +304,8 @@ const News = () => {
           {/* Left Column - News (2/3 width) */}
           <div className="lg:w-2/3">
             
-            {/* সার্চবার - আগের মত */}
-            <div className="sticky top-16 md:top-20 z-30 py-4 md:py-5 mb-6 -mt-2">
+            {/* সার্চবার - স্টিকি অবস্থায় নেভবারের ঠিক নিচে */}
+            <div className="sticky top-16 md:top-20 z-30 py-4 md:py-5 mb-6 -mt-4 bg-white border-b border-emerald-100 shadow-sm">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FaSearch className="text-gray-400 text-lg md:text-xl" />
@@ -315,7 +315,7 @@ const News = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search news by title, content, tags or author..."
-                  className="w-full pl-12 pr-4 py-3 md:py-3.5 bg-white/95 backdrop-blur-sm border-2 border-emerald-200 rounded-xl focus:ring-4 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-sm md:text-base hover:border-emerald-300 shadow-lg"
+                  className="w-full pl-12 pr-4 py-3 md:py-3.5 bg-white backdrop-blur-sm border-2 border-emerald-200 rounded-xl focus:ring-4 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-sm md:text-base hover:border-emerald-300 shadow"
                 />
                 {searchTerm && (
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
@@ -332,7 +332,7 @@ const News = () => {
 
             {/* Featured News Section */}
             {featuredNews.length > 0 && (
-              <div className="mb-10">
+              <div className="mb-10 mt-2">
                 <h2 className="text-xl md:text-2xl font-bold text-emerald-900 mb-4 md:mb-6 flex items-center">
                   <FaNewspaper className="mr-2 md:mr-3 text-emerald-600" />
                   Featured News
@@ -474,8 +474,8 @@ const News = () => {
 
           {/* Right Column - Announcements (1/3 width) */}
           <div className="lg:w-1/3">
-            {/* Sticky Announcements - সার্চবারের মত স্টিকি */}
-            <div className="sticky top-16 md:top-20 z-30 py-4 md:py-5 mb-6 -mt-2">
+            {/* Sticky Announcements */}
+            <div className="sticky top-32 md:top-36 z-20 py-4 md:py-5 mb-6">
               {/* Announcements Header */}
               <div className="bg-emerald-600 text-white rounded-t-xl p-4 md:p-6">
                 <div className="flex items-center justify-between mb-2">
@@ -585,6 +585,11 @@ const News = () => {
         @media (max-width: 1024px) {
           .sticky {
             position: static !important;
+          }
+          
+          .sticky.top-16,
+          .sticky.top-32 {
+            position: sticky !important;
           }
         }
       `}</style>
