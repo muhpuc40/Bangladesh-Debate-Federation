@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  FaCalendarAlt, 
-  FaUser, 
+import {
+  FaCalendarAlt,
+  FaUser,
   FaArrowRight,
   FaSearch,
   FaBookmark,
@@ -47,7 +47,7 @@ const newsData = {
       "comments": 156,
       "readTime": "4 min read",
       "tags": ["international", "victory", "asia"],
-      
+
     },
     {
       "id": 3,
@@ -211,11 +211,11 @@ const News = () => {
   // Filter news based on search only
   const filteredNews = news.filter(item => {
     const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
-                         item.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.author.toLowerCase().includes(searchTerm.toLowerCase());
+      item.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      item.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.author.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesSearch;
   });
 
@@ -241,9 +241,9 @@ const News = () => {
   const handleFeaturedWheel = (e) => {
     if (featuredScrollRef.current) {
       const isAtTop = featuredScrollRef.current.scrollTop === 0;
-      const isAtBottom = featuredScrollRef.current.scrollTop + featuredScrollRef.current.clientHeight >= 
-                        featuredScrollRef.current.scrollHeight - 1;
-      
+      const isAtBottom = featuredScrollRef.current.scrollTop + featuredScrollRef.current.clientHeight >=
+        featuredScrollRef.current.scrollHeight - 1;
+
       // If scrolling up at top, let the page scroll
       if (isAtTop && e.deltaY < 0) {
         return;
@@ -252,7 +252,7 @@ const News = () => {
       if (isAtBottom && e.deltaY > 0) {
         return;
       }
-      
+
       // Otherwise, scroll the featured news container
       e.stopPropagation();
       featuredScrollRef.current.scrollTop += e.deltaY;
@@ -262,9 +262,9 @@ const News = () => {
   const handleAnnouncementWheel = (e) => {
     if (announcementScrollRef.current) {
       const isAtTop = announcementScrollRef.current.scrollTop === 0;
-      const isAtBottom = announcementScrollRef.current.scrollTop + announcementScrollRef.current.clientHeight >= 
-                        announcementScrollRef.current.scrollHeight - 1;
-      
+      const isAtBottom = announcementScrollRef.current.scrollTop + announcementScrollRef.current.clientHeight >=
+        announcementScrollRef.current.scrollHeight - 1;
+
       // If scrolling up at top, let the page scroll
       if (isAtTop && e.deltaY < 0) {
         return;
@@ -273,7 +273,7 @@ const News = () => {
       if (isAtBottom && e.deltaY > 0) {
         return;
       }
-      
+
       // Otherwise, scroll the announcement container
       e.stopPropagation();
       announcementScrollRef.current.scrollTop += e.deltaY;
@@ -281,16 +281,20 @@ const News = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative pt-0 py-8 md:py-12 bg-white text-emerald-900">
+    <div
+      className="min-h-screen bg-white"
+      style={{ '--navbar-height': '72px' }}
+    >
+
+      {/* Hero Section - Moved further down */}
+      <section className="relative bg-white text-emerald-900 pt-18 md:pt-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mt-6 md:mt-8">
+          <div className="max-w-4xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight whitespace-normal sm:whitespace-nowrap">
               Debate News & Announcements
             </h1>
             <p className="text-base md:text-lg lg:text-xl text-gray-700 mb-6 md:mb-8 leading-relaxed">
-              Stay informed with the latest news, announcements, competition results, 
+              Stay informed with the latest news, announcements, competition results,
               training programs, and achievements from Bangladesh Debate Federation.
             </p>
           </div>
@@ -300,12 +304,12 @@ const News = () => {
       {/* Main Content with Two Columns */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         <div className="flex flex-col lg:flex-row gap-6 md:gap-8">
-          
+
           {/* Left Column - News (2/3 width) */}
           <div className="lg:w-2/3">
-            
-            {/* সার্চবার - স্টিকি অবস্থায় নেভবারের ঠিক নিচে */}
-            <div className="sticky top-16 md:top-20 z-30 py-4 md:py-5 mb-6 -mt-4 bg-white border-b border-emerald-100 shadow-sm">
+
+            {/* Search Bar */}
+            <div className="desktop-sticky z-30 bg-transparent mb-6" style={{ top: 'var(--navbar-height)' }}>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FaSearch className="text-gray-400 text-lg md:text-xl" />
@@ -315,11 +319,11 @@ const News = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search news by title, content, tags or author..."
-                  className="w-full pl-12 pr-4 py-3 md:py-3.5 bg-white backdrop-blur-sm border-2 border-emerald-200 rounded-xl focus:ring-4 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-sm md:text-base hover:border-emerald-300 shadow"
+                  className="w-full pl-12 pr-4 py-3 md:py-3.5 bg-white border-2 border-emerald-200 rounded-xl focus:ring-4 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-sm md:text-base hover:border-emerald-300 shadow"
                 />
                 {searchTerm && (
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                    <button 
+                    <button
                       onClick={() => setSearchTerm('')}
                       className="text-gray-500 hover:text-red-500 transition-colors duration-200 text-sm md:text-base"
                     >
@@ -332,13 +336,13 @@ const News = () => {
 
             {/* Featured News Section */}
             {featuredNews.length > 0 && (
-              <div className="mb-10 mt-2">
+              <div className="mt-2">
                 <h2 className="text-xl md:text-2xl font-bold text-emerald-900 mb-4 md:mb-6 flex items-center">
                   <FaNewspaper className="mr-2 md:mr-3 text-emerald-600" />
                   Featured News
                 </h2>
                 <div className="bg-gradient-to-r from-emerald-50 to-white rounded-xl md:rounded-2xl p-4 md:p-6 border border-emerald-100">
-                  <div 
+                  <div
                     ref={featuredScrollRef}
                     onWheel={handleFeaturedWheel}
                     className="max-h-[500px] md:max-h-[600px] overflow-y-auto pr-3 md:pr-4 scrollbar-thin scrollbar-thumb-emerald-300/80 scrollbar-track-emerald-100/50 hover:scrollbar-thumb-emerald-400 scroll-smooth"
@@ -346,16 +350,16 @@ const News = () => {
                     {featuredNews.map(item => (
                       <div key={item.id} className="mb-4 md:mb-6 last:mb-0 p-3 md:p-4 hover:bg-emerald-50/50 rounded-lg transition-all duration-300">
                         <div className="flex items-start space-x-3 md:space-x-4">
-                          {/* শুধুমাত্র মোবাইলে ইমেজ লুকানোর জন্য hidden sm:flex */}
+                          {/* Hide image on mobile */}
                           <div className="flex-shrink-0 hidden sm:block">
-                            <img 
-                              src={item.image} 
+                            <img
+                              src={item.image}
                               alt={item.title}
                               className="w-20 h-20 md:w-24 md:h-24 rounded-lg object-cover"
                             />
                           </div>
-                          <div className={`${item.id === 1 ? 'w-full' : 'flex-1'}`}>
-                            {/* শুধুমাত্র Announcement ক্যাটাগরি লুকানোর জন্য */}
+                          <div className="flex-1">
+                            {/* Hide Announcement category */}
                             {item.category !== 'Announcement' && (
                               <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
                                 <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
@@ -370,7 +374,7 @@ const News = () => {
                               {item.excerpt}
                             </p>
                             <div className="flex items-center justify-between">
-                              <Link 
+                              <Link
                                 to={`/news/${item.id}`}
                                 className="text-emerald-600 hover:text-emerald-800 font-bold text-xs md:text-sm flex items-center"
                               >
@@ -387,7 +391,7 @@ const News = () => {
             )}
 
             {/* All News Grid */}
-            <div>
+            <div className="mt-8 md:mt-10">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 md:mb-6 gap-2">
                 <h2 className="text-xl md:text-2xl font-bold text-emerald-900">
                   Latest News
@@ -411,7 +415,7 @@ const News = () => {
                   <p className="text-gray-600 mb-4 text-sm md:text-base">
                     No articles match your search "{searchTerm}"
                   </p>
-                  <button 
+                  <button
                     onClick={() => setSearchTerm('')}
                     className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 md:px-6 rounded-lg transition-all duration-300 text-sm md:text-base"
                   >
@@ -423,12 +427,12 @@ const News = () => {
                   {filteredNews.map(item => (
                     <div key={item.id} className="bg-white rounded-xl border border-emerald-100 overflow-hidden hover:border-emerald-300 hover:shadow-lg transition-all duration-300">
                       <div className="relative h-40 md:h-48 overflow-hidden">
-                        <img 
-                          src={item.image} 
+                        <img
+                          src={item.image}
                           alt={item.title}
                           className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                         />
-                        {/* শুধুমাত্র Announcement ক্যাটাগরি লুকানোর জন্য */}
+                        {/* Hide Announcement category */}
                         {item.category !== 'Announcement' && (
                           <div className="absolute top-3 left-3">
                             <span className={`px-2 py-1 rounded text-xs font-bold ${getCategoryColor(item.category)}`}>
@@ -436,9 +440,8 @@ const News = () => {
                             </span>
                           </div>
                         )}
-                        {/* Bookmark icon removed as requested */}
                       </div>
-                      
+
                       <div className="p-4 md:p-6">
                         <div className="flex items-center text-xs text-gray-600 mb-2 md:mb-3">
                           <FaCalendarAlt className="mr-1.5 text-emerald-600" />
@@ -447,17 +450,17 @@ const News = () => {
                           <FaUser className="mr-1.5 text-emerald-600" />
                           <span>{item.author}</span>
                         </div>
-                        
+
                         <h3 className="text-base md:text-lg font-bold text-emerald-900 mb-2 md:mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
                           {item.title}
                         </h3>
-                        
+
                         <p className="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3">
                           {item.excerpt}
                         </p>
-                        
+
                         <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-emerald-50">
-                          <Link 
+                          <Link
                             to={`/news/${item.id}`}
                             className="text-emerald-600 hover:text-emerald-800 font-bold text-xs md:text-sm flex items-center"
                           >
@@ -472,10 +475,9 @@ const News = () => {
             </div>
           </div>
 
-          {/* Right Column - Announcements (1/3 width) */}
+          {/* Right Column - Announcements (1/3 width) - Moved further up */}
           <div className="lg:w-1/3">
-            {/* Sticky Announcements */}
-            <div className="sticky top-32 md:top-36 z-20 py-4 md:py-5 mb-6">
+            <div className="desktop-sticky z-20 bg-transparent" style={{ top: 'calc(var(--navbar-height) + 1px)' }}>
               {/* Announcements Header */}
               <div className="bg-emerald-600 text-white rounded-t-xl p-4 md:p-6">
                 <div className="flex items-center justify-between mb-2">
@@ -494,13 +496,13 @@ const News = () => {
 
               {/* Announcements List */}
               <div className="bg-white border border-emerald-100 rounded-b-xl overflow-hidden">
-                <div 
+                <div
                   ref={announcementScrollRef}
                   onWheel={handleAnnouncementWheel}
                   className="max-h-[400px] md:max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-300/80 scrollbar-track-emerald-100/50 hover:scrollbar-thumb-emerald-400 scroll-smooth"
                 >
                   {announcementsData.map(announcement => (
-                    <div 
+                    <div
                       key={announcement.id}
                       className="p-3 md:p-5 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors duration-200"
                     >
@@ -509,7 +511,6 @@ const News = () => {
                           {announcement.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                          {/* Category only - time removed */}
                           <div className="mb-1">
                             <span className="px-2 py-0.5 bg-gray-100 text-xs font-bold text-gray-700 rounded w-fit">
                               {announcement.category}
@@ -522,12 +523,11 @@ const News = () => {
                             {announcement.description}
                           </p>
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                            <span className={`text-xs px-2 py-1 rounded w-fit ${
-                              announcement.type === 'urgent' ? 'bg-red-100 text-red-700' :
+                            <span className={`text-xs px-2 py-1 rounded w-fit ${announcement.type === 'urgent' ? 'bg-red-100 text-red-700' :
                               announcement.type === 'update' ? 'bg-yellow-100 text-yellow-700' :
-                              announcement.type === 'new' ? 'bg-orange-100 text-orange-700' :
-                              'bg-gray-100 text-gray-700'
-                            }`}>
+                                announcement.type === 'new' ? 'bg-orange-100 text-orange-700' :
+                                  'bg-gray-100 text-gray-700'
+                              }`}>
                               {announcement.type.charAt(0).toUpperCase() + announcement.type.slice(1)}
                             </span>
                             <button className="text-emerald-600 hover:text-emerald-800 text-xs md:text-sm font-medium flex items-center justify-end sm:justify-start">
@@ -556,7 +556,24 @@ const News = () => {
 
       {/* Add custom CSS for smooth scrolling */}
       <style jsx>{`
-        /* Custom scrollbar styling for extra smoothness */
+        /* ===== DESKTOP ONLY STICKY ===== */
+        @media (min-width: 1024px) {
+          .desktop-sticky {
+            position: sticky;
+            z-index: 30;
+          }
+        }
+
+        /* ===== MOBILE / TABLET ===== */
+        @media (max-width: 1023px) {
+          .desktop-sticky {
+            position: static !important;
+            margin-top: 0 !important;
+            margin-bottom: 1.5rem !important;
+          }
+        }
+
+        /* Custom scrollbar styling */
         .scrollbar-thin::-webkit-scrollbar {
           width: 6px;
         }
@@ -579,18 +596,6 @@ const News = () => {
         .scrollbar-thin {
           scrollbar-width: thin;
           scrollbar-color: rgba(16, 185, 129, 0.6) rgba(209, 250, 229, 0.3);
-        }
-        
-        /* Mobile responsiveness */
-        @media (max-width: 1024px) {
-          .sticky {
-            position: static !important;
-          }
-          
-          .sticky.top-16,
-          .sticky.top-32 {
-            position: sticky !important;
-          }
         }
       `}</style>
     </div>
