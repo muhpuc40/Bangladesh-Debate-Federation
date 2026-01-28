@@ -1,16 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  FaCalendarAlt,
-  FaMapMarkerAlt,
-  FaUsers,
-  FaClock,
-  FaSearch,
-  FaArrowRight,
-  FaRegCalendarCheck,
-  FaTrophy,
-  FaFilter,
-} from 'react-icons/fa';
+import apiService from '../Services/apiService';
+import {FaCalendarAlt,FaMapMarkerAlt,FaUsers,FaClock,FaSearch,FaArrowRight,FaRegCalendarCheck,FaTrophy,FaFilter,} from 'react-icons/fa';
 
 const Events = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -21,39 +12,28 @@ const Events = () => {
   const [error, setError] = useState(null);
   const observerRef = useRef(null);
 
-  // Fetch events from API
+  // Fetch events from API using apiService
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        // Add timeout for the fetch request
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-
-        const response = await fetch('http://192.168.0.218:8000/api/events', {
-          signal: controller.signal
-        });
-
-        clearTimeout(timeoutId);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const result = await response.json();
+        const result = await apiService.getEvents();
 
         if (result.success) {
           setEvents(result.data || []);
         } else {
-          throw new Error(result.message || 'Failed to fetch events');
+          // If API doesn't return success field, assume data is directly the array
+          if (Array.isArray(result)) {
+            setEvents(result);
+          } else {
+            throw new Error(result.message || 'Failed to fetch events');
+          }
         }
       } catch (err) {
         console.error('Error fetching events:', err);
-        if (err.name === 'AbortError') {
-          setError('Request timed out. Please try again.');
-        } else if (err.message.includes('Failed to fetch')) {
+        if (err.message.includes('Failed to fetch') || err.message.includes('Network Error')) {
           setError('Unable to connect to server. Please check your connection.');
         } else {
           setError(err.message || 'An error occurred while fetching events');
