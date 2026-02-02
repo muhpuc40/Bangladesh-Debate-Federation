@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import apiService from '../Services/apiService';
-import {FaCalendarAlt,FaMapMarkerAlt,FaUsers,FaClock,FaSearch,FaArrowRight,FaRegCalendarCheck,FaTrophy,FaFilter,} from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt, FaUsers, FaClock, FaSearch, FaArrowRight, FaRegCalendarCheck, FaTrophy, FaFilter, } from 'react-icons/fa';
 
 const Events = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -20,16 +20,18 @@ const Events = () => {
         setError(null);
 
         const result = await apiService.getEvents();
-
-        if (result.success) {
-          setEvents(result.data || []);
+        
+        // Handle the API response format properly
+        if (result && result.status === "success" && Array.isArray(result.data)) {
+          setEvents(result.data);
+        } else if (Array.isArray(result)) {
+          // If result is directly an array (for backward compatibility)
+          setEvents(result);
+        } else if (result && result.success && Array.isArray(result.data)) {
+          // Handle the other format mentioned in code
+          setEvents(result.data);
         } else {
-          // If API doesn't return success field, assume data is directly the array
-          if (Array.isArray(result)) {
-            setEvents(result);
-          } else {
-            throw new Error(result.message || 'Failed to fetch events');
-          }
+          throw new Error('Invalid data format received from server');
         }
       } catch (err) {
         console.error('Error fetching events:', err);
@@ -430,7 +432,7 @@ const Events = () => {
                         View Details <FaArrowRight className="ml-2" />
                       </Link>
 
-                      {event.type === 'upcoming' && event.status === 'Open' && (
+                      {event.type === 'upcoming' && event.status && event.status.toLowerCase() === 'open' && (
                         <Link
                           to={`/registration/${event.id}`}
                           className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 text-sm"
