@@ -175,7 +175,7 @@ const DevelopersInfo = () => {
                       <div className="mb-6">
                         <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
                           <div className={`w-2 h-2 ${colors.dark} rounded-full animate-pulse`}></div>
-                          Expertise
+                          Qualification
                         </h4>
                         <div className="flex flex-wrap gap-2 justify-center">
                           {developer.skills.map((skill, index) => (
