@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Root from './Root';
 import Home from './pages/Home';
-
 import MissionVision from './pages/MissionVision';
 import HallOfFame from './pages/HallOfFame';
 import AdvisorPanel from './pages/AdvisorPanel';
@@ -16,6 +15,7 @@ import Contact from './pages/Contact';
 import Portal from './pages/Portal';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import DevelopersInfo from './pages/DevelopersInfo';
 
 function App() {
   return (
@@ -36,6 +36,7 @@ function App() {
         <Route path="gallery" element={<Gallery />} />
         <Route path="contact" element={<Contact />} />
         <Route path="portal" element={<Portal />} />
+        <Route path="developers-info" element={<DevelopersInfo />} />
       </Route>
       <Route path="signin" element={<SignIn />} />
       <Route path="signup" element={<SignUp />} />
