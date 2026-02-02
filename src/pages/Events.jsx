@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import apiService from '../Services/apiService';
+import apiService from '../services/apiService';
 import { FaCalendarAlt, FaMapMarkerAlt, FaUsers, FaClock, FaSearch, FaArrowRight, FaRegCalendarCheck, FaTrophy, FaFilter, } from 'react-icons/fa';
 
 const Events = () => {
