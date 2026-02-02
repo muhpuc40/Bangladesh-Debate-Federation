@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const HallOfFame = () => {
@@ -95,8 +96,8 @@ const HallOfFame = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-12 px-4">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
+        {/* Header - নেভবারের নিচে নামানো হয়েছে */}
+        <div className="text-center mb-12 mt-0 pt-8">
           <h1 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4">
             Hall of Fame
           </h1>
