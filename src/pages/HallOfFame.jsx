@@ -75,6 +75,7 @@ const HallOfFame = () => {
       presidentImage: "https://i.ibb.co.com/JRkk6v0K/sanjib-saha.jpg",
       secretaryImage: "https://i.ibb.co.com/S49bQYVy/shukrana.jpg",
     },
+    
     {
       id: 10,
       name: "10th Executive Committee",
