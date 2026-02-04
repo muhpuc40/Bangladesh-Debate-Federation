@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import apiService from '../Services/apiService';
+import apiService from '../services/apiService';
 import { FaGoogle, FaFacebook, FaLinkedin } from 'react-icons/fa';
 
 
