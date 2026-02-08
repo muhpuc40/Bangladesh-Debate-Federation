@@ -1,104 +1,48 @@
-import React, { useState } from 'react';
-import { FaSearch, FaUniversity, FaUserTie, FaUserGraduate, FaPhone, FaEnvelope, FaFilter, FaDownload, FaPrint, FaMapMarkerAlt, FaFacebook, FaLink } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaSearch, FaUniversity, FaUserTie, FaUserGraduate, FaPhone, FaEnvelope, FaFilter, FaDownload, FaMapMarkerAlt, FaFacebook, FaLink } from 'react-icons/fa';
+import apiService from '../services/apiService';
 
 const DebateClubDirectory = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedUniversity, setSelectedUniversity] = useState('all');
   const [selectedRegion, setSelectedRegion] = useState('all');
+  const [debateClubs, setDebateClubs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Debate club data with all required fields including Facebook
-  const debateClubs = [
-    {
-      id: 1,
-      clubName: "Dhaka University Debate Society",
-      university: "University of Dhaka",
-      president: "Ahmed Rahman",
-      generalSecretary: "Fatima Khan",
-      contact: "01719 142953",
-      email: "duds@du.ac.bd",
-      location: "Dhaka",
-      established: "1995",
-      members: "150",
-      status: "Active",
-      facebookId: "DU.Debate.Society",
-      facebookUrl: "https://facebook.com/DUDebateSociety"
-    },
-    {
-      id: 2,
-      clubName: "BUET Oratory Club",
-      university: "Bangladesh University of Engineering & Technology",
-      president: "Rahim Islam",
-      generalSecretary: "Tasnim Ahmed",
-      contact: "01717 666166",
-      email: "oratory@buet.ac.bd",
-      location: "Dhaka",
-      established: "2001",
-      members: "120",
-      status: "Active",
-      facebookId: "BUET.Oratory.Club",
-      facebookUrl: "https://facebook.com/BUETOratoryClub"
-    },
-    {
-      id: 4,
-      clubName: "Chittagong University Debate Forum",
-      university: "University of Chittagong",
-      president: "Nabil Hasan",
-      generalSecretary: "Sumaiya Akter",
-      contact: "01812 345678",
-      email: "cudf@cu.ac.bd",
-      location: "Chittagong",
-      established: "2000",
-      members: "110",
-      status: "Active",
-      facebookId: "CUDebateForum",
-      facebookUrl: "https://facebook.com/CUDebateForum"
-    },
-    {
-      id: 5,
-      clubName: "North South University Debate Club",
-      university: "North South University",
-      president: "Zarin Tasnim",
-      generalSecretary: "Rayhan",
-      contact: "01987 654321",
-      email: "dc@northsouth.edu",
-      location: "Dhaka",
-      established: "2005",
-      members: "130",
-      status: "Active",
-      facebookId: "NSUDebateClub",
-      facebookUrl: "https://facebook.com/NSUDebateClub"
-    },
-    {
-      id: 6,
-      clubName: "BRAC University Debate Society",
-      university: "BRAC University",
-      president: "Tahsin Alam",
-      generalSecretary: "Nusrat Jahan",
-      contact: "01678 912345",
-      email: "brac.debate@bracu.ac.bd",
-      location: "Dhaka",
-      established: "2003",
-      members: "100",
-      status: "Active",
-      facebookId: "BRACUDebate",
-      facebookUrl: "https://facebook.com/BRACUDebate"
-    },
-    {
-      id: 7,
-      clubName: "Rajshahi University Debate Association",
-      university: "University of Rajshahi",
-      president: "Arif Hossain",
-      generalSecretary: "Mina Begum",
-      contact: "01755 112233",
-      email: "ruda@ru.ac.bd",
-      location: "Rajshahi",
-      established: "1997",
-      members: "85",
-      status: "Active",
-      facebookId: "RU.Debate.Association",
-      facebookUrl: "https://facebook.com/RUDebateAssociation"
-    }
-  ];
+  // Fetch directory data from API
+  useEffect(() => {
+    const fetchDirectory = async () => {
+      try {
+        setLoading(true);
+        const data = await apiService.getDirectory();
+        
+        const transformedData = data.map(club => ({
+          id: club.id,
+          clubName: club.club_name || club.clubName,
+          university: club.university,
+          president: club.president,
+          generalSecretary: club.general_secretary || club.generalSecretary,
+          contact: club.contact,
+          email: club.email,
+          location: club.location,
+          established: club.established,
+          members: club.members,
+          facebookUrl: club.facebook_url
+        }));
+        
+        setDebateClubs(transformedData);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching directory:', err);
+        setError('Failed to load directory data. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDirectory();
+  }, []);
 
   // Get unique universities for filter
   const universities = [...new Set(debateClubs.map(club => club.university))];
@@ -110,8 +54,7 @@ const DebateClubDirectory = () => {
       club.clubName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       club.university.toLowerCase().includes(searchTerm.toLowerCase()) ||
       club.president.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      club.generalSecretary.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      club.facebookId.toLowerCase().includes(searchTerm.toLowerCase());
+      club.generalSecretary.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesUniversity = selectedUniversity === 'all' || club.university === selectedUniversity;
     const matchesRegion = selectedRegion === 'all' || club.location === selectedRegion;
@@ -121,7 +64,7 @@ const DebateClubDirectory = () => {
 
   // Function to download directory as CSV
   const downloadCSV = () => {
-    const headers = ['Club Name', 'University', 'President', 'General Secretary', 'Contact', 'Email', 'Location', 'Established', 'Members', 'Facebook ID', 'Facebook URL'];
+    const headers = ['Club Name', 'University', 'President', 'General Secretary', 'Contact', 'Email', 'Location', 'Established', 'Members', 'Facebook URL'];
     const csvContent = [
       headers.join(','),
       ...filteredClubs.map(club => [
@@ -134,8 +77,7 @@ const DebateClubDirectory = () => {
         `"${club.location}"`,
         club.established,
         club.members,
-        `"${club.facebookId}"`,
-        `"${club.facebookUrl}"`
+        `"${club.facebookUrl || ''}"`
       ].join(','))
     ].join('\n');
 
@@ -146,11 +88,6 @@ const DebateClubDirectory = () => {
     a.download = 'debate-club-directory.csv';
     a.click();
     window.URL.revokeObjectURL(url);
-  };
-
-  // Function to print directory
-  const printDirectory = () => {
-    window.print();
   };
 
   return (
@@ -196,7 +133,7 @@ const DebateClubDirectory = () => {
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search by club name, university, president, general secretary or Facebook ID..."
+                placeholder="Search by club name, university, president, or general secretary..."
                 className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 shadow-sm"
               />
             </div>
@@ -263,13 +200,6 @@ const DebateClubDirectory = () => {
               >
                 <FaDownload className="mr-2" /> CSV
               </button>
-              <button
-                onClick={printDirectory}
-                className="bg-white hover:bg-emerald-50 text-emerald-700 font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow-md text-sm shadow-sm"
-                title="Print Directory"
-              >
-                <FaPrint className="mr-2" /> Print
-              </button>
             </div>
           </div>
         </div>
@@ -278,7 +208,24 @@ const DebateClubDirectory = () => {
       {/* Directory Table Section */}
       <section className="py-8 md:py-12 lg:py-16 bg-emerald-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredClubs.length === 0 ? (
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading directory data...</p>
+            </div>
+          ) : error ? (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">⚠️</div>
+              <h3 className="text-2xl font-bold text-gray-700 mb-2">Error loading data</h3>
+              <p className="text-gray-600 mb-6">{error}</p>
+              <button 
+                onClick={() => window.location.reload()}
+                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-300"
+              >
+                Retry
+              </button>
+            </div>
+          ) : filteredClubs.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-2xl font-bold text-gray-700 mb-2">No clubs found</h3>
@@ -335,9 +282,6 @@ const DebateClubDirectory = () => {
                         <td className="px-6 py-4">
                           <div className="font-bold text-emerald-900">{club.clubName}</div>
                           <div className="text-sm text-gray-600 mt-1">{club.university}</div>
-                          <div className="flex items-center mt-1 text-xs text-gray-500">
-                            <FaMapMarkerAlt className="mr-1" /> {club.location}
-                          </div>
                         </td>
                         <td className="px-6 py-4">
                           <div className="font-medium text-gray-900">{club.president}</div>
@@ -356,15 +300,19 @@ const DebateClubDirectory = () => {
                           </a>
                         </td>
                         <td className="px-6 py-4">
-                          <a 
-                            href={club.facebookUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 hover:text-blue-800 font-medium flex items-center justify-center text-lg"
-                            title={`Visit ${club.facebookId} on Facebook`}
-                          >
-                            <FaFacebook />
-                          </a>
+                          {club.facebookUrl ? (
+                            <a 
+                              href={club.facebookUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:text-blue-800 font-medium flex items-center justify-center text-lg"
+                              title="Visit on Facebook"
+                            >
+                              <FaFacebook />
+                            </a>
+                          ) : (
+                            <span className="text-gray-400">—</span>
+                          )}
                         </td>
                       </tr>
                     ))}
@@ -442,14 +390,18 @@ const DebateClubDirectory = () => {
                         </div>
                         <div>
                           <div className="text-xs text-gray-500">Link</div>
-                          <a 
-                            href={club.facebookUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="font-medium text-emerald-600 hover:text-emerald-800 hover:underline truncate block"
-                          >
-                            Visit Link
-                          </a>
+                          {club.facebookUrl ? (
+                            <a 
+                              href={club.facebookUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="font-medium text-blue-600 hover:text-blue-800 hover:underline truncate block flex items-center"
+                            >
+                              <FaFacebook className="mr-1" /> Facebook
+                            </a>
+                          ) : (
+                            <span className="text-gray-500">No link available</span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -460,55 +412,6 @@ const DebateClubDirectory = () => {
           )}
         </div>
       </section>
-
-      {/* Print Styles */}
-      <style>{`
-        @media print {
-          .no-print {
-            display: none !important;
-          }
-          
-          body {
-            background: white !important;
-          }
-          
-          table {
-            width: 100%;
-            border-collapse: collapse;
-          }
-          
-          th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-          }
-          
-          th {
-            background-color: #f0f9ff !important;
-            -webkit-print-color-adjust: exact;
-          }
-          
-          /* Hide Link column in print */
-          th:nth-child(6), td:nth-child(6) {
-            display: none;
-          }
-          
-          /* Hide CTA section in print */
-          section:last-child {
-            display: none;
-          }
-          
-          /* Hide search section in print */
-          #search {
-            display: none !important;
-          }
-          
-          /* Ensure contact numbers stay on one line in print */
-          td {
-            white-space: nowrap !important;
-          }
-        }
-      `}</style>
     </div>
   );
 };

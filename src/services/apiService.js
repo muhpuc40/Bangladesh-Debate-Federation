@@ -20,8 +20,14 @@ const apiService = {
     const response = await apiClient.get('/announcements');
     return response.data;
   },
+  
   getHallOfFame: async () => {
     const response = await apiClient.get('/hall');
+    return response.data;
+  },
+
+  getDirectory: async () => {
+    const response = await apiClient.get('/directory');
     return response.data;
   }
 };
