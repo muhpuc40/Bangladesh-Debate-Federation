@@ -38,16 +38,26 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    if (!validateForm()) return;
-    
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  if (!validateForm()) return;
+  
+  setIsSubmitting(true);
+  
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}contact`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
       setIsSubmitted(true);
       setFormData({
         name: '',
@@ -61,8 +71,16 @@ const Contact = () => {
       setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
-    }, 1500);
-  };
+    } else {
+      alert('Failed to send message. Please try again.');
+    }
+  } catch (error) {
+    console.error('Error sending message:', error);
+    alert('An error occurred. Please try again.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
