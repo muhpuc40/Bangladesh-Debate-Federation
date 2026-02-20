@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaGlobe, FaStar, FaCode, FaPalette, FaRocket } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaGlobe, FaStar, FaCode, FaPalette, FaRocket, FaGraduationCap } from 'react-icons/fa';
 
 const DevelopersInfo = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -9,13 +9,13 @@ const DevelopersInfo = () => {
       id: 1,
       name: "Minhaj Uddin Hassan",
       role: "Frontend Developer & UI/UX Designer",
-      bio: "Creating beautiful and functional user interfaces with modern web technologies.",
+      // bio: "Creating beautiful and functional user interfaces with modern web technologies.",
       image: "https://i.ibb.co.com/hRpzpL2k/97126606.jpg",
-      skills: ["React", "JavaScript", "Tailwind CSS", "UI/UX Design", "Figma"],
+      degree: "Bachelor of Science (Engineering) in Computer Science and Engineering - BSc in CSE",
       social: {
-        github: "https://github.com/ahmedrafi",
-        linkedin: "https://linkedin.com/in/ahmedrafi",
-        email: "rafi@example.com",
+        github: "https://github.com/muhpuc40",
+        linkedin: "https://www.linkedin.com/in/minhajuddinhassan/?originalSubdomain=bd",
+        email: "mdhassan49.muh@gmail.com",
         portfolio: "https://rafidev.com"
       },
       color: "emerald",
@@ -25,9 +25,9 @@ const DevelopersInfo = () => {
       id: 2,
       name: "Md Ebtesham Azam",
       role: "Full Stack Developer",
-      bio: "Building robust backend systems and scalable applications with cutting-edge technologies.",
+      // bio: "Building robust backend systems and scalable applications with cutting-edge technologies.",
       image: "https://i.ibb.co.com/wZNPNjNw/97126606.jpg",
-      skills: ["Node.js", "Express", "MongoDB", "React", "API Development"],
+      degree: "Bachelor of Science (Engineering) in Computer Science and Engineering - BSc in CSE",
       social: {
         github: "https://github.com/sadiaislam",
         linkedin: "https://linkedin.com/in/sadiaislam",
@@ -171,25 +171,14 @@ const DevelopersInfo = () => {
                         {developer.bio}
                       </p>
 
-                      {/* Skills with Animation */}
-                      <div className="mb-6">
-                        <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
-                          <div className={`w-2 h-2 ${colors.dark} rounded-full animate-pulse`}></div>
-                          Qualification
-                        </h4>
-                        <div className="flex flex-wrap gap-2 justify-center">
-                          {developer.skills.map((skill, index) => (
-                            <span
-                              key={index}
-                              className={`${colors.light} ${colors.text} px-3 py-1.5 rounded-full text-sm font-medium transform transition-all duration-300 hover:scale-105 hover:shadow-md cursor-default`}
-                              style={{
-                                animationDelay: `${index * 100}ms`
-                              }}
-                            >
-                              {skill}
-                            </span>
-                          ))}
+                      {/* Degree Information with SVG Icon */}
+                      <div className="mb-6 flex items-start gap-3 bg-gradient-to-r from-gray-50 to-white p-4 rounded-xl border border-gray-100">
+                        <div className={`${colors.light} p-3 rounded-lg flex-shrink-0`}>
+                          <FaGraduationCap className={`text-2xl ${colors.text}`} />
                         </div>
+                        <p className="text-gray-700 font-medium leading-relaxed">
+                          {developer.degree}
+                        </p>
                       </div>
 
                       {/* Social Links with Hover Effects */}
