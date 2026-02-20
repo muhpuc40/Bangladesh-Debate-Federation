@@ -198,7 +198,7 @@ const News = () => {
       <div className="min-h-screen bg-white" style={{ '--navbar-height': '72px' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-md mx-auto text-center">
-            <div className="text-6xl mb-4">❌</div>
+            <div className="text-6xl mb-4">⚠️</div>
             <h3 className="text-2xl font-bold text-gray-800 mb-2">Error loading news</h3>
             <p className="text-gray-600 mb-6">{error}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

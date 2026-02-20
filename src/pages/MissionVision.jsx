@@ -31,25 +31,19 @@ const MissionVision = () => {
   const galleryImages = [
     {
       id: 1,
-      url: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      url: "image/4.jpeg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       caption: "",
       description: ""
     },
     {
       id: 2,
-      url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      url: "image/5.jpeg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       caption: "",
       description: ""
     },
     {
       id: 3,
-      url: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      caption: "",
-      description: ""
-    },
-    {
-      id: 4,
-      url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      url: "image/6.jpeg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       caption: "",
       description: ""
     }

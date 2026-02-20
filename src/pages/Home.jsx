@@ -52,17 +52,17 @@ const Home = () => {
   const aboutImages = [
     {
       id: 1,
-      url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      url: "image/1.jpeg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       // alt: "National Debate Competition"
     },
     {
       id: 2,
-      url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      url: "image/2.jpeg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       // alt: "Debate Training Workshop"
     },
     {
       id: 3,
-      url: "https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      url: "image/3.jpeg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       // alt: "Debate Award Ceremony"
     }
   ];
@@ -262,7 +262,7 @@ const Home = () => {
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link
-                  to="/about"
+                  to="/mission-vision"
                   className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
                 >
                   Know More <FaArrowRight className="ml-2 text-sm sm:text-base md:text-base" />
