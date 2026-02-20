@@ -430,7 +430,7 @@ const News = () => {
                                 {announcement.type ? announcement.type.charAt(0).toUpperCase() + announcement.type.slice(1) : 'Notice'}
                               </span>
                               <span className="text-xs text-gray-500">
-                                {announcement.time_ago ? `${announcement.time_ago} hours ago` : ''}
+                                {announcement.time_ago ? `${announcement.time_ago}` : ''}
                               </span>
                             </div>
                           </div>
