@@ -1,7 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import apiService from '../services/apiService';
-import { FaCalendarAlt, FaMapMarkerAlt, FaUsers, FaClock, FaSearch, FaArrowRight, FaRegCalendarCheck, FaTrophy, FaFilter, } from 'react-icons/fa';
+import { 
+  FaCalendarAlt, 
+  FaMapMarkerAlt, 
+  FaUsers, 
+  FaClock, 
+  FaSearch, 
+  FaArrowRight, 
+  FaRegCalendarCheck, 
+  FaTrophy, 
+  FaFilter 
+} from 'react-icons/fa';
 
 const Events = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -224,7 +234,7 @@ const Events = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
+      <section className="relative pt-20 md:pt-24 py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight">

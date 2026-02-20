@@ -8,6 +8,7 @@ import ExecutiveCommittee from './pages/ExecutiveCommittee';
 import PresidiumMember from './pages/PresidiumMember';
 import DebateClubDirectory from './pages/DebateClubDirectory';
 import Events from './pages/Events';
+import EventDetails from './pages/EventDetails'; // নতুন ইম্পোর্ট
 import News from './pages/News';
 import Resources from './pages/Resources';
 import Gallery from './pages/Gallery';
@@ -31,6 +32,7 @@ function App() {
         
         <Route path="debate-club-directory" element={<DebateClubDirectory />} />
         <Route path="events" element={<Events />} />
+        <Route path="event/:id" element={<EventDetails />} /> {/* নতুন রুট */}
         <Route path="news" element={<News />} />
         <Route path="resources" element={<Resources />} />
         <Route path="gallery" element={<Gallery />} />
