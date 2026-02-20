@@ -259,7 +259,7 @@ const News = () => {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Search news by title, content, tags or author..."
+                  placeholder="Search news by title, content or category..."
                   className="w-full pl-12 pr-4 py-3 md:py-3.5 bg-white border-2 border-emerald-200 rounded-xl focus:ring-4 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-sm md:text-base hover:border-emerald-300 shadow"
                 />
                 {searchTerm && (
@@ -285,10 +285,10 @@ const News = () => {
                   {searchTerm ? (
                     <span className="flex items-center">
                       <FaSearch className="mr-1 md:mr-2" />
-                      {filteredNews.length} results for "{searchTerm}"
+                      {filteredNews.length} results
                     </span>
                   ) : (
-                    <span>{news.length} articles</span>
+                    <span>{news.length} News</span>
                   )}
                 </div>
               </div>
@@ -297,9 +297,6 @@ const News = () => {
                 <div className="text-center py-8 md:py-12 bg-gray-50 rounded-xl">
                   <FaSearch className="text-3xl md:text-4xl text-gray-400 mx-auto mb-3 md:mb-4" />
                   <h3 className="text-lg md:text-xl font-bold text-gray-700 mb-2">No news found</h3>
-                  <p className="text-gray-600 mb-4 text-sm md:text-base">
-                    {searchTerm ? `No articles match your search "${searchTerm}"` : 'No articles available'}
-                  </p>
                   {searchTerm && (
                     <button
                       onClick={() => setSearchTerm('')}
@@ -335,13 +332,6 @@ const News = () => {
                         <div className="flex items-center text-xs text-gray-600 mb-2 md:mb-3">
                           <FaCalendarAlt className="mr-1.5 text-emerald-600" />
                           <span>{formatDate(item.date)}</span>
-                          {item.author && (
-                            <>
-                              <span className="mx-1.5 md:mx-2">•</span>
-                              <FaUser className="mr-1.5 text-emerald-600" />
-                              <span>{item.author}</span>
-                            </>
-                          )}
                         </div>
 
                         <h3 className="text-base md:text-lg font-bold text-emerald-900 mb-2 md:mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
@@ -349,7 +339,7 @@ const News = () => {
                         </h3>
 
                         <p className="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3">
-                          {item.excerpt}
+                          {item.content}
                         </p>
 
                         <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-emerald-50">
