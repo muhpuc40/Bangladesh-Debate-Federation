@@ -8,7 +8,7 @@ const DevelopersInfo = () => {
     {
       id: 1,
       name: "Minhaj Uddin Hassan",
-      role: "Frontend Developer & UI/UX Designer",
+      // role: "Frontend Developer & UI/UX Designer",
       // bio: "Creating beautiful and functional user interfaces with modern web technologies.",
       image: "https://i.ibb.co.com/hRpzpL2k/97126606.jpg",
       degree: "Bachelor of Science (Engineering) in Computer Science and Engineering - BSc in CSE",
@@ -16,7 +16,7 @@ const DevelopersInfo = () => {
         github: "https://github.com/muhpuc40",
         linkedin: "https://www.linkedin.com/in/minhajuddinhassan/?originalSubdomain=bd",
         email: "mdhassan49.muh@gmail.com",
-        portfolio: "https://rafidev.com"
+        portfolio: "https://muhpuc40.github.io/Minhaj-Uddin-Hassan/"
       },
       color: "emerald",
       icon: <FaPalette className="text-xl" />
@@ -24,7 +24,7 @@ const DevelopersInfo = () => {
     {
       id: 2,
       name: "Md Ebtesham Azam",
-      role: "Full Stack Developer",
+      // role: "Full Stack Developer",
       // bio: "Building robust backend systems and scalable applications with cutting-edge technologies.",
       image: "https://i.ibb.co.com/wZNPNjNw/97126606.jpg",
       degree: "Bachelor of Science (Engineering) in Computer Science and Engineering - BSc in CSE",
@@ -68,18 +68,18 @@ const DevelopersInfo = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header Section with Animation */}
         <div className="text-center mb-12 md:mb-16 transform transition-all duration-700">
-          <div className="inline-block mb-4 animate-bounce-slow">
+          {/* <div className="inline-block mb-4 animate-bounce-slow">
             <FaRocket className="text-4xl text-emerald-600" />
-          </div>
+          </div> */}
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 animate-fade-in-up">
             Meet Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-blue-600">Developer Team</span>
           </h1>
-          <div className="mt-6 max-w-3xl mx-auto">
+          {/* <div className="mt-6 max-w-3xl mx-auto">
             <p className="text-gray-600 text-lg leading-relaxed animate-fade-in-up animation-delay-300">
               The Bangladesh Debate Federation website was crafted with passion and precision by our dedicated developer team, 
               blending cutting-edge technology with elegant design.
             </p>
-          </div>
+          </div> */}
         </div>
 
         {/* Developers Grid */}
@@ -101,10 +101,10 @@ const DevelopersInfo = () => {
                 <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-500 hover:-translate-y-2">
                   {/* Decorative Ribbon */}
                   <div className="absolute top-0 right-0">
-                    <div className={`${colors.dark} text-white px-4 py-1 text-sm font-semibold rounded-bl-lg flex items-center gap-2`}>
+                    {/* <div className={`${colors.dark} text-white px-4 py-1 text-sm font-semibold rounded-bl-lg flex items-center gap-2`}>
                       {developer.icon}
                       <span>{developer.role.split('&')[0].trim()}</span>
-                    </div>
+                    </div> */}
                   </div>
 
                   {/* Developer Image with Unique Frame */}
@@ -162,9 +162,9 @@ const DevelopersInfo = () => {
                         <h3 className="text-2xl font-bold text-gray-800 mb-1">
                           {developer.name}
                         </h3>
-                        <p className={`${colors.text} font-medium`}>
+                        {/* <p className={`${colors.text} font-medium`}>
                           {developer.role}
-                        </p>
+                        </p> */}
                       </div>
 
                       <p className="text-gray-600 mb-6 leading-relaxed text-center">
