@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { 
-  FaUser, 
-  FaEnvelope, 
-  FaLock, 
-  FaEye, 
+import apiService from '../services/apiService';
+
+import {
+  FaUser,
+  FaEnvelope,
+  FaLock,
+  FaEye,
   FaEyeSlash,
   FaPhone,
   FaUniversity,
@@ -38,13 +40,13 @@ const SignUp = () => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     document.body.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
     document.body.style.minHeight = '100vh';
-    
+
     return () => {
       document.body.style.background = '';
       document.body.style.minHeight = '';
@@ -54,90 +56,85 @@ const SignUp = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.fullName.trim()) {
       newErrors.fullName = "Full name is required";
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Please enter a valid email address";
     }
-    
+
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required";
     }
-    
+
     if (!formData.institution.trim()) {
       newErrors.institution = "Institution is required";
     }
-    
+
     if (!formData.password.trim()) {
       newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
       newErrors.password = "Password must be at least 6 characters";
     }
-    
+
     if (!formData.confirmPassword.trim()) {
       newErrors.confirmPassword = "Please confirm your password";
     } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
     }
-    
+
     if (!formData.acceptTerms) {
       newErrors.acceptTerms = "You must accept the terms and conditions";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
 
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  if (!validateForm()) return;
-  
-  setIsSubmitting(true);
-  
-  try {
-    const response = await fetch('http://192.168.0.104:8000/api/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const data = await apiService.register({
         fullName: formData.fullName,
         email: formData.email,
         phone: formData.phone,
         institution: formData.institution,
         password: formData.password,
-      }),
-    });
+      });
 
-    const data = await response.json();
+      if (data.success) {
+        setIsSuccess(true);
 
-    if (data.success) {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      
-      setTimeout(() => {
-        navigate('/signin');
-      }, 3000);
-    } else {
-      setErrors(data.errors || {});
+        setTimeout(() => {
+          navigate('/signin');
+        }, 3000);
+      } else {
+        setErrors(data.errors || {});
+      }
+
+    } catch (error) {
+      console.error('Registration error:', error);
+
+      if (error.response?.data?.errors) {
+        setErrors(error.response.data.errors);
+      } else {
+        alert('Registration failed. Please try again.');
+      }
+    } finally {
       setIsSubmitting(false);
     }
-  } catch (error) {
-    console.error('Registration error:', error);
-    setIsSubmitting(false);
-    alert('Registration failed. Please try again.');
-  }
-};
-
+  };
 
 
 
@@ -167,14 +164,14 @@ const handleSubmit = async (e) => {
     <div className="w-full max-w-md bg-gradient-to-b from-amber-50 to-amber-100 rounded-2xl shadow-xl overflow-hidden border border-amber-200">
       {/* Page Texture for Mobile */}
       <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#8B4513_1px,transparent_1px)] [background-size:20px_20px]"></div>
-      
+
       {/* Mobile Header */}
       <div className="relative z-10 p-6 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white">
         <div className="flex items-center justify-center mb-4">
           <div className="w-16 h-16 bg-white rounded-full p-2 border-2 border-white/30">
-            <img 
-              src="https://i.ibb.co/Ldwswy4m/logo.png" 
-              alt="Bangladesh Debate Federation Logo" 
+            <img
+              src="https://i.ibb.co/Ldwswy4m/logo.png"
+              alt="Bangladesh Debate Federation Logo"
               className="w-full h-full object-contain"
             />
           </div>
@@ -192,7 +189,7 @@ const handleSubmit = async (e) => {
             <FaBook className="text-emerald-600 mr-2" />
             <h2 className="text-xl font-serif font-bold text-gray-800">Sign Up</h2>
           </div>
-          
+
           {/* Back to Home Button on RIGHT */}
           <div className="flex items-center gap-2">
             <button
@@ -227,7 +224,7 @@ const handleSubmit = async (e) => {
               Welcome to the Bangladesh Debate Federation. Your account has been created.
             </p>
             <div className="w-64 h-2 bg-emerald-100 rounded-full overflow-hidden mx-auto mb-6">
-              <div 
+              <div
                 className="h-full bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"
                 style={{ animation: 'progress 3s linear forwards' }}
               ></div>
@@ -252,9 +249,8 @@ const handleSubmit = async (e) => {
                 type="text"
                 value={formData.fullName}
                 onChange={handleChange}
-                className={`appearance-none block w-full px-4 py-3 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
-                  errors.fullName ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
-                }`}
+                className={`appearance-none block w-full px-4 py-3 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${errors.fullName ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
+                  }`}
                 placeholder="John Doe"
               />
               {errors.fullName && (
@@ -276,9 +272,8 @@ const handleSubmit = async (e) => {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`appearance-none block w-full px-4 py-3 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
-                  errors.email ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
-                }`}
+                className={`appearance-none block w-full px-4 py-3 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${errors.email ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
+                  }`}
                 placeholder="john@example.com"
               />
               {errors.email && (
@@ -300,9 +295,8 @@ const handleSubmit = async (e) => {
                 type="tel"
                 value={formData.phone}
                 onChange={handleChange}
-                className={`appearance-none block w-full px-4 py-3 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
-                  errors.phone ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
-                }`}
+                className={`appearance-none block w-full px-4 py-3 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${errors.phone ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
+                  }`}
                 placeholder="+880 1XXX XXXXXX"
               />
               {errors.phone && (
@@ -324,9 +318,8 @@ const handleSubmit = async (e) => {
                 type="text"
                 value={formData.institution}
                 onChange={handleChange}
-                className={`appearance-none block w-full px-4 py-3 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
-                  errors.institution ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
-                }`}
+                className={`appearance-none block w-full px-4 py-3 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${errors.institution ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
+                  }`}
                 placeholder="School/College/University"
               />
               {errors.institution && (
@@ -349,9 +342,8 @@ const handleSubmit = async (e) => {
                   type={showPassword ? "text" : "password"}
                   value={formData.password}
                   onChange={handleChange}
-                  className={`appearance-none block w-full px-4 py-3 pr-12 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
-                    errors.password ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
-                  }`}
+                  className={`appearance-none block w-full px-4 py-3 pr-12 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${errors.password ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
+                    }`}
                   placeholder="••••••••"
                 />
                 <button
@@ -387,9 +379,8 @@ const handleSubmit = async (e) => {
                   type={showConfirmPassword ? "text" : "password"}
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className={`appearance-none block w-full px-4 py-3 pr-12 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
-                    errors.confirmPassword ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
-                  }`}
+                  className={`appearance-none block w-full px-4 py-3 pr-12 bg-white/80 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${errors.confirmPassword ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
+                    }`}
                   placeholder="••••••••"
                 />
                 <button
@@ -486,7 +477,7 @@ const handleSubmit = async (e) => {
         <div className="lg:w-3/5 bg-gradient-to-b from-amber-50 to-amber-100 p-6 lg:p-8 flex flex-col overflow-auto relative">
           {/* Page Texture */}
           <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#8B4513_1px,transparent_1px)] [background-size:20px_20px]"></div>
-          
+
           <div className="relative z-10 flex flex-col h-full">
             {/* Header */}
             <div className="mb-6">
@@ -507,7 +498,7 @@ const handleSubmit = async (e) => {
                     Home
                   </Link>
                 </div>
-                
+
                 <div className="flex items-center">
                   <FaBook className="text-emerald-600 mr-2" />
                   <h2 className="text-xl font-serif font-bold text-gray-800">Sign Up</h2>
@@ -530,7 +521,7 @@ const handleSubmit = async (e) => {
                     Welcome to the Bangladesh Debate Federation. Your account has been created.
                   </p>
                   <div className="w-64 h-2 bg-emerald-100 rounded-full overflow-hidden mx-auto mb-6">
-                    <div 
+                    <div
                       className="h-full bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"
                       style={{ animation: 'progress 3s linear forwards' }}
                     ></div>
@@ -556,9 +547,8 @@ const handleSubmit = async (e) => {
                         type="text"
                         value={formData.fullName}
                         onChange={handleChange}
-                        className={`appearance-none block w-full px-4 py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
-                          errors.fullName ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
-                        }`}
+                        className={`appearance-none block w-full px-4 py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${errors.fullName ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
+                          }`}
                         placeholder="John Doe"
                       />
                       {errors.fullName && (
@@ -580,9 +570,8 @@ const handleSubmit = async (e) => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`appearance-none block w-full px-4 py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
-                          errors.email ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
-                        }`}
+                        className={`appearance-none block w-full px-4 py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${errors.email ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
+                          }`}
                         placeholder="john@example.com"
                       />
                       {errors.email && (
@@ -604,9 +593,8 @@ const handleSubmit = async (e) => {
                         type="tel"
                         value={formData.phone}
                         onChange={handleChange}
-                        className={`appearance-none block w-full px-4 py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
-                          errors.phone ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
-                        }`}
+                        className={`appearance-none block w-full px-4 py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${errors.phone ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
+                          }`}
                         placeholder="+880 1XXX XXXXXX"
                       />
                       {errors.phone && (
@@ -628,9 +616,8 @@ const handleSubmit = async (e) => {
                         type="text"
                         value={formData.institution}
                         onChange={handleChange}
-                        className={`appearance-none block w-full px-4 py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
-                          errors.institution ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
-                        }`}
+                        className={`appearance-none block w-full px-4 py-2.5 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${errors.institution ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
+                          }`}
                         placeholder="School/College/University"
                       />
                       {errors.institution && (
@@ -653,9 +640,8 @@ const handleSubmit = async (e) => {
                           type={showPassword ? "text" : "password"}
                           value={formData.password}
                           onChange={handleChange}
-                          className={`appearance-none block w-full px-4 py-2.5 pr-10 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
-                            errors.password ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
-                          }`}
+                          className={`appearance-none block w-full px-4 py-2.5 pr-10 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${errors.password ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
+                            }`}
                           placeholder="••••••••"
                         />
                         <button
@@ -691,9 +677,8 @@ const handleSubmit = async (e) => {
                           type={showConfirmPassword ? "text" : "password"}
                           value={formData.confirmPassword}
                           onChange={handleChange}
-                          className={`appearance-none block w-full px-4 py-2.5 pr-10 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${
-                            errors.confirmPassword ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
-                          }`}
+                          className={`appearance-none block w-full px-4 py-2.5 pr-10 bg-white/70 border-2 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-emerald-500 text-sm transition-all duration-300 font-serif text-black ${errors.confirmPassword ? 'border-red-300 focus:border-red-500' : 'border-amber-300 hover:border-emerald-400'
+                            }`}
                           placeholder="••••••••"
                         />
                         <button
@@ -787,9 +772,9 @@ const handleSubmit = async (e) => {
         <div className="lg:w-2/5 bg-gradient-to-l from-emerald-700 to-emerald-600 p-6 lg:p-8 flex flex-col items-center justify-center text-white relative overflow-hidden">
           <div className="relative z-10 text-center">
             <div className="w-24 h-24 lg:w-32 lg:h-32 mx-auto mb-6 bg-white rounded-full p-3 border-2 border-white/20 shadow-xl">
-              <img 
-                src="https://i.ibb.co/Ldwswy4m/logo.png" 
-                alt="Bangladesh Debate Federation Logo" 
+              <img
+                src="https://i.ibb.co/Ldwswy4m/logo.png"
+                alt="Bangladesh Debate Federation Logo"
                 className="w-full h-full object-contain"
               />
             </div>
