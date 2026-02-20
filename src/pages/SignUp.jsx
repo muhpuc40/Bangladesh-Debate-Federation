@@ -93,22 +93,53 @@ const SignUp = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    if (!validateForm()) return;
-    
-    setIsSubmitting(true);
-    
-    setTimeout(() => {
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  if (!validateForm()) return;
+  
+  setIsSubmitting(true);
+  
+  try {
+    const response = await fetch('http://192.168.0.104:8000/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        institution: formData.institution,
+        password: formData.password,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
       setIsSubmitting(false);
       setIsSuccess(true);
       
       setTimeout(() => {
         navigate('/signin');
       }, 3000);
-    }, 1500);
-  };
+    } else {
+      setErrors(data.errors || {});
+      setIsSubmitting(false);
+    }
+  } catch (error) {
+    console.error('Registration error:', error);
+    setIsSubmitting(false);
+    alert('Registration failed. Please try again.');
+  }
+};
+
+
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
