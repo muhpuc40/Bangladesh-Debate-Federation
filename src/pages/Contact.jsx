@@ -46,7 +46,7 @@ const handleSubmit = async (e) => {
   setIsSubmitting(true);
   
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}contact`, {
+    const response = await fetch('https://admin.bdfbd.org/api/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +54,6 @@ const handleSubmit = async (e) => {
       },
       body: JSON.stringify(formData),
     });
-
     const result = await response.json();
 
     if (result.success) {
