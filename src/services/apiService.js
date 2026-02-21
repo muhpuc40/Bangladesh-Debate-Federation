@@ -36,7 +36,7 @@ const apiService = {
     const response = await apiClient.get('/announcements');
     return response.data;
   },
-  
+
   // Hall of Fame
   getHallOfFame: async () => {
     const response = await apiClient.get('/hall');
@@ -47,7 +47,13 @@ const apiService = {
   getDirectory: async () => {
     const response = await apiClient.get('/directory');
     return response.data;
+  },
+
+  register: async (payload) => {
+    const response = await apiClient.post('/register', payload);
+    return response.data;
   }
+
 };
 
 export default apiService;

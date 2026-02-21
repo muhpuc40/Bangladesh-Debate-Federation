@@ -634,8 +634,6 @@ const Home = () => {
     `}
         </style>
       </section>
-
- /* Latest News - Compact Version */
       <section className="py-8 md:py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Compact Header Section */}
