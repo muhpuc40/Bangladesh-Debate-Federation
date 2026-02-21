@@ -1,4 +1,4 @@
-// App.jsx
+
 import { Routes, Route } from 'react-router-dom';
 import Root from './Root';
 import Home from './pages/Home';
@@ -11,7 +11,7 @@ import DebateClubDirectory from './pages/DebateClubDirectory';
 import Events from './pages/Events';
 import EventDetails from './pages/EventDetails';
 import News from './pages/News';
-import NewsDetails from './pages/NewsDetails'; // NewsDetails ইম্পোর্ট
+import NewsDetails from './pages/NewsDetails'; 
 import Resources from './pages/Resources';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
@@ -36,7 +36,7 @@ function App() {
         <Route path="events" element={<Events />} />
         <Route path="event/:id" element={<EventDetails />} />
         <Route path="news" element={<News />} />
-        <Route path="news/:id" element={<NewsDetails />} /> {/* নিউজ ডিটেইলস রুট */}
+        <Route path="news/:id" element={<NewsDetails />} /> 
         <Route path="resources" element={<Resources />} />
         <Route path="gallery" element={<Gallery />} />
         <Route path="contact" element={<Contact />} />
