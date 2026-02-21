@@ -204,167 +204,176 @@ const EventDetails = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Main Content - pt-20 যোগ করা হয়েছে নেভবারের জন্য */}
+      {/* Main Content */}
       <section className="pt-24 pb-8 md:pt-28 md:pb-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left Column - Main Event Content (2/3 width) */}
             <div className="lg:col-span-2">
-              {/* Heading - ব্যাজ টাইটেলের নিচে */}
-              <div className="mb-6">
-                <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-3">{event.title}</h1>
-                <div className="flex flex-wrap gap-3">
-                  <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(event.status || event.type)}`}>
-                    {event.status || event.type}
-                  </span>
-                  {event.category && (
-                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-600 text-white">
-                      {event.category}
+              {/* Single Card - সবকিছু একসাথে */}
+              <div className="bg-white rounded-xl border border-emerald-100 shadow-lg overflow-hidden">
+                {/* Card Header - ব্যাজ এবং টাইটেল */}
+                <div className="p-6 pb-0">
+                  <div className="flex flex-wrap gap-3 mb-3">
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(event.status || event.type)}`}>
+                      {event.status || event.type}
                     </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Event Image */}
-              <div className="mb-8 rounded-xl overflow-hidden border border-emerald-100 shadow-lg">
-                <img
-                  src={event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'}
-                  alt={event.title}
-                  className="w-full h-[400px] object-cover"
-                  onError={(e) => {
-                    e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';
-                  }}
-                />
-              </div>
-
-              {/* Event Description */}
-              <div className="bg-white rounded-xl border border-emerald-100 p-6">
-                {/* <h2 className="text-2xl font-bold text-emerald-900 mb-4">About the Event</h2> */}
-                <div className="prose max-w-none text-gray-700">
-                  <p className="mb-4 text-lg">{event.description}</p>
-                  {event.details && (
-                    <div className="mt-6">
-                      <p>{event.details}</p>
-                    </div>
-                  )}
+                    {event.category && (
+                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-600 text-white">
+                        {event.category}
+                      </span>
+                    )}
+                  </div>
+                  <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4">{event.title}</h1>
                 </div>
 
-                {/* Event Info Cards - Below Description */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-                  <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
-                    <div className="flex items-center">
-                      <div className="bg-emerald-600 text-white p-2 rounded-lg mr-3">
-                        <FaCalendarAlt className="text-sm" />
+                {/* Event Image */}
+                <div className="px-6">
+                  <div className="rounded-xl overflow-hidden border border-emerald-100">
+                    <img
+                      src={event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'}
+                      alt={event.title}
+                      className="w-full h-[400px] object-cover"
+                      onError={(e) => {
+                        e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Event Details */}
+                <div className="p-6">
+                  {/* Description */}
+                  <div className="prose max-w-none text-gray-700 mb-8">
+                    <p className="text-lg">{event.description}</p>
+                    {event.details && (
+                      <div className="mt-4">
+                        <p>{event.details}</p>
                       </div>
-                      <div>
-                        <h3 className="text-xs text-gray-600">Date</h3>
-                        <p className="font-semibold text-emerald-900">{formatDate(event.date)}</p>
-                      </div>
-                    </div>
+                    )}
                   </div>
 
-                  {event.time && (
+                  {/* Info Grid - একসাথে দেখানো হবে */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    {/* Date */}
                     <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
                       <div className="flex items-center">
                         <div className="bg-emerald-600 text-white p-2 rounded-lg mr-3">
-                          <FaClock className="text-sm" />
+                          <FaCalendarAlt className="text-sm" />
                         </div>
                         <div>
-                          <h3 className="text-xs text-gray-600">Time</h3>
-                          <p className="font-semibold text-emerald-900">{formatTime(event.time)}</p>
+                          <h3 className="text-xs text-gray-600">Date</h3>
+                          <p className="font-semibold text-emerald-900">{formatDate(event.date)}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Time (if available) */}
+                    {event.time && (
+                      <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+                        <div className="flex items-center">
+                          <div className="bg-emerald-600 text-white p-2 rounded-lg mr-3">
+                            <FaClock className="text-sm" />
+                          </div>
+                          <div>
+                            <h3 className="text-xs text-gray-600">Time</h3>
+                            <p className="font-semibold text-emerald-900">{formatTime(event.time)}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Location */}
+                    {event.location && (
+                      <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+                        <div className="flex items-center">
+                          <div className="bg-emerald-600 text-white p-2 rounded-lg mr-3">
+                            <FaMapMarkerAlt className="text-sm" />
+                          </div>
+                          <div>
+                            <h3 className="text-xs text-gray-600">Location</h3>
+                            <p className="font-semibold text-emerald-900">{event.location}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Participants (if available) */}
+                    {event.participants && (
+                      <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+                        <div className="flex items-center">
+                          <div className="bg-emerald-600 text-white p-2 rounded-lg mr-3">
+                            <FaUsers className="text-sm" />
+                          </div>
+                          <div>
+                            <h3 className="text-xs text-gray-600">Participants</h3>
+                            <p className="font-semibold text-emerald-900">{event.participants}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Registration Deadline Alert */}
+                  {event.type === 'upcoming' && event.registration_deadline && (
+                    <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6">
+                      <div className="flex items-start">
+                        <FaExclamationCircle className="text-yellow-600 text-xl mr-3 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <h3 className="font-bold text-yellow-800 mb-1">Registration Deadline</h3>
+                          <p className="text-yellow-700 text-sm mb-2">
+                            Registrations close on {formatDate(event.registration_deadline)}
+                          </p>
+                          <div className="flex items-center text-sm">
+                            <FaRegClock className="mr-2 text-yellow-600" />
+                            <span className="text-yellow-700 font-medium">
+                              {new Date(event.registration_deadline) > new Date() ? 'Open' : 'Closed'}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   )}
 
-                  {event.location && (
-                    <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
-                      <div className="flex items-center">
-                        <div className="bg-emerald-600 text-white p-2 rounded-lg mr-3">
-                          <FaMapMarkerAlt className="text-sm" />
+                  {/* Organizer Info */}
+                  {event.organizer && (
+                    <div className="pt-6 border-t border-emerald-100">
+                      <h3 className="text-lg font-bold text-emerald-900 mb-4">Organizer</h3>
+                      <div className="flex items-start">
+                        <div className="bg-emerald-100 text-emerald-600 p-2 rounded-lg mr-3">
+                          <FaUserTie className="text-lg" />
                         </div>
                         <div>
-                          <h3 className="text-xs text-gray-600">Location</h3>
-                          <p className="font-semibold text-emerald-900">{event.location}</p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {event.participants && (
-                    <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
-                      <div className="flex items-center">
-                        <div className="bg-emerald-600 text-white p-2 rounded-lg mr-3">
-                          <FaUsers className="text-sm" />
-                        </div>
-                        <div>
-                          <h3 className="text-xs text-gray-600">Participants</h3>
-                          <p className="font-semibold text-emerald-900">{event.participants}</p>
+                          <h4 className="font-bold text-emerald-900">{event.organizer.name}</h4>
+                          {event.organizer.email && (
+                            <p className="flex items-center text-sm text-gray-600 mt-1">
+                              <FaEnvelope className="mr-2 text-emerald-600 text-xs" />
+                              <a href={`mailto:${event.organizer.email}`} className="hover:text-emerald-700">
+                                {event.organizer.email}
+                              </a>
+                            </p>
+                          )}
+                          {event.organizer.phone && (
+                            <p className="flex items-center text-sm text-gray-600 mt-1">
+                              <FaPhone className="mr-2 text-emerald-600 text-xs" />
+                              <a href={`tel:${event.organizer.phone}`} className="hover:text-emerald-700">
+                                {event.organizer.phone}
+                              </a>
+                            </p>
+                          )}
+                          {event.organizer.website && (
+                            <p className="flex items-center text-sm text-gray-600 mt-1">
+                              <FaGlobe className="mr-2 text-emerald-600 text-xs" />
+                              <a href={event.organizer.website} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-700">
+                                {event.organizer.website}
+                              </a>
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
                   )}
                 </div>
-
-                {/* Registration Deadline Alert */}
-                {event.type === 'upcoming' && event.registration_deadline && (
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mt-6">
-                    <div className="flex items-start">
-                      <FaExclamationCircle className="text-yellow-600 text-xl mr-3 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <h3 className="font-bold text-yellow-800 mb-1">Registration Deadline</h3>
-                        <p className="text-yellow-700 text-sm mb-2">
-                          Registrations close on {formatDate(event.registration_deadline)}
-                        </p>
-                        <div className="flex items-center text-sm">
-                          <FaRegClock className="mr-2 text-yellow-600" />
-                          <span className="text-yellow-700 font-medium">
-                            {new Date(event.registration_deadline) > new Date() ? 'Open' : 'Closed'}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Organizer Info */}
-                {event.organizer && (
-                  <div className="mt-6 pt-6 border-t border-emerald-100">
-                    <h3 className="text-lg font-bold text-emerald-900 mb-4">Organizer</h3>
-                    <div className="flex items-start">
-                      <div className="bg-emerald-100 text-emerald-600 p-2 rounded-lg mr-3">
-                        <FaUserTie className="text-lg" />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-emerald-900">{event.organizer.name}</h4>
-                        {event.organizer.email && (
-                          <p className="flex items-center text-sm text-gray-600 mt-1">
-                            <FaEnvelope className="mr-2 text-emerald-600 text-xs" />
-                            <a href={`mailto:${event.organizer.email}`} className="hover:text-emerald-700">
-                              {event.organizer.email}
-                            </a>
-                          </p>
-                        )}
-                        {event.organizer.phone && (
-                          <p className="flex items-center text-sm text-gray-600 mt-1">
-                            <FaPhone className="mr-2 text-emerald-600 text-xs" />
-                            <a href={`tel:${event.organizer.phone}`} className="hover:text-emerald-700">
-                              {event.organizer.phone}
-                            </a>
-                          </p>
-                        )}
-                        {event.organizer.website && (
-                          <p className="flex items-center text-sm text-gray-600 mt-1">
-                            <FaGlobe className="mr-2 text-emerald-600 text-xs" />
-                            <a href={event.organizer.website} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-700">
-                              {event.organizer.website}
-                            </a>
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
 
