@@ -1,6 +1,7 @@
 import apiClient from '../Axios/axiosConfig';
 
 const apiService = {
+
   // Committees
   getCommittees: async () => {
     const response = await apiClient.get('/committees');
@@ -12,13 +13,7 @@ const apiService = {
     const response = await apiClient.get('/events');
     return response.data;
   },
-
-  // Get single event by ID (নতুন মেথড)
-  getEventById: async (id) => {
-    const response = await apiClient.get(`/events/${id}`);
-    return response.data;
-  },
-
+  
   // News
   getNews: async () => {
     const response = await apiClient.get('/news');
@@ -49,10 +44,23 @@ const apiService = {
     return response.data;
   },
 
+  //registration
   register: async (payload) => {
     const response = await apiClient.post('/register', payload);
     return response.data;
-  }
+  },
+
+  // Advisors
+  getAdvisors: async () => {
+    const response = await apiClient.get('/advisors');
+    return response.data;
+  },
+
+  // Presidium Members
+  getPresidium: async () => {
+    const response = await apiClient.get('/presidium');
+    return response.data;
+  },
 
 };
 

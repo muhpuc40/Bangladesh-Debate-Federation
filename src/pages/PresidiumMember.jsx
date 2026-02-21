@@ -1,66 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import apiService from '../services/apiService';
 
 const PresidiumMember = () => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
   useEffect(() => {
-    const fetchMembers = async () => {
+    const fetchPresidium = async () => {
       try {
-        // বিভিন্ন সম্ভাব্য URL টেস্ট করার জন্য
-        const possibleUrls = [
-          'http://localhost:8000/api/presidium-members',
-          'http://localhost:8000/api/presidium-member',
-          'http://localhost:8000/api/presidium',
-          'http://localhost:8000/api/members/presidium',
-          'http://localhost:8000/api/presidium-members/all',
-          'http://localhost:8000/presidium-members',
-        ];
-
-        let response = null;
-        let successUrl = '';
-
-        // এক একটি URL টেস্ট করি
-        for (const url of possibleUrls) {
-          try {
-            console.log('Trying URL:', url);
-            const res = await fetch(url, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-              },
-            });
-            
-            if (res.ok) {
-              response = res;
-              successUrl = url;
-              console.log('Success with URL:', url);
-              break;
-            }
-          } catch (e) {
-            console.log('Failed URL:', url);
-          }
-        }
-
-        if (!response) {
-          throw new Error('Could not find the correct API endpoint');
-        }
-
-        const data = await response.json();
-        console.log('Received data from:', successUrl, data);
-        
-        setMembers(data.data || data);
+        const result = await apiService.getPresidium();
+        setMembers(result.data || result);
         setLoading(false);
       } catch (err) {
-        console.error('Fetch error:', err);
+        console.error('Failed to fetch presidium members:', err);
         setError(err.message);
         setLoading(false);
       }
     };
 
-    fetchMembers();
+    fetchPresidium();
   }, []);
 
   if (loading) {
@@ -85,7 +45,7 @@ const PresidiumMember = () => {
           </div>
           <p className="text-red-600 mb-4 font-semibold">Error!</p>
           <p className="text-gray-600 mb-4">{error}</p>
-          
+
           <div className="bg-gray-50 p-4 rounded-lg mb-4 text-left">
             <p className="text-sm font-semibold mb-2">🔍 Please check:</p>
             <ol className="text-xs text-gray-600 list-decimal pl-4">
@@ -96,8 +56,8 @@ const PresidiumMember = () => {
             </ol>
           </div>
 
-          <button 
-            onClick={() => window.location.reload()} 
+          <button
+            onClick={() => window.location.reload()}
             className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
           >
             Try Again
@@ -116,12 +76,12 @@ const PresidiumMember = () => {
               Presidium Member
             </h1>
           </div>
-          
+
           <div className="text-center py-12">
             <div className="mb-4">
-              <img 
-                src="https://i.ibb.co.com/S0tX2qF/presidium-icon.png" 
-                alt="Presidium Member Icon" 
+              <img
+                src="https://i.ibb.co.com/S0tX2qF/presidium-icon.png"
+                alt="Presidium Member Icon"
                 className="w-24 h-24 mx-auto opacity-50"
               />
             </div>
@@ -140,8 +100,8 @@ const PresidiumMember = () => {
   return (
     <div className="bg-white py-12 px-4 sm:px-6 lg:px-8 min-h-screen">
       <div className="max-w-7xl mx-auto">
-     
-        <div className="text-center pt-16 md:pt-20 mb-12">
+
+        <div className="text-center pt-16 md:pt-10 mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4">
             Presidium Member
           </h1>
@@ -149,27 +109,27 @@ const PresidiumMember = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {members.map((member) => (
-            <div 
-              key={member.id} 
+            <div
+              key={member.id}
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 max-w-xs mx-auto w-full"
             >
               <div className="p-6">
                 <div className="mb-6 flex justify-center">
                   {member.image ? (
-                    <img 
+                    <img
                       src={member.image}
                       alt={member.name}
-                      className="w-40 h-40 rounded-full object-cover border-4 border-emerald-900"
+                      className="w-48 h-48 rounded-full object-cover border-4 border-emerald-900"
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=0D9488&color=fff&size=160`;
                       }}
                     />
                   ) : (
-                    <img 
+                    <img
                       src={`https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=0D9488&color=fff&size=160`}
                       alt={member.name}
-                      className="w-40 h-40 rounded-full border-4 border-emerald-900"
+                      className="w-48 h-48 rounded-full border-4 border-emerald-900"
                     />
                   )}
                 </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import apiService from '../services/apiService';
 
 const AdvisorPanel = () => {
   const [advisors, setAdvisors] = useState([]);
@@ -8,27 +9,11 @@ const AdvisorPanel = () => {
   useEffect(() => {
     const fetchAdvisors = async () => {
       try {
-        // Laravel backend URL
-        const API_URL = 'http://localhost:8000';
-        
-        const response = await fetch(`${API_URL}/api/advisors`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        
-        setAdvisors(data.data || data);
+        const result = await apiService.getAdvisors();
+        setAdvisors(result.data || result);
         setLoading(false);
       } catch (err) {
-        console.error('Fetch error:', err);
+        console.error('Failed to fetch advisors:', err);
         setError(err.message);
         setLoading(false);
       }
@@ -59,13 +44,13 @@ const AdvisorPanel = () => {
           </div>
           <p className="text-red-600 mb-4 font-semibold">Error Loading Advisors</p>
           <p className="text-gray-600 mb-4">Failed to connect to backend</p>
-          
+
           <p className="text-sm text-gray-500 mb-4">
             Please make sure your Laravel backend is running on port 8000
           </p>
-          
-          <button 
-            onClick={() => window.location.reload()} 
+
+          <button
+            onClick={() => window.location.reload()}
             className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
           >
             Try Again
@@ -78,8 +63,8 @@ const AdvisorPanel = () => {
   return (
     <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-     
-        <div className="text-center pt-16 md:pt-20 mb-12">
+
+        <div className="text-center pt-16 md:pt-10 mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4">
             Advisor Panel
           </h1>
@@ -95,27 +80,27 @@ const AdvisorPanel = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {advisors.map((advisor) => (
-              <div 
-                key={advisor.id || advisor._id} 
+              <div
+                key={advisor.id || advisor._id}
                 className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 max-w-xs mx-auto w-full"
               >
                 <div className="p-6">
                   <div className="mb-6 flex justify-center">
                     {advisor.image || advisor.avatar ? (
-                      <img 
+                      <img
                         src={advisor.image || advisor.avatar}
                         alt={advisor.name}
-                        className="w-40 h-40 rounded-full object-cover border-4 border-emerald-900"
+                        className="w-48 h-48 rounded-full object-cover border-4 border-emerald-900"
                         onError={(e) => {
                           e.target.onerror = null;
                           e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(advisor.name)}&background=0D9488&color=fff&size=160`;
                         }}
                       />
                     ) : (
-                      <img 
+                      <img
                         src={`https://ui-avatars.com/api/?name=${encodeURIComponent(advisor.name)}&background=0D9488&color=fff&size=160`}
                         alt={advisor.name}
-                        className="w-40 h-40 rounded-full border-4 border-emerald-900"
+                        className="w-48 h-48 rounded-full border-4 border-emerald-900"
                       />
                     )}
                   </div>
