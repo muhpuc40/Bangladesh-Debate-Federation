@@ -1,3 +1,4 @@
+// App.jsx
 import { Routes, Route } from 'react-router-dom';
 import Root from './Root';
 import Home from './pages/Home';
@@ -8,8 +9,9 @@ import ExecutiveCommittee from './pages/ExecutiveCommittee';
 import PresidiumMember from './pages/PresidiumMember';
 import DebateClubDirectory from './pages/DebateClubDirectory';
 import Events from './pages/Events';
-import EventDetails from './pages/EventDetails'; // নতুন ইম্পোর্ট
+import EventDetails from './pages/EventDetails';
 import News from './pages/News';
+import NewsDetails from './pages/NewsDetails'; // NewsDetails ইম্পোর্ট
 import Resources from './pages/Resources';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
@@ -32,8 +34,9 @@ function App() {
         
         <Route path="debate-club-directory" element={<DebateClubDirectory />} />
         <Route path="events" element={<Events />} />
-        <Route path="event/:id" element={<EventDetails />} /> {/* নতুন রুট */}
+        <Route path="event/:id" element={<EventDetails />} />
         <Route path="news" element={<News />} />
+        <Route path="news/:id" element={<NewsDetails />} /> {/* নিউজ ডিটেইলস রুট */}
         <Route path="resources" element={<Resources />} />
         <Route path="gallery" element={<Gallery />} />
         <Route path="contact" element={<Contact />} />
