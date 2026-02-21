@@ -33,17 +33,17 @@ const Home = () => {
   const heroBackgrounds = [
     {
       id: 1,
-      url: "https://i.ibb.co.com/HfwY09Kt/Gemini-Generated-Image-sozxjesozxjesozx.png",
+      url: "hero/1.png",
       alt: "Bangladesh Debate Competition"
     },
     {
       id: 2,
-      url: "https://i.ibb.co.com/MkTLQsv1/Whats-App-Image-2025-12-28-at-11-14-00-AM.jpg",
+      url: "hero/2.jpg",
       alt: "Debate Training Session"
     },
     {
       id: 3,
-      url: "https://i.ibb.co.com/rRqqC8v7/590229201-1406347054631792-9028344179879825090-n.jpg",
+      url: "hero/3.jpg",
       alt: "Youth Debate Competition"
     }
   ];
