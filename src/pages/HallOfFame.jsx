@@ -79,9 +79,9 @@ const HallOfFame = () => {
                 key={committee.id}
                 className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
               >
-                <div className="md:flex">
+                <div className="flex flex-col md:flex-row">
                   {/* Left Side - Committee Info */}
-                  <div className="md:w-3/5 p-8">
+                  <div className="md:w-1/2 p-8 bg-white">
                     <div className="h-full flex flex-col justify-center">
                       <div className="mb-6">
                         <span className="inline-block px-4 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold mb-2">
@@ -97,57 +97,65 @@ const HallOfFame = () => {
                     </div>
                   </div>
 
-                  {/* Right Side - Images */}
-                  <div className="md:w-2/5 bg-gradient-to-r from-emerald-50 to-white p-8 flex flex-col justify-center">
-                    <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
+                  {/* Right Side - Images (50-50 split) */}
+                  <div className="md:w-1/2 bg-gradient-to-r from-emerald-50 to-white p-8">
+                    <div className="grid grid-cols-2 gap-6 h-full">
                       {/* President */}
-                      <div className="text-center">
-                        <div className="w-36 h-36 md:w-40 md:h-40 mx-auto mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                          {committee.presidentImage ? (
-                            <img
-                              src={committee.presidentImage}
-                              alt={committee.president}
-                              className="w-full h-full object-cover"
-                              onError={(e) => {
-                                e.target.onerror = null;
-                                e.target.src = "https://i.ibb.co.com/default-avatar.png";
-                              }}
-                            />
-                          ) : (
-                            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                              <span className="text-gray-400">No Image</span>
-                            </div>
-                          )}
+                      <div className="flex flex-col items-center justify-center text-center">
+                        <div className="w-full aspect-square max-w-[180px] mx-auto mb-4">
+                          <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg">
+                            {committee.presidentImage ? (
+                              <img
+                                src={committee.presidentImage}
+                                alt={committee.president}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = "https://i.ibb.co.com/default-avatar.png";
+                                }}
+                              />
+                            ) : (
+                              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                                <span className="text-gray-400 text-sm">No Image</span>
+                              </div>
+                            )}
+                          </div>
                         </div>
-                        <h3 className="font-bold text-gray-900 text-lg">
+                        <h3 className="font-bold text-gray-900 text-base md:text-lg mb-1 px-2">
                           {committee.president}
                         </h3>
-                        <p className="text-emerald-600 font-medium">President</p>
+                        <p className="text-emerald-600 font-medium text-sm md:text-base">
+                          President
+                        </p>
                       </div>
 
                       {/* Secretary */}
-                      <div className="text-center">
-                        <div className="w-36 h-36 md:w-40 md:h-40 mx-auto mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                          {committee.secretaryImage ? (
-                            <img
-                              src={committee.secretaryImage}
-                              alt={committee.secretary}
-                              className="w-full h-full object-cover"
-                              onError={(e) => {
-                                e.target.onerror = null;
-                                e.target.src = "https://i.ibb.co.com/default-avatar.png";
-                              }}
-                            />
-                          ) : (
-                            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                              <span className="text-gray-400">No Image</span>
-                            </div>
-                          )}
+                      <div className="flex flex-col items-center justify-center text-center">
+                        <div className="w-full aspect-square max-w-[180px] mx-auto mb-4">
+                          <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg">
+                            {committee.secretaryImage ? (
+                              <img
+                                src={committee.secretaryImage}
+                                alt={committee.secretary}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = "https://i.ibb.co.com/default-avatar.png";
+                                }}
+                              />
+                            ) : (
+                              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                                <span className="text-gray-400 text-sm">No Image</span>
+                              </div>
+                            )}
+                          </div>
                         </div>
-                        <h3 className="font-bold text-gray-900 text-lg">
+                        <h3 className="font-bold text-gray-900 text-base md:text-lg mb-1 px-2">
                           {committee.secretary}
                         </h3>
-                        <p className="text-emerald-600 font-medium">General Secretary</p>
+                        <p className="text-emerald-600 font-medium text-sm md:text-base">
+                          General Secretary
+                        </p>
                       </div>
                     </div>
                   </div>
