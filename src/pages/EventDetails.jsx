@@ -204,65 +204,16 @@ const EventDetails = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header with Back and Share Buttons */}
-      <div className="bg-white border-b border-emerald-100 sticky top-0 z-10">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <button
-              onClick={() => navigate(-1)}
-              className="flex items-center text-emerald-700 hover:text-emerald-900 font-medium transition-colors"
-            >
-              <FaArrowLeft className="mr-2" /> Back
-            </button>
-            
-            <div className="relative">
-              <button
-                onClick={() => setShowShareMenu(!showShareMenu)}
-                className="flex items-center text-emerald-700 hover:text-emerald-900 font-medium transition-colors"
-              >
-                <FaShare className="mr-2" /> Share
-              </button>
-              
-              {showShareMenu && (
-                <div className="absolute top-10 right-0 bg-white rounded-lg shadow-xl border border-emerald-100 p-2 z-50 w-48">
-                  <button onClick={shareOnFacebook} className="w-full text-left px-4 py-2 hover:bg-blue-50 rounded-lg flex items-center text-gray-700">
-                    <FaFacebook className="mr-2 text-blue-600" /> Facebook
-                  </button>
-                  <button onClick={shareOnTwitter} className="w-full text-left px-4 py-2 hover:bg-blue-50 rounded-lg flex items-center text-gray-700">
-                    <FaTwitter className="mr-2 text-blue-400" /> Twitter
-                  </button>
-                  <button onClick={shareOnLinkedIn} className="w-full text-left px-4 py-2 hover:bg-blue-50 rounded-lg flex items-center text-gray-700">
-                    <FaLinkedin className="mr-2 text-blue-700" /> LinkedIn
-                  </button>
-                  <button onClick={shareOnWhatsApp} className="w-full text-left px-4 py-2 hover:bg-green-50 rounded-lg flex items-center text-gray-700">
-                    <FaWhatsapp className="mr-2 text-green-600" /> WhatsApp
-                  </button>
-                  <button onClick={shareByEmail} className="w-full text-left px-4 py-2 hover:bg-red-50 rounded-lg flex items-center text-gray-700">
-                    <FaEnvelope className="mr-2 text-red-600" /> Email
-                  </button>
-                  <div className="border-t border-gray-200 my-2"></div>
-                  <button onClick={printPage} className="w-full text-left px-4 py-2 hover:bg-gray-50 rounded-lg flex items-center text-gray-700">
-                    <FaPrint className="mr-2 text-gray-600" /> Print
-                  </button>
-                  <button onClick={downloadAsPDF} className="w-full text-left px-4 py-2 hover:bg-gray-50 rounded-lg flex items-center text-gray-700">
-                    <FaDownload className="mr-2 text-gray-600" /> Download PDF
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <section className="py-8 md:py-12">
+      {/* Main Content - pt-20 যোগ করা হয়েছে নেভবারের জন্য */}
+      <section className="pt-24 pb-8 md:pt-28 md:pb-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left Column - Main Event Content (2/3 width) */}
             <div className="lg:col-span-2">
-              {/* Heading */}
+              {/* Heading - ব্যাজ টাইটেলের নিচে */}
               <div className="mb-6">
-                <div className="flex flex-wrap gap-3 mb-4">
+                <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-3">{event.title}</h1>
+                <div className="flex flex-wrap gap-3">
                   <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(event.status || event.type)}`}>
                     {event.status || event.type}
                   </span>
@@ -272,7 +223,6 @@ const EventDetails = () => {
                     </span>
                   )}
                 </div>
-                <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4">{event.title}</h1>
               </div>
 
               {/* Event Image */}
@@ -289,7 +239,7 @@ const EventDetails = () => {
 
               {/* Event Description */}
               <div className="bg-white rounded-xl border border-emerald-100 p-6">
-                <h2 className="text-2xl font-bold text-emerald-900 mb-4">About the Event</h2>
+                {/* <h2 className="text-2xl font-bold text-emerald-900 mb-4">About the Event</h2> */}
                 <div className="prose max-w-none text-gray-700">
                   <p className="mb-4 text-lg">{event.description}</p>
                   {event.details && (
@@ -473,16 +423,6 @@ const EventDetails = () => {
                         </div>
                       </Link>
                     ))}
-                  </div>
-
-                  <div className="mt-4 pt-4 border-t border-emerald-100">
-                    <Link
-                      to="/events"
-                      className="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center text-sm"
-                    >
-                      Browse All Events
-                      <FaArrowRight className="ml-2" />
-                    </Link>
                   </div>
                 </div>
               )}
