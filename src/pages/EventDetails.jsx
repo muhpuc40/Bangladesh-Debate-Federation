@@ -22,7 +22,8 @@ import {
   FaCheckCircle,
   FaExclamationCircle,
   FaSpinner,
-  FaArrowRight
+  FaArrowRight,
+  FaTag
 } from 'react-icons/fa';
 
 const EventDetails = () => {
@@ -207,28 +208,40 @@ const EventDetails = () => {
       {/* Main Content */}
       <section className="pt-24 pb-8 md:pt-28 md:pb-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Card Header with Tags - সব ট্যাগ এখানে দেখাবে */}
+          <div className="mb-6">
+            {/* Status and Category Badges */}
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <span className={`px-4 py-1.5 rounded-full text-sm font-bold ${getStatusColor(event.status || event.type)}`}>
+                {event.status || event.type}
+              </span>
+              {event.category && (
+                <span className="px-4 py-1.5 rounded-full text-sm font-bold bg-emerald-600 text-white">
+                  {event.category}
+                </span>
+              )}
+              {/* Additional Tags - যদি আলাদা ট্যাগ থাকে */}
+              {event.tags && event.tags.map((tag, index) => (
+                <span key={index} className="px-4 py-1.5 rounded-full text-sm font-bold bg-purple-100 text-purple-800 border border-purple-200">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            
+            {/* Event Title */}
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-2">
+              {event.title}
+            </h1>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left Column - Main Event Content (2/3 width) */}
             <div className="lg:col-span-2">
-              {/* Single Card - সবকিছু একসাথে */}
+              {/* Single Card */}
               <div className="bg-white rounded-xl border border-emerald-100 shadow-lg overflow-hidden">
-                {/* Card Header - ব্যাজ এবং টাইটেল */}
-                <div className="p-6 pb-0">
-                  <div className="flex flex-wrap gap-3 mb-3">
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(event.status || event.type)}`}>
-                      {event.status || event.type}
-                    </span>
-                    {event.category && (
-                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-600 text-white">
-                        {event.category}
-                      </span>
-                    )}
-                  </div>
-                  <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4">{event.title}</h1>
-                </div>
-
-                {/* Event Image */}
-                <div className="px-6">
+                {/* Event Image - এখন শুধু ছবি, কোনো টেক্সট নেই */}
+                <div className="p-6">
                   <div className="rounded-xl overflow-hidden border border-emerald-100">
                     <img
                       src={event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'}
@@ -242,7 +255,7 @@ const EventDetails = () => {
                 </div>
 
                 {/* Event Details */}
-                <div className="p-6">
+                <div className="p-6 pt-0">
                   {/* Description */}
                   <div className="prose max-w-none text-gray-700 mb-8">
                     <p className="text-lg">{event.description}</p>
@@ -253,7 +266,7 @@ const EventDetails = () => {
                     )}
                   </div>
 
-                  {/* Info Grid - একসাথে দেখানো হবে */}
+                  {/* Info Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     {/* Date */}
                     <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">

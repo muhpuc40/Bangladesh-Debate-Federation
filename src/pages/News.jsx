@@ -431,13 +431,13 @@ const News = () => {
                 </div>
 
                 {/* View All Button */}
-                <div className="p-3 md:p-4 border-t border-gray-100 bg-gray-50">
+                {/* <div className="p-3 md:p-4 border-t border-gray-100 bg-gray-50">
                   <button className="w-full bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-2.5 md:py-3 px-4 rounded-lg border border-emerald-200 hover:border-emerald-300 transition-all duration-300 flex items-center justify-center text-sm md:text-base">
                     <FaBullhorn className="mr-1.5 md:mr-2" />
                     View All Announcements
                     <FaArrowRight className="ml-1.5 md:ml-2" />
                   </button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
