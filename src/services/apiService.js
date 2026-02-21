@@ -13,7 +13,7 @@ const apiService = {
     const response = await apiClient.get('/events');
     return response.data;
   },
-  
+
   // News
   getNews: async () => {
     const response = await apiClient.get('/news');
@@ -61,6 +61,50 @@ const apiService = {
     const response = await apiClient.get('/presidium');
     return response.data;
   },
+
+  // Auth
+  login: async (email, password) => {
+    const response = await apiClient.post('/login', { email, password });
+    return response.data;
+  },
+
+  logout: async () => {
+    const response = await apiClient.post('/logout');
+    return response.data;
+  },
+
+  me: async () => {
+    const response = await apiClient.get('/me');
+    return response.data;
+  },
+
+  createBlog: async (payload) => {
+    const response = await apiClient.post('/blogs', payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  },
+  updateBlog: async (id, formData) => {
+    formData.append('_method', 'PUT');
+
+    const response = await apiClient.post(`/blogs/${id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+
+    return response.data;
+  },
+  deleteBlog: async (id) => {
+    const response = await apiClient.delete(`/blogs/${id}`);
+    return response.data;
+  },
+  getMyBlogs: async () => {
+    const response = await apiClient.get('/blogs/my');
+    return response.data;
+
+  },
+
 
 };
 

@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Root from './Root';
+import ProtectedRoute from './components/ProtectedRoute';
 
-// Lazy load all pages
 const Home = lazy(() => import('./pages/Home'));
 const MissionVision = lazy(() => import('./pages/MissionVision'));
 const HallOfFame = lazy(() => import('./pages/HallOfFame'));
@@ -17,20 +17,27 @@ const NewsDetails = lazy(() => import('./pages/NewsDetails'));
 const Resources = lazy(() => import('./pages/Resources'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const Contact = lazy(() => import('./pages/Contact'));
-const Portal = lazy(() => import('./pages/Portal'));
+
 const SignIn = lazy(() => import('./pages/SignIn'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const DevelopersInfo = lazy(() => import('./pages/DevelopersInfo'));
+const Profile = lazy(() => import('./pages/Profile'));
+const Blog = lazy(() => import('./pages/Blog'));
+
+const Spinner = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="w-12 h-12 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin" />
+  </div>
+);
 
 function App() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    }>
+    <Suspense fallback={<Spinner />}>
       <Routes>
+
         <Route path="/" element={<Root />}>
+
+          {/* Public */}
           <Route index element={<Home />} />
           <Route path="mission-vision" element={<MissionVision />} />
           <Route path="hall-of-fame" element={<HallOfFame />} />
@@ -45,11 +52,24 @@ function App() {
           <Route path="resources" element={<Resources />} />
           <Route path="gallery" element={<Gallery />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="portal" element={<Portal />} />
           <Route path="developers-info" element={<DevelopersInfo />} />
+
+          {/* Protected — must be logged in */}
+          <Route path="profile" element={
+            <ProtectedRoute><Profile /></ProtectedRoute>
+          } />
+          <Route path="blog" element={
+            <ProtectedRoute><Blog /></ProtectedRoute>
+          } />
+
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
+
+
         </Route>
-        <Route path="signin" element={<SignIn />} />
-        <Route path="signup" element={<SignUp />} />
+
+
+
       </Routes>
     </Suspense>
   );

@@ -1,15 +1,17 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FaBars, FaTimes, FaSignInAlt, FaChevronDown } from 'react-icons/fa';
+import { FaBars, FaTimes, FaSignInAlt, FaChevronDown, FaTachometerAlt } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
+  const { user } = useAuth();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
   const [isCommitteeDropdownOpen, setIsCommitteeDropdownOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   const [mobileCommitteeOpen, setMobileCommitteeOpen] = useState(false);
-  const menuRef = useRef(null);
+  // const menuRef = useRef(null);
   const mobileMenuRef = useRef(null);
   const aboutDropdownRef = useRef(null);
   const committeeDropdownRef = useRef(null);
@@ -25,7 +27,7 @@ const Navbar = () => {
     { path: '/presidium-member', label: 'Presidium Member' },
   ];
 
-  // Home আলাদাভাবে দেখানো হবে, তাই navLinks থেকে রিমুভ করা হয়েছে
+  // Home আলাদাভাবে দেখানো হবে, তাই navLinks থেকে রিমুভ করা হয়েছে
   const navLinks = [
     { path: '/events', label: 'Events' },
     { path: '/debate-club-directory', label: 'Directory' },
@@ -291,15 +293,25 @@ const Navbar = () => {
                 {link.label}
               </NavLink>
             ))}
-            
-            {/* Sign In Button */}
-            <Link
-              to="/signin"
-              className="text-white bg-emerald-700 hover:bg-emerald-800 border border-emerald-700 font-bold py-1.5 px-3.5 rounded-full transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-lg ml-2 text-sm"
-            >
-              <FaSignInAlt className="mr-1.5 w-3 h-3" />
-              Sign In
-            </Link>
+
+            {/* ── Desktop: Sign In / My Dashboard ── */}
+            {user ? (
+              <Link
+                to="/profile"
+                className="text-white bg-emerald-700 hover:bg-emerald-800 border border-emerald-700 font-bold py-1.5 px-3.5 rounded-full transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-lg ml-2 text-sm"
+              >
+                <FaTachometerAlt className="mr-1.5 w-3 h-3" />
+                My Dashboard
+              </Link>
+            ) : (
+              <Link
+                to="/signin"
+                className="text-white bg-emerald-700 hover:bg-emerald-800 border border-emerald-700 font-bold py-1.5 px-3.5 rounded-full transition-all duration-300 flex items-center whitespace-nowrap hover:scale-105 hover:shadow-lg ml-2 text-sm"
+              >
+                <FaSignInAlt className="mr-1.5 w-3 h-3" />
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
 
@@ -453,15 +465,25 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Menu Footer - Sign In - ফুল কভার */}
+          {/* Menu Footer - Sign In / My Dashboard - ফুল কভার */}
           <div className="p-4 border-t border-emerald-100">
-            <Link
-              to="/signin"
-              onClick={closeMenu}
-              className="block w-full text-white bg-emerald-700 hover:bg-emerald-800 font-bold py-3 px-4 rounded-lg text-center transition-all duration-300 hover:scale-[1.02] text-sm"
-            >
-              <FaSignInAlt className="inline mr-2 w-4 h-4" /> Sign In
-            </Link>
+            {user ? (
+              <Link
+                to="/profile"
+                onClick={closeMenu}
+                className="block w-full text-white bg-emerald-700 hover:bg-emerald-800 font-bold py-3 px-4 rounded-lg text-center transition-all duration-300 hover:scale-[1.02] text-sm"
+              >
+                <FaTachometerAlt className="inline mr-2 w-4 h-4" /> My Dashboard
+              </Link>
+            ) : (
+              <Link
+                to="/signin"
+                onClick={closeMenu}
+                className="block w-full text-white bg-emerald-700 hover:bg-emerald-800 font-bold py-3 px-4 rounded-lg text-center transition-all duration-300 hover:scale-[1.02] text-sm"
+              >
+                <FaSignInAlt className="inline mr-2 w-4 h-4" /> Sign In
+              </Link>
+            )}
           </div>
         </div>
       </div>
