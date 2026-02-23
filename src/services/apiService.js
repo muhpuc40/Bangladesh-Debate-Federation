@@ -112,7 +112,16 @@ const apiService = {
     const response = await apiClient.get(`/blogs/${id}`);
     return response.data;
   },
+  
+  getGalleries: async () => {
+    const response = await apiClient.get('/gallery');
+    return response.data;
+  },
 
+  getGalleryById: async (id) => {
+    const response = await apiClient.get(`/gallery/${id}`);
+    return response.data;
+  },
 
 
 };

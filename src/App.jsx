@@ -16,14 +16,15 @@ const News = lazy(() => import('./pages/News'));
 const NewsDetails = lazy(() => import('./pages/NewsDetails'));
 const AllBlogs = lazy(() => import('./pages/AllBlogs'));
 const Gallery = lazy(() => import('./pages/Gallery'));
+const GalleryDetails = lazy(() => import('./pages/GalleryDetails'));
 const Contact = lazy(() => import('./pages/Contact'));
-
 const SignIn = lazy(() => import('./pages/SignIn'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const DevelopersInfo = lazy(() => import('./pages/DevelopersInfo'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Blog = lazy(() => import('./pages/Blog'));
-const BlogDetails = lazy(() => import('./pages/BlogDetails')); // Add this line
+const BlogDetails = lazy(() => import('./pages/BlogDetails'));
+const Resources = lazy(() => import('./pages/Resources'));
 
 
 const Spinner = () => (
@@ -53,9 +54,11 @@ function App() {
           <Route path="news/:id" element={<NewsDetails />} />
           <Route path="all-blogs" element={<AllBlogs />} />
           <Route path="gallery" element={<Gallery />} />
+          <Route path="gallery/:id" element={<GalleryDetails />} />
           <Route path="contact" element={<Contact />} />
           <Route path="developers-info" element={<DevelopersInfo />} />
           <Route path="blog-details/:id" element={<BlogDetails />} />
+          <Route path="resources" element={<Resources />} />
 
           {/* Protected — must be logged in */}
           <Route path="profile" element={

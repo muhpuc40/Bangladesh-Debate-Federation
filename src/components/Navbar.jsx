@@ -33,6 +33,7 @@ const Navbar = () => {
     { path: '/debate-club-directory', label: 'Directory' },
     { path: '/news', label: 'News' },
     { path: '/all-blogs', label: 'Blogs' },
+    { path: '/resources', label: 'Resources' },
     { path: '/gallery', label: 'Gallery' },
     { path: '/contact', label: 'Contact' },
   ];
