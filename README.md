@@ -14,7 +14,7 @@ The official website of the **Bangladesh Debate Federation (BDF)** — a full-st
 
 | Layer | Technology |
 |---|---|
-| Frontend | React 18.3, React Router 6, Tailwind CSS, Axios, Swiper |
+| Frontend | React 18.3, React Router 6, Tailwind CSS, Axios |
 | Backend | Laravel 12, PHP 8.3, JWT Auth, MySQL |
 | Infrastructure | LiteSpeed, Hostseba.com |
 
@@ -65,32 +65,11 @@ The official website of the **Bangladesh Debate Federation (BDF)** — a full-st
 - CORS configuration
 - Server-side input validation
 - SQL injection prevention via Eloquent ORM
-
 ---
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Commit your changes: `git commit -m 'Add some feature'`
-4. Push to your branch: `git push origin feature/your-feature`
-5. Open a Pull Request
-
----
-
 ## 👨‍💻 Developer
 
 **Minhaj Uddin Hassan**
 - GitHub: [@muhpuc40](https://github.com/muhpuc40)
-- Website: [minhaj.dev](https://minhaj.dev)
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
 
 > Built with ❤️ for the debating community of Bangladesh  
 > Support: [support@bdfbd.org](mailto:support@bdfbd.org)
