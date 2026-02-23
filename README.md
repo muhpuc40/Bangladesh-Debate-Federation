@@ -1,4 +1,4 @@
-# 🎙️ Bangladesh Debate Federation (BDF) — Official Website
+# 🎙️ Bangladesh Debate Federation — Official Website
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 [![PHP](https://img.shields.io/badge/PHP-8.3-blue.svg)]()
@@ -8,15 +8,15 @@
 
 The official website of the **Bangladesh Debate Federation (BDF)** — a full-stack platform for managing debate events, news, member blogs, and more. Built with a React frontend and Laravel REST API backend.
 
-🌐 **Live :** [https://bdfbd.org/](https://bdfbd.org/)
+🌐 **Live :** [bdfbd.org](https://bdfbd.org/)
 
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Frontend | React 18.3, React Router 6, Tailwind CSS, Axios |
-| Backend | Laravel 12, PHP 8.3, JWT Auth, MySQL |
-| Infrastructure | LiteSpeed, Hostseba.com |
+| Frontend | React 18.3, React Router 6 |
+| Backend | Laravel 12, PHP 8.3, JWT Auth |
+| Infrastructure | LiteSpeed |
 
 ---
 
