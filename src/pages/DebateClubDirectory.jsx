@@ -16,7 +16,7 @@ const DebateClubDirectory = () => {
       try {
         setLoading(true);
         const data = await apiService.getDirectory();
-        
+
         const transformedData = data.map(club => ({
           id: club.id,
           clubName: club.club_name || club.clubName,
@@ -30,7 +30,7 @@ const DebateClubDirectory = () => {
           members: club.members,
           facebookUrl: club.facebook_url
         }));
-        
+
         setDebateClubs(transformedData);
         setError(null);
       } catch (err) {
@@ -50,15 +50,15 @@ const DebateClubDirectory = () => {
 
   // Filter clubs based on search and filters
   const filteredClubs = debateClubs.filter(club => {
-    const matchesSearch = 
+    const matchesSearch =
       club.clubName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       club.university.toLowerCase().includes(searchTerm.toLowerCase()) ||
       club.president.toLowerCase().includes(searchTerm.toLowerCase()) ||
       club.generalSecretary.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     const matchesUniversity = selectedUniversity === 'all' || club.university === selectedUniversity;
     const matchesRegion = selectedRegion === 'all' || club.location === selectedRegion;
-    
+
     return matchesSearch && matchesUniversity && matchesRegion;
   });
 
@@ -103,7 +103,7 @@ const DebateClubDirectory = () => {
               Find debate clubs from Universities across Bangladesh...
             </p>
             <div className="flex flex-wrap gap-4 justify-start">
-              <a 
+              <a
                 href="#search"
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1"
               >
@@ -209,16 +209,18 @@ const DebateClubDirectory = () => {
       <section className="py-8 md:py-12 lg:py-16 bg-emerald-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
-            <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto mb-4"></div>
-              <p className="text-gray-600">Loading directory data...</p>
+            <div className="min-h-screen bg-white flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading...</p>
+              </div>
             </div>
           ) : error ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">⚠️</div>
               <h3 className="text-2xl font-bold text-gray-700 mb-2">Error loading data</h3>
               <p className="text-gray-600 mb-6">{error}</p>
-              <button 
+              <button
                 onClick={() => window.location.reload()}
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-300"
               >
@@ -230,7 +232,7 @@ const DebateClubDirectory = () => {
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-2xl font-bold text-gray-700 mb-2">No clubs found</h3>
               <p className="text-gray-600 mb-6">Try adjusting your search criteria or filters</p>
-              <button 
+              <button
                 onClick={() => { setSearchTerm(''); setSelectedUniversity('all'); setSelectedRegion('all'); }}
                 className="text-emerald-600 hover:text-emerald-800 font-bold"
               >
@@ -301,7 +303,7 @@ const DebateClubDirectory = () => {
                         </td>
                         <td className="px-6 py-4">
                           {club.facebookUrl ? (
-                            <a 
+                            <a
                               href={club.facebookUrl}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -391,7 +393,7 @@ const DebateClubDirectory = () => {
                         <div>
                           <div className="text-xs text-gray-500">Link</div>
                           {club.facebookUrl ? (
-                            <a 
+                            <a
                               href={club.facebookUrl}
                               target="_blank"
                               rel="noopener noreferrer"

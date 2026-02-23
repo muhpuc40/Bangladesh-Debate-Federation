@@ -191,12 +191,10 @@ const Events = () => {
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-white">
-        <div className="container mx-auto px-4 py-20">
-          <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-600"></div>
-            <p className="mt-4 text-gray-600 text-lg">Loading events...</p>
-          </div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );

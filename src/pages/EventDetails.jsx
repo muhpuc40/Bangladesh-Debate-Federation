@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService';
-import { 
-  FaCalendarAlt, 
-  FaMapMarkerAlt, 
-  FaUsers, 
-  FaClock, 
+import {
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaUsers,
+  FaClock,
   FaArrowLeft,
   FaShare,
   FaPrint,
@@ -136,12 +136,10 @@ const EventDetails = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white">
-        <div className="container mx-auto px-4 py-20">
-          <div className="text-center">
-            <FaSpinner className="animate-spin text-4xl text-emerald-600 mx-auto mb-4" />
-            <p className="text-gray-600 text-lg">Loading event details...</p>
-          </div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
@@ -180,7 +178,7 @@ const EventDetails = () => {
       {/* Main Content */}
       <section className="pt-24 pb-8 md:pt-28 md:pb-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Card Header with Tags - সব ট্যাগ এখানে দেখাবে */}
           <div className="mb-6">
             {/* Status and Category Badges */}
@@ -200,7 +198,7 @@ const EventDetails = () => {
                 </span>
               ))}
             </div>
-            
+
             {/* Event Title */}
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-2">
               {event.title}
@@ -369,14 +367,14 @@ const EventDetails = () => {
                 <div className="bg-white rounded-xl border border-emerald-100 p-6 sticky top-24">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-xl font-bold text-emerald-900">Other Events</h3>
-                    <Link 
-                      to="/events" 
+                    <Link
+                      to="/events"
                       className="text-emerald-600 hover:text-emerald-800 text-sm font-medium flex items-center"
                     >
                       View All <FaArrowRight className="ml-1 text-xs" />
                     </Link>
                   </div>
-                  
+
                   <div className="space-y-3">
                     {otherEvents.map(otherEvent => (
                       <Link
@@ -404,12 +402,11 @@ const EventDetails = () => {
                               <span className="truncate">{formatShortDate(otherEvent.date)}</span>
                             </div>
                             <div>
-                              <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                                otherEvent.type === 'upcoming' ? 'bg-green-100 text-green-800' :
-                                otherEvent.type === 'ongoing' ? 'bg-blue-100 text-blue-800' :
-                                otherEvent.type === 'completed' ? 'bg-gray-100 text-gray-800' :
-                                'bg-emerald-100 text-emerald-800'
-                              }`}>
+                              <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold ${otherEvent.type === 'upcoming' ? 'bg-green-100 text-green-800' :
+                                  otherEvent.type === 'ongoing' ? 'bg-blue-100 text-blue-800' :
+                                    otherEvent.type === 'completed' ? 'bg-gray-100 text-gray-800' :
+                                      'bg-emerald-100 text-emerald-800'
+                                }`}>
                                 {otherEvent.status || otherEvent.type || 'Event'}
                               </span>
                             </div>

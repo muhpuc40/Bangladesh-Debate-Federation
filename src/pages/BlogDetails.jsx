@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
-  FaUserCircle, FaClock, FaArrowLeft, FaShareAlt,
-  FaEnvelope, FaCalendarAlt, FaUniversity, FaNewspaper,
-  FaFacebook, FaTwitter, FaLinkedin, FaWhatsapp, FaCopy
+  FaUserCircle, FaClock, FaArrowLeft,
+  FaEnvelope, FaCalendarAlt, FaUniversity, FaNewspaper
 } from 'react-icons/fa';
 import apiService from '../services/apiService';
 
@@ -13,25 +12,10 @@ const BlogDetails = () => {
   const [blogData, setBlogData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showShareMenu, setShowShareMenu] = useState(false);
-  const shareMenuRef = useRef(null);
 
   useEffect(() => {
     fetchBlogDetails();
   }, [id]);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (shareMenuRef.current && !shareMenuRef.current.contains(event.target)) {
-        setShowShareMenu(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   const fetchBlogDetails = async () => {
     try {
@@ -59,69 +43,12 @@ const BlogDetails = () => {
     });
   };
 
-  const handleShare = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setShowShareMenu(!showShareMenu);
-  };
-
-const shareToSocial = async (platform) => {
-    const url = window.location.href;
-    const title = encodeURIComponent(blogData.blog.title);
-
-    let shareUrl = '';
-
-    switch (platform) {
-      case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-        break;
-      case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${title}`;
-        break;
-      case 'linkedin':
-        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-        break;
-      case 'whatsapp':
-        shareUrl = `https://wa.me/?text=${title}%20${encodeURIComponent(url)}`;
-        break;
-      case 'copy':
-        try {
-          if (navigator.clipboard && window.isSecureContext) {
-            await navigator.clipboard.writeText(url);
-          } else {
-            // Fallback method
-            const textArea = document.createElement("textarea");
-            textArea.value = url;
-            textArea.style.position = "fixed"; // Avoid scrolling to bottom
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-          }
-
-         
-        } catch (err) {
-          console.error("Copy failed", err);
-          alert("Failed to copy link.");
-        }
-
-        setShowShareMenu(false);
-        return;
-      default:
-        return;
-    }
-
-    window.open(shareUrl, '_blank', 'width=600,height=400');
-    setShowShareMenu(false);
-  };
-
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-emerald-600 border-r-transparent"></div>
-          <p className="mt-4 text-emerald-800 font-medium">Loading blog...</p>
+          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
@@ -165,83 +92,20 @@ const shareToSocial = async (platform) => {
             <article className="bg-white rounded-xl shadow-md overflow-hidden">
               {/* Blog Header */}
               <div className="p-4 md:p-8">
-                <div className="flex items-start justify-between mb-4 md:mb-6">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600">
-                      <FaUserCircle className="w-8 h-8 md:w-10 md:h-10" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 text-base md:text-lg">{blog.author}</h3>
-                      <div className="flex items-center text-xs md:text-sm text-gray-500">
-                        <FaClock className="mr-1 text-xs" />
-                        <span>{formatDate(blog.created_at)}</span>
-                        <span className="mx-2">•</span>
-                        <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                          Published
-                        </span>
-                      </div>
-                    </div>
+                <div className="flex items-center space-x-3 mb-4 md:mb-6">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600">
+                    <FaUserCircle className="w-8 h-8 md:w-10 md:h-10" />
                   </div>
-
-                  {/* Share Button with Dropdown */}
-                  <div className="relative" ref={shareMenuRef}>
-                    <button
-                      onClick={handleShare}
-                      className="text-gray-400 hover:text-emerald-600 transition-colors p-2 hover:bg-gray-100 rounded-full focus:outline-none"
-                      title="Share"
-                      type="button"
-                    >
-                      <FaShareAlt className="text-lg md:text-xl" />
-                    </button>
-
-                    {/* Share Dropdown */}
-                    {showShareMenu && (
-                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50 overflow-hidden">
-                        <div className="py-2">
-                          <button
-                            onClick={() => shareToSocial('facebook')}
-                            className="w-full px-4 py-2.5 text-left hover:bg-gray-50 flex items-center space-x-3 focus:outline-none"
-                            type="button"
-                          >
-                            <FaFacebook className="text-blue-600 text-lg" />
-                            <span className="text-sm text-gray-700">Facebook</span>
-                          </button>
-                          <button
-                            onClick={() => shareToSocial('twitter')}
-                            className="w-full px-4 py-2.5 text-left hover:bg-gray-50 flex items-center space-x-3 focus:outline-none"
-                            type="button"
-                          >
-                            <FaTwitter className="text-sky-500 text-lg" />
-                            <span className="text-sm text-gray-700">Twitter</span>
-                          </button>
-                          <button
-                            onClick={() => shareToSocial('linkedin')}
-                            className="w-full px-4 py-2.5 text-left hover:bg-gray-50 flex items-center space-x-3 focus:outline-none"
-                            type="button"
-                          >
-                            <FaLinkedin className="text-blue-700 text-lg" />
-                            <span className="text-sm text-gray-700">LinkedIn</span>
-                          </button>
-                          <button
-                            onClick={() => shareToSocial('whatsapp')}
-                            className="w-full px-4 py-2.5 text-left hover:bg-gray-50 flex items-center space-x-3 focus:outline-none"
-                            type="button"
-                          >
-                            <FaWhatsapp className="text-green-500 text-lg" />
-                            <span className="text-sm text-gray-700">WhatsApp</span>
-                          </button>
-                          <div className="border-t border-gray-100 my-1"></div>
-                          <button
-                            onClick={() => shareToSocial('copy')}
-                            className="w-full px-4 py-2.5 text-left hover:bg-gray-50 flex items-center space-x-3 focus:outline-none"
-                            type="button"
-                          >
-                            <FaCopy className="text-gray-600 text-lg" />
-                            <span className="text-sm text-gray-700">Copy Link</span>
-                          </button>
-                        </div>
-                      </div>
-                    )}
+                  <div>
+                    <h3 className="font-semibold text-gray-900 text-base md:text-lg">{blog.author}</h3>
+                    <div className="flex items-center text-xs md:text-sm text-gray-500">
+                      <FaClock className="mr-1 text-xs" />
+                      <span>{formatDate(blog.created_at)}</span>
+                      <span className="mx-2">•</span>
+                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                        Published
+                      </span>
+                    </div>
                   </div>
                 </div>
 

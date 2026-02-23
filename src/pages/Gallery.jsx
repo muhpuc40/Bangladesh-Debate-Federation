@@ -45,11 +45,10 @@ const GalleryCardSlider = ({ images, eventName }) => {
           {images.map((_, index) => (
             <span
               key={index}
-              className={`block rounded-full transition-all duration-300 ${
-                index === currentIndex
+              className={`block rounded-full transition-all duration-300 ${index === currentIndex
                   ? 'bg-white w-4 h-1.5'
                   : 'bg-white bg-opacity-50 w-1.5 h-1.5'
-              }`}
+                }`}
             />
           ))}
         </div>
@@ -96,8 +95,11 @@ const Gallery = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
       </div>
     );
   }
@@ -107,7 +109,7 @@ const Gallery = () => {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center text-red-600">
           <p className="text-xl">{error}</p>
-          <button 
+          <button
             onClick={fetchGalleries}
             className="mt-4 px-4 py-2 bg-emerald-900 text-white rounded hover:bg-emerald-800"
           >
@@ -133,9 +135,9 @@ const Gallery = () => {
 
         {galleries.length === 0 ? (
           <div className="text-center py-16">
-            <img 
-              src="https://i.ibb.co.com/gFMzPHTV/gallery-icon.png" 
-              alt="Gallery Icon" 
+            <img
+              src="https://i.ibb.co.com/gFMzPHTV/gallery-icon.png"
+              alt="Gallery Icon"
               className="w-24 h-24 mx-auto mb-4 opacity-50"
             />
             <p className="text-gray-500 text-lg">No galleries available yet.</p>

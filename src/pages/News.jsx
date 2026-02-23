@@ -181,12 +181,10 @@ const News = () => {
   // Loading state for news
   if (loadingNews) {
     return (
-      <div className="min-h-screen bg-white" style={{ '--navbar-height': '72px' }}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-600"></div>
-            <p className="mt-4 text-gray-600 text-lg">Loading news...</p>
-          </div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );

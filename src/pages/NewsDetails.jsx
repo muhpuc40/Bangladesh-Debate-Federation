@@ -29,7 +29,6 @@ const NewsDetails = () => {
   const [allNews, setAllNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showShareMenu, setShowShareMenu] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -124,43 +123,14 @@ const NewsDetails = () => {
     return colors[categoryLower] || 'bg-emerald-100 text-emerald-800';
   };
 
-  // Share functions
-  const shareOnFacebook = () => {
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`, '_blank');
-  };
 
-  const shareOnTwitter = () => {
-    window.open(`https://twitter.com/intent/tweet?text=${news?.title}&url=${window.location.href}`, '_blank');
-  };
-
-  const shareOnLinkedIn = () => {
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`, '_blank');
-  };
-
-  const shareOnWhatsApp = () => {
-    window.open(`https://wa.me/?text=${news?.title}%20${window.location.href}`, '_blank');
-  };
-
-  const shareByEmail = () => {
-    window.location.href = `mailto:?subject=${news?.title}&body=Check out this news: ${window.location.href}`;
-  };
-
-  const printPage = () => {
-    window.print();
-  };
-
-  const downloadAsPDF = () => {
-    window.print();
-  };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white">
-        <div className="container mx-auto px-4 py-20">
-          <div className="text-center">
-            <FaSpinner className="animate-spin text-4xl text-emerald-600 mx-auto mb-4" />
-            <p className="text-gray-600 text-lg">Loading news details...</p>
-          </div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
@@ -199,7 +169,7 @@ const NewsDetails = () => {
       {/* Main Content */}
       <section className="pt-24 pb-8 md:pt-28 md:pb-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Back Button */}
           <div className="mb-6">
             <button
@@ -210,7 +180,7 @@ const NewsDetails = () => {
               Back to News
             </button>
           </div>
-          
+
           {/* Card Header with Tags */}
           <div className="mb-6">
             {/* Category and Tags */}
@@ -228,7 +198,7 @@ const NewsDetails = () => {
                 </span>
               ))}
             </div>
-            
+
             {/* News Title */}
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-2">
               {news.title}
@@ -289,10 +259,10 @@ const NewsDetails = () => {
                         {news.excerpt}
                       </div>
                     )}
-                    
+
                     <div className="mt-4 space-y-4">
                       <p className="text-lg">{news.content}</p>
-                      
+
                       {news.details && (
                         <div className="mt-6">
                           <p>{news.details}</p>
@@ -335,14 +305,14 @@ const NewsDetails = () => {
                       <FaNewspaper className="mr-2" />
                       More News
                     </h3>
-                    <Link 
-                      to="/news" 
+                    <Link
+                      to="/news"
                       className="text-emerald-600 hover:text-emerald-800 text-sm font-medium flex items-center"
                     >
                       View All <FaArrowRight className="ml-1 text-xs" />
                     </Link>
                   </div>
-                  
+
                   <div className="space-y-3">
                     {otherNews.map(otherItem => (
                       <Link

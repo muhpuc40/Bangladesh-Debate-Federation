@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  FaUserCircle, FaClock, FaShareAlt,
-  FaFacebook, FaTwitter, FaLinkedin, FaWhatsapp, FaCopy
+  FaUserCircle, FaClock
 } from 'react-icons/fa';
 import apiService from '../services/apiService';
 
@@ -10,21 +9,8 @@ const AllBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [shareOpen, setShareOpen] = useState(null);
-  const shareRefs = useRef({});
 
   useEffect(() => { fetchBlogs(); }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (shareOpen !== null) {
-        const ref = shareRefs.current[shareOpen];
-        if (ref && !ref.contains(e.target)) setShareOpen(null);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [shareOpen]);
 
   const fetchBlogs = async () => {
     try {
@@ -41,88 +27,33 @@ const AllBlogs = () => {
 
   const getRelativeTime = (dateString) => {
     if (!dateString) return 'Recently';
+
     const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) return 'Recently';
+
     const now = new Date();
-    const diff = Math.floor((now - date) / 1000);
-    if (diff < 60) return `${diff} seconds ago`;
-    if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`;
-    if (diff < 86400) return `${Math.floor(diff / 3600)} hours ago`;
-    if (diff < 2592000) return `${Math.floor(diff / 86400)} days ago`;
-    if (diff < 31536000) return `${Math.floor(diff / 2592000)} months ago`;
-    return `${Math.floor(diff / 31536000)} years ago`;
+    const diff = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+    if (diff < 0) return 'Just now';
+    if (diff < 5) return 'Just now';
+    if (diff < 60) return `${diff} second${diff === 1 ? '' : 's'} ago`;
+
+    const minutes = Math.floor(diff / 60);
+    if (minutes < 60) return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+
+    const hours = Math.floor(diff / 3600);
+    if (hours < 24) return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+
+    const days = Math.floor(diff / 86400);
+    if (days < 30) return `${days} day${days === 1 ? '' : 's'} ago`;
+
+    const months = Math.floor(diff / 2592000);
+    if (months < 12) return `${months} month${months === 1 ? '' : 's'} ago`;
+
+    const years = Math.floor(diff / 31536000);
+    return `${years} year${years === 1 ? '' : 's'} ago`;
   };
-
-  const handleShare = (blogId, e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setShareOpen(shareOpen === blogId ? null : blogId);
-  };
-
-  const shareToSocial = async (platform, blog, e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const url = `${window.location.origin}/blog-details/${blog.id}`;
-    const title = encodeURIComponent(blog.title);
-    let shareUrl = '';
-
-    // Close dropdown immediately
-    setShareOpen(null);
-
-    switch (platform) {
-      case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-        window.open(shareUrl, '_blank', 'width=600,height=400');
-        break;
-      case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${title}`;
-        window.open(shareUrl, '_blank', 'width=600,height=400');
-        break;
-      case 'linkedin':
-        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-        window.open(shareUrl, '_blank', 'width=600,height=400');
-        break;
-      case 'whatsapp':
-        shareUrl = `https://wa.me/?text=${title}%20${encodeURIComponent(url)}`;
-        window.open(shareUrl, '_blank', 'width=600,height=400');
-        break;
-      case 'copy':
-        try {
-          await navigator.clipboard.writeText(url);
-         
-        } catch  {
-          // Fallback method
-          const textArea = document.createElement("textarea");
-          textArea.value = url;
-          textArea.style.position = "fixed";
-          textArea.style.left = "-999999px";
-          textArea.style.top = "-999999px";
-          document.body.appendChild(textArea);
-          textArea.focus();
-          textArea.select();
-          
-          try {
-            document.execCommand('copy');
-           
-          } catch (fallbackErr) {
-            console.error("Copy failed", fallbackErr);
-            alert('Failed to copy link. Please copy manually.');
-          }
-          
-          document.body.removeChild(textArea);
-        }
-        return;
-      default: return;
-    }
-  };
-
-  const shareItems = [
-    { key: 'facebook', Icon: FaFacebook, iconClass: 'text-blue-600', label: 'Facebook' },
-    { key: 'twitter', Icon: FaTwitter, iconClass: 'text-sky-500', label: 'Twitter' },
-    { key: 'linkedin', Icon: FaLinkedin, iconClass: 'text-blue-700', label: 'LinkedIn' },
-    { key: 'whatsapp', Icon: FaWhatsapp, iconClass: 'text-green-500', label: 'WhatsApp' },
-    { key: 'copy', Icon: FaCopy, iconClass: 'text-gray-600', label: 'Copy Link' },
-  ];
 
   /* ── LEFT PANEL ── */
   const LeftPanel = () => (
@@ -155,49 +86,18 @@ const AllBlogs = () => {
           <div className="p-6">
 
             {/* Author row */}
-            <div className="flex justify-between items-start mb-4">
-              <div className="flex items-center space-x-3">
-                <FaUserCircle className="w-10 h-10 text-emerald-600 shrink-0" />
-                <div>
-                  <h3 className="font-semibold text-gray-900">{blog.author}</h3>
-                  <div className="text-sm text-gray-500 flex items-center gap-1">
-                    <FaClock className="text-xs" />
-                    <span>{getRelativeTime(blog.created_at)}</span>
-                    <span className="mx-1">•</span>
-                    <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                      Published
-                    </span>
-                  </div>
+            <div className="flex items-center space-x-3 mb-4">
+              <FaUserCircle className="w-10 h-10 text-emerald-600 shrink-0" />
+              <div>
+                <h3 className="font-semibold text-gray-900">{blog.author}</h3>
+                <div className="text-sm text-gray-500 flex items-center gap-1">
+                  <FaClock className="text-xs" />
+                  <span>{getRelativeTime(blog.created_at)}</span>
+                  <span className="mx-1">•</span>
+                  <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                    Published
+                  </span>
                 </div>
-              </div>
-
-              {/* Share button */}
-              <div className="relative shrink-0" ref={(el) => (shareRefs.current[blog.id] = el)}>
-                <button
-                  onClick={(e) => handleShare(blog.id, e)}
-                  className="p-2 text-gray-400 hover:text-emerald-600 transition-colors focus:outline-none"
-                  title="Share"
-                  type="button"
-                >
-                  <FaShareAlt className="text-lg" />
-                </button>
-
-                {shareOpen === blog.id && (
-                  <div className="absolute right-0 mt-1 w-48 bg-white rounded-lg shadow-2xl border border-gray-200 z-50 overflow-hidden">
-                    {shareItems.map(({ key, Icon, iconClass, label }) => (
-                      <button
-                        key={key}
-                        Icon={Icon}
-                        onClick={(e) => shareToSocial(key, blog, e)}
-                        className="flex items-center gap-3 w-full px-4 py-2.5 hover:bg-gray-100 transition-colors focus:outline-none"
-                        type="button"
-                      >
-                        <Icon className={`${iconClass} text-lg shrink-0`} />
-                        <span className="text-gray-900 font-medium text-sm">{label}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
               </div>
             </div>
 
@@ -238,15 +138,12 @@ const AllBlogs = () => {
 
   /* ── LOADING ── */
   if (loading) return (
-    <div className="flex min-h-screen bg-gray-50">
-      <LeftPanel />
-      <div className="flex-1 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-emerald-600 border-r-transparent" />
-          <p className="mt-4 text-emerald-800 font-medium">Loading blogs...</p>
+          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
-    </div>
   );
 
   /* ── ERROR ── */
