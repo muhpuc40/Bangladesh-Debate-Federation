@@ -206,7 +206,7 @@ const Blog = () => {
     }
   };
 
-  // ── Edit handlers ──
+  // ── Edit handlers hide kore raksi ──
   const startEdit = (blog) => {
     setEditingId(blog.id);
     setEditForm({ title: blog.title, content: blog.content });
@@ -281,7 +281,7 @@ const Blog = () => {
     }
   };
 
-  // ── Delete ──
+  // ── Delete hide kore raksi 572 no line e──
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this blog post? This action cannot be undone.')) return;
     try {
@@ -570,7 +570,7 @@ const Blog = () => {
                           </div>
 
                           {/* Actions — own post only */}
-                          {blog.user_id === user.id && (
+                          {/* {blog.user_id === user.id && (
                             <div className="flex items-center gap-1 flex-shrink-0">
                               <button onClick={() => startEdit(blog)}
                                 className="p-1.5 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
@@ -583,7 +583,7 @@ const Blog = () => {
                                 <FaTrash className="w-3.5 h-3.5" />
                               </button>
                             </div>
-                          )}
+                          )} */}
                         </div>
 
                         {/* Meta */}

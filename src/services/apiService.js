@@ -104,6 +104,15 @@ const apiService = {
     return response.data;
 
   },
+  getBlogs: async () => {
+    const response = await apiClient.get('/blogs');
+    return response.data;
+  },
+  getBlogById: async (id) => {
+    const response = await apiClient.get(`/blogs/${id}`);
+    return response.data;
+  },
+
 
 
 };

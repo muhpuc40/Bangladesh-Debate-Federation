@@ -32,7 +32,7 @@ const Navbar = () => {
     { path: '/events', label: 'Events' },
     { path: '/debate-club-directory', label: 'Directory' },
     { path: '/news', label: 'News' },
-    { path: '/resources', label: 'Resources' },
+    { path: '/all-blogs', label: 'Blogs' },
     { path: '/gallery', label: 'Gallery' },
     { path: '/contact', label: 'Contact' },
   ];

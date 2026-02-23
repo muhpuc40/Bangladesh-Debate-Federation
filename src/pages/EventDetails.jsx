@@ -33,7 +33,7 @@ const EventDetails = () => {
   const [allEvents, setAllEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showShareMenu, setShowShareMenu] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -133,34 +133,6 @@ const EventDetails = () => {
     return colors[status?.toLowerCase()] || 'bg-emerald-100 text-emerald-800 border-emerald-200';
   };
 
-  // Share functions
-  const shareOnFacebook = () => {
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`, '_blank');
-  };
-
-  const shareOnTwitter = () => {
-    window.open(`https://twitter.com/intent/tweet?text=${event?.title}&url=${window.location.href}`, '_blank');
-  };
-
-  const shareOnLinkedIn = () => {
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`, '_blank');
-  };
-
-  const shareOnWhatsApp = () => {
-    window.open(`https://wa.me/?text=${event?.title}%20${window.location.href}`, '_blank');
-  };
-
-  const shareByEmail = () => {
-    window.location.href = `mailto:?subject=${event?.title}&body=Check out this event: ${window.location.href}`;
-  };
-
-  const printPage = () => {
-    window.print();
-  };
-
-  const downloadAsPDF = () => {
-    window.print();
-  };
 
   if (loading) {
     return (
