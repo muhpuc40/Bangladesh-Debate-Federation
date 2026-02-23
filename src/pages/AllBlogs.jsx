@@ -89,7 +89,7 @@ const AllBlogs = () => {
       case 'copy':
         try {
           await navigator.clipboard.writeText(url);
-          alert('Link copied to clipboard!');
+         
         } catch  {
           // Fallback method
           const textArea = document.createElement("textarea");
