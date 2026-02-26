@@ -51,10 +51,10 @@ const DebateClubDirectory = () => {
   // Filter clubs based on search and filters
   const filteredClubs = debateClubs.filter(club => {
     const matchesSearch =
-      club.clubName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      club.university.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      club.president.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      club.generalSecretary.toLowerCase().includes(searchTerm.toLowerCase());
+      club.clubName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      club.university?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      club.president?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      club.generalSecretary?.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesUniversity = selectedUniversity === 'all' || club.university === selectedUniversity;
     const matchesRegion = selectedRegion === 'all' || club.location === selectedRegion;
@@ -68,15 +68,15 @@ const DebateClubDirectory = () => {
     const csvContent = [
       headers.join(','),
       ...filteredClubs.map(club => [
-        `"${club.clubName}"`,
-        `"${club.university}"`,
-        `"${club.president}"`,
-        `"${club.generalSecretary}"`,
-        `"${club.contact}"`,
-        `"${club.email}"`,
-        `"${club.location}"`,
-        club.established,
-        club.members,
+        `"${club.clubName || ''}"`,
+        `"${club.university || ''}"`,
+        `"${club.president || ''}"`,
+        `"${club.generalSecretary || ''}"`,
+        `"${club.contact || ''}"`,
+        `"${club.email || ''}"`,
+        `"${club.location || ''}"`,
+        club.established || '',
+        club.members || '',
         `"${club.facebookUrl || ''}"`
       ].join(','))
     ].join('\n');
@@ -90,12 +90,14 @@ const DebateClubDirectory = () => {
     window.URL.revokeObjectURL(url);
   };
 
+  // Loading স্পিনার - নেভার আর ফুটার ছাড়া
   if (loading) {
     return (
-      <div className="fixed inset-0 bg-white z-50 flex items-center justify-center min-h-screen">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
+          <div className="w-20 h-20 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-emerald-900 font-semibold text-lg">Loading </p>
+          {/* <p className="text-gray-500 text-sm mt-2">Please wait</p> */}
         </div>
       </div>
     );
@@ -103,8 +105,8 @@ const DebateClubDirectory = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative pt-20 md:pt-24 py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
+      {/* Hero Section - সরাসরি পেজ থেকে শুরু, কোন নেভার নেই */}
+      <section className="pt-20 md:pt-24 py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight">
