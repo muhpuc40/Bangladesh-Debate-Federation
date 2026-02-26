@@ -129,8 +129,8 @@ const ExecutiveCommittee = () => {
   // Empty
   if (committeeMembers.length === 0) {
     return (
-      <div className="min-h-screen flex justify-center items-center">
-        <p>No committee members found.</p>
+      <div className="min-h-screen bg-white flex justify-center items-center">
+        <p className="text-gray-500">No committee members found.</p>
       </div>
     );
   }
