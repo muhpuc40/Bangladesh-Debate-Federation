@@ -90,6 +90,17 @@ const DebateClubDirectory = () => {
     window.URL.revokeObjectURL(url);
   };
 
+  if (loading) {
+    return (
+      <div className="fixed inset-0 bg-white z-50 flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -114,7 +125,7 @@ const DebateClubDirectory = () => {
         </div>
       </section>
 
-      {/* Search and Filter Section - NOT Sticky */}
+      {/* Search and Filter Section */}
       <section id="search" className="py-4 bg-white border-b border-emerald-100 shadow-lg">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-4">
@@ -208,14 +219,7 @@ const DebateClubDirectory = () => {
       {/* Directory Table Section */}
       <section className="py-8 md:py-12 lg:py-16 bg-emerald-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {loading ? (
-            <div className="min-h-screen bg-white flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                <p className="text-gray-600">Loading...</p>
-              </div>
-            </div>
-          ) : error ? (
+          {error ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">⚠️</div>
               <h3 className="text-2xl font-bold text-gray-700 mb-2">Error loading data</h3>
