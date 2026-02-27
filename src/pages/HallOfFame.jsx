@@ -15,7 +15,7 @@ const HallOfFame = () => {
         setError(null);
       } catch (err) {
         console.error('Error fetching hall of fame:', err);
-        setError('Failed to load hall of fame data. Please try again later.');
+        setError('Network Error');
         setCommittees([]);
       } finally {
         setLoading(false);
@@ -27,7 +27,7 @@ const HallOfFame = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-emerald-50 flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading...</p>
@@ -38,15 +38,16 @@ const HallOfFame = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white">
-        <div className="text-center">
-          <div className="text-red-500 text-5xl mb-4">⚠️</div>
-          <p className="text-gray-700 text-lg mb-4">{error}</p>
+      <div className="min-h-screen bg-emerald-50 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-4 py-12">
+          <div className="text-6xl mb-4">⚠️</div>
+          <h3 className="text-2xl font-bold text-gray-700 mb-2">Error loading data</h3>
+          <p className="text-gray-600 mb-6">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
+            className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
           >
-            Retry
+            Try Again
           </button>
         </div>
       </div>

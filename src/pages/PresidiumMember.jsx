@@ -6,7 +6,6 @@ const PresidiumMember = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
   useEffect(() => {
     const fetchPresidium = async () => {
       try {
@@ -25,7 +24,7 @@ const PresidiumMember = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-emerald-50 flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading...</p>
@@ -36,26 +35,11 @@ const PresidiumMember = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto px-4">
-          <div className="mb-4">
-            <svg className="w-16 h-16 text-red-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <p className="text-red-600 mb-4 font-semibold">Error!</p>
-          <p className="text-gray-600 mb-4">{error}</p>
-
-          <div className="bg-gray-50 p-4 rounded-lg mb-4 text-left">
-            <p className="text-sm font-semibold mb-2">🔍 Please check:</p>
-            <ol className="text-xs text-gray-600 list-decimal pl-4">
-              <li className="mb-1">Your Laravel backend is running: <strong>php artisan serve</strong></li>
-              <li className="mb-1">Check in browser: <strong>http://localhost:8000/api/presidium-members</strong></li>
-              <li className="mb-1">Your route name in <strong>routes/api.php</strong></li>
-              <li className="mb-1">Network tab in browser console (F12) for more details</li>
-            </ol>
-          </div>
-
+      <div className="min-h-screen bg-emerald-50 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-4 py-12">
+          <div className="text-6xl mb-4">⚠️</div>
+          <h3 className="text-2xl font-bold text-gray-700 mb-2">Error loading data</h3>
+          <p className="text-gray-600 mb-6">{error}</p>
           <button
             onClick={() => window.location.reload()}
             className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
@@ -69,26 +53,21 @@ const PresidiumMember = () => {
 
   if (members.length === 0) {
     return (
-      <div className="bg-white py-12 px-4 sm:px-6 lg:px-8 min-h-screen">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center pt-16 md:pt-20 mb-12">
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-12 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12 mt-0 pt-8">
             <h1 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4">
               Presidium Member
             </h1>
+            <p className="text-gray-600 text-lg">
+              Our respected presidium members
+            </p>
           </div>
 
           <div className="text-center py-12">
-            <div className="mb-4">
-              <img
-                src="https://i.ibb.co.com/S0tX2qF/presidium-icon.png"
-                alt="Presidium Member Icon"
-                className="w-24 h-24 mx-auto opacity-50"
-              />
-            </div>
-            <p className="text-2xl md:text-3xl text-gray-400 mb-4">
-              Coming Soon
-            </p>
-            <p className="text-gray-500 max-w-md mx-auto">
+            <div className="text-gray-400 text-6xl mb-4">📭</div>
+            <p className="text-gray-500 text-xl mb-4">Coming Soon</p>
+            <p className="text-gray-400 max-w-md mx-auto">
               Presidium member details are currently being updated. Please visit again later.
             </p>
           </div>
@@ -98,51 +77,82 @@ const PresidiumMember = () => {
   }
 
   return (
-    <div className="bg-white py-12 px-4 sm:px-6 lg:px-8 min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-12 px-4">
       <div className="max-w-7xl mx-auto">
-
-        <div className="text-center pt-16 md:pt-10 mb-12">
+        {/* Header */}
+        <div className="text-center mb-12 mt-0 pt-8">
           <h1 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4">
             Presidium Member
           </h1>
+          <p className="text-gray-600 text-lg">
+            Our respected presidium members
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Members Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {members.map((member) => (
             <div
               key={member.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 max-w-xs mx-auto w-full"
+              className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             >
               <div className="p-6">
+                {/* Image */}
                 <div className="mb-6 flex justify-center">
-                  {member.image ? (
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-48 h-48 rounded-full object-cover border-4 border-emerald-900"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=0D9488&color=fff&size=160`;
-                      }}
-                    />
-                  ) : (
-                    <img
-                      src={`https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=0D9488&color=fff&size=160`}
-                      alt={member.name}
-                      className="w-48 h-48 rounded-full border-4 border-emerald-900"
-                    />
+                  <div className="relative">
+                    <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-emerald-900 shadow-lg group-hover:border-emerald-700 transition-colors duration-300">
+                      {member.image ? (
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=0D9488&color=fff&size=160`;
+                          }}
+                        />
+                      ) : (
+                        <img
+                          src={`https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=0D9488&color=fff&size=160`}
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
+                    </div>
+                    {/* Optional: Add a small decorative element */}
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-emerald-900 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="text-center">
+                  <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-900 transition-colors duration-300">
+                    {member.name}
+                  </h2>
+                  <p className="text-emerald-900 font-medium mb-4">
+                    {member.position}
+                  </p>
+                  {member.bio && (
+                    <div className="relative">
+                      <p className="text-gray-600 text-sm line-clamp-3">
+                        {member.bio}
+                      </p>
+                      {/* Optional: Gradient fade for longer bios */}
+                      <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+                    </div>
                   )}
                 </div>
-                <h2 className="text-xl font-semibold text-center text-gray-900 mb-2">
-                  {member.name}
-                </h2>
-                <p className="text-center text-emerald-900 font-medium mb-4">
-                  {member.position}
-                </p>
-                {member.bio && (
-                  <p className="text-gray-600 text-sm text-center line-clamp-3">
-                    {member.bio}
-                  </p>
+
+                {/* Optional: Add social links or contact info if available */}
+                {(member.email || member.phone) && (
+                  <div className="mt-4 pt-4 border-t border-gray-100">
+                    {member.email && (
+                      <p className="text-xs text-gray-500 truncate">{member.email}</p>
+                    )}
+                    {member.phone && (
+                      <p className="text-xs text-gray-500 truncate">{member.phone}</p>
+                    )}
+                  </div>
                 )}
               </div>
             </div>
