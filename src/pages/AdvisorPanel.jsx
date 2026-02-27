@@ -40,10 +40,6 @@ const AdvisorPanel = () => {
         <div className="text-center max-w-md mx-auto px-4 py-12">
           <div className="text-6xl mb-4">⚠️</div>
           <h3 className="text-2xl font-bold text-gray-700 mb-2">Error loading data</h3>
-          <p className="text-gray-600 mb-6">{error}</p>
-          {/* <p className="text-sm text-gray-500 mb-4">
-            Please make sure your Laravel backend is running on port 8000
-          </p> */}
           <button
             onClick={() => window.location.reload()}
             className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"

@@ -29,10 +29,10 @@ const DevelopersInfo = () => {
       image: "https://i.ibb.co.com/wZNPNjNw/97126606.jpg",
       degree: "Bachelor of Science (Engineering) in Computer Science and Engineering",
       social: {
-        github: "https://github.com/sadiaislam",
-        linkedin: "https://linkedin.com/in/sadiaislam",
-        email: "sadia@example.com",
-        portfolio: "https://sadia.dev"
+        github: "https://github.com/ebteshampuc44",
+        linkedin: "https://www.linkedin.com/in/mohammad-ebtesham-4619aa396/",
+        email: "mdebteshamazam@gmail.com",
+        portfolio: ""
       },
       color: "blue",
       icon: <FaCode className="text-xl" />
