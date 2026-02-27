@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService';
 import { 
   FaCalendarAlt, 
@@ -10,7 +10,10 @@ import {
   FaArrowRight, 
   FaRegCalendarCheck, 
   FaTrophy, 
-  FaFilter 
+  FaFilter,
+  FaTimes,
+  FaChevronLeft,
+  FaChevronRight
 } from 'react-icons/fa';
 
 const Events = () => {
@@ -20,7 +23,12 @@ const Events = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [calendarMonth, setCalendarMonth] = useState(new Date());
+  const [selectedDayEvents, setSelectedDayEvents] = useState(null);
   const observerRef = useRef(null);
+  const calendarRef = useRef(null);
+  const navigate = useNavigate();
 
   // Fetch events from API using apiService
   useEffect(() => {
@@ -35,10 +43,8 @@ const Events = () => {
         if (result && result.status === "success" && Array.isArray(result.data)) {
           setEvents(result.data);
         } else if (Array.isArray(result)) {
-          // If result is directly an array (for backward compatibility)
           setEvents(result);
         } else if (result && result.success && Array.isArray(result.data)) {
-          // Handle the other format mentioned in code
           setEvents(result.data);
         } else {
           throw new Error('Invalid data format received from server');
@@ -53,6 +59,39 @@ const Events = () => {
 
     fetchEvents();
   }, []);
+
+  // When calendar opens, jump to the month of the first upcoming event
+  useEffect(() => {
+    if (showCalendar) {
+      const upcomingEvents = events
+        .filter(e => e.type === 'upcoming' && e.date)
+        .map(e => ({ ...e, parsedDate: new Date(e.date) }))
+        .filter(e => !isNaN(e.parsedDate))
+        .sort((a, b) => a.parsedDate - b.parsedDate);
+
+      if (upcomingEvents.length > 0) {
+        const firstDate = upcomingEvents[0].parsedDate;
+        setCalendarMonth(new Date(firstDate.getFullYear(), firstDate.getMonth(), 1));
+      } else {
+        setCalendarMonth(new Date());
+      }
+      setSelectedDayEvents(null);
+    }
+  }, [showCalendar, events]);
+
+  // Close calendar on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (calendarRef.current && !calendarRef.current.contains(e.target)) {
+        setShowCalendar(false);
+        setSelectedDayEvents(null);
+      }
+    };
+    if (showCalendar) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showCalendar]);
 
   // ফিল্টার অপশনস
   const filterOptions = [
@@ -115,6 +154,31 @@ const Events = () => {
       }
     };
   }, [filteredEvents]);
+
+  // Get all upcoming events mapped by dateString
+  const getUpcomingEventsByDate = () => {
+    const map = {};
+    events
+      .filter(e => e.type === 'upcoming' && e.date)
+      .forEach(e => {
+        try {
+          const key = new Date(e.date).toDateString();
+          if (!map[key]) map[key] = [];
+          map[key].push(e);
+        } catch (error) {
+          console.error('Error processing event date:', e, error);
+        }
+      });
+    return map;
+  };
+
+  const getDaysInMonth = (date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    return { firstDay, daysInMonth, year, month };
+  };
 
   // Function to get event status color
   const getStatusColor = (eventType) => {
@@ -184,6 +248,17 @@ const Events = () => {
       } hover:-translate-y-2`;
   };
 
+  // Handle day click — navigate if single event, show list if multiple
+  const handleDayClick = (dayEvents) => {
+    if (dayEvents.length === 1) {
+      setShowCalendar(false);
+      setSelectedDayEvents(null);
+      navigate(`/event/${dayEvents[0].id}`);
+    } else if (dayEvents.length > 1) {
+      setSelectedDayEvents(dayEvents);
+    }
+  };
+
   // Loading state
   if (loading) {
     return (
@@ -213,6 +288,8 @@ const Events = () => {
       </div>
     );
   }
+
+  const upcomingEventsByDate = getUpcomingEventsByDate();
 
   return (
     <div className="min-h-screen bg-white">
@@ -303,11 +380,168 @@ const Events = () => {
               {activeFilter === 'all' ? 'All Events' : filterOptions.find(f => f.id === activeFilter)?.label}
               <span className="text-gray-500 text-lg ml-2">({filteredEvents.length})</span>
             </h2>
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-600 text-sm">
-                <FaRegCalendarCheck className="inline mr-1" />
-                {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-              </span>
+
+            {/* Upcoming Calendar Button + Dropdown */}
+            <div className="relative" ref={calendarRef}>
+              <button
+                onClick={() => setShowCalendar(prev => !prev)}
+                className="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-sm font-semibold rounded-full shadow-md transition-all duration-200"
+              >
+                <FaRegCalendarCheck className="text-base" />
+                Upcoming Calendar
+              </button>
+
+              {/* Calendar Dropdown */}
+              {showCalendar && (
+                <div
+                  className="absolute right-0 top-12 z-50 bg-white border border-emerald-100 rounded-2xl shadow-2xl overflow-hidden animate-fade-in"
+                  style={{ width: '360px' }}
+                >
+                  {/* Calendar Header */}
+                  <div className="flex items-center justify-between px-5 py-4 bg-emerald-600">
+                    <button
+                      onClick={() => {
+                        setCalendarMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
+                        setSelectedDayEvents(null);
+                      }}
+                      className="text-white hover:bg-emerald-500 p-1.5 rounded-full transition-colors"
+                    >
+                      <FaChevronLeft className="text-sm" />
+                    </button>
+                    <span className="text-white font-bold text-base tracking-wide">
+                      {calendarMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                    </span>
+                    <button
+                      onClick={() => {
+                        setCalendarMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
+                        setSelectedDayEvents(null);
+                      }}
+                      className="text-white hover:bg-emerald-500 p-1.5 rounded-full transition-colors"
+                    >
+                      <FaChevronRight className="text-sm" />
+                    </button>
+                  </div>
+
+                  {/* Day Labels */}
+                  <div className="grid grid-cols-7 bg-emerald-50 border-b border-emerald-100">
+                    {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
+                      <div key={d} className="text-center text-xs text-emerald-700 font-semibold py-2">{d}</div>
+                    ))}
+                  </div>
+
+                  {/* Day Grid */}
+                  <div className="grid grid-cols-7 p-3 gap-1">
+                    {(() => {
+                      const { firstDay, daysInMonth, year, month } = getDaysInMonth(calendarMonth);
+                      const today = new Date().toDateString();
+                      const cells = [];
+
+                      // Empty cells before first day
+                      for (let i = 0; i < firstDay; i++) {
+                        cells.push(<div key={`empty-${i}`} />);
+                      }
+
+                      // Day cells
+                      for (let day = 1; day <= daysInMonth; day++) {
+                        const thisDate = new Date(year, month, day).toDateString();
+                        const isToday = thisDate === today;
+                        const dayEvents = upcomingEventsByDate[thisDate] || [];
+                        const hasEvent = dayEvents.length > 0;
+
+                        cells.push(
+                          <div
+                            key={day}
+                            onClick={() => hasEvent && handleDayClick(dayEvents)}
+                            className={`
+                              relative flex flex-col items-center justify-start pt-1 pb-1 rounded-xl min-h-[44px] transition-all duration-150
+                              ${hasEvent ? 'cursor-pointer hover:bg-emerald-50' : 'cursor-default'}
+                              ${isToday && !hasEvent ? 'bg-emerald-50' : ''}
+                            `}
+                          >
+                            <span className={`
+                              w-7 h-7 flex items-center justify-center rounded-full text-xs font-semibold
+                              ${hasEvent
+                                ? 'bg-emerald-500 text-white shadow-sm'
+                                : isToday
+                                ? 'bg-emerald-200 text-emerald-900'
+                                : 'text-gray-600'
+                              }
+                            `}>
+                              {day}
+                            </span>
+                            {hasEvent && (
+                              <div className="flex gap-0.5 mt-0.5 flex-wrap justify-center">
+                                {dayEvents.slice(0, 3).map((_, i) => (
+                                  <span key={i} className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                                ))}
+                                {dayEvents.length > 3 && (
+                                  <span className="text-emerald-600 text-xs leading-none">+{dayEvents.length - 3}</span>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      }
+                      return cells;
+                    })()}
+                  </div>
+
+                  {/* Selected Day Events List (multiple events on same day) */}
+                  {selectedDayEvents && (
+                    <div className="border-t border-emerald-100 px-4 py-3 bg-emerald-50">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-bold text-emerald-800 uppercase tracking-wide">
+                          {new Date(selectedDayEvents[0].date).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+                        </span>
+                        <button
+                          onClick={() => setSelectedDayEvents(null)}
+                          className="text-gray-400 hover:text-gray-600 transition-colors"
+                        >
+                          <FaTimes className="text-xs" />
+                        </button>
+                      </div>
+                      <div className="space-y-2 max-h-40 overflow-y-auto">
+                        {selectedDayEvents.map(event => (
+                          <div
+                            key={event.id}
+                            onClick={() => {
+                              setShowCalendar(false);
+                              setSelectedDayEvents(null);
+                              navigate(`/event/${event.id}`);
+                            }}
+                            className="flex items-center gap-2 p-2 bg-white rounded-lg border border-emerald-100 cursor-pointer hover:border-emerald-400 hover:shadow-sm transition-all duration-150 group"
+                          >
+                            <div className="w-1 h-8 rounded-full bg-emerald-500 flex-shrink-0" />
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs font-semibold text-emerald-900 truncate">{event.title}</p>
+                              {event.location && (
+                                <p className="text-xs text-gray-500 truncate flex items-center gap-1 mt-0.5">
+                                  <FaMapMarkerAlt className="text-emerald-400 flex-shrink-0 text-xs" />
+                                  {event.location}
+                                </p>
+                              )}
+                            </div>
+                            <FaArrowRight className="text-emerald-400 text-xs flex-shrink-0 group-hover:text-emerald-600 transition-colors" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Legend */}
+                  <div className="flex items-center gap-4 px-4 py-3 border-t border-emerald-100 bg-white">
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-emerald-500" />
+                      <span className="text-xs text-gray-500">Upcoming Event</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-emerald-200" />
+                      <span className="text-xs text-gray-500">Today</span>
+                    </div>
+                    <span className="text-xs text-gray-400 ml-auto italic">Click to open</span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
