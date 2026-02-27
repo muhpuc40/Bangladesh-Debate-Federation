@@ -35,7 +35,7 @@ const DebateClubDirectory = () => {
         setError(null);
       } catch (err) {
         console.error('Error fetching directory:', err);
-        setError('Failed to load directory data. Please try again later.');
+        setError(err.message || 'Failed to load directory data');
       } finally {
         setLoading(false);
       }
@@ -96,8 +96,25 @@ const DebateClubDirectory = () => {
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="w-20 h-20 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-emerald-900 font-semibold text-lg">Loading </p>
-          {/* <p className="text-gray-500 text-sm mt-2">Please wait</p> */}
+          <p className="text-emerald-900 font-semibold text-lg">Loading</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-4">
+          <div className="text-6xl mb-4">⚠️</div>
+          <h3 className="text-2xl font-bold text-gray-800 mb-6">Error loading data</h3>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
+          >
+            Try Again
+          </button>
         </div>
       </div>
     );
@@ -221,20 +238,8 @@ const DebateClubDirectory = () => {
       {/* Directory Table Section */}
       <section className="py-8 md:py-12 lg:py-16 bg-emerald-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {error ? (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">⚠️</div>
-              <h3 className="text-2xl font-bold text-gray-700 mb-2">Error loading data</h3>
-              <p className="text-gray-600 mb-6">{error}</p>
-              <button
-                onClick={() => window.location.reload()}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-300"
-              >
-                Retry
-              </button>
-            </div>
-          ) : filteredClubs.length === 0 ? (
-            <div className="text-center py-12">
+          {filteredClubs.length === 0 ? (
+            <div className="text-center py-12 bg-white rounded-xl shadow-lg">
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-2xl font-bold text-gray-700 mb-2">No clubs found</h3>
               <p className="text-gray-600 mb-6">Try adjusting your search criteria or filters</p>
