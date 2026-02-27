@@ -46,11 +46,7 @@ const News = () => {
         }
       } catch (err) {
         console.error('Error fetching news:', err);
-        if (err.message.includes('Failed to fetch') || err.message.includes('Network Error')) {
-          setError('Unable to connect to server. Please check your connection.');
-        } else {
-          setError(err.message || 'An error occurred while fetching news');
-        }
+        setError(err.message || 'An error occurred while fetching news');
       } finally {
         setLoadingNews(false);
       }
@@ -193,27 +189,16 @@ const News = () => {
   // Error state
   if (error) {
     return (
-      <div className="min-h-screen bg-white" style={{ '--navbar-height': '72px' }}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="max-w-md mx-auto text-center">
-            <div className="text-6xl mb-4">⚠️</div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">Error loading news</h3>
-            <p className="text-gray-600 mb-6">{error}</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => window.location.reload()}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300"
-              >
-                Try Again
-              </button>
-              <Link
-                to="/"
-                className="border border-emerald-600 text-emerald-600 hover:bg-emerald-50 font-bold py-3 px-6 rounded-full transition-all duration-300"
-              >
-                Go to Home
-              </Link>
-            </div>
-          </div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-4">
+          <div className="text-6xl mb-4">⚠️</div>
+          <h3 className="text-2xl font-bold text-gray-800 mb-6">Error loading data</h3>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300"
+          >
+            Try Again
+          </button>
         </div>
       </div>
     );

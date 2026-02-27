@@ -81,7 +81,7 @@ const Gallery = () => {
         setGalleries(response.data);
       }
     } catch (err) {
-      setError('Failed to load galleries');
+      setError(err.message || 'Failed to load galleries');
       console.error('Error fetching galleries:', err);
     } finally {
       setLoading(false);
@@ -106,12 +106,13 @@ const Gallery = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center text-red-600">
-          <p className="text-xl">{error}</p>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-4">
+          <div className="text-6xl mb-4">⚠️</div>
+          <h3 className="text-2xl font-bold text-gray-800 mb-6">Error loading data</h3>
           <button
             onClick={fetchGalleries}
-            className="mt-4 px-4 py-2 bg-emerald-900 text-white rounded hover:bg-emerald-800"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
           >
             Try Again
           </button>
@@ -121,7 +122,7 @@ const Gallery = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-white py-12">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center md:pt-10 mb-12">

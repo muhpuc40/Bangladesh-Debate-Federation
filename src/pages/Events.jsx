@@ -202,7 +202,7 @@ const Events = () => {
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center max-w-md mx-auto px-4">
           <div className="text-6xl mb-4">⚠️</div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-6">Error loading events</h3>
+          <h3 className="text-2xl font-bold text-gray-800 mb-6">Error loading data</h3>
           <button
             onClick={() => window.location.reload()}
             className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300"
