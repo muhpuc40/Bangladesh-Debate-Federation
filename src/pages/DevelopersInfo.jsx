@@ -11,7 +11,7 @@ const DevelopersInfo = () => {
       // role: "Frontend Developer & UI/UX Designer",
       // bio: "Creating beautiful and functional user interfaces with modern web technologies.",
       image: "https://i.ibb.co.com/hRpzpL2k/97126606.jpg",
-      degree: "Bachelor of Science (Engineering) in Computer Science and Engineering - BSc in CSE",
+      degree: "Bachelor of Science (Engineering) in Computer Science and Engineering",
       social: {
         github: "https://github.com/muhpuc40",
         linkedin: "https://www.linkedin.com/in/minhajuddinhassan/?originalSubdomain=bd",
@@ -27,7 +27,7 @@ const DevelopersInfo = () => {
       // role: "Full Stack Developer",
       // bio: "Building robust backend systems and scalable applications with cutting-edge technologies.",
       image: "https://i.ibb.co.com/wZNPNjNw/97126606.jpg",
-      degree: "Bachelor of Science (Engineering) in Computer Science and Engineering - BSc in CSE",
+      degree: "Bachelor of Science (Engineering) in Computer Science and Engineering",
       social: {
         github: "https://github.com/sadiaislam",
         linkedin: "https://linkedin.com/in/sadiaislam",
