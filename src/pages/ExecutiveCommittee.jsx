@@ -114,14 +114,17 @@ const ExecutiveCommittee = () => {
   // Error
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center">
-        <p className="text-red-600 mb-4">Error loading committee data</p>
-        <button
-          onClick={fetchCommitteeData}
-          className="bg-emerald-600 text-white px-6 py-2 rounded-lg"
-        >
-          Retry
-        </button>
+      <div className="min-h-screen bg-emerald-50 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-4 py-12">
+          <div className="text-6xl mb-4">⚠️</div>
+          <h3 className="text-2xl font-bold text-gray-700 mb-2">Error loading data</h3>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
       </div>
     );
   }

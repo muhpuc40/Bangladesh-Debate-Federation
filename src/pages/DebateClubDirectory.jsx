@@ -95,8 +95,8 @@ const DebateClubDirectory = () => {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="w-20 h-20 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-emerald-900 font-semibold text-lg">Loading</p>
+          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
@@ -111,7 +111,7 @@ const DebateClubDirectory = () => {
           <h3 className="text-2xl font-bold text-gray-800 mb-6">Error loading data</h3>
           <button
             onClick={() => window.location.reload()}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300"
           >
             Try Again
           </button>
