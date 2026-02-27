@@ -26,8 +26,6 @@ const DebateClubDirectory = () => {
           contact: club.contact,
           email: club.email,
           location: club.location,
-          established: club.established,
-          members: club.members,
           facebookUrl: club.facebook_url
         }));
 
@@ -64,7 +62,7 @@ const DebateClubDirectory = () => {
 
   // Function to download directory as CSV
   const downloadCSV = () => {
-    const headers = ['Club Name', 'University', 'President', 'General Secretary', 'Contact', 'Email', 'Location', 'Established', 'Members', 'Facebook URL'];
+    const headers = ['Club Name', 'University', 'President', 'General Secretary', 'Contact', 'Email', 'Location', 'Facebook URL'];
     const csvContent = [
       headers.join(','),
       ...filteredClubs.map(club => [
@@ -75,8 +73,6 @@ const DebateClubDirectory = () => {
         `"${club.contact || ''}"`,
         `"${club.email || ''}"`,
         `"${club.location || ''}"`,
-        club.established || '',
-        club.members || '',
         `"${club.facebookUrl || ''}"`
       ].join(','))
     ].join('\n');
@@ -130,7 +126,7 @@ const DebateClubDirectory = () => {
               Debate Club Directory
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-              Find debate clubs from Universities across Bangladesh...
+              Find debate clubs from Institutes across Bangladesh...
             </p>
             <div className="flex flex-wrap gap-4 justify-start">
               <a
@@ -173,14 +169,14 @@ const DebateClubDirectory = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <div>
               <label className="block text-gray-700 font-medium mb-2">
-                <FaUniversity className="inline mr-2 text-emerald-600" /> University
+                <FaUniversity className="inline mr-2 text-emerald-600" /> Institute
               </label>
               <select
                 value={selectedUniversity}
                 onChange={(e) => setSelectedUniversity(e.target.value)}
                 className="w-full px-4 py-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 bg-white text-black shadow-sm"
               >
-                <option value="all">All Universities</option>
+                <option value="all">All Institutes</option>
                 {universities.map((uni, index) => (
                   <option key={index} value={uni}>{uni}</option>
                 ))}
@@ -259,7 +255,7 @@ const DebateClubDirectory = () => {
                     <tr>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
                         <div className="flex items-center">
-                          <FaUniversity className="mr-2" /> Club & University
+                          <FaUniversity className="mr-2" /> Club & Institutes
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-emerald-900 uppercase tracking-wider">
