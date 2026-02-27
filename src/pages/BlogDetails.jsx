@@ -14,22 +14,22 @@ const BlogDetails = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const fetchBlogDetails = async () => {
+      try {
+        setLoading(true);
+        const data = await apiService.getBlogById(id);
+        setBlogData(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching blog details:', err);
+        setError('Failed to load blog. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchBlogDetails();
   }, [id]);
-
-  const fetchBlogDetails = async () => {
-    try {
-      setLoading(true);
-      const data = await apiService.getBlogById(id);
-      setBlogData(data);
-      setError(null);
-    } catch (err) {
-      console.error('Error fetching blog details:', err);
-      setError('Failed to load blog. Please try again later.');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const formatDate = (dateString) => {
     if (!dateString) return '';
