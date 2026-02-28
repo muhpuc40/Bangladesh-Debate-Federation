@@ -6,24 +6,9 @@ import {
   FaMapMarkerAlt,
   FaUsers,
   FaClock,
-  FaArrowLeft,
-  FaShare,
-  FaPrint,
-  FaDownload,
-  FaEnvelope,
-  FaFacebook,
-  FaTwitter,
-  FaLinkedin,
-  FaWhatsapp,
-  FaRegClock,
-  FaUserTie,
-  FaPhone,
-  FaGlobe,
-  FaCheckCircle,
-  FaExclamationCircle,
-  FaSpinner,
   FaArrowRight,
-  FaTag
+  FaExclamationCircle,
+  FaRegClock,
 } from 'react-icons/fa';
 
 const EventDetails = () => {
@@ -33,7 +18,6 @@ const EventDetails = () => {
   const [allEvents, setAllEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,28 +41,18 @@ const EventDetails = () => {
         setAllEvents(eventsArray);
 
         const foundEvent = eventsArray.find(e => String(e.id) === String(id));
-
-        if (!foundEvent) {
-          throw new Error('Event not found');
-        }
+        if (!foundEvent) throw new Error('Event not found');
 
         setEvent(foundEvent);
-
       } catch (err) {
         console.error('Error fetching data:', err);
-        if (err.message.includes('Failed to fetch') || err.message.includes('Network Error')) {
-          setError('Unable to connect to server. Please check your connection.');
-        } else {
-          setError(err.message || 'An error occurred while fetching event details');
-        }
+        setError(err.message || 'An error occurred while fetching event details');
       } finally {
         setLoading(false);
       }
     };
 
-    if (id) {
-      fetchData();
-    }
+    if (id) fetchData();
   }, [id]);
 
   const otherEvents = allEvents.filter(e => String(e.id) !== String(id)).slice(0, 5);
@@ -86,60 +60,46 @@ const EventDetails = () => {
   const formatDate = (dateString) => {
     if (!dateString) return 'Date not specified';
     try {
-      const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-    } catch {
-      return dateString;
-    }
+      return new Date(dateString).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    } catch { return dateString; }
   };
 
   const formatShortDate = (dateString) => {
     if (!dateString) return '';
     try {
-      const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric'
-      });
-    } catch {
-      return dateString;
-    }
+      return new Date(dateString).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    } catch { return dateString; }
   };
 
   const formatTime = (timeString) => {
-    if (!timeString) return 'Time not specified';
+    if (!timeString) return null;
     try {
       const [hours, minutes] = timeString.split(':');
       const hour = parseInt(hours);
-      const ampm = hour >= 12 ? 'PM' : 'AM';
-      const formattedHour = hour % 12 || 12;
-      return `${formattedHour}:${minutes} ${ampm}`;
-    } catch {
-      return timeString;
-    }
+      return `${hour % 12 || 12}:${minutes} ${hour >= 12 ? 'PM' : 'AM'}`;
+    } catch { return timeString; }
   };
 
-  const getStatusColor = (status) => {
-    const colors = {
-      'upcoming': 'bg-green-100 text-green-800 border-green-200',
-      'ongoing': 'bg-blue-100 text-blue-800 border-blue-200',
-      'completed': 'bg-gray-100 text-gray-800 border-gray-200',
-      'cancelled': 'bg-red-100 text-red-800 border-red-200'
-    };
-    return colors[status?.toLowerCase()] || 'bg-emerald-100 text-emerald-800 border-emerald-200';
-  };
+  const getTypeColor = (type) => ({
+    'upcoming':  'bg-emerald-100 text-emerald-800 border-emerald-200',
+    'ongoing':   'bg-teal-100 text-teal-800 border-teal-200',
+    'completed': 'bg-gray-100 text-gray-700 border-gray-200',
+  }[type] || 'bg-emerald-100 text-emerald-800 border-emerald-200');
 
+  const getCategoryLabel = (category) => ({
+    'bdf':   'BDF Event',
+    'other': 'Other Organization',
+  }[category] || category);
+
+  const getCategoryColor = (category) =>
+    category === 'bdf' ? 'bg-emerald-600 text-white' : 'bg-amber-500 text-white';
 
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
+          <div className="w-16 h-16 border-4 border-emerald-700 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-gray-600 font-medium">Loading event...</p>
         </div>
       </div>
     );
@@ -156,13 +116,13 @@ const EventDetails = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={() => navigate(-1)}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300"
+                className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-6 rounded-full transition-all duration-300"
               >
                 Go Back
               </button>
               <Link
                 to="/events"
-                className="border border-emerald-600 text-emerald-600 hover:bg-emerald-50 font-bold py-3 px-6 rounded-full transition-all duration-300"
+                className="border border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-bold py-3 px-6 rounded-full transition-all duration-300"
               >
                 Browse Events
               </Link>
@@ -175,203 +135,169 @@ const EventDetails = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Main Content */}
-      <section className="pt-24 pb-8 md:pt-28 md:pb-12">
+      <section className="pt-24 pb-12 md:pt-28 md:pb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Card Header with Tags - সব ট্যাগ এখানে দেখাবে */}
+          {/* Badges + Title */}
           <div className="mb-6">
-            {/* Status and Category Badges */}
             <div className="flex flex-wrap items-center gap-2 mb-3">
-              <span className={`px-4 py-1.5 rounded-full text-sm font-bold ${getStatusColor(event.status || event.type)}`}>
-                {event.status || event.type}
+              <span className={`px-4 py-1.5 rounded-full text-sm font-bold border ${getTypeColor(event.type)}`}>
+                {event.type}
               </span>
               {event.category && (
-                <span className="px-4 py-1.5 rounded-full text-sm font-bold bg-emerald-600 text-white">
-                  {event.category}
+                <span className={`px-4 py-1.5 rounded-full text-sm font-bold ${getCategoryColor(event.category)}`}>
+                  {getCategoryLabel(event.category)}
                 </span>
               )}
-              {/* Additional Tags - যদি আলাদা ট্যাগ থাকে */}
-              {event.tags && event.tags.map((tag, index) => (
-                <span key={index} className="px-4 py-1.5 rounded-full text-sm font-bold bg-purple-100 text-purple-800 border border-purple-200">
-                  {tag}
-                </span>
-              ))}
             </div>
-
-            {/* Event Title */}
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-2">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 leading-tight">
               {event.title}
             </h1>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Column - Main Event Content (2/3 width) */}
+
+            {/* ── Main Content ── */}
             <div className="lg:col-span-2">
-              {/* Single Card */}
               <div className="bg-white rounded-xl border border-emerald-100 shadow-lg overflow-hidden">
-                {/* Event Image - এখন শুধু ছবি, কোনো টেক্সট নেই */}
-                <div className="p-6">
+
+                {/* Image */}
+                <div className="p-6 pb-0">
                   <div className="rounded-xl overflow-hidden border border-emerald-100">
                     <img
                       src={event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'}
                       alt={event.title}
                       className="w-full h-[400px] object-cover"
-                      onError={(e) => {
-                        e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';
-                      }}
+                      onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'; }}
                     />
                   </div>
                 </div>
 
-                {/* Event Details */}
-                <div className="p-6 pt-0">
+                <div className="p-6">
+
                   {/* Description */}
-                  <div className="prose max-w-none text-gray-700 mb-8">
-                    <p className="text-lg">{event.description}</p>
-                    {event.details && (
-                      <div className="mt-4">
-                        <p>{event.details}</p>
-                      </div>
-                    )}
-                  </div>
+                  <p className="text-lg text-gray-700 leading-relaxed mb-8">{event.description}</p>
+
+                  {/* Status — only shown if the field has a value */}
+                  {event.status && (
+                    <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-6">
+                      <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Status</p>
+                      <p className="text-emerald-900 font-bold text-base">{event.status}</p>
+                    </div>
+                  )}
 
                   {/* Info Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    {/* Date */}
+
                     <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
-                      <div className="flex items-center">
-                        <div className="bg-emerald-600 text-white p-2 rounded-lg mr-3">
+                      <div className="flex items-center gap-3">
+                        <div className="bg-emerald-600 text-white p-2 rounded-lg">
                           <FaCalendarAlt className="text-sm" />
                         </div>
                         <div>
-                          <h3 className="text-xs text-gray-600">Date</h3>
-                          <p className="font-semibold text-emerald-900">{formatDate(event.date)}</p>
+                          <p className="text-xs text-gray-500 mb-0.5">Start Date</p>
+                          <p className="font-semibold text-emerald-900">{formatDate(event.start_date)}</p>
                         </div>
                       </div>
                     </div>
 
-                    {/* Time (if available) */}
+                    {event.end_date && (
+                      <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+                        <div className="flex items-center gap-3">
+                          <div className="bg-emerald-600 text-white p-2 rounded-lg">
+                            <FaCalendarAlt className="text-sm" />
+                          </div>
+                          <div>
+                            <p className="text-xs text-gray-500 mb-0.5">End Date</p>
+                            <p className="font-semibold text-emerald-900">{formatDate(event.end_date)}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     {event.time && (
                       <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
-                        <div className="flex items-center">
-                          <div className="bg-emerald-600 text-white p-2 rounded-lg mr-3">
+                        <div className="flex items-center gap-3">
+                          <div className="bg-emerald-600 text-white p-2 rounded-lg">
                             <FaClock className="text-sm" />
                           </div>
                           <div>
-                            <h3 className="text-xs text-gray-600">Time</h3>
+                            <p className="text-xs text-gray-500 mb-0.5">Time</p>
                             <p className="font-semibold text-emerald-900">{formatTime(event.time)}</p>
                           </div>
                         </div>
                       </div>
                     )}
 
-                    {/* Location */}
                     {event.location && (
                       <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
-                        <div className="flex items-center">
-                          <div className="bg-emerald-600 text-white p-2 rounded-lg mr-3">
+                        <div className="flex items-center gap-3">
+                          <div className="bg-emerald-600 text-white p-2 rounded-lg">
                             <FaMapMarkerAlt className="text-sm" />
                           </div>
                           <div>
-                            <h3 className="text-xs text-gray-600">Location</h3>
+                            <p className="text-xs text-gray-500 mb-0.5">Location</p>
                             <p className="font-semibold text-emerald-900">{event.location}</p>
                           </div>
                         </div>
                       </div>
                     )}
 
-                    {/* Participants (if available) */}
                     {event.participants && (
                       <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
-                        <div className="flex items-center">
-                          <div className="bg-emerald-600 text-white p-2 rounded-lg mr-3">
+                        <div className="flex items-center gap-3">
+                          <div className="bg-emerald-600 text-white p-2 rounded-lg">
                             <FaUsers className="text-sm" />
                           </div>
                           <div>
-                            <h3 className="text-xs text-gray-600">Participants</h3>
+                            <p className="text-xs text-gray-500 mb-0.5">Participants</p>
                             <p className="font-semibold text-emerald-900">{event.participants}</p>
                           </div>
                         </div>
                       </div>
                     )}
+
                   </div>
 
-                  {/* Registration Deadline Alert */}
-                  {event.type === 'upcoming' && event.registration_deadline && (
-                    <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6">
-                      <div className="flex items-start">
-                        <FaExclamationCircle className="text-yellow-600 text-xl mr-3 flex-shrink-0 mt-0.5" />
+                  {/* Registration Deadline */}
+                  {event.registration_deadline && (
+                    <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+                      <div className="flex items-start gap-3">
+                        <FaExclamationCircle className="text-amber-500 text-xl flex-shrink-0 mt-0.5" />
                         <div>
-                          <h3 className="font-bold text-yellow-800 mb-1">Registration Deadline</h3>
-                          <p className="text-yellow-700 text-sm mb-2">
-                            Registrations close on {formatDate(event.registration_deadline)}
-                          </p>
-                          <div className="flex items-center text-sm">
-                            <FaRegClock className="mr-2 text-yellow-600" />
-                            <span className="text-yellow-700 font-medium">
-                              {new Date(event.registration_deadline) > new Date() ? 'Open' : 'Closed'}
-                            </span>
-                          </div>
+                          <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Registration Deadline</p>
+                          <p className="font-bold text-amber-900">{formatDate(event.registration_deadline)}</p>
                         </div>
                       </div>
                     </div>
                   )}
 
-                  {/* Organizer Info */}
-                  {event.organizer && (
-                    <div className="pt-6 border-t border-emerald-100">
-                      <h3 className="text-lg font-bold text-emerald-900 mb-4">Organizer</h3>
-                      <div className="flex items-start">
-                        <div className="bg-emerald-100 text-emerald-600 p-2 rounded-lg mr-3">
-                          <FaUserTie className="text-lg" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-emerald-900">{event.organizer.name}</h4>
-                          {event.organizer.email && (
-                            <p className="flex items-center text-sm text-gray-600 mt-1">
-                              <FaEnvelope className="mr-2 text-emerald-600 text-xs" />
-                              <a href={`mailto:${event.organizer.email}`} className="hover:text-emerald-700">
-                                {event.organizer.email}
-                              </a>
-                            </p>
-                          )}
-                          {event.organizer.phone && (
-                            <p className="flex items-center text-sm text-gray-600 mt-1">
-                              <FaPhone className="mr-2 text-emerald-600 text-xs" />
-                              <a href={`tel:${event.organizer.phone}`} className="hover:text-emerald-700">
-                                {event.organizer.phone}
-                              </a>
-                            </p>
-                          )}
-                          {event.organizer.website && (
-                            <p className="flex items-center text-sm text-gray-600 mt-1">
-                              <FaGlobe className="mr-2 text-emerald-600 text-xs" />
-                              <a href={event.organizer.website} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-700">
-                                {event.organizer.website}
-                              </a>
-                            </p>
-                          )}
-                        </div>
-                      </div>
+                  {/* Event Link */}
+                  {event.event_link && (
+                    <div className="mt-6 pt-6 border-t border-emerald-100">
+                      <a
+                        href={event.event_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold py-2.5 px-5 rounded-full transition-all duration-300"
+                      >
+                        Visit Event Page <FaArrowRight className="text-sm" />
+                      </a>
                     </div>
                   )}
+
                 </div>
               </div>
             </div>
 
-            {/* Right Column - Sidebar (1/3 width) */}
+            {/* ── Sidebar ── */}
             <div className="lg:col-span-1">
-              {/* Other Events Section */}
               {otherEvents.length > 0 && (
                 <div className="bg-white rounded-xl border border-emerald-100 p-6 sticky top-24">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-emerald-900">Other Events</h3>
-                    <Link
-                      to="/events"
-                      className="text-emerald-600 hover:text-emerald-800 text-sm font-medium flex items-center"
-                    >
-                      View All <FaArrowRight className="ml-1 text-xs" />
+                    <h3 className="text-lg font-bold text-emerald-900">Other Events</h3>
+                    <Link to="/events" className="text-emerald-600 hover:text-emerald-800 text-sm font-medium flex items-center gap-1">
+                      View All <FaArrowRight className="text-xs" />
                     </Link>
                   </div>
 
@@ -380,36 +306,26 @@ const EventDetails = () => {
                       <Link
                         key={otherEvent.id}
                         to={`/event/${otherEvent.id}`}
-                        className="block p-3 border border-emerald-100 rounded-lg transition-all duration-300 hover:shadow-md hover:border-emerald-300 hover:bg-emerald-50"
+                        className="block p-3 border border-emerald-100 rounded-lg hover:shadow-md hover:border-emerald-300 hover:bg-emerald-50 transition-all duration-300"
                       >
                         <div className="flex items-start gap-3">
-                          <div className="w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden border border-emerald-200">
+                          <div className="w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden border border-emerald-100">
                             <img
                               src={otherEvent.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'}
                               alt={otherEvent.title}
                               className="w-full h-full object-cover"
-                              onError={(e) => {
-                                e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80';
-                              }}
+                              onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'; }}
                             />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h4 className="font-semibold text-emerald-900 text-sm mb-1 line-clamp-2 hover:text-emerald-700">
-                              {otherEvent.title}
-                            </h4>
-                            <div className="flex items-center text-xs text-gray-600 mb-1">
-                              <FaCalendarAlt className="mr-1 text-emerald-600 flex-shrink-0" />
-                              <span className="truncate">{formatShortDate(otherEvent.date)}</span>
+                            <h4 className="font-semibold text-emerald-900 text-sm mb-1 line-clamp-2">{otherEvent.title}</h4>
+                            <div className="flex items-center text-xs text-gray-500 mb-1.5">
+                              <FaCalendarAlt className="mr-1 text-emerald-500 flex-shrink-0" />
+                              <span>{formatShortDate(otherEvent.start_date)}</span>
                             </div>
-                            <div>
-                              <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold ${otherEvent.type === 'upcoming' ? 'bg-green-100 text-green-800' :
-                                  otherEvent.type === 'ongoing' ? 'bg-blue-100 text-blue-800' :
-                                    otherEvent.type === 'completed' ? 'bg-gray-100 text-gray-800' :
-                                      'bg-emerald-100 text-emerald-800'
-                                }`}>
-                                {otherEvent.status || otherEvent.type || 'Event'}
-                              </span>
-                            </div>
+                            <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold border ${getTypeColor(otherEvent.type)}`}>
+                              {otherEvent.type}
+                            </span>
                           </div>
                         </div>
                       </Link>
@@ -418,16 +334,10 @@ const EventDetails = () => {
                 </div>
               )}
             </div>
+
           </div>
         </div>
       </section>
-
-      <style jsx>{`
-        @media print {
-          .no-print { display: none !important; }
-          body { background: white; }
-        }
-      `}</style>
     </div>
   );
 };

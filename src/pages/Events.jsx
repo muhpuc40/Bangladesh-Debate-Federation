@@ -782,7 +782,7 @@ const Events = () => {
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Participants</label>
-                      <input type="text" name="participants" value={formData.participants} onChange={handleChange} className={inputClass('participants')} placeholder="e.g., 500+" />
+                      <input type="text" name="participants" value={formData.participants} onChange={handleChange} className={inputClass('participants')} placeholder="e.g., 500+ ( If Event is Completed)" />
                     </div>
 
                     <div>
@@ -790,9 +790,9 @@ const Events = () => {
                       <input type="date" name="registration_deadline" value={formData.registration_deadline} onChange={handleChange} min={new Date().toISOString().split('T')[0]} className={inputClass('registration_deadline')} />
                     </div>
 
-                    <div className="md:col-span-2">
+                    <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Event Link</label>
-                      <input type="url" name="event_link" value={formData.event_link} onChange={handleChange} className={inputClass('event_link')} placeholder="https://example.com/event" />
+                      <input type="url" name="event_link" value={formData.event_link} onChange={handleChange} className={inputClass('event_link')} placeholder="https://facebook.com/event" />
                     </div>
 
                     <div className="md:col-span-2">
@@ -849,7 +849,7 @@ const Events = () => {
                       <input type="email" name="email" value={formData.email} onChange={handleChange} className={inputClass('email')} placeholder="your@email.com" required />
                       {validationErrors.email && <p className="mt-1 text-xs text-red-500">{validationErrors.email[0]}</p>}
                     </div>
-                    <div className="md:col-span-2">
+                    <div >
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone Number <span className="text-red-500">*</span></label>
                       <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+8801XXXXXXXXX" required />
                       {validationErrors.phone && <p className="mt-1 text-xs text-red-500">{validationErrors.phone[0]}</p>}

@@ -113,6 +113,11 @@ const apiService = {
     return response.data;
   },
 
+  trackBlogView: async (id) => {
+    const response = await apiClient.post(`/blogs/${id}/track-view`);
+    return response.data;
+  },
+
   getGalleries: async () => {
     const response = await apiClient.get('/gallery');
     return response.data;

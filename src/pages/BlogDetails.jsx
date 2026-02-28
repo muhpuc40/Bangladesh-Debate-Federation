@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   FaUserCircle, FaClock, FaArrowLeft,
-  FaEnvelope, FaCalendarAlt, FaUniversity, FaNewspaper
+  FaEnvelope, FaCalendarAlt, FaUniversity, FaNewspaper,
+  FaEye, FaShareAlt, FaFacebook, FaLinkedin, FaWhatsapp, FaCopy
 } from 'react-icons/fa';
 import apiService from '../services/apiService';
 
@@ -12,6 +13,8 @@ const BlogDetails = () => {
   const [blogData, setBlogData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [shareOpen, setShareOpen] = useState(false);
+  const shareRef = useRef(null);
 
   useEffect(() => {
     const fetchBlogDetails = async () => {
@@ -31,6 +34,17 @@ const BlogDetails = () => {
     fetchBlogDetails();
   }, [id]);
 
+  // Close share dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (shareRef.current && !shareRef.current.contains(e.target)) {
+        setShareOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const formatDate = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);
@@ -42,6 +56,57 @@ const BlogDetails = () => {
       minute: '2-digit'
     });
   };
+
+  const shareToSocial = async (platform) => {
+    const url = `${window.location.origin}/blog-details/${id}`;
+    const title = encodeURIComponent(blogData?.blog?.title || '');
+    setShareOpen(false);
+
+    switch (platform) {
+      case 'facebook':
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+          '_blank', 'width=600,height=400'
+        );
+        break;
+      case 'linkedin':
+        window.open(
+          `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+          '_blank', 'width=600,height=400'
+        );
+        break;
+      case 'whatsapp':
+        window.open(
+          `https://wa.me/?text=${title}%20${encodeURIComponent(url)}`,
+          '_blank', 'width=600,height=400'
+        );
+        break;
+      case 'copy':
+        try {
+          await navigator.clipboard.writeText(url);
+        } catch {
+          const textArea = document.createElement('textarea');
+          textArea.value = url;
+          textArea.style.position = 'fixed';
+          textArea.style.left = '-999999px';
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          try { document.execCommand('copy'); } catch {}
+          document.body.removeChild(textArea);
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  const shareItems = [
+    { key: 'facebook', Icon: FaFacebook, iconClass: 'text-blue-600', label: 'Facebook' },
+    { key: 'linkedin', Icon: FaLinkedin, iconClass: 'text-blue-700', label: 'LinkedIn' },
+    { key: 'whatsapp', Icon: FaWhatsapp, iconClass: 'text-green-500', label: 'WhatsApp' },
+    { key: 'copy',     Icon: FaCopy,     iconClass: 'text-gray-600',  label: 'Copy Link' },
+  ];
 
   if (loading) {
     return (
@@ -60,7 +125,7 @@ const BlogDetails = () => {
         <div className="text-center bg-white p-8 rounded-xl shadow-md max-w-md">
           <div className="text-red-500 text-5xl mb-4">😕</div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Blog Not Found</h2>
-          <p className="text-gray-600 mb-6">{error || 'The blog you\'re looking for doesn\'t exist.'}</p>
+          <p className="text-gray-600 mb-6">{error || "The blog you're looking for doesn't exist."}</p>
           <button
             onClick={() => navigate('/all-blogs')}
             className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300"
@@ -77,6 +142,7 @@ const BlogDetails = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-4 md:py-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+
         {/* Back Button */}
         <button
           onClick={() => navigate('/all-blogs')}
@@ -87,24 +153,71 @@ const BlogDetails = () => {
 
         {/* Main Content with Sidebar */}
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Left Column - Blog Content */}
+
+          {/* ── Left Column — Blog Content ── */}
           <div className="lg:w-2/3">
             <article className="bg-white rounded-xl shadow-md overflow-hidden">
-              {/* Blog Header */}
               <div className="p-4 md:p-8">
-                <div className="flex items-center space-x-3 mb-4 md:mb-6">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600">
-                    <FaUserCircle className="w-8 h-8 md:w-10 md:h-10" />
+
+                {/* Author row + Views + Share */}
+                <div className="flex items-start justify-between gap-4 mb-4 md:mb-6">
+                  {/* Author info */}
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600">
+                      <FaUserCircle className="w-8 h-8 md:w-10 md:h-10" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 text-base md:text-lg">{blog.author}</h3>
+                      <div className="flex flex-wrap items-center gap-1 text-xs md:text-sm text-gray-500">
+                        <FaClock className="text-xs" />
+                        <span>{formatDate(blog.created_at)}</span>
+                        <span className="mx-1">•</span>
+                        <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                          Published
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 text-base md:text-lg">{blog.author}</h3>
-                    <div className="flex items-center text-xs md:text-sm text-gray-500">
-                      <FaClock className="mr-1 text-xs" />
-                      <span>{formatDate(blog.created_at)}</span>
-                      <span className="mx-2">•</span>
-                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                        Published
-                      </span>
+
+                  {/* Views + Share */}
+                  <div className="flex items-center gap-3 shrink-0">
+                    {/* Views badge */}
+                    <div className="flex items-center gap-1.5 text-sm text-gray-500 bg-gray-100 px-3 py-1.5 rounded-full">
+                      <FaEye className="text-emerald-600 text-xs" />
+                      <span className="font-medium">{(blog.views || 0).toLocaleString()}</span>
+                      <span className="hidden sm:inline">views</span>
+                    </div>
+
+                    {/* Share dropdown */}
+                    <div className="relative" ref={shareRef}>
+                      <button
+                        onClick={() => setShareOpen((prev) => !prev)}
+                        className="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm px-3 py-1.5 rounded-full transition-colors focus:outline-none"
+                        type="button"
+                        title="Share"
+                      >
+                        <FaShareAlt className="text-xs" />
+                        <span className="hidden sm:inline">Share</span>
+                      </button>
+
+                      {shareOpen && (
+                        <div
+                          className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-2xl border border-gray-200 overflow-hidden"
+                          style={{ zIndex: 9999 }}
+                        >
+                          {shareItems.map(({ key, Icon, iconClass, label }) => (
+                            <button
+                              key={key}
+                              onClick={() => shareToSocial(key)}
+                              className="flex items-center gap-3 w-full px-4 py-2.5 hover:bg-gray-100 transition-colors focus:outline-none"
+                              type="button"
+                            >
+                              <Icon className={`${iconClass} text-lg shrink-0`} />
+                              <span className="text-gray-900 font-medium text-sm">{label}</span>
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -137,19 +250,19 @@ const BlogDetails = () => {
                     </p>
                   ))}
                 </div>
+
               </div>
             </article>
           </div>
 
-          {/* Right Column - Author Info Sidebar */}
+          {/* ── Right Column — Sidebar ── */}
           <div className="lg:w-1/3">
             <div className="sticky top-24 space-y-6">
+
               {/* Author Card */}
               <div className="bg-white rounded-xl shadow-md overflow-hidden">
                 <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 px-6 py-4">
-                  <h3 className="text-lg font-semibold text-white flex items-center">
-                    About the Author
-                  </h3>
+                  <h3 className="text-lg font-semibold text-white">About the Author</h3>
                 </div>
 
                 <div className="p-6">
@@ -179,6 +292,14 @@ const BlogDetails = () => {
                     <div className="flex items-center text-gray-600">
                       <FaNewspaper className="mr-3 text-emerald-600 shrink-0" />
                       <span className="text-sm">Total Blogs: {author.total_blogs}</span>
+                    </div>
+
+                    {/* Total views from author object */}
+                    <div className="flex items-center text-gray-600">
+                      <FaEye className="mr-3 text-emerald-600 shrink-0" />
+                      <span className="text-sm">
+                        Total Views: {Number(author.total_views || 0).toLocaleString()}
+                      </span>
                     </div>
 
                     <div className="flex items-center text-gray-600">
@@ -231,9 +352,15 @@ const BlogDetails = () => {
                               <h4 className="font-medium text-gray-900 group-hover:text-emerald-600 transition-colors line-clamp-2 text-sm mb-1">
                                 {otherBlog.title}
                               </h4>
-                              <div className="flex items-center text-xs text-gray-500">
-                                <FaClock className="mr-1 shrink-0" />
-                                <span className="truncate">{formatDate(otherBlog.created_at)}</span>
+                              <div className="flex items-center justify-between text-xs text-gray-500">
+                                <div className="flex items-center gap-1">
+                                  <FaClock className="shrink-0" />
+                                  <span className="truncate">{formatDate(otherBlog.created_at)}</span>
+                                </div>
+                                <div className="flex items-center gap-1 ml-2 shrink-0">
+                                  <FaEye className="text-emerald-500" />
+                                  <span>{(otherBlog.views || 0).toLocaleString()}</span>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -252,8 +379,10 @@ const BlogDetails = () => {
                   </div>
                 </div>
               )}
+
             </div>
           </div>
+
         </div>
       </div>
     </div>
