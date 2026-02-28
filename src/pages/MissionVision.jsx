@@ -64,7 +64,7 @@ const MissionVision = () => {
               </h1>
               <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed text-justify">
                 Bangladesh Debate Federation (BDF) is a non-profit voluntary organization dedicated to spreading 
-                the art of debate and the power of public speaking to every corner of our nation. Founded in 2010, 
+                the art of debate and the power of public speaking to every corner of our nation. Founded in 1992, 
                 we work to bring logical reasoning and critical thinking to all age groups—from students to 
                 professionals—ensuring that clear discourse becomes a core part of our national identity.
               </p>
