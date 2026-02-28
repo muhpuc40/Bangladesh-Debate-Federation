@@ -112,7 +112,7 @@ const apiService = {
     const response = await apiClient.get(`/blogs/${id}`);
     return response.data;
   },
-  
+
   getGalleries: async () => {
     const response = await apiClient.get('/gallery');
     return response.data;
@@ -123,7 +123,15 @@ const apiService = {
     return response.data;
   },
 
-
+  // Add this to your apiService object
+  submitEventRequest: async (formData) => {
+    const response = await apiClient.post('/event-requests', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  },
 };
 
 export default apiService;
