@@ -25,6 +25,8 @@ const Profile = lazy(() => import('./pages/Profile'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogDetails = lazy(() => import('./pages/BlogDetails'));
 const Resources = lazy(() => import('./pages/Resources'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const Terms = lazy(() => import('./pages/Terms'));
 
 
 const Spinner = () => (
@@ -59,7 +61,8 @@ function App() {
           <Route path="developers-info" element={<DevelopersInfo />} />
           <Route path="blog-details/:id" element={<BlogDetails />} />
           <Route path="resources" element={<Resources />} />
-
+          <Route path="privacy" element={<Privacy />} />
+          <Route path="terms" element={<Terms />} />
           {/* Protected — must be logged in */}
           <Route path="profile" element={
             <ProtectedRoute><Profile /></ProtectedRoute>

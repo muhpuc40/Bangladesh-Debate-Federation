@@ -10,7 +10,7 @@ const DevelopersInfo = () => {
       name: "Minhaj Uddin Hassan",
       // role: "Frontend Developer & UI/UX Designer",
       // bio: "Creating beautiful and functional user interfaces with modern web technologies.",
-      image: "https://i.ibb.co.com/hRpzpL2k/97126606.jpg",
+      image: "dev/2.jpg",
       degree: "Bachelor of Science (Engineering) in Computer Science and Engineering",
       social: {
         github: "https://github.com/muhpuc40",
@@ -26,7 +26,7 @@ const DevelopersInfo = () => {
       name: "Md Ebtesham Azam",
       // role: "Full Stack Developer",
       // bio: "Building robust backend systems and scalable applications with cutting-edge technologies.",
-      image: "https://i.ibb.co.com/wZNPNjNw/97126606.jpg",
+      image: "dev/1.jpg",
       degree: "Bachelor of Science (Engineering) in Computer Science and Engineering",
       social: {
         github: "https://github.com/ebteshampuc44",

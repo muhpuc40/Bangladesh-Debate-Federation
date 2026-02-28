@@ -1,6 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import apiService from '../services/apiService';
 
+const PersonCard = ({ image, name, role, size = 'normal' }) => {
+  const imgSize = size === 'small' ? 'max-w-[140px]' : 'max-w-[180px]';
+  return (
+    <div className="flex flex-col items-center justify-center text-center">
+      <div className={`w-full aspect-square ${imgSize} mx-auto mb-4`}>
+        <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg">
+          {image ? (
+            <img
+              src={image}
+              alt={name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = 'https://i.ibb.co.com/default-avatar.png';
+              }}
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-400 text-sm">No Image</span>
+            </div>
+          )}
+        </div>
+      </div>
+      <h3 className="font-bold text-gray-900 text-base md:text-lg mb-1 px-2">{name}</h3>
+      <p className="text-emerald-600 font-medium text-sm md:text-base">{role}</p>
+    </div>
+  );
+};
+
 const HallOfFame = () => {
   const [committees, setCommittees] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -56,14 +85,13 @@ const HallOfFame = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-12 px-4">
       <div className="max-w-6xl mx-auto">
+
         {/* Header */}
         <div className="text-center mb-12 mt-0 pt-8">
           <h1 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4">
             Hall of Fame
           </h1>
-          <p className="text-gray-600 text-lg">
-            Executive Committee Records
-          </p>
+          <p className="text-gray-600 text-lg">Executive Committee Records</p>
         </div>
 
         {/* Committees List */}
@@ -74,94 +102,78 @@ const HallOfFame = () => {
           </div>
         ) : (
           <div className="space-y-8">
-            {committees.map((committee) => (
-              <div
-                key={committee.id}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
-              >
-                <div className="flex flex-col md:flex-row">
-                  {/* Left Side - Committee Info */}
-                  <div className="md:w-1/2 p-8 bg-white">
-                    <div className="h-full flex flex-col justify-center">
-                      <div className="mb-6">
-                        <span className="inline-block px-4 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold mb-2">
-                          Executive Committee
-                        </span>
-                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-                          {committee.name}
-                        </h2>
-                        {committee.ec && (
-                          <p className="text-gray-600 mt-1">{committee.ec}</p>
-                        )}
+            {committees.map((committee) => {
+              const isFirst = committee.id === 1;
+
+              return (
+                <div
+                  key={committee.id}
+                  className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
+                >
+                  <div className="flex flex-col md:flex-row">
+
+                    {/* Left Side — Committee Info */}
+                    <div className="md:w-1/2 p-8 bg-white">
+                      <div className="h-full flex flex-col justify-center">
+                        <div className="mb-6">
+                          <span className="inline-block px-4 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold mb-2">
+                            Executive Committee
+                          </span>
+                          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+                            {committee.name}
+                          </h2>
+                          {committee.ec && (
+                            <p className="text-gray-600 mt-1">{committee.ec}</p>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Right Side - Images (50-50 split) */}
-                  <div className="md:w-1/2 bg-gradient-to-r from-emerald-50 to-white p-8">
-                    <div className="grid grid-cols-2 gap-6 h-full">
-                      {/* President */}
-                      <div className="flex flex-col items-center justify-center text-center">
-                        <div className="w-full aspect-square max-w-[180px] mx-auto mb-4">
-                          <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg">
-                            {committee.presidentImage ? (
-                              <img
-                                src={committee.presidentImage}
-                                alt={committee.president}
-                                className="w-full h-full object-cover"
-                                onError={(e) => {
-                                  e.target.onerror = null;
-                                  e.target.src = "https://i.ibb.co.com/default-avatar.png";
-                                }}
-                              />
-                            ) : (
-                              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                                <span className="text-gray-400 text-sm">No Image</span>
-                              </div>
-                            )}
-                          </div>
+                    {/* Right Side — People */}
+                    <div className="md:w-1/2 bg-gradient-to-r from-emerald-50 to-white p-8">
+                      {isFirst ? (
+                        /* ── 3-person row for id=1 ── */
+                        <div className="grid grid-cols-3 gap-4 h-full">
+                          <PersonCard
+                            image="extra/1.jpeg"
+                            name="Plabon Ganguly"
+                            role="President"
+                            size="small"
+                          />
+                          <PersonCard
+                            image={committee.presidentImage}
+                            name={committee.president}
+                            role="President"
+                            size="small"
+                          />
+                          <PersonCard
+                            image={committee.secretaryImage}
+                            name={committee.secretary}
+                            role="General Secretary"
+                            size="small"
+                          />
                         </div>
-                        <h3 className="font-bold text-gray-900 text-base md:text-lg mb-1 px-2">
-                          {committee.president}
-                        </h3>
-                        <p className="text-emerald-600 font-medium text-sm md:text-base">
-                          President
-                        </p>
-                      </div>
-
-                      {/* Secretary */}
-                      <div className="flex flex-col items-center justify-center text-center">
-                        <div className="w-full aspect-square max-w-[180px] mx-auto mb-4">
-                          <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg">
-                            {committee.secretaryImage ? (
-                              <img
-                                src={committee.secretaryImage}
-                                alt={committee.secretary}
-                                className="w-full h-full object-cover"
-                                onError={(e) => {
-                                  e.target.onerror = null;
-                                  e.target.src = "https://i.ibb.co.com/default-avatar.png";
-                                }}
-                              />
-                            ) : (
-                              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                                <span className="text-gray-400 text-sm">No Image</span>
-                              </div>
-                            )}
-                          </div>
+                      ) : (
+                        /* ── Normal 2-person layout ── */
+                        <div className="grid grid-cols-2 gap-6 h-full">
+                          <PersonCard
+                            image={committee.presidentImage}
+                            name={committee.president}
+                            role="President"
+                          />
+                          <PersonCard
+                            image={committee.secretaryImage}
+                            name={committee.secretary}
+                            role="General Secretary"
+                          />
                         </div>
-                        <h3 className="font-bold text-gray-900 text-base md:text-lg mb-1 px-2">
-                          {committee.secretary}
-                        </h3>
-                        <p className="text-emerald-600 font-medium text-sm md:text-base">
-                          General Secretary
-                        </p>
-                      </div>
+                      )}
                     </div>
+
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
