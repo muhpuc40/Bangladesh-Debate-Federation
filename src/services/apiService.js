@@ -96,7 +96,11 @@ const apiService = {
     return response.data;
   },
   deleteBlog: async (id) => {
-    const response = await apiClient.delete(`/blogs/${id}`);
+    const formData = new FormData();
+    formData.append('_method', 'DELETE');
+    const response = await apiClient.post(`/blogs/${id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
     return response.data;
   },
   getMyBlogs: async () => {
