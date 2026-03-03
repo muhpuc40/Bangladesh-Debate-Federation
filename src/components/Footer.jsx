@@ -20,7 +20,7 @@ const Footer = () => {
     { platform: 'Facebook', icon: <FaFacebook />, link: 'https://www.facebook.com/BangladeshDebateFedaration' },
     { platform: 'Facebook Group', icon: <FaUsers />, link: 'https://www.facebook.com/groups/8307242668/' },
     { platform: 'YouTube', icon: <FaYoutube />, link: 'https://www.youtube.com/@bangladeshdebatefederation' },
-    { platform: 'Twitter', icon: <FaTwitter />, link: 'https://twitter.com' },
+    // { platform: 'Twitter', icon: <FaTwitter />, link: 'https://twitter.com' },
     { platform: 'LinkedIn', icon: <FaLinkedin />, link: 'www.linkedin.com/company/bangladesh-debate-federation-bdf' },
   ];
 
