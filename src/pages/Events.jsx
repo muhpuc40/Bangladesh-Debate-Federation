@@ -327,10 +327,10 @@ const Events = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-emerald-700 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-gray-600 font-medium">Loading events...</p>
+          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
@@ -338,12 +338,36 @@ const Events = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto px-4">
+      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
+        <div className="text-center">
           <div className="text-6xl mb-4">⚠️</div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-6">Error loading data</h3>
-          <p className="text-gray-600 mb-4">{error}</p>
-          <button onClick={() => window.location.reload()} className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-6 rounded-full transition-all duration-300">
+          <h3 className="text-2xl font-bold text-gray-700 mb-6">
+            Error
+          </h3>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Empty state for no events
+  if (events.length === 0) {
+    return (
+      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-4">⚠️</div>
+          <h3 className="text-2xl font-bold text-gray-700 mb-6">
+            Error
+          </h3>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
+          >
             Try Again
           </button>
         </div>
@@ -353,7 +377,6 @@ const Events = () => {
 
   return (
     <div className="min-h-screen bg-white">
-
       {/* ── Hero ── */}
       <section className="relative pt-20 md:pt-24 py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -571,21 +594,19 @@ const Events = () => {
             </div>
           </div>
 
-          {/* ── Empty state ── */}
+          {/* ── Empty state for filtered results ── */}
           {filteredEvents.length === 0 ? (
             <div className="text-center py-16">
               <div className="text-6xl mb-4">📅</div>
               <h3 className="text-2xl font-bold text-gray-700 mb-2">
-                {events.length === 0 ? 'No events available' : 'No events found'}
+                No events found
               </h3>
               <p className="text-gray-500 mb-6">
-                {events.length === 0 ? 'Check back later for upcoming events.' : 'Try changing your search or filter criteria'}
+                Try changing your search or filter criteria
               </p>
-              {events.length > 0 && (
-                <button onClick={() => { setSearchTerm(''); setActiveFilter('all'); }} className="border border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-bold py-2 px-6 rounded-full transition-all duration-300">
-                  Reset Filters
-                </button>
-              )}
+              <button onClick={() => { setSearchTerm(''); setActiveFilter('all'); }} className="border border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-bold py-2 px-6 rounded-full transition-all duration-300">
+                Reset Filters
+              </button>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -672,16 +693,9 @@ const Events = () => {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          MODAL
-          - backdrop: semi-transparent, page visible behind
-          - body scroll: locked when open
-          - colors: full emerald theme
-          - inputs: black text
-      ════════════════════════════════════════════════ */}
+      {/* MODAL - সম্পূর্ণ অংশ */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-
           {/* Backdrop — 50% opacity so page shows through */}
           <div
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -690,7 +704,6 @@ const Events = () => {
 
           {/* Modal panel */}
           <div className="relative z-10 bg-white rounded-2xl shadow-2xl border border-emerald-100 w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
-
             {/* Sticky header */}
             <div className="flex-shrink-0 bg-emerald-700 text-white px-6 py-4 rounded-t-2xl flex justify-between items-center">
               <div>
@@ -704,7 +717,6 @@ const Events = () => {
 
             {/* Scrollable content */}
             <div className="overflow-y-auto flex-1 overscroll-contain">
-
               {/* Success */}
               {modalSuccess && (
                 <div className="mx-6 mt-5 bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center gap-3">
@@ -728,7 +740,6 @@ const Events = () => {
               )}
 
               <form onSubmit={handleSubmit} className="p-6 space-y-8">
-
                 {/* ─ Event Information ─ */}
                 <div>
                   <div className="flex items-center gap-2 mb-5">
@@ -736,7 +747,6 @@ const Events = () => {
                     <h3 className="text-sm font-bold text-emerald-900 uppercase tracking-widest">Event Information</h3>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                     <div className="md:col-span-2">
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Event Title <span className="text-red-500">*</span></label>
                       <input type="text" name="title" value={formData.title} onChange={handleChange} className={inputClass('title')} placeholder="Enter event title" required />
@@ -849,7 +859,7 @@ const Events = () => {
                       <input type="email" name="email" value={formData.email} onChange={handleChange} className={inputClass('email')} placeholder="your@email.com" required />
                       {validationErrors.email && <p className="mt-1 text-xs text-red-500">{validationErrors.email[0]}</p>}
                     </div>
-                    <div >
+                    <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone Number <span className="text-red-500">*</span></label>
                       <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+8801XXXXXXXXX" required />
                       {validationErrors.phone && <p className="mt-1 text-xs text-red-500">{validationErrors.phone[0]}</p>}
@@ -874,7 +884,6 @@ const Events = () => {
                     ) : 'Submit Request'}
                   </button>
                 </div>
-
               </form>
             </div>
           </div>

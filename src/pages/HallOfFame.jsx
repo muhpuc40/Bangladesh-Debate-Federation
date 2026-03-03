@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import apiService from '../services/apiService';
+import React, { useState, useEffect } from "react";
+import apiService from "../services/apiService";
 
-const PersonCard = ({ image, name, role, size = 'normal' }) => {
-  const imgSize = size === 'small' ? 'max-w-[140px]' : 'max-w-[180px]';
+const PersonCard = ({ image, name, role, size = "normal" }) => {
+  const imgSize = size === "small" ? "max-w-[140px]" : "max-w-[180px]";
+
   return (
     <div className="flex flex-col items-center justify-center text-center">
       <div className={`w-full aspect-square ${imgSize} mx-auto mb-4`}>
@@ -14,7 +15,8 @@ const PersonCard = ({ image, name, role, size = 'normal' }) => {
               className="w-full h-full object-cover"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = 'https://i.ibb.co.com/default-avatar.png';
+                e.target.src =
+                  "https://i.ibb.co.com/default-avatar.png";
               }}
             />
           ) : (
@@ -24,8 +26,13 @@ const PersonCard = ({ image, name, role, size = 'normal' }) => {
           )}
         </div>
       </div>
-      <h3 className="font-bold text-gray-900 text-base md:text-lg mb-1 px-2">{name}</h3>
-      <p className="text-emerald-600 font-medium text-sm md:text-base">{role}</p>
+
+      <h3 className="font-bold text-gray-900 text-base md:text-lg mb-1 px-2">
+        {name}
+      </h3>
+      <p className="text-emerald-600 font-medium text-sm md:text-base">
+        {role}
+      </p>
     </div>
   );
 };
@@ -43,8 +50,8 @@ const HallOfFame = () => {
         setCommittees(data);
         setError(null);
       } catch (err) {
-        console.error('Error fetching hall of fame:', err);
-        setError('Error');
+        console.error("Error fetching hall of fame:", err);
+        setError(true);
         setCommittees([]);
       } finally {
         setLoading(false);
@@ -54,6 +61,7 @@ const HallOfFame = () => {
     fetchHallOfFame();
   }, []);
 
+  /* ================= LOADING ================= */
   if (loading) {
     return (
       <div className="min-h-screen bg-emerald-50 flex items-center justify-center">
@@ -65,12 +73,15 @@ const HallOfFame = () => {
     );
   }
 
+  /* ================= ERROR ================= */
   if (error) {
     return (
-      <div className="min-h-screen bg-emerald-50 flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto px-4 py-12">
+      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
+        <div className="text-center">
           <div className="text-6xl mb-4">⚠️</div>
-          <h3 className="text-2xl font-bold text-gray-700 mb-6">Error loading data</h3>
+          <h3 className="text-2xl font-bold text-gray-700 mb-6">
+            Error Loading Data
+          </h3>
           <button
             onClick={() => window.location.reload()}
             className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
@@ -82,100 +93,112 @@ const HallOfFame = () => {
     );
   }
 
+  /* ================= EMPTY ================= */
+  if (committees.length === 0) {
+    return (
+      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-4">⚠️</div>
+          <h3 className="text-2xl font-bold text-gray-700 mb-4">
+            Error
+          </h3>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
+          >
+           Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  /* ================= MAIN CONTENT ================= */
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-12 px-4">
       <div className="max-w-6xl mx-auto">
-
         {/* Header */}
-        <div className="text-center mb-12 mt-0 pt-8">
+        <div className="text-center mb-12 pt-8">
           <h1 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4">
             Hall of Fame
           </h1>
-          <p className="text-gray-600 text-lg">Executive Committee Records</p>
+          <p className="text-gray-600 text-lg">
+            Executive Committee Records
+          </p>
         </div>
 
-        {/* Committees List */}
-        {committees.length === 0 ? (
-          <div className="text-center py-12">
-            <div className="text-gray-400 text-6xl mb-4">📭</div>
-            <p className="text-gray-500 text-lg">No hall of fame records found.</p>
-          </div>
-        ) : (
-          <div className="space-y-8">
-            {committees.map((committee) => {
-              const isFirst = committee.id === 1;
+        <div className="space-y-8">
+          {committees.map((committee) => {
+            const isFirst = committee.id === 1;
 
-              return (
-                <div
-                  key={committee.id}
-                  className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
-                >
-                  <div className="flex flex-col md:flex-row">
+            return (
+              <div
+                key={committee.id}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
+              >
+                <div className="flex flex-col md:flex-row">
+                  {/* Left Side */}
+                  <div className="md:w-1/2 p-8 bg-white">
+                    <div className="h-full flex flex-col justify-center">
+                      <span className="inline-block px-4 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold mb-2">
+                        Executive Committee
+                      </span>
 
-                    {/* Left Side — Committee Info */}
-                    <div className="md:w-1/2 p-8 bg-white">
-                      <div className="h-full flex flex-col justify-center">
-                        <div className="mb-6">
-                          <span className="inline-block px-4 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold mb-2">
-                            Executive Committee
-                          </span>
-                          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-                            {committee.name}
-                          </h2>
-                          {committee.ec && (
-                            <p className="text-gray-600 mt-1">{committee.ec}</p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
+                      <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+                        {committee.name}
+                      </h2>
 
-                    {/* Right Side — People */}
-                    <div className="md:w-1/2 bg-gradient-to-r from-emerald-50 to-white p-8">
-                      {isFirst ? (
-                        /* ── 3-person row for id=1 ── */
-                        <div className="grid grid-cols-3 gap-4 h-full">
-                          <PersonCard
-                            image="extra/1.jpeg"
-                            name="Plabon Ganguly"
-                            role="President"
-                            size="small"
-                          />
-                          <PersonCard
-                            image={committee.presidentImage}
-                            name={committee.president}
-                            role="President"
-                            size="small"
-                          />
-                          <PersonCard
-                            image={committee.secretaryImage}
-                            name={committee.secretary}
-                            role="General Secretary"
-                            size="small"
-                          />
-                        </div>
-                      ) : (
-                        /* ── Normal 2-person layout ── */
-                        <div className="grid grid-cols-2 gap-6 h-full">
-                          <PersonCard
-                            image={committee.presidentImage}
-                            name={committee.president}
-                            role="President"
-                          />
-                          <PersonCard
-                            image={committee.secretaryImage}
-                            name={committee.secretary}
-                            role="General Secretary"
-                          />
-                        </div>
+                      {committee.ec && (
+                        <p className="text-gray-600 mt-1">
+                          {committee.ec}
+                        </p>
                       )}
                     </div>
+                  </div>
 
+                  {/* Right Side */}
+                  <div className="md:w-1/2 bg-gradient-to-r from-emerald-50 to-white p-8">
+                    {isFirst ? (
+                      <div className="grid grid-cols-3 gap-4">
+                        <PersonCard
+                          image="extra/1.jpeg"
+                          name="Plabon Ganguly"
+                          role="President"
+                          size="small"
+                        />
+                        <PersonCard
+                          image={committee.presidentImage}
+                          name={committee.president}
+                          role="President"
+                          size="small"
+                        />
+                        <PersonCard
+                          image={committee.secretaryImage}
+                          name={committee.secretary}
+                          role="General Secretary"
+                          size="small"
+                        />
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 gap-6">
+                        <PersonCard
+                          image={committee.presidentImage}
+                          name={committee.president}
+                          role="President"
+                        />
+                        <PersonCard
+                          image={committee.secretaryImage}
+                          name={committee.secretary}
+                          role="General Secretary"
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        )}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

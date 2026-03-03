@@ -58,8 +58,6 @@ const DebateClubDirectory = () => {
     const matchesRegion = selectedRegion === 'all' || club.location === selectedRegion;
 
     return matchesSearch && matchesUniversity && matchesRegion;
-
-    
   });
 
   // Function to download directory as CSV
@@ -88,10 +86,10 @@ const DebateClubDirectory = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  // Loading স্পিনার - নেভার আর ফুটার ছাড়া
+  // Loading স্পিনার
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading...</p>
@@ -103,13 +101,35 @@ const DebateClubDirectory = () => {
   // Error state
   if (error) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto px-4">
+      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
+        <div className="text-center">
           <div className="text-6xl mb-4">⚠️</div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-6">Error loading data</h3>
+          <h3 className="text-2xl font-bold text-gray-700 mb-6">
+            Error
+          </h3>
           <button
             onClick={() => window.location.reload()}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300"
+            className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Empty state for no clubs
+  if (debateClubs.length === 0) {
+    return (
+      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-4">⚠️</div>
+          <h3 className="text-2xl font-bold text-gray-700 mb-6">
+            Error
+          </h3>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
           >
             Try Again
           </button>
