@@ -9,6 +9,7 @@ import {
   FaArrowRight,
   FaExclamationCircle,
   FaRegClock,
+  FaArrowLeft,
 } from 'react-icons/fa';
 
 const EventDetails = () => {
@@ -138,6 +139,17 @@ const EventDetails = () => {
       <section className="pt-24 pb-12 md:pt-28 md:pb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
+          {/* Back Button - Above the badges */}
+          <div className="mb-4">
+            <button
+              onClick={() => navigate(-1)}
+              className="flex items-center text-emerald-600 hover:text-emerald-800 font-medium transition-colors duration-300 group"
+            >
+              <FaArrowLeft className="mr-2 text-sm group-hover:-translate-x-1 transition-transform duration-300" />
+              Back
+            </button>
+          </div>
+
           {/* Badges + Title */}
           <div className="mb-6">
             <div className="flex flex-wrap items-center gap-2 mb-3">
@@ -157,7 +169,7 @@ const EventDetails = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-            {/* ── Main Content ── */}
+            {/* Main Content */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-xl border border-emerald-100 shadow-lg overflow-hidden">
 
@@ -290,7 +302,7 @@ const EventDetails = () => {
               </div>
             </div>
 
-            {/* ── Sidebar ── */}
+            {/* Sidebar */}
             <div className="lg:col-span-1">
               {otherEvents.length > 0 && (
                 <div className="bg-white rounded-xl border border-emerald-100 p-6 sticky top-24">

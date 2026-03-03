@@ -177,7 +177,7 @@ const NewsDetails = () => {
               className="flex items-center text-emerald-600 hover:text-emerald-800 font-medium transition-colors duration-300"
             >
               <FaArrowLeft className="mr-2 text-sm" />
-              Back to News
+              Back 
             </button>
           </div>
 

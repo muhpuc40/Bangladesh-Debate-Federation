@@ -74,6 +74,13 @@ const AdvisorPanel = () => {
   return (
     <div className="min-h-screen bg-[#e8f1ee] py-8 md:py-12 lg:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Advisor Panel Title - Added pt-8 for mobile to clear the navbar (reduced from pt-16) */}
+        <div className="text-center mb-16 pt-8 lg:pt-0">
+          <h1 className="text-4xl md:text-5xl font-bold text-emerald-900">
+            Advisor Panel
+          </h1>
+        </div>
+
         {/* Desktop Grid View */}
         <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {advisors.map((advisor) => (

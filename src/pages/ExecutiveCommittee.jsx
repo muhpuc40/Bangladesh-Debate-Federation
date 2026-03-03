@@ -175,9 +175,9 @@ const ExecutiveCommittee = () => {
       <section className="py-8 md:py-12">
         <div className="container mx-auto px-4">
 
-          <h2 className="text-2xl md:text-3xl font-bold text-emerald-900 text-center mb-8">
+          {/* <h2 className="text-2xl md:text-3xl font-bold text-emerald-900 text-center mb-8">
             Our Leadership Team
-          </h2>
+          </h2> */}
 
           {/* Top 2 Members */}
           {topMembers.length > 0 && (
