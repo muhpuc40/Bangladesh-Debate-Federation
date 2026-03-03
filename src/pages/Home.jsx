@@ -29,21 +29,21 @@ import 'swiper/css/pagination';
 import Stack from './Stack';
 
 const Home = () => {
-  // Background images for hero slider
+  // Background images for hero slider - Fixed paths with leading slash
   const heroBackgrounds = [
     {
       id: 1,
-      url: "hero/1.png",
+      url: "/hero/1.png",
       alt: "Bangladesh Debate Competition"
     },
     {
       id: 2,
-      url: "hero/2.jpg",
+      url: "/hero/2.jpg",
       alt: "Debate Training Session"
     },
     {
       id: 3,
-      url: "hero/3.jpg",
+      url: "/hero/3.jpg",
       alt: "Youth Debate Competition"
     }
   ];
@@ -53,23 +53,19 @@ const Home = () => {
     {
       id: 1,
       url: "image/1.jpeg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      // alt: "National Debate Competition"
     },
     {
       id: 2,
       url: "image/2.jpeg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      // alt: "Debate Training Workshop"
     },
     {
       id: 3,
       url: "image/3.jpeg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      // alt: "Debate Award Ceremony"
     }
   ];
 
   const [newsItems, setNewsItems] = useState([]);
   const [events, setEvents] = useState([]);
-
 
   useEffect(() => {
     apiService.getEvents()
@@ -96,20 +92,18 @@ const Home = () => {
           .slice(0, 3)
           .map(n => ({
             ...n,
-            excerpt: n.content,        // API sends 'content', JSX expects 'excerpt'
-            alt: n.title,             // not in API
+            excerpt: n.content,
+            alt: n.title,
           }));
         setNewsItems(latest3);
       })
       .catch(err => console.error('Failed to fetch news:', err));
   }, []);
 
-
-
   return (
     <div className="home-page bg-white">
-      {/* Hero Banner with Background Swiper Slider */}
-      <section className="relative overflow-hidden min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
+      {/* Hero Banner with Background Swiper Slider - Fixed for Mobile */}
+      <section className="relative overflow-hidden min-h-[250px] xs:min-h-[300px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[600px] xl:min-h-[700px]">
         {/* Background Swiper Slider */}
         <div className="absolute inset-0 z-0">
           <Swiper
@@ -135,151 +129,150 @@ const Home = () => {
             {heroBackgrounds.map((bg) => (
               <SwiperSlide key={bg.id} className="h-full">
                 <div
-                  className="w-full h-full bg-cover bg-center"
+                  className="w-full h-full bg-cover bg-center bg-no-repeat"
                   style={{
                     backgroundImage: `url(${bg.url})`,
                     backgroundSize: 'cover',
-                    backgroundPosition: 'center'
+                    backgroundPosition: 'center center',
+                    backgroundRepeat: 'no-repeat'
                   }}
+                  aria-label={bg.alt}
+                  role="img"
                 >
-                  {/* Gradient overlay removed for clear image view */}
-                  {/* <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20"></div> */}
+                  {/* Light overlay for better text readability if needed */}
+                  <div className="absolute inset-0 bg-black/10"></div>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
 
-        {/* Content Overlay */}
-        <div className="relative z-10 py-12 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+        {/* Content Overlay - Adjusted for mobile */}
+        <div className="relative z-10 py-6 xs:py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 h-full flex items-center">
           <div className="container mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
               {/* Left Content - Text */}
               <div className="text-white">
-                {/* Content removed for cleaner hero section */}
                 <div className="flex flex-wrap gap-3 sm:gap-4 md:gap-5">
                   {/* Empty for now */}
                 </div>
-
-                {/* Stats - সংখ্যাগুলো কমেন্ট করে রাখা হয়েছে */}
-
               </div>
             </div>
           </div>
         </div>
       </section>
 
-    {/* About Us Section with Stack Component */}
-<section className="py-12 md:py-16 lg:py-20 bg-white" id="about-section">
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
-      
-      {/* Mobile Order: Content First (shows above images on mobile) */}
-      <div className="w-full order-1 lg:order-2">
-        {/* Mobile: Show "ABOUT BDF" label */}
-        <div className="lg:hidden mb-4">
-          <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200 text-justify">
-            ABOUT BDF
-          </div>
-        </div>
-
-        {/* Desktop: Show "ABOUT BDF" label */}
-        <div className="hidden lg:block">
-          <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200 text-justify">
-            ABOUT BDF
-          </div>
-        </div>
-
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-4 sm:mb-6 leading-tight text-justify">
-          Leading Debate Excellence in <span className="text-emerald-600">Bangladesh</span>
-        </h2>
-        <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-4 sm:mb-6 md:mb-8 leading-relaxed text-justify">
-          Bangladesh Debate Federation (BDF) started its journey on the first quarter of the last decade of the previous century when democracy just appeared to the country as the form of government. 
-          Through a long period, BDF could able to build a generation who can lead, who can speak and who can represent. Since 1992 Bangladesh Debate Federation (BDF) is the central debate platform in the debating arena of Bangladesh. With a view to explore democracy in every sphere of the country, accessible to the mass people and increases the boundary of debate beyond the Dhaka city few legends of the debating arena has started there journey through debate. 
-          Dr. Biru Paksha Paul, Mohammad Niamot Ali Elahi, Dr. Abdun or Tushar were the gypsy of that caravan. Since its launching BDF is organizing National Debate Festival in every two year regularly as well as training workshops, several competitions, mini-fests, Inter University debate championships, national school debate championship etc. Recently BDF has started to give debate award for performing and organizing debate activities.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-          <Link
-            to="/mission-vision"
-            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-          >
-            Know More <FaArrowRight className="ml-2 text-sm sm:text-base md:text-base" />
-          </Link>
-          <Link
-            to="/events"
-            className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
-          >
-            Upcoming Events
-          </Link>
-        </div>
-      </div>
-
-      {/* Right Side (in mobile) / Left Side (in desktop) - Image Display */}
-      <div className="w-full order-2 lg:order-1">
-        {/* Mobile View: Swiper Slider (shows after content on mobile) */}
-        <div className="lg:hidden">
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={10}
-            slidesPerView={1}
-            pagination={{ clickable: true }}
-            className="h-64 sm:h-72 md:h-80"
-          >
-            {aboutImages.map((image) => (
-              <SwiperSlide key={image.id}>
-                <div className="relative w-full h-full rounded-lg md:rounded-xl overflow-hidden border border-emerald-200 shadow-lg">
-                  <img
-                    src={image.url}
-                    alt={`About Image ${image.id}`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 md:p-4">
-                    <p className="text-white font-medium text-sm md:text-base">
-                      {/* Add alt text if needed */}
-                    </p>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-
-        {/* Desktop View: Stack Component (unchanged) */}
-        <div className="hidden lg:block relative w-full h-64 sm:h-72 md:h-80 lg:h-96">
-          <Stack
-            randomRotation={true}
-            sensitivity={180}
-            sendToBackOnClick={true}
-            autoplay={true}
-            autoplayDelay={3000}
-            pauseOnHover={true}
-            mobileClickOnly={true}
-            cards={aboutImages.map((image) => (
-              <div
-                key={image.id}
-                className="relative w-full h-full rounded-lg md:rounded-xl overflow-hidden border border-emerald-200 shadow-lg"
-              >
-                <img
-                  src={image.url}
-                  alt={`About Image ${image.id}`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 md:p-4">
-                  <p className="text-white font-medium text-sm md:text-base">
-                    {/* Add alt text if needed */}
-                  </p>
+      {/* About Us Section with Stack Component */}
+      <section className="py-12 md:py-16 lg:py-20 bg-white" id="about-section">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
+            
+            {/* Mobile Order: Content First (shows above images on mobile) */}
+            <div className="w-full order-1 lg:order-2">
+              {/* Mobile: Show "ABOUT BDF" label */}
+              <div className="lg:hidden mb-4">
+                <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200 text-justify">
+                  ABOUT BDF
                 </div>
               </div>
-            ))}
-          />
+
+              {/* Desktop: Show "ABOUT BDF" label */}
+              <div className="hidden lg:block">
+                <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 border border-emerald-200 text-justify">
+                  ABOUT BDF
+                </div>
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-4 sm:mb-6 leading-tight text-justify">
+                Leading Debate Excellence in <span className="text-emerald-600">Bangladesh</span>
+              </h2>
+              <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-4 sm:mb-6 md:mb-8 leading-relaxed text-justify">
+                Bangladesh Debate Federation (BDF) started its journey on the first quarter of the last decade of the previous century when democracy just appeared to the country as the form of government. 
+                Through a long period, BDF could able to build a generation who can lead, who can speak and who can represent. Since 1992 Bangladesh Debate Federation (BDF) is the central debate platform in the debating arena of Bangladesh. With a view to explore democracy in every sphere of the country, accessible to the mass people and increases the boundary of debate beyond the Dhaka city few legends of the debating arena has started there journey through debate. 
+                Dr. Biru Paksha Paul, Mohammad Niamot Ali Elahi, Dr. Abdun or Tushar were the gypsy of that caravan. Since its launching BDF is organizing National Debate Festival in every two year regularly as well as training workshops, several competitions, mini-fests, Inter University debate championships, national school debate championship etc. Recently BDF has started to give debate award for performing and organizing debate activities.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <Link
+                  to="/mission-vision"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-700 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
+                >
+                  Know More <FaArrowRight className="ml-2 text-sm sm:text-base md:text-base" />
+                </Link>
+                <Link
+                  to="/events"
+                  className="bg-white hover:bg-emerald-50 text-emerald-700 font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-300 hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base md:text-lg"
+                >
+                  Upcoming Events
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Side (in mobile) / Left Side (in desktop) - Image Display */}
+            <div className="w-full order-2 lg:order-1">
+              {/* Mobile View: Swiper Slider (shows after content on mobile) */}
+              <div className="lg:hidden">
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={10}
+                  slidesPerView={1}
+                  pagination={{ clickable: true }}
+                  className="h-64 sm:h-72 md:h-80"
+                >
+                  {aboutImages.map((image) => (
+                    <SwiperSlide key={image.id}>
+                      <div className="relative w-full h-full rounded-lg md:rounded-xl overflow-hidden border border-emerald-200 shadow-lg">
+                        <img
+                          src={image.url}
+                          alt={`About Image ${image.id}`}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 md:p-4">
+                          <p className="text-white font-medium text-sm md:text-base">
+                            {/* Add alt text if needed */}
+                          </p>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+
+              {/* Desktop View: Stack Component (unchanged) */}
+              <div className="hidden lg:block relative w-full h-64 sm:h-72 md:h-80 lg:h-96">
+                <Stack
+                  randomRotation={true}
+                  sensitivity={180}
+                  sendToBackOnClick={true}
+                  autoplay={true}
+                  autoplayDelay={3000}
+                  pauseOnHover={true}
+                  mobileClickOnly={true}
+                  cards={aboutImages.map((image) => (
+                    <div
+                      key={image.id}
+                      className="relative w-full h-full rounded-lg md:rounded-xl overflow-hidden border border-emerald-200 shadow-lg"
+                    >
+                      <img
+                        src={image.url}
+                        alt={`About Image ${image.id}`}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 md:p-4">
+                        <p className="text-white font-medium text-sm md:text-base">
+                          {/* Add alt text if needed */}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Partners with Marquee Cards - LOGOS ONLY, NO TEXT, COLORFUL */}
       <section className="py-8 md:py-12 lg:py-16 bg-white overflow-hidden">
@@ -636,6 +629,8 @@ const Home = () => {
     `}
         </style>
       </section>
+
+      {/* News Section */}
       <section className="py-8 md:py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Compact Header Section */}
@@ -726,8 +721,6 @@ const Home = () => {
                       <span className="text-left">Read Full Story</span>
                       <FaArrowRight className="ml-1.5 text-xs group-hover/readmore:translate-x-1 transition-transform duration-300" />
                     </Link>
-
-                    {/* ভিউয়ার কাউন্টার রিমুভ করা হয়েছে */}
                   </div>
                 </div>
               </div>
