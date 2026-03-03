@@ -28,12 +28,10 @@ const Events = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showCalendar, setShowCalendar] = useState(false);
   const [calendarMonth, setCalendarMonth] = useState(new Date());
   const [selectedDayEvents, setSelectedDayEvents] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const observerRef = useRef(null);
-  const calendarRef = useRef(null);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -116,35 +114,21 @@ const Events = () => {
     fetchEvents();
   }, []);
 
-  // Jump calendar to first upcoming event month
+  // Set calendar to first upcoming event month
   useEffect(() => {
-    if (showCalendar) {
-      const upcoming = events
-        .filter(e => e.type === 'upcoming' && e.start_date)
-        .map(e => ({ ...e, parsedDate: new Date(e.start_date) }))
-        .filter(e => !isNaN(e.parsedDate))
-        .sort((a, b) => a.parsedDate - b.parsedDate);
-      if (upcoming.length > 0) {
-        const d = upcoming[0].parsedDate;
-        setCalendarMonth(new Date(d.getFullYear(), d.getMonth(), 1));
-      } else {
-        setCalendarMonth(new Date());
-      }
-      setSelectedDayEvents(null);
+    const upcoming = events
+      .filter(e => e.type === 'upcoming' && e.start_date)
+      .map(e => ({ ...e, parsedDate: new Date(e.start_date) }))
+      .filter(e => !isNaN(e.parsedDate))
+      .sort((a, b) => a.parsedDate - b.parsedDate);
+    if (upcoming.length > 0) {
+      const d = upcoming[0].parsedDate;
+      setCalendarMonth(new Date(d.getFullYear(), d.getMonth(), 1));
+    } else {
+      setCalendarMonth(new Date());
     }
-  }, [showCalendar, events]);
-
-  // Close calendar on outside click
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (calendarRef.current && !calendarRef.current.contains(e.target)) {
-        setShowCalendar(false);
-        setSelectedDayEvents(null);
-      }
-    };
-    if (showCalendar) document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [showCalendar]);
+    setSelectedDayEvents(null);
+  }, [events]);
 
   // Intersection observer for card fade-in animations
   useEffect(() => {
@@ -239,7 +223,6 @@ const Events = () => {
 
   const handleDayClick = (dayEvents) => {
     if (dayEvents.length === 1) {
-      setShowCalendar(false);
       setSelectedDayEvents(null);
       navigate(`/event/${dayEvents[0].id}`);
     } else {
@@ -414,12 +397,21 @@ const Events = () => {
                 )}
               </div>
             </div>
-            <button
-              onClick={() => { setActiveFilter('all'); setSearchTerm(''); }}
-              className="px-5 py-3 border border-emerald-200 text-emerald-700 rounded-full hover:bg-emerald-50 transition-all duration-300 font-semibold whitespace-nowrap"
-            >
-              Clear Filters
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={() => { setActiveFilter('all'); setSearchTerm(''); }}
+                className="px-5 py-3 border border-emerald-200 text-emerald-700 rounded-full hover:bg-emerald-50 transition-all duration-300 font-semibold whitespace-nowrap"
+              >
+                Clear Filters
+              </button>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="flex items-center gap-2 px-5 py-3 bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold rounded-full shadow-md transition-all duration-200 whitespace-nowrap"
+              >
+                <FaPlus className="text-sm" />
+                Submit Event
+              </button>
+            </div>
           </div>
           <div className="flex flex-col md:flex-row md:items-center gap-3">
             <div className="flex items-center shrink-0">
@@ -435,261 +427,238 @@ const Events = () => {
         </div>
       </section>
 
-      {/* ── Events Grid ── */}
+      {/* ── Main Content with Calendar ── */}
       <section className="py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-8 flex-wrap gap-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">
-              {activeFilter === 'all' ? 'All Events' : filterOptions.find(f => f.id === activeFilter)?.label}
-              <span className="text-gray-400 text-lg ml-2">({filteredEvents.length})</span>
-            </h2>
+          <div className="flex gap-8">
+            {/* Left Column - Events Grid */}
+            <div className="flex-1">
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">
+                  {activeFilter === 'all' ? 'All Events' : filterOptions.find(f => f.id === activeFilter)?.label}
+                  <span className="text-gray-400 text-lg ml-2">({filteredEvents.length})</span>
+                </h2>
+              </div>
 
-            <div className="relative flex items-center flex-wrap gap-2" ref={calendarRef}>
-              <button
-                onClick={() => setShowCalendar(prev => !prev)}
-                className="flex items-center gap-2 px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold rounded-full shadow-md transition-all duration-200"
-              >
-                <FaRegCalendarCheck className="text-base" />
-                Upcoming Calendar
-              </button>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="flex items-center gap-2 px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold rounded-full shadow-md transition-all duration-200"
-              >
-                <FaPlus className="text-sm" />
-                Submit Event
-              </button>
-
-              {/* ── Calendar Dropdown ── */}
-              {showCalendar && (
-                <div className="absolute right-0 top-12 z-50 bg-white border border-emerald-100 rounded-2xl shadow-2xl overflow-hidden" style={{ width: '380px' }}>
-                  {/* Header */}
-                  <div className="flex items-center justify-between px-5 py-4 bg-emerald-700">
-                    <button
-                      onClick={() => { setCalendarMonth(prev => new Date(prev.getFullYear(), prev.getMonth()-1, 1)); setSelectedDayEvents(null); }}
-                      className="text-white hover:bg-emerald-600 p-1.5 rounded-full transition-colors"
-                    >
-                      <FaChevronLeft className="text-sm" />
-                    </button>
-                    <span className="text-white font-bold text-base tracking-wide">
-                      {calendarMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-                    </span>
-                    <button
-                      onClick={() => { setCalendarMonth(prev => new Date(prev.getFullYear(), prev.getMonth()+1, 1)); setSelectedDayEvents(null); }}
-                      className="text-white hover:bg-emerald-600 p-1.5 rounded-full transition-colors"
-                    >
-                      <FaChevronRight className="text-sm" />
-                    </button>
-                  </div>
-
-                  {/* Day labels */}
-                  <div className="grid grid-cols-7 bg-emerald-50 border-b border-emerald-100">
-                    {['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => (
-                      <div key={d} className="text-center text-xs text-emerald-700 font-semibold py-2">{d}</div>
-                    ))}
-                  </div>
-
-                  {/* Day cells */}
-                  <div className="grid grid-cols-7 p-3 gap-1">
-                    {(() => {
-                      const { firstDay, daysInMonth, year, month } = getDaysInMonth(calendarMonth);
-                      const today = new Date().toDateString();
-                      const cells = [];
-                      for (let i = 0; i < firstDay; i++) cells.push(<div key={`e${i}`} />);
-                      for (let day = 1; day <= daysInMonth; day++) {
-                        const thisDate = new Date(year, month, day).toDateString();
-                        const isToday = thisDate === today;
-                        const dayEvents = eventsByDate[thisDate] || [];
-                        const hasBdf   = dayEvents.some(e => e.category === 'bdf');
-                        const hasOther = dayEvents.some(e => e.category === 'other');
-                        const hasEvent = dayEvents.length > 0;
-
-                        // Circle bg by category mix
-                        let circleCls = 'text-gray-600';
-                        if (hasBdf && hasOther) circleCls = 'bg-gradient-to-br from-emerald-500 to-amber-500 text-white shadow-sm';
-                        else if (hasBdf)         circleCls = 'bg-emerald-600 text-white shadow-sm';
-                        else if (hasOther)       circleCls = 'bg-amber-500 text-white shadow-sm';
-                        else if (isToday)        circleCls = 'bg-emerald-200 text-emerald-900';
-
-                        cells.push(
-                          <div
-                            key={day}
-                            onClick={() => hasEvent && handleDayClick(dayEvents)}
-                            className={`flex flex-col items-center justify-start pt-1 pb-1 rounded-xl min-h-[46px] transition-all duration-150 ${
-                              hasEvent ? 'cursor-pointer hover:bg-emerald-50' : 'cursor-default'
-                            } ${isToday && !hasEvent ? 'bg-emerald-50' : ''}`}
-                          >
-                            <span className={`w-7 h-7 flex items-center justify-center rounded-full text-xs font-semibold ${circleCls}`}>
-                              {day}
-                            </span>
-                            {hasEvent && (
-                              <div className="flex gap-0.5 mt-0.5 justify-center">
-                                {hasBdf   && <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />}
-                                {hasOther && <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      }
-                      return cells;
-                    })()}
-                  </div>
-
-                  {/* Selected day list */}
-                  {selectedDayEvents && (
-                    <div className="border-t border-emerald-100 px-4 py-3 bg-emerald-50">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-bold text-emerald-800 uppercase tracking-wide">
-                          {new Date(selectedDayEvents[0].start_date).toLocaleDateString('en-US', { month:'long', day:'numeric' })}
-                        </span>
-                        <button onClick={() => setSelectedDayEvents(null)} className="text-gray-400 hover:text-gray-600">
-                          <FaTimes className="text-xs" />
-                        </button>
+              {/* ── Empty state for filtered results ── */}
+              {filteredEvents.length === 0 ? (
+                <div className="text-center py-16">
+                  <div className="text-6xl mb-4">📅</div>
+                  <h3 className="text-2xl font-bold text-gray-700 mb-2">
+                    No events found
+                  </h3>
+                  <p className="text-gray-500 mb-6">
+                    Try changing your search or filter criteria
+                  </p>
+                  <button onClick={() => { setSearchTerm(''); setActiveFilter('all'); }} className="border border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-bold py-2 px-6 rounded-full transition-all duration-300">
+                    Reset Filters
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {filteredEvents.map((event, index) => (
+                    <div key={event.id} data-card-id={event.id} className={getCardAnimationClass(event.id)} style={{ transitionDelay: `${index * 50}ms` }}>
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}
+                          alt={event.title}
+                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                          onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'; }}
+                        />
+                        <div className="absolute top-4 left-4">
+                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(event.type)}`}>
+                            {event.status || event.type}
+                          </span>
+                        </div>
+                        <div className="absolute top-4 right-4">
+                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${event.category === 'bdf' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
+                            {getCategoryLabel(event.category)}
+                          </span>
+                        </div>
                       </div>
-                      <div className="space-y-2 max-h-40 overflow-y-auto">
-                        {selectedDayEvents.map(event => (
-                          <div
-                            key={event.id}
-                            onClick={() => { setShowCalendar(false); setSelectedDayEvents(null); navigate(`/event/${event.id}`); }}
-                            className="flex items-center gap-2 p-2 bg-white rounded-lg border border-emerald-100 cursor-pointer hover:border-emerald-400 hover:shadow-sm transition-all duration-150 group"
-                          >
-                            <div className={`w-1 h-8 rounded-full flex-shrink-0 ${event.category === 'bdf' ? 'bg-emerald-500' : 'bg-amber-500'}`} />
-                            <div className="flex-1 min-w-0">
-                              <p className="text-xs font-semibold text-emerald-900 truncate">{event.title}</p>
-                              {event.location && (
-                                <p className="text-xs text-gray-500 truncate flex items-center gap-1 mt-0.5">
-                                  <FaMapMarkerAlt className="text-emerald-400 flex-shrink-0 text-xs" />
-                                  {event.location}
-                                </p>
-                              )}
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-emerald-900 mb-3 hover:text-emerald-700 transition-colors">{event.title}</h3>
+                        <p className="text-gray-600 mb-4 text-sm line-clamp-2">{event.description}</p>
+                        <div className="space-y-3 mb-6">
+                          <div className="flex items-center text-gray-600 text-sm">
+                            <FaCalendarAlt className="mr-3 text-emerald-600 flex-shrink-0" />
+                            <span className="font-medium">{formatDate(event.start_date)}</span>
+                          </div>
+                          {event.time && (
+                            <div className="flex items-center text-gray-600 text-sm">
+                              <FaClock className="mr-3 text-emerald-600 flex-shrink-0" />
+                              <span>{formatTime(event.time)}</span>
                             </div>
-                            <span className={`text-xs px-1.5 py-0.5 rounded-full font-semibold flex-shrink-0 ${event.category === 'bdf' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
-                              {event.category === 'bdf' ? 'BDF' : 'Other'}
-                            </span>
-                            <FaArrowRight className="text-emerald-400 text-xs flex-shrink-0 group-hover:text-emerald-600" />
+                          )}
+                          {event.location && (
+                            <div className="flex items-center text-gray-600 text-sm">
+                              <FaMapMarkerAlt className="mr-3 text-emerald-600 flex-shrink-0" />
+                              <span className="truncate">{event.location}</span>
+                            </div>
+                          )}
+                          {event.participants && (
+                            <div className="flex items-center text-gray-600 text-sm">
+                              <FaUsers className="mr-3 text-emerald-600 flex-shrink-0" />
+                              <span>{event.participants} Participants</span>
+                            </div>
+                          )}
+                        </div>
+                        {event.type === 'upcoming' && event.registration_deadline && (
+                          <div className="bg-amber-50 border border-amber-100 rounded-lg p-3 mb-4">
+                            <div className="flex items-center text-amber-800 text-sm">
+                              <FaClock className="mr-2 flex-shrink-0" />
+                              <span className="font-bold">Registration Deadline:</span>
+                              <span className="ml-2">{formatDate(event.registration_deadline)}</span>
+                            </div>
                           </div>
-                        ))}
+                        )}
+                        {event.type === 'completed' && (
+                          <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-3 mb-4">
+                            <div className="flex items-center text-emerald-800 text-sm">
+                              <FaTrophy className="mr-2 flex-shrink-0" />
+                              <span className="font-bold">Status:</span>
+                              <span className="ml-2">{event.status || 'Completed'}</span>
+                            </div>
+                          </div>
+                        )}
+                        <div className="flex justify-between items-center">
+                          <Link to={`/event/${event.id}`} className="text-emerald-700 hover:text-emerald-900 font-bold flex items-center hover:underline text-sm">
+                            View Details <FaArrowRight className="ml-2" />
+                          </Link>
+                          {event.type === 'upcoming' && event.status?.toLowerCase() === 'open' && (
+                            <Link to={`/registration/${event.id}`} className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 text-sm">
+                              Register Now
+                            </Link>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  )}
-
-                  {/* Legend */}
-                  <div className="flex items-center gap-4 px-4 py-3 border-t border-emerald-100 bg-white flex-wrap">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                      <span className="text-xs text-gray-600 font-medium">BDF Event</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-amber-500" />
-                      <span className="text-xs text-gray-600 font-medium">Other Org.</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-emerald-200" />
-                      <span className="text-xs text-gray-500">Today</span>
-                    </div>
-                    <span className="text-xs text-gray-400 ml-auto italic">Click to open</span>
-                  </div>
+                  ))}
                 </div>
               )}
             </div>
-          </div>
 
-          {/* ── Empty state for filtered results ── */}
-          {filteredEvents.length === 0 ? (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4">📅</div>
-              <h3 className="text-2xl font-bold text-gray-700 mb-2">
-                No events found
-              </h3>
-              <p className="text-gray-500 mb-6">
-                Try changing your search or filter criteria
-              </p>
-              <button onClick={() => { setSearchTerm(''); setActiveFilter('all'); }} className="border border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-bold py-2 px-6 rounded-full transition-all duration-300">
-                Reset Filters
-              </button>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredEvents.map((event, index) => (
-                <div key={event.id} data-card-id={event.id} className={getCardAnimationClass(event.id)} style={{ transitionDelay: `${index * 50}ms` }}>
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}
-                      alt={event.title}
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                      onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'; }}
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(event.type)}`}>
-                        {event.status || event.type}
+            {/* Right Column - Permanent Calendar */}
+            <div className="w-80 flex-shrink-0">
+              <div className="sticky top-24 bg-white border border-emerald-100 rounded-2xl shadow-lg overflow-hidden">
+                {/* Header */}
+                <div className="flex items-center justify-between px-4 py-3 bg-emerald-700">
+                  <button
+                    onClick={() => { setCalendarMonth(prev => new Date(prev.getFullYear(), prev.getMonth()-1, 1)); setSelectedDayEvents(null); }}
+                    className="text-white hover:bg-emerald-600 p-1.5 rounded-full transition-colors"
+                  >
+                    <FaChevronLeft className="text-sm" />
+                  </button>
+                  <span className="text-white font-bold text-sm tracking-wide">
+                    {calendarMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                  </span>
+                  <button
+                    onClick={() => { setCalendarMonth(prev => new Date(prev.getFullYear(), prev.getMonth()+1, 1)); setSelectedDayEvents(null); }}
+                    className="text-white hover:bg-emerald-600 p-1.5 rounded-full transition-colors"
+                  >
+                    <FaChevronRight className="text-sm" />
+                  </button>
+                </div>
+
+                {/* Day labels */}
+                <div className="grid grid-cols-7 bg-emerald-50 border-b border-emerald-100">
+                  {['Su','Mo','Tu','We','Th','Fr','Sa'].map(d => (
+                    <div key={d} className="text-center text-xs text-emerald-700 font-semibold py-2">{d}</div>
+                  ))}
+                </div>
+
+                {/* Day cells */}
+                <div className="grid grid-cols-7 p-2 gap-0.5">
+                  {(() => {
+                    const { firstDay, daysInMonth, year, month } = getDaysInMonth(calendarMonth);
+                    const today = new Date().toDateString();
+                    const cells = [];
+                    for (let i = 0; i < firstDay; i++) cells.push(<div key={`e${i}`} className="h-8" />);
+                    for (let day = 1; day <= daysInMonth; day++) {
+                      const thisDate = new Date(year, month, day).toDateString();
+                      const isToday = thisDate === today;
+                      const dayEvents = eventsByDate[thisDate] || [];
+                      const hasBdf   = dayEvents.some(e => e.category === 'bdf');
+                      const hasOther = dayEvents.some(e => e.category === 'other');
+                      const hasEvent = dayEvents.length > 0;
+
+                      let circleCls = 'text-gray-600';
+                      if (hasBdf && hasOther) circleCls = 'bg-gradient-to-br from-emerald-500 to-amber-500 text-white shadow-sm';
+                      else if (hasBdf)         circleCls = 'bg-emerald-600 text-white shadow-sm';
+                      else if (hasOther)       circleCls = 'bg-amber-500 text-white shadow-sm';
+                      else if (isToday)        circleCls = 'bg-emerald-200 text-emerald-900';
+
+                      cells.push(
+                        <div
+                          key={day}
+                          onClick={() => hasEvent && handleDayClick(dayEvents)}
+                          className={`flex flex-col items-center justify-start pt-1 pb-1 rounded-lg min-h-[40px] transition-all duration-150 ${
+                            hasEvent ? 'cursor-pointer hover:bg-emerald-50' : 'cursor-default'
+                          } ${isToday && !hasEvent ? 'bg-emerald-50' : ''}`}
+                        >
+                          <span className={`w-6 h-6 flex items-center justify-center rounded-full text-xs font-semibold ${circleCls}`}>
+                            {day}
+                          </span>
+                          {hasEvent && (
+                            <div className="flex gap-0.5 mt-0.5 justify-center">
+                              {hasBdf   && <span className="w-1 h-1 rounded-full bg-emerald-500" />}
+                              {hasOther && <span className="w-1 h-1 rounded-full bg-amber-500" />}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }
+                    return cells;
+                  })()}
+                </div>
+
+                {/* Selected day list */}
+                {selectedDayEvents && (
+                  <div className="border-t border-emerald-100 px-3 py-2 bg-emerald-50">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-bold text-emerald-800 uppercase tracking-wide">
+                        {new Date(selectedDayEvents[0].start_date).toLocaleDateString('en-US', { month:'short', day:'numeric' })}
                       </span>
+                      <button onClick={() => setSelectedDayEvents(null)} className="text-gray-400 hover:text-gray-600">
+                        <FaTimes className="text-xs" />
+                      </button>
                     </div>
-                    <div className="absolute top-4 right-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold ${event.category === 'bdf' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
-                        {getCategoryLabel(event.category)}
-                      </span>
+                    <div className="space-y-1.5 max-h-32 overflow-y-auto">
+                      {selectedDayEvents.map(event => (
+                        <div
+                          key={event.id}
+                          onClick={() => { setSelectedDayEvents(null); navigate(`/event/${event.id}`); }}
+                          className="flex items-center gap-1.5 p-1.5 bg-white rounded border border-emerald-100 cursor-pointer hover:border-emerald-400 hover:shadow-sm transition-all duration-150 group"
+                        >
+                          <div className={`w-0.5 h-6 rounded-full flex-shrink-0 ${event.category === 'bdf' ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-semibold text-emerald-900 truncate">{event.title}</p>
+                          </div>
+                          <FaArrowRight className="text-emerald-400 text-xs flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                      ))}
                     </div>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-emerald-900 mb-3 hover:text-emerald-700 transition-colors">{event.title}</h3>
-                    <p className="text-gray-600 mb-4 text-sm line-clamp-2">{event.description}</p>
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-center text-gray-600 text-sm">
-                        <FaCalendarAlt className="mr-3 text-emerald-600 flex-shrink-0" />
-                        <span className="font-medium">{formatDate(event.start_date)}</span>
-                      </div>
-                      {event.time && (
-                        <div className="flex items-center text-gray-600 text-sm">
-                          <FaClock className="mr-3 text-emerald-600 flex-shrink-0" />
-                          <span>{formatTime(event.time)}</span>
-                        </div>
-                      )}
-                      {event.location && (
-                        <div className="flex items-center text-gray-600 text-sm">
-                          <FaMapMarkerAlt className="mr-3 text-emerald-600 flex-shrink-0" />
-                          <span className="truncate">{event.location}</span>
-                        </div>
-                      )}
-                      {event.participants && (
-                        <div className="flex items-center text-gray-600 text-sm">
-                          <FaUsers className="mr-3 text-emerald-600 flex-shrink-0" />
-                          <span>{event.participants} Participants</span>
-                        </div>
-                      )}
-                    </div>
-                    {event.type === 'upcoming' && event.registration_deadline && (
-                      <div className="bg-amber-50 border border-amber-100 rounded-lg p-3 mb-4">
-                        <div className="flex items-center text-amber-800 text-sm">
-                          <FaClock className="mr-2 flex-shrink-0" />
-                          <span className="font-bold">Registration Deadline:</span>
-                          <span className="ml-2">{formatDate(event.registration_deadline)}</span>
-                        </div>
-                      </div>
-                    )}
-                    {event.type === 'completed' && (
-                      <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-3 mb-4">
-                        <div className="flex items-center text-emerald-800 text-sm">
-                          <FaTrophy className="mr-2 flex-shrink-0" />
-                          <span className="font-bold">Status:</span>
-                          <span className="ml-2">{event.status || 'Completed'}</span>
-                        </div>
-                      </div>
-                    )}
-                    <div className="flex justify-between items-center">
-                      <Link to={`/event/${event.id}`} className="text-emerald-700 hover:text-emerald-900 font-bold flex items-center hover:underline text-sm">
-                        View Details <FaArrowRight className="ml-2" />
-                      </Link>
-                      {event.type === 'upcoming' && event.status?.toLowerCase() === 'open' && (
-                        <Link to={`/registration/${event.id}`} className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 text-sm">
-                          Register Now
-                        </Link>
-                      )}
-                    </div>
+                )}
+
+                {/* Legend */}
+                <div className="flex items-center gap-3 px-3 py-2 border-t border-emerald-100 bg-white flex-wrap">
+                  <div className="flex items-center gap-1">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <span className="text-xs text-gray-600">BDF</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className="w-2 h-2 rounded-full bg-amber-500" />
+                    <span className="text-xs text-gray-600">Other</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className="w-2 h-2 rounded-full bg-emerald-200" />
+                    <span className="text-xs text-gray-500">Today</span>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </section>
 
