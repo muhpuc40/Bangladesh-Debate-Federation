@@ -52,11 +52,7 @@ const NewsDetails = () => {
         setAllNews(newsArray);
 
         const foundNews = newsArray.find(n => String(n.id) === String(id));
-
-        if (!foundNews) {
-          throw new Error('News not found');
-        }
-
+        if (!foundNews) throw new Error('News not found');
         setNews(foundNews);
 
       } catch (err) {
@@ -71,9 +67,7 @@ const NewsDetails = () => {
       }
     };
 
-    if (id) {
-      fetchData();
-    }
+    if (id) fetchData();
   }, [id]);
 
   const otherNews = allNews.filter(n => String(n.id) !== String(id)).slice(0, 5);
@@ -81,49 +75,31 @@ const NewsDetails = () => {
   const formatDate = (dateString) => {
     if (!dateString) return 'Date not specified';
     try {
-      const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-    } catch {
-      return dateString;
-    }
+      return new Date(dateString).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    } catch { return dateString; }
   };
 
   const formatShortDate = (dateString) => {
     if (!dateString) return '';
     try {
-      const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-      });
-    } catch {
-      return dateString;
-    }
+      return new Date(dateString).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    } catch { return dateString; }
   };
 
   const getCategoryColor = (category) => {
     if (!category) return 'bg-gray-100 text-gray-800';
-
-    const categoryLower = category.toLowerCase();
     const colors = {
       'announcement': 'bg-blue-100 text-blue-800',
-      'achievement': 'bg-green-100 text-green-800',
-      'education': 'bg-purple-100 text-purple-800',
-      'workshop': 'bg-orange-100 text-orange-800',
-      'scholarship': 'bg-yellow-100 text-yellow-800',
-      'training': 'bg-indigo-100 text-indigo-800',
-      'infrastructure': 'bg-pink-100 text-pink-800',
-      'results': 'bg-red-100 text-red-800'
+      'achievement':  'bg-green-100 text-green-800',
+      'education':    'bg-purple-100 text-purple-800',
+      'workshop':     'bg-orange-100 text-orange-800',
+      'scholarship':  'bg-yellow-100 text-yellow-800',
+      'training':     'bg-indigo-100 text-indigo-800',
+      'infrastructure':'bg-pink-100 text-pink-800',
+      'results':      'bg-red-100 text-red-800'
     };
-    return colors[categoryLower] || 'bg-emerald-100 text-emerald-800';
+    return colors[category.toLowerCase()] || 'bg-emerald-100 text-emerald-800';
   };
-
-
 
   if (loading) {
     return (
@@ -166,67 +142,60 @@ const NewsDetails = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Main Content */}
-      <section className="pt-24 pb-8 md:pt-28 md:pb-12">
+      <section className="pt-16 pb-8 md:pt-20 md:pb-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Back Button */}
-          <div className="mb-6">
+          {/* Back + Category + Tags — single line, all screen sizes */}
+          <div className="flex flex-wrap items-center gap-2 mb-4">
             <button
               onClick={() => navigate(-1)}
-              className="flex items-center text-emerald-600 hover:text-emerald-800 font-medium transition-colors duration-300"
+              className="flex items-center text-emerald-600 hover:text-emerald-800 font-medium transition-colors duration-300 group"
             >
-              <FaArrowLeft className="mr-2 text-sm" />
-              Back 
+              <FaArrowLeft className="mr-1.5 text-sm group-hover:-translate-x-1 transition-transform duration-300" />
+              Back
             </button>
+
+            <span className="text-gray-300 select-none">|</span>
+
+            {news.category && (
+              <span className={`px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(news.category)}`}>
+                {news.category}
+              </span>
+            )}
+            {news.tags && news.tags.map((tag, index) => (
+              <span key={index} className="px-3 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800 border border-purple-200">
+                <FaTag className="inline mr-1 text-[10px]" />
+                {tag}
+              </span>
+            ))}
           </div>
 
-          {/* Card Header with Tags */}
-          <div className="mb-6">
-            {/* Category and Tags */}
-            <div className="flex flex-wrap items-center gap-2 mb-3">
-              {news.category && (
-                <span className={`px-4 py-1.5 rounded-full text-sm font-bold ${getCategoryColor(news.category)}`}>
-                  {news.category}
-                </span>
-              )}
-              {/* Additional Tags */}
-              {news.tags && news.tags.map((tag, index) => (
-                <span key={index} className="px-4 py-1.5 rounded-full text-sm font-bold bg-purple-100 text-purple-800 border border-purple-200">
-                  <FaTag className="inline mr-1 text-xs" />
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* News Title */}
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-2">
-              {news.title}
-            </h1>
-          </div>
+          {/* Title */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-6 leading-tight">
+            {news.title}
+          </h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Column - Main News Content (2/3 width) */}
+
+            {/* Main Content */}
             <div className="lg:col-span-2">
-              {/* Single Card */}
               <div className="bg-white rounded-xl border border-emerald-100 shadow-lg overflow-hidden">
-                {/* News Image */}
-                <div className="p-6">
+
+                {/* Image */}
+                <div className="p-6 pb-0">
                   <div className="rounded-xl overflow-hidden border border-emerald-100">
                     <img
                       src={news.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'}
                       alt={news.title}
                       className="w-full h-[400px] object-cover"
-                      onError={(e) => {
-                        e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';
-                      }}
+                      onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'; }}
                     />
                   </div>
                 </div>
 
                 {/* News Details */}
-                <div className="p-6 pt-0">
-                  {/* Meta Information */}
+                <div className="p-6 pt-4">
+                  {/* Meta */}
                   <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-gray-600 border-b border-emerald-100 pb-4">
                     <div className="flex items-center">
                       <FaCalendarAlt className="mr-2 text-emerald-600" />
@@ -259,33 +228,26 @@ const NewsDetails = () => {
                         {news.excerpt}
                       </div>
                     )}
-
                     <div className="mt-4 space-y-4">
                       <p className="text-lg">{news.content}</p>
-
                       {news.details && (
-                        <div className="mt-6">
-                          <p>{news.details}</p>
-                        </div>
+                        <div className="mt-6"><p>{news.details}</p></div>
                       )}
                     </div>
-
-                    {/* Additional Content Sections */}
                     {news.sections && news.sections.map((section, index) => (
                       <div key={index} className="mt-8">
-                        {section.title && (
-                          <h2 className="text-2xl font-bold text-emerald-800 mb-3">{section.title}</h2>
-                        )}
+                        {section.title && <h2 className="text-2xl font-bold text-emerald-800 mb-3">{section.title}</h2>}
                         <p>{section.content}</p>
                       </div>
                     ))}
                   </div>
 
-                  {/* Source/Reference */}
+                  {/* Source */}
                   {news.source && (
                     <div className="mt-8 pt-6 border-t border-emerald-100">
                       <p className="text-sm text-gray-600">
-                        Source: <a href={news.source.url} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-800 hover:underline">
+                        Source:{' '}
+                        <a href={news.source.url} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-800 hover:underline">
                           {news.source.name || news.source.url}
                         </a>
                       </p>
@@ -295,9 +257,8 @@ const NewsDetails = () => {
               </div>
             </div>
 
-            {/* Right Column - Sidebar (1/3 width) */}
+            {/* Sidebar */}
             <div className="lg:col-span-1">
-              {/* Other News Section */}
               {otherNews.length > 0 && (
                 <div className="bg-white rounded-xl border border-emerald-100 p-6 sticky top-24">
                   <div className="flex items-center justify-between mb-4">
@@ -305,10 +266,7 @@ const NewsDetails = () => {
                       <FaNewspaper className="mr-2" />
                       More News
                     </h3>
-                    <Link
-                      to="/news"
-                      className="text-emerald-600 hover:text-emerald-800 text-sm font-medium flex items-center"
-                    >
+                    <Link to="/news" className="text-emerald-600 hover:text-emerald-800 text-sm font-medium flex items-center">
                       View All <FaArrowRight className="ml-1 text-xs" />
                     </Link>
                   </div>
@@ -326,9 +284,7 @@ const NewsDetails = () => {
                               src={otherItem.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'}
                               alt={otherItem.title}
                               className="w-full h-full object-cover"
-                              onError={(e) => {
-                                e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80';
-                              }}
+                              onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'; }}
                             />
                           </div>
                           <div className="flex-1 min-w-0">
@@ -339,11 +295,9 @@ const NewsDetails = () => {
                               <FaCalendarAlt className="mr-1 text-emerald-600 flex-shrink-0" />
                               <span className="truncate">{formatShortDate(otherItem.date)}</span>
                             </div>
-                            <div>
-                              <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold ${getCategoryColor(otherItem.category)}`}>
-                                {otherItem.category || 'News'}
-                              </span>
-                            </div>
+                            <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold ${getCategoryColor(otherItem.category)}`}>
+                              {otherItem.category || 'News'}
+                            </span>
                           </div>
                         </div>
                       </Link>
@@ -352,6 +306,7 @@ const NewsDetails = () => {
                 </div>
               )}
             </div>
+
           </div>
         </div>
       </section>
@@ -361,73 +316,17 @@ const NewsDetails = () => {
           .no-print { display: none !important; }
           body { background: white; }
         }
-        
-        /* Rich text content styling */
-        .prose h2 {
-          color: #065f46;
-          margin-top: 1.5rem;
-          margin-bottom: 1rem;
-        }
-        
-        .prose h3 {
-          color: #047857;
-          margin-top: 1.25rem;
-          margin-bottom: 0.75rem;
-        }
-        
-        .prose ul, .prose ol {
-          margin-top: 0.5rem;
-          margin-bottom: 1rem;
-          padding-left: 1.5rem;
-        }
-        
-        .prose li {
-          margin-bottom: 0.25rem;
-        }
-        
-        .prose a {
-          color: #059669;
-          text-decoration: underline;
-          text-decoration-thickness: 1px;
-          text-underline-offset: 2px;
-        }
-        
-        .prose a:hover {
-          color: #047857;
-          text-decoration-thickness: 2px;
-        }
-        
-        .prose blockquote {
-          border-left-color: #059669;
-          background-color: #f0fdf4;
-          padding: 1rem;
-          border-radius: 0.5rem;
-          font-style: italic;
-          margin: 1rem 0;
-        }
-        
-        .prose img {
-          border-radius: 0.5rem;
-          margin: 1rem 0;
-        }
-        
-        .prose table {
-          width: 100%;
-          border-collapse: collapse;
-          margin: 1rem 0;
-        }
-        
-        .prose th {
-          background-color: #f0fdf4;
-          font-weight: 600;
-          padding: 0.5rem;
-          border: 1px solid #d1fae5;
-        }
-        
-        .prose td {
-          padding: 0.5rem;
-          border: 1px solid #d1fae5;
-        }
+        .prose h2 { color: #065f46; margin-top: 1.5rem; margin-bottom: 1rem; }
+        .prose h3 { color: #047857; margin-top: 1.25rem; margin-bottom: 0.75rem; }
+        .prose ul, .prose ol { margin-top: 0.5rem; margin-bottom: 1rem; padding-left: 1.5rem; }
+        .prose li { margin-bottom: 0.25rem; }
+        .prose a { color: #059669; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+        .prose a:hover { color: #047857; text-decoration-thickness: 2px; }
+        .prose blockquote { border-left-color: #059669; background-color: #f0fdf4; padding: 1rem; border-radius: 0.5rem; font-style: italic; margin: 1rem 0; }
+        .prose img { border-radius: 0.5rem; margin: 1rem 0; }
+        .prose table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        .prose th { background-color: #f0fdf4; font-weight: 600; padding: 0.5rem; border: 1px solid #d1fae5; }
+        .prose td { padding: 0.5rem; border: 1px solid #d1fae5; }
       `}</style>
     </div>
   );

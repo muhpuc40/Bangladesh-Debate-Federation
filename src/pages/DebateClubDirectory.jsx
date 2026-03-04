@@ -86,10 +86,10 @@ const DebateClubDirectory = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  // Loading স্পিনার
+  // Loading spinner
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading...</p>
@@ -105,27 +105,7 @@ const DebateClubDirectory = () => {
         <div className="text-center">
           <div className="text-6xl mb-4">⚠️</div>
           <h3 className="text-2xl font-bold text-gray-700 mb-6">
-            Error
-          </h3>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // Empty state for no clubs
-  if (debateClubs.length === 0) {
-    return (
-      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-6xl mb-4">⚠️</div>
-          <h3 className="text-2xl font-bold text-gray-700 mb-6">
-            Error
+            Error Loading Data
           </h3>
           <button
             onClick={() => window.location.reload()}
@@ -140,6 +120,7 @@ const DebateClubDirectory = () => {
 
   return (
     <div className="min-h-screen bg-white">
+
       {/* Hero Section */}
       <section className="pt-16 md:pt-20 py-8 md:py-10 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -154,8 +135,9 @@ const DebateClubDirectory = () => {
         </div>
       </section>
 
-      {/* Search and Filter Section */}
-      <section id="search" className="py-3 bg-white border-b border-emerald-100 shadow">
+      {/* Search and Filter Section — hidden when no clubs loaded */}
+      {debateClubs.length > 0 && (
+      <section id="search" className="py-3 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-3">
             <h2 className="text-xl font-bold text-emerald-900">
@@ -174,21 +156,23 @@ const DebateClubDirectory = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search by club name, university, president, or general secretary..."
-                className="w-full pl-10 pr-4 py-2.5 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300 text-black placeholder:text-gray-500 shadow-sm"
+                className="w-full pl-10 pr-4 py-2.5 border border-emerald-200 rounded-lg focus:border-emerald-400 outline-none transition-all duration-300 text-black placeholder:text-gray-500 shadow-sm"
               />
             </div>
           </div>
 
-          {/* Filters */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
-            <div>
-              <label className="block text-gray-700 font-medium mb-1">
-                <FaUniversity className="inline mr-2 text-emerald-600" /> Institute
+          {/* Filters row — Institute + Region + Clear + CSV all in one row */}
+          <div className="flex flex-wrap gap-3 items-end">
+
+            {/* Institute filter */}
+            <div className="flex-1 min-w-[160px]">
+              <label className="block text-gray-700 font-medium mb-1 text-sm">
+                <FaUniversity className="inline mr-1 text-emerald-600" /> Institute
               </label>
               <select
                 value={selectedUniversity}
                 onChange={(e) => setSelectedUniversity(e.target.value)}
-                className="w-full px-4 py-2.5 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white text-black shadow-sm"
+                className="w-full px-3 py-2.5 border border-emerald-200 rounded-lg focus:border-emerald-400 outline-none bg-white text-gray-900 shadow-sm text-sm"
               >
                 <option value="all">All Institutes</option>
                 {universities.map((uni, index) => (
@@ -197,14 +181,15 @@ const DebateClubDirectory = () => {
               </select>
             </div>
 
-            <div>
-              <label className="block text-gray-700 font-medium mb-1">
-                <FaMapMarkerAlt className="inline mr-2 text-emerald-600" /> Region
+            {/* Region filter */}
+            <div className="flex-1 min-w-[140px]">
+              <label className="block text-gray-700 font-medium mb-1 text-sm">
+                <FaMapMarkerAlt className="inline mr-1 text-emerald-600" /> Region
               </label>
               <select
                 value={selectedRegion}
                 onChange={(e) => setSelectedRegion(e.target.value)}
-                className="w-full px-4 py-2.5 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white text-black shadow-sm"
+                className="w-full px-3 py-2.5 border border-emerald-200 rounded-lg focus:border-emerald-400 outline-none bg-white text-gray-900 shadow-sm text-sm"
               >
                 <option value="all">All Regions</option>
                 {regions.map((region, index) => (
@@ -213,6 +198,7 @@ const DebateClubDirectory = () => {
               </select>
             </div>
 
+            {/* Clear Filters button */}
             <div className="flex items-end">
               <button
                 onClick={() => {
@@ -220,46 +206,41 @@ const DebateClubDirectory = () => {
                   setSelectedUniversity('all');
                   setSelectedRegion('all');
                 }}
-                className="w-full bg-emerald-100 hover:bg-emerald-200 text-emerald-700 font-bold py-2.5 px-6 rounded-lg transition-all duration-300 flex items-center justify-center border border-emerald-300 shadow-sm"
+                className="bg-emerald-100 hover:bg-emerald-200 text-emerald-700 font-bold py-2.5 px-4 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 shadow-sm text-sm whitespace-nowrap"
               >
-                <FaFilter className="mr-2" /> Clear Filters
+                <FaFilter className="mr-1.5" /> Clear
               </button>
             </div>
-          </div>
 
-          {/* Results + Actions */}
-          <div className="flex justify-between items-center pt-2 border-t border-emerald-100 text-sm">
-            <div className="text-gray-600">
-              Found <span className="font-bold text-emerald-700">{filteredClubs.length}</span> debate clubs
+            {/* CSV Download button */}
+            <div className="flex items-end">
+              <button
+                onClick={downloadCSV}
+                className="bg-white hover:bg-emerald-50 text-emerald-700 font-medium py-2.5 px-4 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow text-sm whitespace-nowrap"
+              >
+                <FaDownload className="mr-1.5" /> CSV
+              </button>
             </div>
 
-            <button
-              onClick={downloadCSV}
-              className="bg-white hover:bg-emerald-50 text-emerald-700 font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center border border-emerald-300 hover:shadow"
-            >
-              <FaDownload className="mr-2" /> CSV
-            </button>
           </div>
         </div>
       </section>
+      )}
 
       {/* Directory Section */}
-      <section className="py-6 md:py-8 bg-emerald-50">
+      <section className="py-6 md:py-8 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {filteredClubs.length === 0 ? (
-            <div className="text-center py-10 bg-white rounded-xl shadow">
-              <div className="text-5xl mb-3">🔍</div>
-              <h3 className="text-xl font-bold text-gray-700 mb-2">No clubs found</h3>
-              <p className="text-gray-600 mb-4">Try adjusting your search criteria or filters</p>
+            <div className="text-center">
+              <div className="text-6xl mb-4">⚠️</div>
+              <h3 className="text-2xl font-bold text-gray-700 mb-6">
+                No Data Found
+              </h3>
               <button
-                onClick={() => {
-                  setSearchTerm('');
-                  setSelectedUniversity('all');
-                  setSelectedRegion('all');
-                }}
-                className="text-emerald-600 hover:text-emerald-800 font-bold"
+                onClick={() => window.location.reload()}
+                className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
               >
-                Clear all filters
+                Try Again
               </button>
             </div>
           ) : (
@@ -297,9 +278,10 @@ const DebateClubDirectory = () => {
                           <div className="font-bold text-emerald-900">{club.clubName}</div>
                           <div className="text-sm text-gray-600">{club.university}</div>
                         </td>
-
-                        <td className="px-6 py-3">{club.president}</td>
-                        <td className="px-6 py-3">{club.generalSecretary}</td>
+                        {/* President — explicit text-gray-800 so it's always visible */}
+                        <td className="px-6 py-3 text-gray-800">{club.president}</td>
+                        {/* General Secretary — explicit text-gray-800 */}
+                        <td className="px-6 py-3 text-gray-800">{club.generalSecretary}</td>
 
                         <td className="px-6 py-3 whitespace-nowrap">
                           <a href={`tel:${club.contact}`} className="text-emerald-600 hover:underline">
@@ -340,21 +322,33 @@ const DebateClubDirectory = () => {
                     <h3 className="font-bold text-emerald-900">{club.clubName}</h3>
                     <p className="text-sm text-gray-600 mb-3">{club.university}</p>
 
-                    <div className="space-y-2 text-sm">
-                      <div><strong>President:</strong> {club.president}</div>
-                      <div><strong>General Secretary:</strong> {club.generalSecretary}</div>
+                    <div className="space-y-2 text-sm text-gray-800">
+                      <div><span className="font-semibold text-gray-700">President:</span> {club.president}</div>
+                      <div><span className="font-semibold text-gray-700">General Secretary:</span> {club.generalSecretary}</div>
                       <div>
-                        <strong>Contact:</strong>{' '}
+                        <span className="font-semibold text-gray-700">Contact:</span>{' '}
                         <a href={`tel:${club.contact}`} className="text-emerald-600 hover:underline">
                           {club.contact}
                         </a>
                       </div>
                       <div>
-                        <strong>Email:</strong>{' '}
+                        <span className="font-semibold text-gray-700">Email:</span>{' '}
                         <a href={`mailto:${club.email}`} className="text-emerald-600 hover:underline">
                           {club.email}
                         </a>
                       </div>
+                      {club.facebookUrl && (
+                        <div>
+                          <a
+                            href={club.facebookUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                          >
+                            <FaFacebook /> Facebook
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}

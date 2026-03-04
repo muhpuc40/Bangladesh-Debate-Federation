@@ -7,6 +7,34 @@ import {
 } from 'react-icons/fa';
 import apiService from '../services/apiService';
 
+// ── Session-based view tracking helpers (same as AllBlogs) ───────────────────
+const SESSION_KEY = 'viewed_blog_ids';
+
+const getViewedBlogs = () => {
+  try {
+    return JSON.parse(sessionStorage.getItem(SESSION_KEY) || '[]');
+  } catch {
+    return [];
+  }
+};
+
+const markBlogViewed = (blogId) => {
+  try {
+    const viewed = getViewedBlogs();
+    if (!viewed.includes(blogId)) {
+      viewed.push(blogId);
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(viewed));
+    }
+  } catch {
+    // sessionStorage unavailable — silently ignore
+  }
+};
+
+const hasBlogBeenViewed = (blogId) => {
+  return getViewedBlogs().includes(blogId);
+};
+// ─────────────────────────────────────────────────────────────────────────────
+
 const BlogDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -92,7 +120,7 @@ const BlogDetails = () => {
           document.body.appendChild(textArea);
           textArea.focus();
           textArea.select();
-          try { document.execCommand('copy'); } catch {}
+          try { document.execCommand('copy'); } catch { }
           document.body.removeChild(textArea);
         }
         break;
@@ -105,7 +133,7 @@ const BlogDetails = () => {
     { key: 'facebook', Icon: FaFacebook, iconClass: 'text-blue-600', label: 'Facebook' },
     { key: 'linkedin', Icon: FaLinkedin, iconClass: 'text-blue-700', label: 'LinkedIn' },
     { key: 'whatsapp', Icon: FaWhatsapp, iconClass: 'text-green-500', label: 'WhatsApp' },
-    { key: 'copy',     Icon: FaCopy,     iconClass: 'text-gray-600',  label: 'Copy Link' },
+    { key: 'copy', Icon: FaCopy, iconClass: 'text-gray-600', label: 'Copy Link' },
   ];
 
   if (loading) {
@@ -139,14 +167,34 @@ const BlogDetails = () => {
 
   const { blog, author, more_from_author } = blogData;
 
+  // ── Track view then navigate — same pattern as AllBlogs ──────────────────
+  const handleReadArticle = async (e, targetBlog) => {
+    e.preventDefault();
+
+    if (hasBlogBeenViewed(targetBlog.id)) {
+      navigate(`/blog-details/${targetBlog.id}`);
+      return;
+    }
+
+    try {
+      await apiService.trackBlogView(targetBlog.id);
+      markBlogViewed(targetBlog.id);
+    } catch {
+      markBlogViewed(targetBlog.id);
+    }
+
+    navigate(`/blog-details/${targetBlog.id}`);
+  };
+  // ─────────────────────────────────────────────────────────────────────────
+
   return (
-    <div className="min-h-screen bg-gray-50 py-4 md:py-8">
+    <div className="min-h-screen bg-gray-50 pt-16 md:pt-20 pb-4 md:pb-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
 
         {/* Back Button */}
         <button
           onClick={() => navigate('/all-blogs')}
-          className="flex items-center text-emerald-600 hover:text-emerald-700 mb-4 md:mb-6 transition-colors pt-2 md:pt-10"
+          className="flex items-center text-emerald-600 hover:text-emerald-700 mb-4 md:mb-6 transition-colors"
         >
           <FaArrowLeft className="mr-2" /> Back to All Blogs
         </button>
@@ -171,10 +219,6 @@ const BlogDetails = () => {
                       <div className="flex flex-wrap items-center gap-1 text-xs md:text-sm text-gray-500">
                         <FaClock className="text-xs" />
                         <span>{formatDate(blog.created_at)}</span>
-                        <span className="mx-1">•</span>
-                        <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                          Published
-                        </span>
                       </div>
                     </div>
                   </div>
@@ -294,7 +338,6 @@ const BlogDetails = () => {
                       <span className="text-sm">Total Blogs: {author.total_blogs}</span>
                     </div>
 
-                    {/* Total views from author object */}
                     <div className="flex items-center text-gray-600">
                       <FaEye className="mr-3 text-emerald-600 shrink-0" />
                       <span className="text-sm">
@@ -322,9 +365,10 @@ const BlogDetails = () => {
                   <div className="p-6">
                     <div className="space-y-4">
                       {more_from_author.map((otherBlog) => (
-                        <Link
+                        <a
                           key={otherBlog.id}
-                          to={`/blog-details/${otherBlog.id}`}
+                          href={`/blog-details/${otherBlog.id}`}
+                          onClick={(e) => handleReadArticle(e, otherBlog)}
                           className="block group"
                         >
                           <div className="flex gap-3 border-b border-gray-100 last:border-0 pb-3 last:pb-0">
@@ -364,7 +408,7 @@ const BlogDetails = () => {
                               </div>
                             </div>
                           </div>
-                        </Link>
+                        </a>
                       ))}
                     </div>
 

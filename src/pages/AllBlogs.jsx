@@ -221,10 +221,6 @@ const AllBlogs = () => {
                         <FaEye className="text-xs" />
                         <span>{(blog.views || 0).toLocaleString()} views</span>
                       </span>
-                      <span className="mx-1">•</span>
-                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                        Published
-                      </span>
                     </div>
                   </div>
                 </div>
@@ -315,12 +311,12 @@ const AllBlogs = () => {
 
   /* ── LOADING ── */
   if (loading) return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
-      <div className="text-center">
-        <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        <p className="text-gray-600">Loading...</p>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
       </div>
-    </div>
   );
 
   /* ── ERROR ── */
@@ -373,7 +369,7 @@ const AllBlogs = () => {
       <div className="flex-1 py-10 pl-8 pr-4 min-h-screen" style={{ width: '66.666%' }}>
 
         {/* Mobile header */}
-        <div className="lg:hidden flex justify-between items-center mb-6">
+        <div className="lg:hidden flex justify-between items-center mb-6 pt-9">
           <h1 className="text-2xl font-bold text-emerald-900">All Blogs</h1>
           <Link
             to="/blog"

@@ -99,10 +99,10 @@ const ExecutiveCommittee = () => {
     </div>
   );
 
-  // Loading
+  // Loading State
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading...</p>
@@ -111,14 +111,14 @@ const ExecutiveCommittee = () => {
     );
   }
 
-  // Error
+  // Error State
   if (error) {
     return (
       <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-4">⚠️</div>
           <h3 className="text-2xl font-bold text-gray-700 mb-6">
-            Error
+            Error Loading Data
           </h3>
           <button
             onClick={() => window.location.reload()}
@@ -131,39 +131,16 @@ const ExecutiveCommittee = () => {
     );
   }
 
-  // Empty
-  if (committeeMembers.length === 0) {
-    return (
-      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-6xl mb-4">⚠️</div>
-          <h3 className="text-2xl font-bold text-gray-700 mb-6">
-            Error
-          </h3>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // Top 2 special design
   const topMembers = committeeMembers.slice(0, 2);
-
-  // All remaining members (no limit)
   const otherMembers = committeeMembers.slice(2);
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="relative pt-16 md:pt-20 py-8 md:py-12 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
+      <section className="relative pt-16 md:pt-20 py-8 md:py-12 bg-white">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-3xl md:text-5xl font-bold text-emerald-900 mb-4">
-            Executive Committee
+          <h1 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4">
+          Executive Committee
           </h1>
           <p className="text-lg text-gray-700">
             Meet the dedicated leaders steering Bangladesh Debate Federation.
@@ -174,31 +151,46 @@ const ExecutiveCommittee = () => {
       {/* Members */}
       <section className="py-8 md:py-12">
         <div className="container mx-auto px-4">
-
-          {/* <h2 className="text-2xl md:text-3xl font-bold text-emerald-900 text-center mb-8">
-            Our Leadership Team
-          </h2> */}
-
-          {/* Top 2 Members */}
-          {topMembers.length > 0 && (
-            <div className="flex justify-center mb-10">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
-                {topMembers.map((member, index) => (
-                  <MemberCard key={index} member={member} />
-                ))}
-              </div>
+          {committeeMembers.length === 0 ? (
+            <div className="text-center">
+              <div className="text-6xl mb-4">⚠️</div>
+              <h3 className="text-2xl font-bold text-gray-700 mb-6">
+                No Data Found
+              </h3>
+              <button
+                onClick={() => window.location.reload()}
+                className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
+              >
+                Try Again
+              </button>
             </div>
-          )}
+          ) : (
+            <>
+              <h2 className="text-2xl md:text-3xl font-bold text-emerald-900 text-center mb-8">
+                Our Leadership Team
+              </h2>
 
-          {/* All Remaining Members */}
-          {otherMembers.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {otherMembers.map((member, index) => (
-                <MemberCard key={index} member={member} />
-              ))}
-            </div>
-          )}
+              {/* Top 2 Members */}
+              {topMembers.length > 0 && (
+                <div className="flex justify-center mb-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
+                    {topMembers.map((member, index) => (
+                      <MemberCard key={index} member={member} />
+                    ))}
+                  </div>
+                </div>
+              )}
 
+              {/* Remaining Members */}
+              {otherMembers.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {otherMembers.map((member, index) => (
+                    <MemberCard key={index} member={member} />
+                  ))}
+                </div>
+              )}
+            </>
+          )}
         </div>
       </section>
     </div>

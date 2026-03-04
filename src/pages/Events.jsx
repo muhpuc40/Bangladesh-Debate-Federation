@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService';
-import { 
-  FaCalendarAlt, 
-  FaMapMarkerAlt, 
-  FaUsers, 
-  FaClock, 
-  FaSearch, 
-  FaArrowRight, 
-  FaRegCalendarCheck, 
-  FaTrophy, 
+import {
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaUsers,
+  FaClock,
+  FaSearch,
+  FaArrowRight,
+  FaTrophy,
   FaFilter,
   FaTimes,
   FaChevronLeft,
@@ -183,16 +182,16 @@ const Events = () => {
 
   const getStatusColor = (eventType) => ({
     'upcoming': 'bg-emerald-100 text-emerald-800',
-    'ongoing':  'bg-teal-100 text-teal-800',
-    'completed':'bg-gray-100 text-gray-700'
+    'ongoing': 'bg-teal-100 text-teal-800',
+    'completed': 'bg-gray-100 text-gray-700'
   }[eventType] || 'bg-gray-100 text-gray-700');
 
   const getCategoryLabel = (category) => ({
-    'bdf':           'BDF Event',
-    'other':         'Other Organization',
-    'national':      'National',
+    'bdf': 'BDF Event',
+    'other': 'Other Organization',
+    'national': 'National',
     'international': 'International',
-    'training':      'Training'
+    'training': 'Training'
   }[category] || category);
 
   const formatDate = (dateString) => {
@@ -202,7 +201,7 @@ const Events = () => {
   };
 
   const formatTime = (timeString) => {
-    if (!timeString) return 'Time not specified';
+    if (!timeString) return '';
     try {
       const [hours, minutes] = timeString.split(':');
       const hour = parseInt(hours);
@@ -210,15 +209,11 @@ const Events = () => {
     } catch { return timeString; }
   };
 
-  const getFilterButtonStyle = (filterId) => activeFilter === filterId
-    ? 'px-5 py-2.5 rounded-full text-sm font-semibold bg-emerald-700 text-white shadow-md transition-all duration-200'
-    : 'px-5 py-2.5 rounded-full text-sm font-semibold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 transition-all duration-200';
-
   const getCardAnimationClass = (cardId) => {
     const visible = visibleCards.includes(cardId);
-    return `event-card bg-white rounded-xl border border-emerald-100 overflow-hidden hover:shadow-xl transition-all duration-300 transform ${
+    return `event-card bg-white rounded-xl border border-emerald-100 overflow-hidden hover:border-emerald-300 hover:shadow-lg transition-all duration-300 ${
       visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-    } hover:-translate-y-2`;
+    }`;
   };
 
   const handleDayClick = (dayEvents) => {
@@ -240,7 +235,7 @@ const Events = () => {
     const file = e.target.files[0];
     if (!file) return;
     if (file.size > 2 * 1024 * 1024) { setModalError('Image size must be less than 2MB'); return; }
-    if (!['image/jpeg','image/png','image/jpg','image/gif'].includes(file.type)) { setModalError('Only JPG, PNG, and GIF images are allowed'); return; }
+    if (!['image/jpeg', 'image/png', 'image/jpg', 'image/gif'].includes(file.type)) { setModalError('Only JPG, PNG, and GIF images are allowed'); return; }
     setImageFile(file);
     setModalError(null);
     const reader = new FileReader();
@@ -290,7 +285,7 @@ const Events = () => {
   };
 
   const resetForm = () => {
-    setFormData({ title:'', description:'', start_date:'', end_date:'', time:'', location:'', type:'upcoming', participants:'', registration_deadline:'', event_link:'', status:'', name:'', email:'', phone:'' });
+    setFormData({ title: '', description: '', start_date: '', end_date: '', time: '', location: '', type: 'upcoming', participants: '', registration_deadline: '', event_link: '', status: '', name: '', email: '', phone: '' });
     clearImage();
     setValidationErrors({});
     setModalSuccess(false);
@@ -301,16 +296,16 @@ const Events = () => {
 
   const eventsByDate = getEventsByDate();
 
-  // Shared input/select styles — always black text
   const inputClass = (field) =>
     `w-full px-4 py-2.5 border rounded-lg text-gray-900 placeholder-gray-400 bg-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-200 ${
       validationErrors[field] ? 'border-red-400 bg-red-50' : 'border-emerald-200'
     }`;
   const selectClass = `w-full px-4 py-2.5 border border-emerald-200 rounded-lg text-gray-900 bg-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-200 cursor-pointer`;
 
+  // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading...</p>
@@ -319,37 +314,16 @@ const Events = () => {
     );
   }
 
+  // Error state
   if (error) {
     return (
-      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-4">
           <div className="text-6xl mb-4">⚠️</div>
-          <h3 className="text-2xl font-bold text-gray-700 mb-6">
-            Error
-          </h3>
+          <h3 className="text-2xl font-bold text-gray-800 mb-6">Error loading data</h3>
           <button
             onClick={() => window.location.reload()}
-            className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // Empty state for no events
-  if (events.length === 0) {
-    return (
-      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-6xl mb-4">⚠️</div>
-          <h3 className="text-2xl font-bold text-gray-700 mb-6">
-            Error
-          </h3>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300"
           >
             Try Again
           </button>
@@ -360,173 +334,222 @@ const Events = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* ── Hero ── */}
-      <section className="relative pt-20 md:pt-24 py-12 md:py-16 lg:py-20 bg-gradient-to-r from-emerald-50 to-white border-b border-emerald-100">
+
+      {/* Hero Section — same as News */}
+      <section className="relative bg-white text-emerald-900 pt-18 md:pt-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-900 mb-6 leading-tight">
+          <div className="max-w-4xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
               Events & Competitions
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-              Discover upcoming debate competitions, training, and workshops organized by Bangladesh Debate Federation.
+            <p className="text-base md:text-lg lg:text-xl text-gray-700 mb-6 md:mb-8 leading-relaxed">
+              Discover upcoming debate competitions, training programs, and workshops
+              organized by Bangladesh Debate Federation.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── Search & Filter ── */}
-      <section className="py-8 bg-white border-b border-emerald-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row gap-4 mb-6">
-            <div className="flex-1">
-              <div className="relative">
+      {/* Main Content with Two Columns — same as News */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+        <div className="flex flex-col lg:flex-row gap-6 md:gap-8">
+
+          {/* Left Column — Events (2/3 width) — same as News left column */}
+          <div className="lg:w-2/3">
+
+            {/* Search + Filter + Submit — lg:sticky */}
+            {/* Fine-tune: adjust top-[72px] if navbar height changes */}
+            <div className="lg:sticky top-[72px] z-30 bg-white mb-6 pb-4"> {/* pb-4 = extra bottom padding below filter row when sticky */}
+              {/* Search bar — no focus ring/outline, only border color change on focus */}
+              <div className="relative mb-3">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaSearch className="text-gray-400" />
+                  <FaSearch className="text-gray-400 text-lg md:text-xl" />
                 </div>
                 <input
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Search events by title, description, or location..."
-                  className="w-full pl-10 pr-10 py-3 border border-emerald-200 rounded-full text-gray-900 placeholder-gray-400 bg-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300"
+                  placeholder="Search events by title, description or location..."
+                  className="w-full pl-12 pr-4 py-3 md:py-3.5 bg-white border-2 border-emerald-200 rounded-xl focus:border-emerald-400 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-sm md:text-base hover:border-emerald-300 shadow"
                 />
                 {searchTerm && (
-                  <button onClick={() => setSearchTerm('')} className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">
-                    <FaTimes />
-                  </button>
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                    <button
+                      onClick={() => setSearchTerm('')}
+                      className="text-gray-500 hover:text-red-500 transition-colors duration-200 text-sm md:text-base"
+                    >
+                      Clear
+                    </button>
+                  </div>
                 )}
               </div>
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => { setActiveFilter('all'); setSearchTerm(''); }}
-                className="px-5 py-3 border border-emerald-200 text-emerald-700 rounded-full hover:bg-emerald-50 transition-all duration-300 font-semibold whitespace-nowrap"
-              >
-                Clear Filters
-              </button>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="flex items-center gap-2 px-5 py-3 bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold rounded-full shadow-md transition-all duration-200 whitespace-nowrap"
-              >
-                <FaPlus className="text-sm" />
-                Submit Event
-              </button>
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row md:items-center gap-3">
-            <div className="flex items-center shrink-0">
-              <FaFilter className="text-emerald-600 mr-2" />
-              <span className="text-gray-700 font-semibold">Filter by:</span>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {filterOptions.map(f => (
-                <button key={f.id} onClick={() => setActiveFilter(f.id)} className={getFilterButtonStyle(f.id)}>{f.label}</button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* ── Main Content with Calendar ── */}
-      <section className="py-12 md:py-16 lg:py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-8">
-            {/* Left Column - Events Grid */}
-            <div className="flex-1">
-              <div className="flex justify-between items-center mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-emerald-900">
+              {/* Filter + Submit */}
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="flex items-center shrink-0">
+                  <FaFilter className="text-emerald-600 mr-2 text-sm" />
+                  <span className="text-gray-700 font-semibold text-sm">Filter:</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {filterOptions.map(f => (
+                    <button
+                      key={f.id}
+                      onClick={() => setActiveFilter(f.id)}
+                      className={
+                        activeFilter === f.id
+                          ? 'px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-700 text-white shadow-md transition-all duration-200'
+                          : 'px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 transition-all duration-200'
+                      }
+                    >
+                      {f.label}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="flex items-center gap-1.5 px-4 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-full shadow-md transition-all duration-200 whitespace-nowrap ml-auto"
+                >
+                  <FaPlus className="text-xs" />
+                  Submit Event
+                </button>
+              </div>
+            </div>
+
+            {/* Events Grid */}
+            <div className="mt-8 md:mt-10">
+              {/* Fine-tune: title left, count right — always same line on all screen sizes */}
+              <div className="flex items-center justify-between mb-4 md:mb-6">
+                <h2 className="text-xl md:text-2xl font-bold text-emerald-900">
                   {activeFilter === 'all' ? 'All Events' : filterOptions.find(f => f.id === activeFilter)?.label}
-                  <span className="text-gray-400 text-lg ml-2">({filteredEvents.length})</span>
                 </h2>
+                <div className="text-xs md:text-sm text-gray-600">
+                  {searchTerm ? (
+                    <span className="flex items-center">
+                      <FaSearch className="mr-1 md:mr-2" />
+                      {filteredEvents.length} results
+                    </span>
+                  ) : (
+                    <span>{filteredEvents.length} Events</span>
+                  )}
+                </div>
               </div>
 
-              {/* ── Empty state for filtered results ── */}
               {filteredEvents.length === 0 ? (
-                <div className="text-center py-16">
-                  <div className="text-6xl mb-4">📅</div>
-                  <h3 className="text-2xl font-bold text-gray-700 mb-2">
-                    No events found
-                  </h3>
-                  <p className="text-gray-500 mb-6">
-                    Try changing your search or filter criteria
-                  </p>
-                  <button onClick={() => { setSearchTerm(''); setActiveFilter('all'); }} className="border border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-bold py-2 px-6 rounded-full transition-all duration-300">
-                    Reset Filters
-                  </button>
+                <div className="text-center py-8 md:py-12 bg-gray-50 rounded-xl">
+                  <FaSearch className="text-3xl md:text-4xl text-gray-400 mx-auto mb-3 md:mb-4" />
+                  <h3 className="text-lg md:text-xl font-bold text-gray-700 mb-2">No events found</h3>
+                  {(searchTerm || activeFilter !== 'all') && (
+                    <button
+                      onClick={() => { setSearchTerm(''); setActiveFilter('all'); }}
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 md:px-6 rounded-lg transition-all duration-300 text-sm md:text-base"
+                    >
+                      Show All Events
+                    </button>
+                  )}
                 </div>
               ) : (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   {filteredEvents.map((event, index) => (
-                    <div key={event.id} data-card-id={event.id} className={getCardAnimationClass(event.id)} style={{ transitionDelay: `${index * 50}ms` }}>
-                      <div className="relative h-48 overflow-hidden">
+                    <div
+                      key={event.id}
+                      data-card-id={event.id}
+                      className={getCardAnimationClass(event.id)}
+                      style={{ transitionDelay: `${index * 50}ms` }}
+                    >
+                      {/* Image — same as News card */}
+                      <div className="relative h-40 md:h-48 overflow-hidden">
                         <img
                           src={event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}
                           alt={event.title}
-                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                           onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'; }}
                         />
-                        <div className="absolute top-4 left-4">
-                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(event.type)}`}>
+                        <div className="absolute top-3 left-3">
+                          <span className={`px-2 py-1 rounded text-xs font-bold ${getStatusColor(event.type)}`}>
                             {event.status || event.type}
                           </span>
                         </div>
-                        <div className="absolute top-4 right-4">
-                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${event.category === 'bdf' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
-                            {getCategoryLabel(event.category)}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="p-6">
-                        <h3 className="text-xl font-bold text-emerald-900 mb-3 hover:text-emerald-700 transition-colors">{event.title}</h3>
-                        <p className="text-gray-600 mb-4 text-sm line-clamp-2">{event.description}</p>
-                        <div className="space-y-3 mb-6">
-                          <div className="flex items-center text-gray-600 text-sm">
-                            <FaCalendarAlt className="mr-3 text-emerald-600 flex-shrink-0" />
-                            <span className="font-medium">{formatDate(event.start_date)}</span>
+                        {event.category && (
+                          <div className="absolute top-3 right-3">
+                            <span className={`px-2 py-1 rounded text-xs font-bold ${event.category === 'bdf' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
+                              {getCategoryLabel(event.category)}
+                            </span>
                           </div>
+                        )}
+                      </div>
+
+                      <div className="p-4 md:p-6">
+                        {/* Date — same as News */}
+                        <div className="flex items-center text-xs text-gray-600 mb-2 md:mb-3">
+                          <FaCalendarAlt className="mr-1.5 text-emerald-600" />
+                          <span>{formatDate(event.start_date)}</span>
+                        </div>
+
+                        {/* Title — same as News */}
+                        <h3 className="text-base md:text-lg font-bold text-emerald-900 mb-2 md:mb-3 hover:text-emerald-700 transition-colors duration-300 line-clamp-2">
+                          {event.title}
+                        </h3>
+
+                        {/* Description — same as News */}
+                        <p className="text-gray-600 text-xs md:text-sm mb-3 line-clamp-3">
+                          {event.description}
+                        </p>
+
+                        {/* Extra meta */}
+                        <div className="space-y-1 mb-3">
                           {event.time && (
-                            <div className="flex items-center text-gray-600 text-sm">
-                              <FaClock className="mr-3 text-emerald-600 flex-shrink-0" />
+                            <div className="flex items-center text-gray-600 text-xs">
+                              <FaClock className="mr-1.5 text-emerald-600 flex-shrink-0" />
                               <span>{formatTime(event.time)}</span>
                             </div>
                           )}
                           {event.location && (
-                            <div className="flex items-center text-gray-600 text-sm">
-                              <FaMapMarkerAlt className="mr-3 text-emerald-600 flex-shrink-0" />
+                            <div className="flex items-center text-gray-600 text-xs">
+                              <FaMapMarkerAlt className="mr-1.5 text-emerald-600 flex-shrink-0" />
                               <span className="truncate">{event.location}</span>
                             </div>
                           )}
                           {event.participants && (
-                            <div className="flex items-center text-gray-600 text-sm">
-                              <FaUsers className="mr-3 text-emerald-600 flex-shrink-0" />
+                            <div className="flex items-center text-gray-600 text-xs">
+                              <FaUsers className="mr-1.5 text-emerald-600 flex-shrink-0" />
                               <span>{event.participants} Participants</span>
                             </div>
                           )}
                         </div>
+
                         {event.type === 'upcoming' && event.registration_deadline && (
-                          <div className="bg-amber-50 border border-amber-100 rounded-lg p-3 mb-4">
-                            <div className="flex items-center text-amber-800 text-sm">
-                              <FaClock className="mr-2 flex-shrink-0" />
-                              <span className="font-bold">Registration Deadline:</span>
-                              <span className="ml-2">{formatDate(event.registration_deadline)}</span>
+                          <div className="bg-amber-50 border border-amber-100 rounded-lg p-2.5 mb-3">
+                            <div className="flex items-center text-amber-800 text-xs">
+                              <FaClock className="mr-1.5 flex-shrink-0" />
+                              <span className="font-bold">Deadline:</span>
+                              <span className="ml-1">{formatDate(event.registration_deadline)}</span>
                             </div>
                           </div>
                         )}
+
                         {event.type === 'completed' && (
-                          <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-3 mb-4">
-                            <div className="flex items-center text-emerald-800 text-sm">
-                              <FaTrophy className="mr-2 flex-shrink-0" />
+                          <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-2.5 mb-3">
+                            <div className="flex items-center text-emerald-800 text-xs">
+                              <FaTrophy className="mr-1.5 flex-shrink-0" />
                               <span className="font-bold">Status:</span>
-                              <span className="ml-2">{event.status || 'Completed'}</span>
+                              <span className="ml-1">{event.status || 'Completed'}</span>
                             </div>
                           </div>
                         )}
-                        <div className="flex justify-between items-center">
-                          <Link to={`/event/${event.id}`} className="text-emerald-700 hover:text-emerald-900 font-bold flex items-center hover:underline text-sm">
-                            View Details <FaArrowRight className="ml-2" />
+
+                        {/* Footer — same as News card */}
+                        <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-emerald-50">
+                          <Link
+                            to={`/event/${event.id}`}
+                            className="text-emerald-600 hover:text-emerald-800 font-bold text-xs md:text-sm flex items-center"
+                          >
+                            View Details <FaArrowRight className="ml-1 md:ml-1.5 text-xs" />
                           </Link>
                           {event.type === 'upcoming' && event.status?.toLowerCase() === 'open' && (
-                            <Link to={`/registration/${event.id}`} className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 text-sm">
+                            <Link
+                              to={`/registration/${event.id}`}
+                              className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-1.5 px-3 rounded-full transition-all duration-300 text-xs"
+                            >
                               Register Now
                             </Link>
                           )}
@@ -537,33 +560,54 @@ const Events = () => {
                 </div>
               )}
             </div>
+          </div>
 
-            {/* Right Column - Permanent Calendar */}
-            <div className="w-80 flex-shrink-0">
-              <div className="sticky top-24 bg-white border border-emerald-100 rounded-2xl shadow-lg overflow-hidden">
-                {/* Header */}
-                <div className="flex items-center justify-between px-4 py-3 bg-emerald-700">
+          {/* Right Column — Calendar (1/3 width) — same structure as News Announcements */}
+          <div className="lg:w-1/3">
+            <div className="lg:sticky top-[72px] z-20">
+
+              {/* Calendar Header — same as Announcements header */}
+              <div className="bg-emerald-600 text-white rounded-t-xl p-4 md:p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <h2 className="text-xl md:text-2xl font-bold flex items-center">
+                    <FaCalendarAlt className="mr-2 md:mr-3" />
+                    Event Calendar
+                  </h2>
+                  <span className="bg-white/20 px-2 md:px-3 py-1 rounded-full text-xs md:text-sm">
+                    {events.filter(e => e.type === 'upcoming').length} Upcoming
+                  </span>
+                </div>
+                <p className="text-emerald-100 text-xs md:text-sm">
+                  Upcoming events from Bangladesh Debate Federation
+                </p>
+              </div>
+
+              {/* Calendar Body — same as Announcements list wrapper */}
+              <div className="bg-white border border-emerald-100 rounded-b-xl overflow-hidden">
+
+                {/* Month navigation */}
+                <div className="flex items-center justify-between px-3 py-2 bg-emerald-50 border-b border-emerald-100">
                   <button
-                    onClick={() => { setCalendarMonth(prev => new Date(prev.getFullYear(), prev.getMonth()-1, 1)); setSelectedDayEvents(null); }}
-                    className="text-white hover:bg-emerald-600 p-1.5 rounded-full transition-colors"
+                    onClick={() => { setCalendarMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1)); setSelectedDayEvents(null); }}
+                    className="text-emerald-700 hover:bg-emerald-100 p-1.5 rounded-full transition-colors"
                   >
-                    <FaChevronLeft className="text-sm" />
+                    <FaChevronLeft className="text-xs" />
                   </button>
-                  <span className="text-white font-bold text-sm tracking-wide">
+                  <span className="text-emerald-900 font-bold text-sm">
                     {calendarMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                   </span>
                   <button
-                    onClick={() => { setCalendarMonth(prev => new Date(prev.getFullYear(), prev.getMonth()+1, 1)); setSelectedDayEvents(null); }}
-                    className="text-white hover:bg-emerald-600 p-1.5 rounded-full transition-colors"
+                    onClick={() => { setCalendarMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1)); setSelectedDayEvents(null); }}
+                    className="text-emerald-700 hover:bg-emerald-100 p-1.5 rounded-full transition-colors"
                   >
-                    <FaChevronRight className="text-sm" />
+                    <FaChevronRight className="text-xs" />
                   </button>
                 </div>
 
                 {/* Day labels */}
-                <div className="grid grid-cols-7 bg-emerald-50 border-b border-emerald-100">
-                  {['Su','Mo','Tu','We','Th','Fr','Sa'].map(d => (
-                    <div key={d} className="text-center text-xs text-emerald-700 font-semibold py-2">{d}</div>
+                <div className="grid grid-cols-7 border-b border-emerald-50 px-2 pt-2">
+                  {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(d => (
+                    <div key={d} className="text-center text-xs text-emerald-600 font-semibold py-1">{d}</div>
                   ))}
                 </div>
 
@@ -573,35 +617,36 @@ const Events = () => {
                     const { firstDay, daysInMonth, year, month } = getDaysInMonth(calendarMonth);
                     const today = new Date().toDateString();
                     const cells = [];
-                    for (let i = 0; i < firstDay; i++) cells.push(<div key={`e${i}`} className="h-8" />);
+
+                    for (let i = 0; i < firstDay; i++)
+                      cells.push(<div key={`e${i}`} className="h-8" />);
+
                     for (let day = 1; day <= daysInMonth; day++) {
                       const thisDate = new Date(year, month, day).toDateString();
                       const isToday = thisDate === today;
                       const dayEvents = eventsByDate[thisDate] || [];
-                      const hasBdf   = dayEvents.some(e => e.category === 'bdf');
+                      const hasBdf = dayEvents.some(e => e.category === 'bdf');
                       const hasOther = dayEvents.some(e => e.category === 'other');
                       const hasEvent = dayEvents.length > 0;
 
                       let circleCls = 'text-gray-600';
                       if (hasBdf && hasOther) circleCls = 'bg-gradient-to-br from-emerald-500 to-amber-500 text-white shadow-sm';
-                      else if (hasBdf)         circleCls = 'bg-emerald-600 text-white shadow-sm';
-                      else if (hasOther)       circleCls = 'bg-amber-500 text-white shadow-sm';
-                      else if (isToday)        circleCls = 'bg-emerald-200 text-emerald-900';
+                      else if (hasBdf) circleCls = 'bg-emerald-600 text-white shadow-sm';
+                      else if (hasOther) circleCls = 'bg-amber-500 text-white shadow-sm';
+                      else if (isToday) circleCls = 'bg-emerald-200 text-emerald-900';
 
                       cells.push(
                         <div
                           key={day}
                           onClick={() => hasEvent && handleDayClick(dayEvents)}
-                          className={`flex flex-col items-center justify-start pt-1 pb-1 rounded-lg min-h-[40px] transition-all duration-150 ${
-                            hasEvent ? 'cursor-pointer hover:bg-emerald-50' : 'cursor-default'
-                          } ${isToday && !hasEvent ? 'bg-emerald-50' : ''}`}
+                          className={`flex flex-col items-center justify-start pt-1 pb-1 rounded-lg min-h-[40px] transition-all duration-150 ${hasEvent ? 'cursor-pointer hover:bg-emerald-50' : 'cursor-default'} ${isToday && !hasEvent ? 'bg-emerald-50' : ''}`}
                         >
                           <span className={`w-6 h-6 flex items-center justify-center rounded-full text-xs font-semibold ${circleCls}`}>
                             {day}
                           </span>
                           {hasEvent && (
                             <div className="flex gap-0.5 mt-0.5 justify-center">
-                              {hasBdf   && <span className="w-1 h-1 rounded-full bg-emerald-500" />}
+                              {hasBdf && <span className="w-1 h-1 rounded-full bg-emerald-500" />}
                               {hasOther && <span className="w-1 h-1 rounded-full bg-amber-500" />}
                             </div>
                           )}
@@ -612,12 +657,12 @@ const Events = () => {
                   })()}
                 </div>
 
-                {/* Selected day list */}
+                {/* Selected day events list */}
                 {selectedDayEvents && (
                   <div className="border-t border-emerald-100 px-3 py-2 bg-emerald-50">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-bold text-emerald-800 uppercase tracking-wide">
-                        {new Date(selectedDayEvents[0].start_date).toLocaleDateString('en-US', { month:'short', day:'numeric' })}
+                        {new Date(selectedDayEvents[0].start_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                       </span>
                       <button onClick={() => setSelectedDayEvents(null)} className="text-gray-400 hover:text-gray-600">
                         <FaTimes className="text-xs" />
@@ -642,14 +687,14 @@ const Events = () => {
                 )}
 
                 {/* Legend */}
-                <div className="flex items-center gap-3 px-3 py-2 border-t border-emerald-100 bg-white flex-wrap">
+                <div className="flex items-center gap-3 px-3 py-2.5 border-t border-emerald-100 bg-white flex-wrap">
                   <div className="flex items-center gap-1">
                     <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                    <span className="text-xs text-gray-600">BDF</span>
+                    <span className="text-xs text-gray-600">BDF Event</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <div className="w-2 h-2 rounded-full bg-amber-500" />
-                    <span className="text-xs text-gray-600">Other</span>
+                    <span className="text-xs text-gray-600">Other Org</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <div className="w-2 h-2 rounded-full bg-emerald-200" />
@@ -657,23 +702,18 @@ const Events = () => {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* MODAL - সম্পূর্ণ অংশ */}
+        </div>
+      </div>
+
+      {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Backdrop — 50% opacity so page shows through */}
-          <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={handleModalClose}
-          />
-
-          {/* Modal panel */}
-          <div className="relative z-10 bg-white rounded-2xl shadow-2xl border border-emerald-100 w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
-            {/* Sticky header */}
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={handleModalClose} />
+          <div className="relative z-10 bg-white rounded-2xl shadow-2xl border border-emerald-100 w-full max-w-4xl max-h-[70vh] md:max-h-[90vh] flex flex-col overflow-hidden">
             <div className="flex-shrink-0 bg-emerald-700 text-white px-6 py-4 rounded-t-2xl flex justify-between items-center">
               <div>
                 <h2 className="text-xl font-bold">Submit Event Request</h2>
@@ -684,9 +724,7 @@ const Events = () => {
               </button>
             </div>
 
-            {/* Scrollable content */}
             <div className="overflow-y-auto flex-1 overscroll-contain">
-              {/* Success */}
               {modalSuccess && (
                 <div className="mx-6 mt-5 bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center gap-3">
                   <FaCheckCircle className="text-emerald-600 text-xl flex-shrink-0" />
@@ -696,8 +734,6 @@ const Events = () => {
                   </div>
                 </div>
               )}
-
-              {/* Error */}
               {modalError && (
                 <div className="mx-6 mt-5 bg-red-50 border border-red-200 rounded-xl p-4 flex items-center gap-3">
                   <FaExclamationCircle className="text-red-500 text-xl flex-shrink-0" />
@@ -709,7 +745,7 @@ const Events = () => {
               )}
 
               <form onSubmit={handleSubmit} className="p-6 space-y-8">
-                {/* ─ Event Information ─ */}
+                {/* Event Information */}
                 <div>
                   <div className="flex items-center gap-2 mb-5">
                     <div className="w-1 h-5 rounded-full bg-emerald-600" />
@@ -721,35 +757,29 @@ const Events = () => {
                       <input type="text" name="title" value={formData.title} onChange={handleChange} className={inputClass('title')} placeholder="Enter event title" required />
                       {validationErrors.title && <p className="mt-1 text-xs text-red-500">{validationErrors.title[0]}</p>}
                     </div>
-
                     <div className="md:col-span-2">
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Description <span className="text-red-500">*</span></label>
                       <textarea name="description" value={formData.description} onChange={handleChange} rows="4" className={`${inputClass('description')} resize-none`} placeholder="Describe the event in detail" required />
                       {validationErrors.description && <p className="mt-1 text-xs text-red-500">{validationErrors.description[0]}</p>}
                     </div>
-
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Start Date <span className="text-red-500">*</span></label>
                       <input type="date" name="start_date" value={formData.start_date} onChange={handleChange} className={inputClass('start_date')} required />
                       {validationErrors.start_date && <p className="mt-1 text-xs text-red-500">{validationErrors.start_date[0]}</p>}
                     </div>
-
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">End Date</label>
                       <input type="date" name="end_date" value={formData.end_date} onChange={handleChange} min={formData.start_date} className={inputClass('end_date')} />
                     </div>
-
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Time</label>
                       <input type="time" name="time" value={formData.time} onChange={handleChange} className={inputClass('time')} />
                     </div>
-
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Location <span className="text-red-500">*</span></label>
                       <input type="text" name="location" value={formData.location} onChange={handleChange} className={inputClass('location')} placeholder="Event venue or city" required />
                       {validationErrors.location && <p className="mt-1 text-xs text-red-500">{validationErrors.location[0]}</p>}
                     </div>
-
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Event Type <span className="text-red-500">*</span></label>
                       <select name="type" value={formData.type} onChange={handleChange} className={selectClass} required>
@@ -758,22 +788,18 @@ const Events = () => {
                         <option value="completed">Completed</option>
                       </select>
                     </div>
-
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Participants</label>
                       <input type="text" name="participants" value={formData.participants} onChange={handleChange} className={inputClass('participants')} placeholder="e.g., 500+ ( If Event is Completed)" />
                     </div>
-
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Registration Deadline</label>
                       <input type="date" name="registration_deadline" value={formData.registration_deadline} onChange={handleChange} min={new Date().toISOString().split('T')[0]} className={inputClass('registration_deadline')} />
                     </div>
-
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Event Link</label>
                       <input type="url" name="event_link" value={formData.event_link} onChange={handleChange} className={inputClass('event_link')} placeholder="https://facebook.com/event" />
                     </div>
-
                     <div className="md:col-span-2">
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Status Text</label>
                       <input type="text" name="status" value={formData.status} onChange={handleChange} className={inputClass('status')} placeholder="e.g., Open for Registration" />
@@ -781,7 +807,7 @@ const Events = () => {
                   </div>
                 </div>
 
-                {/* ─ Image Upload ─ */}
+                {/* Image Upload */}
                 <div>
                   <div className="flex items-center gap-2 mb-5">
                     <div className="w-1 h-5 rounded-full bg-emerald-600" />
@@ -811,7 +837,7 @@ const Events = () => {
                   </div>
                 </div>
 
-                {/* ─ Your Information ─ */}
+                {/* Your Information */}
                 <div>
                   <div className="flex items-center gap-2 mb-5">
                     <div className="w-1 h-5 rounded-full bg-emerald-600" />
@@ -836,7 +862,7 @@ const Events = () => {
                   </div>
                 </div>
 
-                {/* ─ Actions ─ */}
+                {/* Actions */}
                 <div className="flex justify-end gap-3 pt-4 border-t border-emerald-100">
                   <button type="button" onClick={handleModalClose} disabled={modalLoading} className="px-6 py-2.5 border border-emerald-200 rounded-lg text-emerald-700 font-semibold hover:bg-emerald-50 transition-colors disabled:opacity-50">
                     Cancel
@@ -858,6 +884,7 @@ const Events = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };

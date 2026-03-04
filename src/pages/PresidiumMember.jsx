@@ -7,24 +7,26 @@ const PresidiumMember = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchPresidium = async () => {
-      try {
-        const result = await apiService.getPresidium();
-        setMembers(result.data || result);
-        setLoading(false);
-      } catch (err) {
-        console.error('Failed to fetch presidium members:', err);
-        setError(err.message);
-        setLoading(false);
-      }
-    };
-
     fetchPresidium();
   }, []);
 
+  const fetchPresidium = async () => {
+    try {
+      setLoading(true);
+      const result = await apiService.getPresidium();
+      setMembers(result.data || result);
+      setError(null);
+    } catch (err) {
+      console.error('Failed to fetch presidium members:', err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-emerald-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading...</p>
@@ -39,26 +41,7 @@ const PresidiumMember = () => {
         <div className="text-center">
           <div className="text-6xl mb-4">⚠️</div>
           <h3 className="text-2xl font-bold text-gray-700 mb-6">
-            Error
-          </h3>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (members.length === 0) {
-    return (
-      <div className="min-h-screen bg-[#e8f1ee] flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-6xl mb-4">⚠️</div>
-          <h3 className="text-2xl font-bold text-gray-700 mb-6">
-            Error
+            Error Loading Data
           </h3>
           <button
             onClick={() => window.location.reload()}
@@ -74,8 +57,9 @@ const PresidiumMember = () => {
   return (
     <div className="min-h-screen bg-white py-12 px-4">
       <div className="max-w-7xl mx-auto">
+
         {/* Header */}
-        <div className="text-center mb-12 mt-0 pt-8">
+        <div className="text-center mb-12 pt-8">
           <h1 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4">
             Presidium Member
           </h1>
@@ -84,21 +68,38 @@ const PresidiumMember = () => {
           </p>
         </div>
 
-        {/* Members Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {members.map((member) => (
-            <div
-              key={member.id}
-              className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="p-6">
-                {/* Image */}
-                <div className="mb-6 flex justify-center">
-                  <div className="relative">
-                    <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-emerald-900 shadow-lg group-hover:border-emerald-700 transition-colors duration-300">
-                      {member.image ? (
+        {members.length === 0 ? (
+            <div className="text-center">
+              <div className="text-6xl mb-4">⚠️</div>
+              <h3 className="text-2xl font-bold text-gray-700 mb-6">
+                No Data Found
+              </h3>
+              <button
+                onClick={() => window.location.reload()}
+                className="bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors"
+              >
+                Try Again
+              </button>
+            </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {members.map((member) => (
+              <div
+                key={member.id}
+                className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="p-6">
+
+                  {/* Image */}
+                  <div className="mb-6 flex justify-center">
+                    <div className="relative">
+                      <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-emerald-900 shadow-lg group-hover:border-emerald-700 transition-colors duration-300">
                         <img
-                          src={member.image}
+                          src={
+                            member.image
+                              ? member.image
+                              : `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=0D9488&color=fff&size=160`
+                          }
                           alt={member.name}
                           className="w-full h-full object-cover"
                           onError={(e) => {
@@ -106,53 +107,53 @@ const PresidiumMember = () => {
                             e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=0D9488&color=fff&size=160`;
                           }}
                         />
-                      ) : (
-                        <img
-                          src={`https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=0D9488&color=fff&size=160`}
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
+                      </div>
+
+                      <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-emerald-900 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="text-center">
+                    <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-900 transition-colors duration-300">
+                      {member.name}
+                    </h2>
+
+                    <p className="text-emerald-900 font-medium mb-4">
+                      {member.position}
+                    </p>
+
+                    {member.bio && (
+                      <div className="relative">
+                        <p className="text-gray-600 text-sm line-clamp-3">
+                          {member.bio}
+                        </p>
+                        <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+                      </div>
+                    )}
+                  </div>
+
+                  {(member.email || member.phone) && (
+                    <div className="mt-4 pt-4 border-t border-gray-100 text-center">
+                      {member.email && (
+                        <p className="text-xs text-gray-500 truncate">
+                          {member.email}
+                        </p>
+                      )}
+                      {member.phone && (
+                        <p className="text-xs text-gray-500 truncate">
+                          {member.phone}
+                        </p>
                       )}
                     </div>
-                    {/* Optional: Add a small decorative element */}
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-emerald-900 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="text-center">
-                  <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-900 transition-colors duration-300">
-                    {member.name}
-                  </h2>
-                  <p className="text-emerald-900 font-medium mb-4">
-                    {member.position}
-                  </p>
-                  {member.bio && (
-                    <div className="relative">
-                      <p className="text-gray-600 text-sm line-clamp-3">
-                        {member.bio}
-                      </p>
-                      {/* Optional: Gradient fade for longer bios */}
-                      <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
-                    </div>
                   )}
-                </div>
 
-                {/* Optional: Add social links or contact info if available */}
-                {(member.email || member.phone) && (
-                  <div className="mt-4 pt-4 border-t border-gray-100">
-                    {member.email && (
-                      <p className="text-xs text-gray-500 truncate">{member.email}</p>
-                    )}
-                    {member.phone && (
-                      <p className="text-xs text-gray-500 truncate">{member.phone}</p>
-                    )}
-                  </div>
-                )}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
+
       </div>
     </div>
   );

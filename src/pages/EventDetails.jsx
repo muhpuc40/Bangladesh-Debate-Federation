@@ -43,7 +43,6 @@ const EventDetails = () => {
 
         const foundEvent = eventsArray.find(e => String(e.id) === String(id));
         if (!foundEvent) throw new Error('Event not found');
-
         setEvent(foundEvent);
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -136,36 +135,36 @@ const EventDetails = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="pt-24 pb-12 md:pt-28 md:pb-16">
+      <section className="pt-16 pb-8 md:pt-20 md:pb-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Back Button - Above the badges */}
-          <div className="mb-4">
+          {/* Back + Type + Category — single line, all screen sizes */}
+          <div className="flex flex-wrap items-center gap-2 mb-4">
             <button
               onClick={() => navigate(-1)}
               className="flex items-center text-emerald-600 hover:text-emerald-800 font-medium transition-colors duration-300 group"
             >
-              <FaArrowLeft className="mr-2 text-sm group-hover:-translate-x-1 transition-transform duration-300" />
+              <FaArrowLeft className="mr-1.5 text-sm group-hover:-translate-x-1 transition-transform duration-300" />
               Back
             </button>
+
+            <span className="text-gray-300 select-none">|</span>
+
+            <span className={`px-3 py-1 rounded-full text-xs font-bold border ${getTypeColor(event.type)}`}>
+              {event.type}
+            </span>
+
+            {event.category && (
+              <span className={`px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(event.category)}`}>
+                {getCategoryLabel(event.category)}
+              </span>
+            )}
           </div>
 
-          {/* Badges + Title */}
-          <div className="mb-6">
-            <div className="flex flex-wrap items-center gap-2 mb-3">
-              <span className={`px-4 py-1.5 rounded-full text-sm font-bold border ${getTypeColor(event.type)}`}>
-                {event.type}
-              </span>
-              {event.category && (
-                <span className={`px-4 py-1.5 rounded-full text-sm font-bold ${getCategoryColor(event.category)}`}>
-                  {getCategoryLabel(event.category)}
-                </span>
-              )}
-            </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 leading-tight">
-              {event.title}
-            </h1>
-          </div>
+          {/* Title */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-900 mb-6 leading-tight">
+            {event.title}
+          </h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
@@ -190,7 +189,7 @@ const EventDetails = () => {
                   {/* Description */}
                   <p className="text-lg text-gray-700 leading-relaxed mb-8">{event.description}</p>
 
-                  {/* Status — only shown if the field has a value */}
+                  {/* Status */}
                   {event.status && (
                     <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-6">
                       <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Status</p>

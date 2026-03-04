@@ -243,7 +243,7 @@ const News = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search news by title, content or category..."
-                  className="w-full pl-12 pr-4 py-3 md:py-3.5 bg-white border-2 border-emerald-200 rounded-xl focus:ring-4 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-sm md:text-base hover:border-emerald-300 shadow"
+                  className="w-full pl-12 pr-4 py-3 md:py-3.5 bg-white border-2 border-emerald-200 rounded-xl focus:border-emerald-400 outline-none transition-all duration-300 text-black placeholder:text-gray-500 text-sm md:text-base hover:border-emerald-300 shadow"
                 />
                 {searchTerm && (
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
