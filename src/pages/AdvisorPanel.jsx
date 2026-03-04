@@ -58,7 +58,7 @@ const AdvisorPanel = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header Section */}
-        <div className="text-center mb-12 ">
+        <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4">
             Advisor Panel
           </h1>
@@ -132,7 +132,7 @@ const AdvisorPanel = () => {
                         </div>
                       )}
 
-                      {/* Contact Info (if available) */}
+                      {/* Contact Info */}
                       {(advisor.email || advisor.phone) && (
                         <div className="mt-4 space-y-2 text-sm">
                           {advisor.email && (
@@ -153,32 +153,32 @@ const AdvisorPanel = () => {
               ))}
             </div>
 
-            {/* Mobile/Tablet Card View */}
+            {/* Mobile/Tablet Card View — larger image, reduced padding */}
             <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6">
               {advisors.map((advisor) => (
                 <div
                   key={advisor.id || advisor._id}
                   className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-emerald-100"
                 >
-                  <div className="p-6">
-                    <div className="flex items-center mb-4">
-                      {/* Profile Image */}
-                      <div className="flex-shrink-0 mr-4">
+                  <div className="p-4">
+                    <div className="flex items-center mb-3">
+                      {/* Profile Image — increased from w-20/h-20 to w-28/h-28 */}
+                      <div className="flex-shrink-0 mr-3">
                         {advisor.image || advisor.avatar ? (
                           <img
                             src={advisor.image || advisor.avatar}
                             alt={advisor.name}
-                            className="w-20 h-20 rounded-full object-cover border-3 border-emerald-900"
+                            className="w-28 h-28 rounded-full object-cover border-4 border-emerald-900"
                             onError={(e) => {
                               e.target.onerror = null;
-                              e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(advisor.name)}&background=0D9488&color=fff&size=80`;
+                              e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(advisor.name)}&background=0D9488&color=fff&size=112`;
                             }}
                           />
                         ) : (
                           <img
-                            src={`https://ui-avatars.com/api/?name=${encodeURIComponent(advisor.name)}&background=0D9488&color=fff&size=80`}
+                            src={`https://ui-avatars.com/api/?name=${encodeURIComponent(advisor.name)}&background=0D9488&color=fff&size=112`}
                             alt={advisor.name}
-                            className="w-20 h-20 rounded-full border-3 border-emerald-900"
+                            className="w-28 h-28 rounded-full border-4 border-emerald-900"
                           />
                         )}
                       </div>
@@ -196,7 +196,7 @@ const AdvisorPanel = () => {
 
                     {/* Bio */}
                     {advisor.bio && (
-                      <div className="bg-emerald-50 p-3 rounded-lg mb-4">
+                      <div className="bg-emerald-50 p-3 rounded-lg mb-3">
                         <p className="text-gray-700 text-sm italic">
                           "{advisor.bio}"
                         </p>
@@ -205,7 +205,7 @@ const AdvisorPanel = () => {
 
                     {/* Contact Details */}
                     {(advisor.email || advisor.phone) && (
-                      <div className="space-y-2 border-t border-emerald-100 pt-4">
+                      <div className="space-y-2 border-t border-emerald-100 pt-3">
                         {advisor.email && (
                           <a href={`mailto:${advisor.email}`} className="flex items-center text-gray-600 hover:text-emerald-900 transition-colors text-sm">
                             <FaEnvelope className="mr-2 text-emerald-600 flex-shrink-0" />
